@@ -1,0 +1,68 @@
+<div class="non-eu">
+  <%= form_tag @prospect.passport_sent? ? '../staff/update_share_code' : '../staff/upload_passport_and_visa', multipart: true, class: 'form-val fl-form', style: 'margin-top: 36px;' do %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div class="non_eu_id_upload_form" style='margin-bottom: 45px;'>
+      <%= render partial: 'v2/mobile/staff/profile_upload_id_others_work_visa' %>
+    </div>
+
+    <% if !@prospect.passport_sent? %>
+      <div class="v2-profile-identification-uk">Passport Identity</div>
+      <div class="v2-profile-identification-birthcert-content" style='margin-top: 24px'>
+        <p>All scans or photos <strong>MUST</strong></p>
+        <ul>
+          <li><strong>Be in full colour, Looking directly onto a flat document</strong></li>
+          <li><strong>Display All text, four corners of document without glare or shine from flash</strong></li>
+        </ul>
+      </div>
+    <%= render partial: 'v2/mobile/staff/profile_upload_id_passport' %>
+    <% end %>
+
+    <center>
+      <div>
+        <div class="v2-profile-identification-content text-center">*Please bring your uploaded originals to your first Flair contract*</div>
+        <div class="v2-profile-identification-content text-center" style='margin-bottom: 24px;'>Basic Standard photo ID to all sequential events.</div>
+      </div>
+      <% if @prospect.photo.blank? %>
+        <%= submit_tag 'SUBMIT', class: 'v2-profile-identification-submit', id: 'id-upload-submit', style: 'display: none' %>
+        <button type="button" class="v2-profile-identification-submit" data-toggle="modal" data-target="#edit-uploaded-photo" id="modal-required-button-upload" data-backdrop="static" data-keyboard="false" data-required="true">SUBMIT</button>
+      <% else %>
+        <%= submit_tag 'SUBMIT', class: 'v2-profile-identification-submit', id: 'id-upload-submit' %>
+        <button type="button" class="v2-profile-identification-submit" id="modal-required-button-upload" data-toggle="modal" data-target="#edit-uploaded-photo" data-backdrop="static" data-keyboard="false" data-required="true" style="display: none">SUBMIT</button>
+      <% end %>
+    </center>
+  <% end %>
+
+
+  <div class="passport-pic-popup sample-popup v2-id-pic-pop-up" style="display:none">
+    <div class="v2-id-pic-pop-up-body">
+      <%= image_tag 'id-sample-non-eu-passport-picture.jpg' %>
+      <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+        <span>Close</span>
+      </a>
+    </div>
+  </div>
+  <div class="passport-front-popup sample-popup v2-id-pic-pop-up" style="display:none">
+    <div class="v2-id-pic-pop-up-body">
+      <%= image_tag 'id-sample-non-eu-passport-front.jpg' %>
+      <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+        <span>Close</span>
+      </a>
+    </div>
+  </div>
+  <div class="passport-expiry-popup sample-popup v2-id-pic-pop-up" style="display:none">
+    <div class="v2-id-pic-pop-up-body">
+      <%= image_tag 'id-sample-non-eu-passport-expiry.jpg' %>
+      <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+        <span>Close</span>
+      </a>
+    </div>
+  </div>
+  <div class="passport-number-popup sample-popup v2-id-pic-pop-up" style="display:none">
+    <div class="v2-id-pic-pop-up-body">
+      <%= image_tag 'id-sample-non-eu-passport-number.jpg' %>
+      <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+        <span>Close</span>
+      </a>
+    </div>
+  </div>
+</div>

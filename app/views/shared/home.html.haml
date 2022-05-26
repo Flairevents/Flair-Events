@@ -1,0 +1,169 @@
+.public.home
+  .background.background--fixed.background-fest
+  = render :partial => 'shared/nav'
+  .row.field.expanded--restricted#legacy_browser{style: 'display:none'}
+    .column.small-12.text-center
+      %p Your web browser does not fully support all features of this site. If you are having issues, please try visiting with a more modern browser.
+  .content
+    .content-inner
+      .row.pt3.pb3.expanded--restricted.background.background--tall.mb1
+        .column.small-12.medium-7.large-8
+          %h1.home-panel-heading.mt4.pl4 Connecting talented people to great flexible work.
+        = render partial: 'shared/covid'
+        -#.column.small-6.medium-8.flex--middle
+          -#%h1.band-heading.restrict-left Temporary staffing solutions made simple
+          -#.home-carousel
+          -#  %ul.slides
+          -#    %li{style: 'height:0;visibility:hidden'}
+          -#      %p.h4.white-text.shadow-text.lead1.pb1.strong “Recruiting and managing people to work at sporting events, music festivals, in hospitality and everything in between since 2000
+          -#      %p.h4.white-text.shadow-text.lead1.pb1.strong.text-right.em - plus we're really good at it!”
+          -#    %li{style: 'height:0;visibility:hidden'}
+          -#      %p.h4.white-text.shadow-text.lead1.pb1.strong From bespoke, individual, and specific to experts-at-large-volume people management
+          -#    %li{style: 'height:0;visibility:hidden'}
+          -#      %p.h4.white-text.shadow-text.lead1.pb1.strong Engaging job opportunities nationwide; from the developing career to <em>just seeking that #different9to5</em>
+          -#    %li{style: 'height:0;visibility:hidden'}
+          -#      %p.h4.white-text.shadow-text.lead1.pb1.strong Work with the event staffing company that works with you and for you
+      .row.expanded.row--collapse
+        .column.small-12.medium-6.field.translucent{style: 'background-color: white;'}
+          .band-heading.restrict-left{style: 'background-color: #005949;'}
+            %h3.pt1.pb1.staffing-heading Looking for Staff
+          .p2.restrict-left
+            %h2.pl2.mt1.staffing-heading{style: 'min-height: 2.5rem'} Accelerating Business  <br/>Recovery
+            .row.mt1.pl3.mb1{style: 'font-size: 20px;'}
+              %p.home-staffing-text
+                The gradual return to work will require all of us to cooperate and be adequately prepared. With thousands of proactive, skilled employees at the ready, let us work together to build for tomorrow.
+            .pl2
+              .yellow-button-home{style: 'margin: 0px;'}
+                %a.pop-up-request-quote{"data-target" => "#outQueteRequestModal", "data-toggle" => "modal", :type => "button", style: 'width: 100%; margin: auto;'}
+                  %p.bottom-button
+                    %b.home-staffing-text{style: 'color: #005949'} Get A Quote
+
+            -#%p &nbsp;
+            -#%p.text-center
+              -#%a.btn{href: '/about'} Find Out More
+        .column.small-12.medium-6.field-light.translucent{style: 'background-color: #a3d39c;'}
+          .band-heading.restrict-right{style: 'background-color: #005949;'}
+            %h3.pt1.pb1.staffing-heading Looking for Work
+          .p2.restrict-right
+            %h2.pl2.mt1.staffing-heading{style: 'min-height: 2.5rem'} Offering Jobs that <br/>Benefit You
+            .row.mt1.pl3.mb1{style: 'font-size: 20px;'}
+              %p.looking-for-work.home-staffing-text
+                Congrats – you’ve found the agency that works for you! Boasting a year-round selection of interesting jobs, earning weekly pay and awesome employers. Select shifts or events that fit your schedule.
+            .pl2
+              .yellow-button-home{style: 'margin: 0px; width: 30%;'}
+                %a.pop-up-request-quote{href: '/register', :type => "button", style: 'width: 100%; margin: auto;'}
+                  %p.bottom-button
+                    %b.home-staffing-text{style: 'color: #005949'} Join Us
+
+              -#%a.btn{href: '/join_us'} Join Us!
+      .band-heading.row.expanded--restricted{style: 'background-color: #005949;'}
+        %h3.pt2.pb2
+      .column.small-12.medium-10.large-10.align-center.expanded--restricted.text-center{style: 'background-color: white;'}
+        = image_tag 'cone.png', class: '', style: ''
+      .row.padding-top-bottom.field-light.translucent.align-center.expanded--restricted{style: 'background-color: white;'}
+        .column.small-12.medium-10.large-10.our-history
+          .div.text-center.total-contracts{style: 'font-size: 42px;'}
+            .middle-box-heading Supply Across the Industry
+          .div.text-center.mb1{style: 'font-size: 15px; margin-top: 5px;'}
+            .middle-box-text we hire people based on their experiences and supply based on your needs.
+
+      .row.field-light.translucent.pb2.expanded--restricted{style: 'background-color: white;'}
+        .category-main-panel{style: 'width: 100%;'}
+          .column.small-12.medium-4.large-2.container
+            .content-panel.text-center.card-border-radius{style: 'width: 100%;'}
+              .content-overlay-panel
+              =image_tag 'sports-and-outdoor-new.png', class: 'content-image-panel'
+              %h4.home-img-label.text-center{style: 'width: 100%;'} Sports & Outdoor <br/>Workers
+              .content-details.fadeIn-right
+                %p.card-text Sports management is at the very core of Flair, and understanding the required end result guides our team selection and organisations. From the London Olympics, the Royal Parks Half Marathon to 5k fun runs, we strive to provide winning support teams.
+
+          .column.small-12.medium-4.large-2.container
+            .content-panel.text-center.card-border-radius{style: 'width: 100%;'}
+              .content-overlay-panel
+              =image_tag 'bar-and-hospitality-new.png', class: 'content-image-panel'
+              %h4.home-img-label.text-center{style: 'width: 100%;'} Bar & <br/>Hospitality
+              .content-details.fadeIn-right
+                %p Whether it’s skilled servers for a small boutique bar or an entire festival team needed, our database can cater to all styles. We work with our clients to deliver the required service to customers, manage and monitor to build working partnerships.
+
+          .column.small-12.medium-4.large-2.container
+            .content-panel.text-center.card-border-radius{style: 'width: 100%;'}
+              .content-overlay-panel
+              =image_tag 'festival-and-music-concerts-new.png', class: 'content-image-panel'
+              %h4.home-img-label.text-center{style: 'width: 100%;'} Retail & <br/>Merchandise
+              .content-details.fadeIn-right
+                %p If you have merch to sell, our database is brimming with sales, marketing and customer service specialists who can help. From customer facing to stock replenishment, we have teams ready to work on your shop floor outlets or fast-paced merchandise stands.
+
+          .column.small-12.medium-4.large-2.container
+            .content-panel.text-center.card-border-radius{style: 'width: 100%;'}
+              .content-overlay-panel
+              =image_tag 'retail-and-merchandise-new.png', class: 'content-image-panel'
+              %h4.home-img-label.text-center{style: 'width: 100%;'} Festival & <br/>Music Concerts
+              .content-details.fadeIn-right
+                %p Any field, stadium, hall, or village green is our comfort zone where music and beer are flowing.  Vetting, selecting, organizing, and delivering teams across the UK is what we do best. We focus on your workers, so they look after your customers.
+
+          .column.small-12.medium-4.large-2.container
+            .content-panel.text-center.card-border-radius{style: 'width: 100%;'}
+              .content-overlay-panel
+              =image_tag 'promotional-and-street-marketing.png', class: 'content-image-panel'
+              %h4.home-img-label.text-center{style: 'width: 100%;'} Promotional & <br/>Street Marketing
+              .content-details.fadeIn-right
+                %p Looking for the right style of person to capture your vision? That is our job and one we truly understand to ensure the success of your promotional campaign and your reputation.
+
+          .column.small-12.medium-4.large-2.container
+            .content-panel.text-center.card-border-radius{style: 'width: 100%;'}
+              .content-overlay-panel
+              =image_tag 'office-admin-and-call-center.png', class: 'content-image-panel'
+              %h4.home-img-label.text-center{style: 'width: 100%;'} Call Centers & <br/>Office Admin
+              .content-details.fadeIn-right
+                %p Looking for that Friday person? Whether you’re working to a fixed deadline or need support filling sudden absence, our team can support a variety of office-based positions, call centres, box offices, reception duties and more.
+
+      .column.small-12.translucent.band-heading.expanded--restricted.home-main-heading.text-center.pb2{style: 'background-color: #005949;'}
+        %span The Stats <span class="yellow-heading">Don't Lie</span>
+      .padding-top-bottom.dark-green.translucent.align-center.pt4.pb3
+        %div.row{style: 'color: white;'}
+          .column.small-12.medium-2.medium-offset-2.translucent
+            %div.stats-corner-items
+              %h2.stats-corner-items-values= number_with_delimiter(12685, :delimiter => ',')
+            %h2.padding-top-bottom.text-center Active </br>Temp Staff
+          .column.small-12.medium-2.medium-offset-1.translucent
+            %div.jobs-stats-corner-items
+              %h2.stats-corner-items-values= number_with_delimiter(686, :delimiter => ',')
+            %h2.padding-top-bottom.text-center Contracts </br>in 2019
+          .column.small-12.medium-2.medium-offset-1.translucent
+            %div.hrs-stats-corner-items
+              %h2.stats-corner-items-values= number_with_delimiter(20, :delimiter => ',')
+            %h2.padding-top-bottom.text-center Years <br/> of experience
+          .column.medium-2
+
+      .band-heading.expanded--restricted.about-main-heading.home-div.bg
+        %span LET'S GET
+        %span.yellow-heading CONNECTED!
+      .row.field-light.expanded--restricted.pt1.pb1.align-center.pb2{style: 'background-color: white;'}
+        %div.row.bottom-button
+          .column.small-12.medium-4.mt1
+            %div.red-button
+              %a.pop-up-request-quote{ "data-target": '#outQueteRequestModal', "data-toggle": "modal", type: "button"}
+                %p.bottom-button
+                  %b Request A Quote
+          .column.small-12.medium-4.mt1
+            %div.yellow-button
+              %a.pop-up-request-quote{href: '/join_us'}
+                %p.bottom-button
+                  %b Join Us
+          .column.small-12.medium-4.mt1
+            %div.brown-button
+              %a.pop-up-request-quote{href: '/contact'}
+                %p.bottom-button
+                  %b Message Us
+
+      .row.field.expanded--restricted.pt1.pb1.align-center.home-div.bg-light-green
+        .column.small-10.medium-8
+          = render partial: 'shared/client_logos'
+  .content-after
+  = render :partial => 'footer'
+
+- content_for :js do
+  :javascript
+      $(document).ready(function() {
+          $(".reg_back").css("background-color", "#a3d39c");
+      });

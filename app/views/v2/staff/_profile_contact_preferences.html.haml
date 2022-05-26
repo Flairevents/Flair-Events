@@ -1,0 +1,66 @@
+.content
+  = form_for @prospect, method: :post, url: '/staff/update_contact_preferences' do |f|
+    .contact-preferences
+      .row
+        .column.small-12.medium-6
+          %h4 Preferred Contact Methods
+          .row
+            .column.small-12
+              %span.fl-form__checkbox
+                = f.check_box :prefers_in_person
+                %label{for: 'prospect_prefers_in_person'} In Person — Invited to live interview days in your area
+          .row.mt1
+            .column.small-4
+              %span.fl-form__checkbox
+                = f.check_box :prefers_phone, onchange: 'markPhoneValidity(); markPreferredOnlineContactMethod();'
+                %label{for: 'prospect_prefers_phone'} Phone: 
+            .column.small-8
+              = f.text_field :preferred_phone, placeholder: 'Phone Number', onchange: 'markPhoneValidity()', class: 'form-control', pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d?\D*', title: '0 + 10 or 9 digits'
+          .row.mt1
+            .column.small-4
+              %span.fl-form__checkbox
+                = f.check_box :prefers_skype, onchange: 'markSkypeValidity(); markPreferredOnlineContactMethod();'
+                %label{for: 'prospect_prefers_skype'} Skype: 
+            .column.small-8
+              = f.text_field :preferred_skype, placeholder: 'Skype ID', onchange: 'markSkypeValidity()', class: 'form-control'
+          .row.mt1
+            .column.small-4
+              %span.fl-form__checkbox
+                = f.check_box :prefers_facetime, onchange: 'markFacetimeValidity(); markPreferredOnlineContactMethod();'
+                %label{for: 'prospect_prefers_facetime'} Facetime: 
+            .column.small-8
+              = f.text_field :preferred_facetime, placeholder: 'Facetime Email or Number', onchange: 'markFacetimeValidity()', class: 'form-control'
+        .column.small-12.medium-6
+          %h4 Preferred Contact Times
+          .row
+            .column.small-6
+              %p
+                %span.fl-form__checkbox
+                  = f.check_box :prefers_morning, onchange: 'markPreferredTimeValidity()'
+                  %label{for: 'prospect_prefers_morning'} Morning
+              %p
+                %span.fl-form__checkbox
+                  = f.check_box :prefers_afternoon, onchange: 'markPreferredTimeValidity()'
+                  %label{for: 'prospect_prefers_afternoon'} Afternoon
+              %p
+                %span.fl-form__checkbox
+                  = f.check_box :prefers_early_evening, onchange: 'markPreferredTimeValidity()'
+                  %label{for: 'prospect_prefers_early_evening'} Early Evening
+            .column.small-6
+              %p
+                %span.fl-form__checkbox
+                  = f.check_box :prefers_midweek, onchange: 'markPreferredTimeValidity()'
+                  %label{for: 'prospect_prefers_midweek'} Midweek
+              %p
+                %span.fl-form__checkbox
+                  = f.check_box :prefers_weekend, onchange: 'markPreferredTimeValidity()'
+                  %label{for: 'prospect_prefers_weekend'} Weekend
+    -# .row.pt1  #moved to Details tab
+    -#   .column.small-12
+    -#     %h4 Email Preferences
+    -#     %span.fl-form__checkbox
+    -#       = f.check_box :send_marketing_email
+    -#       %label{for: 'prospect_send_marketing_email'} Receive Emails Regarding Upcoming Job Opportunities
+    -# .row
+    -#   .column.small-12.text-right.pt1
+    -#     = submit_tag (@prospect.has_contact_preferences? ? 'Update' : 'Submit'), class: 'btn btn-default'

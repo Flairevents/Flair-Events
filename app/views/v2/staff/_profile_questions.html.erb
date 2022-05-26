@@ -1,0 +1,882 @@
+<%= form_for @questionnaire, method: :post, url: '../staff/update_questions', html: {multipart: true, id: 'application_questionnaire', autocomplete: "off"} do |f| %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div id="v2-application-page-1">
+    <div class="row" style='margin-bottom: 28px;'>
+      <div class="col v2-p-m-0">
+        <div class="v2-application-page-title d-flex flex-row bd-highlight">Work Experience<span style="<%= @questionnaire.job2_position == nil || @questionnaire.job2_position == '' ? "" : "display: block;" %>">(1)</span> </div>
+      </div>
+    </div>
+    <div id="v2-application-job-1">
+      <div class="row" style="margin-bottom: 40px;">
+        <div class="col-5 v2-p-m-0">
+          <%= f.text_field :job1_position, placeholder: 'Job Position', class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-bottom: 16px;' %>
+          <%= f.text_field :job1_company, placeholder: 'Company', class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-bottom: 16px;' %>
+          <div class="row dates-block-app" style='margin-left: 0;'>
+            <div class="date-app">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" style= 'margin-bottom: 16px; width: 100%;'>
+                  <%= select_date @questionnaire[:job1_date_start], {prefix: 'job1_date_start', end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'Start Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs required date-month-year-select'} %>
+                </div>
+              </div>
+            </div>
+            <div class="date-app">
+              <% if @questionnaire[:job1_position]==nil || @questionnaire[:job1_position]=="" %>
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" id='v2-application-form-finish-date-1' >
+                  <%= select_date @questionnaire[:job1_date_finish], {prefix: 'job1_date_finish'.to_s, end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'End Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs date-month-year-select'} %>
+                </div>
+              <% elsif @questionnaire[:job1_date_finish]==nil %>
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" id='v2-application-form-finish-date-1' style='visibility:hidden;'>
+                  <%= select_date @questionnaire[:job1_date_finish], {prefix: 'job1_date_finish'.to_s, end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'End Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs date-month-year-select'} %>
+                </div>
+              <% else %>
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" id='v2-application-form-finish-date-1' >
+                  <%= select_date @questionnaire[:job1_date_finish], {prefix: 'job1_date_finish'.to_s, end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'End Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs date-month-year-select'} %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="col-7 form-check v2-application-checkbox v2-application-page-2-checkbox">
+            <%= check_box_tag :job1_tick, '1', @questionnaire[:job1_position] && @questionnaire[:job1_position] != "" ? (@questionnaire[:job1_date_finish] == nil ? true : false) : false, class: "form-check-input"  %>
+            <%= label_tag :job1_tick, 'Tick if current employer.', class: "form-check-label", style: 'width: 300px;' %>
+          </div>
+          <div class="d-flex flex-row bd-highlight" style='margin-top: 10px;margin-bottom: 20px;'>
+            <div class="form-check v2-profile-radio v2-profile-radio v2-application-forms-radio-buttons">
+              <%= f.radio_button :job1_type, 'FULL_TIME', checked: @questionnaire.job1_type=='FULL_TIME', class: 'form-check-input' %>
+              <%= f.label :job1_type, 'Full Time', value: 'FULL_TIME', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+              <%= f.radio_button :job1_type, 'PART_TIME/CASUAL', checked: @questionnaire.job1_type=='PART_TIME/CASUAL' || @questionnaire.job1_type=='PART_TIME' || @questionnaire.job1_type=='CASUAL' || @questionnaire.job1_type=='PT/Casual', class: 'form-check-input' %>
+              <%= f.label :job1_type, 'PT/Casual', value: 'PART_TIME/CASUAL', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+              <%= f.radio_button :job1_type, 'VOLUNTARY', checked: @questionnaire.job1_type=='VOLUNTARY', class: 'form-check-input' %>
+              <%= f.label :job1_type, 'Voluntary', value: 'VOLUNTARY', class: 'form-check-label' %>
+            </div>
+          </div>
+          <div class="d-flex flex-row bd-highlight v2-p-m-0">
+            <% if @questionnaire.job2_position == nil || @questionnaire.job2_position == '' %>
+              <div class="v2-application-page-2-buttons text-center" id='v2-application-add-job-button' style='margin-right: 30px; border-color: #EE7623E5;'>ADD 2ND JOB</div>
+            <% else %>
+              <div class="v2-application-page-2-buttons-remove text-center" id='v2-application-add-job-button' style='margin-right: 30px; border-color: #EE7623E5;'>REMOVE 2ND JOB</div>
+            <% end %>
+
+            <% if @questionnaire.referee_name == nil || @questionnaire.referee_name == '' %>
+              <div class="v2-application-page-2-buttons text-center" id='v2-application-add-reference-button' style='border-color: #EE7623E5';>ADD REFERENCE</div>
+            <% else %>
+              <div class="v2-application-page-2-buttons-remove text-center" id='v2-application-add-reference-button' style='border-color: #EE7623E5;'>REMOVE REFERENCE</div>
+            <% end %>
+          </div>
+        </div>
+
+        <div class="col v2-p-m-0" style='margin-left: 20px;'>
+          <%= f.text_area :job1_description, class: 'form-control v2-application-page-2-textarea brief-field v2-inputs required', placeholder: 'Brief description of the job.', rows: 12 %>
+        </div>
+      </div>
+    </div>
+    <div id="v2-application-job-2" style="<%= @questionnaire.job2_position == nil || @questionnaire.job2_position == '' ? "" : "display: block;" %>">
+      <div class="v2-application-page-title" style='margin-bottom: 28px;'>Work Experience(2)</div>
+      <div class="row">
+        <div class="col-5 v2-p-m-0">
+          <%= f.text_field :job2_position, placeholder: 'Position', class: 'form-control v2-application-page-2-inputs v2-inputs job2_required', style: 'margin-bottom: 16px;'%>
+          <%= f.text_field :job2_company, placeholder: 'Company', class: 'form-control v2-application-page-2-inputs v2-inputs job2_required', style: 'margin-bottom: 16px;'%>
+          <div class="row dates-block-app" style='margin-left: 0;'>
+            <div class="date-app">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" style= 'margin-bottom: 16px; width: 100%;'>
+                  <%= select_date @questionnaire[:job2_date_start], {prefix: 'job2_date_start', end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'Start Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs job2_required date-month-year-select'} %>
+                </div>
+              </div>
+            </div>
+            <div class="date-app">
+              <% if @questionnaire[:job2_position] == nil || @questionnaire[:job2_position] == "" %>
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" id='v2-application-form-finish-date-2'>
+                  <%= select_date @questionnaire[:job2_date_finish], {prefix: 'job2_date_finish'.to_s, end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'End Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs date-month-year-select'} %>
+                </div>
+              <% elsif @questionnaire[:job2_date_finish] == nil %>
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" id='v2-application-form-finish-date-2' style='visibility:hidden;'>
+                  <%= select_date @questionnaire[:job2_date_finish], {prefix: 'job2_date_finish'.to_s, end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'End Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs date-month-year-select'} %>
+                </div>
+              <% else %>
+                <div class="d-flex flex-row bd-highlight v2-application-date-input-group" id='v2-application-form-finish-date-2'>
+                  <%= select_date @questionnaire[:job2_date_finish], {prefix: 'job2_date_finish'.to_s, end_year: Date.today.year-30, start_year: Date.today.year, order: [:month, :year], :prompt => { :month => 'End Month', :year => 'Year' }}, {class: 'form-control v2-application-page-2-input-date v2-inputs date-month-year-select'} %>
+                </div>
+              <% end %>
+            </div>
+          </div>
+          <div class="form-check v2-application-checkbox v2-application-page-2-checkbox">
+            <%= check_box_tag :job2_tick, '1', @questionnaire[:job2_position] != nil && @questionnaire[:job2_position] != "" ? (@questionnaire[:job2_date_finish] == nil ? true : false) : false, class: "form-check-input"  %>
+            <%= label_tag :job2_tick, 'Tick if current employer.', class: "form-check-label", style: 'width: 300px;' %>
+          </div>
+          <div class="d-flex flex-row bd-highlight" style='margin-top: 10px;margin-bottom: 50px;'>
+            <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+              <%= f.radio_button :job2_type, 'FULL_TIME', checked: @questionnaire.job2_type=='FULL_TIME', class: 'form-check-input' %>
+              <%= f.label :job2_type, 'Full Time', value: 'FULL_TIME', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+              <%= f.radio_button :job2_type, 'PART_TIME/CASUAL', checked: @questionnaire.job2_type=='PART_TIME/CASUAL' || @questionnaire.job2_type=='PART_TIME' || @questionnaire.job2_type=='CASUAL' || @questionnaire.job2_type=='PT/Casual', class: 'form-check-input' %>
+              <%= f.label :job2_type, 'PT/Casual', value: 'PART_TIME/CASUAL', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+              <%= f.radio_button :job2_type, 'VOLUNTARY', checked: @questionnaire.job2_type=='VOLUNTARY', class: 'form-check-input' %>
+              <%= f.label :job2_type, 'Voluntary', value: 'VOLUNTARY', class: 'form-check-label' %>
+            </div>
+          </div>
+        </div>
+        <div class="col v2-p-m-0" style='margin-left: 20px;'>
+          <%= f.text_area :job2_description, class: 'form-control v2-application-page-2-textarea v2-inputs job2_required', placeholder: 'Brief description of the job.', rows: 12 %>
+        </div>
+      </div>
+    </div>
+    <div id="v2-application-work-reference" style="<%= @questionnaire.referee_name == nil || @questionnaire.referee_name == '' ?  "" : "display: block;" %>">
+      <div class="v2-application-page-title" style='margin-bottom: 28px;'>Work Reference(1)</div>
+      <div class="d-flex flex-row bd-highlight" style='margin-bottom: 23px;'>
+        <%= f.text_field :referee_name, placeholder: 'Employer Name', class: 'form-control v2-application-page-2-inputs v2-inputs wr_required', style: 'margin-right: 27px;' %>
+        <%= f.text_field :referee_position, placeholder: 'Position', class: 'form-control v2-application-page-2-inputs v2-inputs wr_required' %>
+      </div>
+      <div class="d-flex flex-row bd-highlight" style='margin-bottom: 30px;'>
+        <%= f.text_field :referee_company, placeholder: 'Company', class: 'form-control v2-application-page-2-inputs v2-inputs wr_required', style: 'margin-right: 27px;' %>
+        <%= f.text_field :referee_email, placeholder: 'Email', class: 'form-control v2-application-page-2-inputs v2-inputs wr_required', type: 'email' %>
+      </div>
+    </div>
+
+    <div class="v2-application-page-title" style='margin-bottom: 13px;'>Ice Breakers</div>
+    <div class="row" id='v2-profile-ib' style='margin-bottom: 34px;'>
+      <div class="col v2-p-m-0" style='margin-right: 30px;'>
+        <div class="v2-application-page-1-labels" style='margin-bottom: 6px;'></div>
+        <%= f.text_field :best_place, placeholder: 'Your favorite film?', class: 'form-control v2-application-page-2-inputs v2-inputs ib_required' %>
+      </div>
+      <div class="col v2-p-m-0">
+        <div class="v2-application-page-1-labels" style='margin-bottom: 6px;'></div>
+        <%= f.text_field :favorite_film, placeholder: 'Best place in the world to you?', class: 'form-control v2-application-page-2-inputs v2-inputs ib_required' %>
+      </div>
+    </div>
+    <div class="row" id='v2-profile-ib' style='margin-bottom: 34px;'>
+      <div class="col v2-p-m-0" style='margin-bottom: 23px; margin-right: 30px'>
+        <%= f.text_area :customer_service_why_interested, placeholder: 'Why do you want to work with flair people?', class: 'form-control v2-application-page-2-textarea v2-inputs required', rows: "3", style: 'margin-right: 22px; height: 100%;' %>
+      </div>
+      <div class="col v2-p-m-0">
+        <div class="row">
+          <div class="v2-application-page-2-market-research">The market research bit</div>
+          <div class="d-flex flex-row bd-highlight" style='margin-bottom: 19px; justify-content: space-around'>
+            <div class="form-check v2-profile-radio">
+              <%= f.radio_button :market_research, 'Friend', class: 'form-check-input', checked: @questionnaire.market_research == 'Friend' %>
+              <%= f.label :market_research, 'Friend', value: 'Friend', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio">
+              <%= f.radio_button :market_research, 'Facebook', class: 'form-check-input', checked: @questionnaire.market_research == 'Facebook' %>
+              <%= f.label :market_research, 'Facebook', value: 'Facebook', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio">
+              <%= f.radio_button :market_research, 'Indeed', class: 'form-check-input', checked: @questionnaire.market_research == 'Indeed' %>
+              <%= f.label :market_research, 'Indeed', value: 'Indeed', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio">
+              <%= f.radio_button :market_research, 'Job centre', class: 'form-check-input', checked: @questionnaire.market_research == 'Job centre' %>
+              <%= f.label :market_research, 'Job centre', value: 'Job centre', class: 'form-check-label' %>
+            </div>
+
+            <div class="form-check v2-profile-radio">
+              <%= f.radio_button :market_research, 'Other', class: 'form-check-input', checked: @questionnaire.market_research == 'Other' %>
+              <%= f.label :market_research, 'Other', value: 'Other', class: 'form-check-label' %>
+            </div>
+          </div>
+          <div class="d-flex justify-content-center" style='margin-bottom: 25px;'>
+            <%= f.text_field :friends_connection,  placeholder: 'Did a friend who recommended you to Flair?', class: 'form-control v2-application-page-2-inputs v2-inputs' %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="v2-application-page-title" style='margin-bottom: 10px;'>Top Academic Qualifications</div>
+    <div class="d-flex flex-row bd-highlight" style='margin-bottom: 19px;'>
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= f.radio_button :qualifications_general, 'School/College', class: 'form-check-input', checked: @questionnaire.qualifications_general == 'School/College' %>
+        <%= f.label :qualifications_general, 'School/College', value: 'School/College', class: 'form-check-label' %>
+      </div>
+
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= f.radio_button :qualifications_general, 'University', class: 'form-check-input', checked: @questionnaire.qualifications_general == 'University' %>
+        <%= f.label :qualifications_general, 'University', value: 'University', class: 'form-check-label' %>
+      </div>
+
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= f.radio_button :qualifications_general, 'Master/PHD', class: 'form-check-input', checked: @questionnaire.qualifications_general == 'Master/PHD' %>
+        <%= f.label :qualifications_general, 'Master/PHD', value: 'Master/PHD', class: 'form-check-label' %>
+      </div>
+
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= f.radio_button :qualifications_general, 'None', class: 'form-check-input', checked: @questionnaire.qualifications_general == 'None' %>
+        <%= f.label :qualifications_general, 'None yet!', value: 'None', class: 'form-check-label' %>
+      </div>
+    </div>
+    <div class="row" id='v2-profile-taq' style='margin-bottom: 34px;'>
+      <div class="col v2-p-m-0" style='margin-right: 30px;'>
+        <%= f.text_field :qualification_name, placeholder: 'Top qualification', class: 'quali form-control v2-application-page-2-inputs v2-inputs taq_required' %>
+      </div>
+      <div class="col v2-p-m-0">
+        <%= f.text_field :city_of_study, value: "#{@questionnaire.prospect.city_of_study}", placeholder: 'City of Study if still different to home address', class: 'quali form-control v2-application-page-2-inputs v2-inputs' %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col" style="padding:0; margin-right: 40px;">
+        <div class="v2-application-page-title">Fact Finders</div>
+      </div>
+      <div class="col" style="padding:0;">
+        <div class="v2-application-page-title">Management level</div>
+      </div>
+    </div>
+    <div class="row" style='margin-bottom: 43px;'>
+      <div class="col v2-p-m-0 v2-application-page-2-fact-finders-checkbox" style="margin-right: 40px;">
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :dbs_qualification, class: 'form-check-input', checked: @questionnaire.dbs_qualification == true %>
+          <%= f.label :dbs_qualification, 'DBS - valid in the last 2 years', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :food_health_level_two_qualification, class: 'form-check-input', checked: @questionnaire.food_health_level_two_qualification == true %>
+          <%= f.label :food_health_level_two_qualification, 'Food Hygiene Level 2', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :english_personal_licence_qualification, class: 'form-check-input', checked: @questionnaire.english_personal_licence_qualification == true %>
+          <%= f.label :english_personal_licence_qualification, 'PLH - Personal Bar License - English', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :scottish_personal_licence_qualification, class: 'form-check-input', checked: @questionnaire.scottish_personal_licence_qualification == true %>
+          <%= f.label :scottish_personal_licence_qualification, 'PLH - Personal Bar License - Scottish', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :sclps_2_hr_training, class: 'form-check-input', checked: @questionnaire.sclps_2_hr_training == true %>
+          <%= f.label :sclps_2_hr_training, 'Scottish Bar Drink Service (SCLPS)', class: 'form-check-label' %>
+        </div>
+      </div>
+      <div class="col v2-p-m-0 v2-application-page-2-fact-finders-checkbox">
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :bar_management_experience, class: 'form-check-input', checked: @questionnaire.bar_management_experience == true %>
+          <%= f.label :bar_management_experience, 'Bar Management', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :staff_leadership_experience, class: 'form-check-input', checked: @questionnaire.staff_leadership_experience == true %>
+          <%= f.label :staff_leadership_experience, 'Staff Leadership', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :festival_event_bar_management_experience, class: 'form-check-input', checked: @questionnaire.festival_event_bar_management_experience == true %>
+          <%= f.label :festival_event_bar_management_experience, 'Festival & Event Bar Management ', class: 'form-check-label' %>
+        </div>
+
+        <div class="form-check v2-application-checkbox">
+          <%= f.check_box :event_production_experience, class: 'form-check-input', checked: @questionnaire.event_production_experience == true %>
+          <%= f.label :event_production_experience, 'Event Production', class: 'form-check-label' %>
+        </div>
+      </div>
+    </div>
+
+    <div class="v2-application-page-1-five-words">In five words, highlight yourself to an employer</div>
+    <div class="d-flex justify-content-center" style='margin-bottom: 34px;'>
+      <%= text_field_tag :describe_yourself_one, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[0], class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-right: 17px;' %>
+
+      <%= text_field_tag :describe_yourself_two, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[1], class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-right: 17px;' %>
+
+      <%= text_field_tag :describe_yourself_three, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[2], class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-right: 17px;' %>
+
+      <%= text_field_tag :describe_yourself_four, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[3], class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-right: 17px;' %>
+
+      <%= text_field_tag :describe_yourself_five, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[4], class: 'form-control v2-application-page-2-inputs v2-inputs required', style: 'margin-right: 17px;' %>
+    </div>
+
+    <div class="v2-application-page-title" style='margin-bottom: 15px;'>Criminal convictions</div>
+    <div class="v2-application-page-2-criminal-caption">
+      Do you have any convictions which are not yet spent under the terms of the Rehabilitation of Offenders Act 1974?
+    </div>
+    <div class="d-flex flex-row bd-highlight">
+      <div class="form-check v2-profile-radio v2-application-page-2-radio-buttons">
+        <%= f.radio_button :has_criminal_convictions, true, checked: @questionnaire.has_criminal_convictions == true %>
+        <%= f.label :has_criminal_convictions, 'Yes', class: 'form-check-label', style: 'margin-right: 47px;', value: true %>
+      </div>
+
+      <div class="form-check v2-profile-radio v2-application-page-2-radio-buttons">
+        <%= f.radio_button :has_criminal_convictions, false, checked: @questionnaire.has_criminal_convictions == false || @questionnaire.has_criminal_convictions == nil %>
+        <%= f.label :has_criminal_convictions, 'No', class: 'form-check-label', value: false %>
+      </div>
+    </div>
+    <% if @questionnaire.has_criminal_convictions == true %>
+      <div id="v2-application-page-2-criminal-text-area" style='margin-top: 32px;display: block; '>
+        <%= f.text_area :criminal_conviction_details,  placeholder: 'Enter your convictions here.....', class: 'form-control v2-application-page-2-textarea v2-inputs', rows: "6" %>
+      </div>
+    <% else %>
+      <div id="v2-application-page-2-criminal-text-area" style='margin-top: 32px; '>
+        <%= f.text_area :criminal_conviction_details,  placeholder: 'Enter your convictions here.....', class: 'form-control v2-application-page-2-textarea v2-inputs', rows: "6" %>
+      </div>
+    <% end %>
+
+    <center>
+      <button class="v2-application-page-submit">
+        <% if @prospect.v2_applications_done? %>
+          UPDATE
+        <% else %>
+          SAVE
+        <% end %>
+      </button>
+    </center>
+
+  </div>
+  <div id="v2-application-page-2">
+    <div class="v2-application-page-title" style='margin-bottom: 28px;'>Working with flair</div>
+
+    <div class="d-flex justify-content-center">
+      <div class="v2-application-page-button text-center" page='1' id="v2-application-page-button" style='margin-right: 15px;font-size: 14px;padding-top: 11px;'>
+        <span><< PREVIOUS PAGE</span>
+      </div>
+      <button class="v2-application-page-submit">
+        <% if @prospect.v2_applications_done? %>
+          UPDATE
+        <% else %>
+          SAVE
+        <% end %>
+      </button>
+    </div>
+  </div>
+
+<% end %>
+
+
+<% content_for_once :js do %>
+  <script>
+
+    $('#questionnaire_english_personal_licence_qualification').on('change', function(){
+      if($(this).prop('checked') == true){
+        $('#questionnaire_scottish_personal_licence_qualification').prop('checked', false);
+        $('#questionnaire_sclps_2_hr_training').prop('checked', false);
+      }
+    })
+
+    $('#questionnaire_scottish_personal_licence_qualification').on('change', function(){
+      if($(this).prop('checked') == true){
+        $('#questionnaire_english_personal_licence_qualification').prop('checked', false);
+      }
+    })
+
+    $('#questionnaire_sclps_2_hr_training').on('change', function(){
+      if($(this).prop('checked') == true){
+        $('#questionnaire_english_personal_licence_qualification').prop('checked', false);
+      }
+    })
+
+    $('body').on('click', '.v2-application-page-submit', function(e){
+      e.preventDefault();
+      if(page_1_validation() == true){
+        $('#application_questionnaire').submit()
+      }
+    })
+
+    $('.v2-application-page-button').on('click', function(){
+      page = $(this).attr('page');
+
+      if (page=='1'){
+        $('#v2-application-page-1').css('display', 'block');
+        $('#v2-application-page-2').css('display', 'none');
+
+        if (!$('.v2-application-page-button-1').hasClass('v2-application-page-button-border')){
+          $('.v2-application-page-button-1').addClass('v2-application-page-button-border');
+          $('.v2-application-page-button-2').removeClass('v2-application-page-button-border');
+        }
+
+        $('.v2-applications-page-numbers span').text('1');
+      }else if (page=='2'){
+        if(page_1_validation() == true){
+          $('#v2-application-page-1').css('display', 'none');
+          $('#v2-application-page-2').css('display', 'block');
+
+          if (!$('.v2-application-page-button-2').hasClass('v2-application-page-button-border')){
+            $('.v2-application-page-button-2').addClass('v2-application-page-button-border');
+            $('.v2-application-page-button-1').removeClass('v2-application-page-button-border');
+          }
+
+          $('.v2-applications-page-numbers span').text('2');
+
+          $([document.documentElement, document.body]).animate({
+            scrollTop: $(`.v2-applications-page-numbers`).offset().top - 100
+          }, 500);
+        }
+      }
+
+      v2_profile_bg_size('#v2-profile-applications-application-container')
+    })
+
+    $('#v2-application-add-job-button').on('click', function(){
+      if($('#v2-application-job-2').css('display') == 'block'){
+        $('#v2-application-job-2').css('display', 'none');
+        $('#v2-application-job-2').find('#questionnaire_job2_position').prop('disabled', true);
+        $('.v2-application-page-title span').css('display', 'none');
+        $(this).text('ADD 2ND JOB');
+        $(this).addClass('v2-application-page-2-buttons')
+        $(this).removeClass('v2-application-page-2-buttons-remove')
+      }else{
+        $('#v2-application-job-2').css('display', 'block');
+        $('.v2-application-page-title span').css('display', 'block');
+        $('#v2-application-job-2').find('#questionnaire_job2_position').prop('disabled', false);
+        $(this).text('REMOVE 2ND JOB');
+        $(this).removeClass('v2-application-page-2-buttons')
+        $(this).addClass('v2-application-page-2-buttons-remove')
+      }
+
+      v2_profile_bg_size('#v2-profile-applications-application-container')
+    })
+
+    $('#v2-application-add-reference-button').on('click', function(){
+      if($('#v2-application-work-reference').css('display') == 'block'){
+        $('#v2-application-work-reference').css('display', 'none');
+        $(this).text('ADD REFERENCE');
+        $(this).addClass('v2-application-page-2-buttons')
+        $(this).removeClass('v2-application-page-2-buttons-remove')
+      }else{
+        $('#v2-application-work-reference').css('display', 'block');
+        $(this).text('REMOVE REFERENCE');
+        $(this).removeClass('v2-application-page-2-buttons')
+        $(this).addClass('v2-application-page-2-buttons-remove')
+      }
+
+      v2_profile_bg_size('#v2-profile-applications-application-container')
+    })
+
+    $('body').on('click', '#questionnaire_has_criminal_convictions_false', function(){
+      $(this).parent().parent().parent().find('#v2-application-page-2-criminal-text-area').css('display', 'none');
+
+      v2_profile_bg_size('#v2-profile-applications-application-container')
+    })
+
+    $('body').on('click', '#questionnaire_has_criminal_convictions_true', function(){
+      $(this).parent().parent().parent().find('#v2-application-page-2-criminal-text-area').css('display', 'block');
+
+      v2_profile_bg_size('#v2-profile-applications-application-container')
+    })
+
+    $('#job1_tick').on('click', function(){
+      if($(this).prop('checked') == true){
+        $('#v2-application-form-finish-date-1').css('visibility', 'hidden')
+      }else{
+        $('#v2-application-form-finish-date-1').css('visibility', 'visible')
+      }
+    })
+
+    $('#job2_tick').on('click', function(){
+      if($(this).prop('checked') == true){
+        $('#v2-application-form-finish-date-2').css('visibility', 'hidden')
+      }else{
+        $('#v2-application-form-finish-date-2').css('visibility', 'visible')
+      }
+    })
+
+    // Page 1 Validation
+    function page_1_validation() {
+      checked = 0
+      input_to_scroll = ""
+      // Job 1
+        job1_inputs = $('#v2-application-page-1').find('.required')
+
+        job1_inputs.each(function(){
+          if($(this).val()==""){
+            if(input_to_scroll === ""){
+              input_to_scroll = $(this).attr('id')
+            }
+            $(this).css('border', '2px solid red')
+            checked = 1
+          }else{
+            $(this).css('border', 'none')
+          }
+        })
+
+        // radio buttons
+        if($('#questionnaire_job1_type_full_time').prop('checked')==false && $('#questionnaire_job1_type_part_timecasual').prop('checked')==false && $('#questionnaire_job1_type_voluntary').prop('checked')==false){
+
+          if(input_to_scroll === ""){
+            input_to_scroll = 'job1_date_start_month'
+          }
+
+          if(!$('#questionnaire_job1_type_full_time').parent().hasClass('v2-profile-radio-empty')){
+            $('#questionnaire_job1_type_full_time').parent().addClass('v2-profile-radio-empty')
+          }
+
+          if(!$('#questionnaire_job1_type_part_timecasual').parent().hasClass('v2-profile-radio-empty')){
+            $('#questionnaire_job1_type_part_timecasual').parent().addClass('v2-profile-radio-empty')
+          }
+
+          if(!$('#questionnaire_job1_type_voluntary').parent().hasClass('v2-profile-radio-empty')){
+            $('#questionnaire_job1_type_voluntary').parent().addClass('v2-profile-radio-empty')
+          }
+          checked = 1
+        }else{
+          $('#questionnaire_job1_type_full_time').parent().removeClass('v2-profile-radio-empty')
+          $('#questionnaire_job1_type_part_timecasual').parent().removeClass('v2-profile-radio-empty')
+          $('#questionnaire_job1_type_voluntary').parent().removeClass('v2-profile-radio-empty')
+        }
+
+      // Job 2
+          if($('#questionnaire_job2_position').val() != ''){
+            job2_inputs = $('#v2-application-job-2').find('.job2_required')
+            job2_inputs.each(function(){
+              if($(this).val()==""){
+                if(input_to_scroll === ""){
+                  input_to_scroll = $(this).attr('id')
+                }
+                $(this).css('border', '2px solid red')
+                checked = 1
+              }else{
+                $(this).css('border', 'none')
+              }
+            })
+
+            // radios
+            if($('#questionnaire_job2_type_full_time').prop('checked')==false && $('#questionnaire_job2_type_part_timecasual').prop('checked')==false && $('#questionnaire_job2_type_voluntary').prop('checked')==false){
+              if(input_to_scroll === ""){
+                input_to_scroll = 'job2_date_start_month'
+              }
+
+              if(!$('#questionnaire_job2_type_full_time').parent().hasClass('v2-profile-radio-empty')){
+                $('#questionnaire_job2_type_full_time').parent().addClass('v2-profile-radio-empty')
+              }
+
+              if(!$('#questionnaire_job2_type_part_timecasual').parent().hasClass('v2-profile-radio-empty')){
+                $('#questionnaire_job2_type_part_timecasual').parent().addClass('v2-profile-radio-empty')
+              }
+
+              if(!$('#questionnaire_job2_type_voluntary').parent().hasClass('v2-profile-radio-empty')){
+                $('#questionnaire_job2_type_voluntary').parent().addClass('v2-profile-radio-empty')
+              }
+              checked = 1
+            }else{
+              $('#questionnaire_job2_type_full_time').parent().removeClass('v2-profile-radio-empty')
+              $('#questionnaire_job2_type_part_timecasual').parent().removeClass('v2-profile-radio-empty')
+              $('#questionnaire_job2_type_voluntary').parent().removeClass('v2-profile-radio-empty')
+            }
+          }
+
+      // // Work Reference
+        //   if($('#v2-application-work-reference').css('display')!='none'){
+        //     wr_inputs = $('#v2-application-work-reference').find('.wr_required')
+        //     wr_inputs.each(function(){
+        //       if($(this).val()==""){
+        //         if(input_to_scroll === ""){
+        //           input_to_scroll = $(this).attr('id')
+        //         }
+        //         $(this).css('border', '2px solid red')
+        //         checked = 1
+        //       }else{
+        //         $(this).css('border', 'none')
+        //       }
+        //     })
+        //   }
+
+      // Top Academic Qualifications
+        // radios
+        if($('#questionnaire_qualifications_general_schoolcollege').prop('checked')==false && $('#questionnaire_qualifications_general_university').prop('checked')==false && $('#questionnaire_qualifications_general_masterphd').prop('checked')==false && $('#questionnaire_qualifications_general_none').prop('checked')==false){
+
+          if(input_to_scroll === ""){
+            input_to_scroll = 'questionnaire_qualifications_general_schoolcollege'
+          }
+
+          if(!$('#questionnaire_qualifications_general_schoolcollege').parent().hasClass('v2-profile-radio-empty')){
+            $('#questionnaire_qualifications_general_schoolcollege').parent().addClass('v2-profile-radio-empty')
+          }
+
+          if(!$('#questionnaire_qualifications_general_university').parent().hasClass('v2-profile-radio-empty')){
+            $('#questionnaire_qualifications_general_university').parent().addClass('v2-profile-radio-empty')
+          }
+
+          if(!$('#questionnaire_qualifications_general_masterphd').parent().hasClass('v2-profile-radio-empty')){
+            $('#questionnaire_qualifications_general_masterphd').parent().addClass('v2-profile-radio-empty')
+          }
+            if(!$('#questionnaire_qualifications_general_none').parent().hasClass('v2-profile-radio-empty')){
+                $('#questionnaire_qualifications_general_none').parent().addClass('v2-profile-radio-empty')
+            }
+          checked = 1
+        }else{
+            $('#questionnaire_qualifications_general_schoolcollege').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_qualifications_general_university').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_qualifications_general_masterphd').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_qualifications_general_none').parent().removeClass('v2-profile-radio-empty')
+        }
+      //Market research
+        //radios
+        if($('#questionnaire_market_research_friend').prop('checked')==false && $('#questionnaire_market_research_facebook').prop('checked')==false && $('#questionnaire_market_research_indeed').prop('checked')==false && $('#questionnaire_market_research_job_centre').prop('checked')==false && $('#questionnaire_market_research_other').prop('checked')==false) {
+
+          if(input_to_scroll === ""){
+              input_to_scroll = 'questionnaire_market_research_friend'
+          }
+
+          if(!$('#questionnaire_market_research_friend').parent().hasClass('v2-profile-radio-empty')){
+              $('#questionnaire_market_research_friend').parent().addClass('v2-profile-radio-empty')
+          }
+          if(!$('#questionnaire_market_research_facebook').parent().hasClass('v2-profile-radio-empty')){
+              $('#questionnaire_market_research_facebook').parent().addClass('v2-profile-radio-empty')
+          }
+          if(!$('#questionnaire_market_research_indeed').parent().hasClass('v2-profile-radio-empty')){
+              $('#questionnaire_market_research_indeed').parent().addClass('v2-profile-radio-empty')
+          }
+          if(!$('#questionnaire_market_research_job_centre').parent().hasClass('v2-profile-radio-empty')){
+              $('#questionnaire_market_research_job_centre').parent().addClass('v2-profile-radio-empty')
+          }
+          if(!$('#questionnaire_market_research_other').parent().hasClass('v2-profile-radio-empty')){
+              $('#questionnaire_market_research_other').parent().addClass('v2-profile-radio-empty')
+          }
+          checked = 1
+        }else{
+            $('#questionnaire_market_research_friend').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_market_research_facebook').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_market_research_indeed').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_market_research_job_centre').parent().removeClass('v2-profile-radio-empty')
+            $('#questionnaire_market_research_other').parent().removeClass('v2-profile-radio-empty')
+        }
+
+        taq_inputs = $('#v2-profile-taq').find('.taq_required')
+        if ($('#questionnaire_qualifications_general_none').is(':checked') === false) {
+            taq_inputs.each(function () {
+                if ($(this).val() == "") {
+                    if (input_to_scroll === "") {
+                        input_to_scroll = $(this).attr('id')
+                    }
+                    $(this).css('border', '2px solid red')
+                    checked = 1
+                } else {
+                    $(this).css('border', 'none')
+                }
+            })
+        }
+
+      // Ice Breaker
+        ib_inputs = $('#v2-profile-ib').find('.ib_required')
+        ib_inputs.each(function(){
+          if($(this).val()==""){
+            if(input_to_scroll === ""){
+              input_to_scroll = $(this).attr('id')
+            }
+            $(this).css('border', '2px solid red')
+            checked = 1
+          }else{
+            $(this).css('border', 'none')
+          }
+        })
+        if($('#job1_date_finish_month').val() === '' || $('#job1_date_finish_year').val() === '') {
+            if(!($('#job1_tick').prop('checked'))) {
+                $('#job1_date_finish_month').css('border', '2px solid red');
+                $('#job1_date_finish_year').css('border', '2px solid red');
+                input_to_scroll = $('#job1_date_finish_year').attr('id');
+                checked = 1;
+            }
+        }
+        if($('#questionnaire_job2_position').val() != ''){
+          if($('#job2_date_finish_month').val() === '' || $('#job2_date_finish_year').val() === '') {
+              if(!($('#job2_tick').prop('checked'))) {
+                  $('#job2_date_finish_month').css('border', '2px solid red');
+                  $('#job2_date_finish_year').css('border', '2px solid red');
+                  input_to_scroll = $('#job2_date_finish_year').attr('id');
+                  checked = 1;
+              }
+          }
+        }
+
+      if(checked == 1){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#${input_to_scroll}`).offset().top - 100
+        }, 500);
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <i class="icon--notice-flag"></i>
+              <div class="v2-flash-message">
+                Please fill up all details.
+              </div>
+              <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+              </a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        `)
+        return false
+      }
+
+      return true
+    }
+
+    // Page 2 Validation
+    function page_2_validation() {
+      checked = 0
+      input_to_scroll = ""
+
+      text_inputs = $('#v2-application-page-2').find('.p2_required')
+      text_inputs.each(function(){
+        if($(this).val()==""){
+          if(input_to_scroll === ""){
+            input_to_scroll = $(this).attr('id')
+          }
+          $(this).css('border', '2px solid red')
+          checked = 1
+        }else{
+          $(this).css('border', 'none')
+        }
+      })
+
+      if($('#v2-application-page-2-criminal-text-area').css('display') != 'none'){
+        if($('#questionnaire_criminal_conviction_details').val()==""){
+          if(input_to_scroll === ""){
+            input_to_scroll = 'questionnaire_criminal_conviction_details'
+          }
+          $('#questionnaire_criminal_conviction_details').css('border', '2px solid red')
+          checked = 1
+        }else{
+          $('#questionnaire_criminal_conviction_details').css('border', 'none')
+        }
+      }
+
+      checkbox_check = 0
+      $('.form-checkbox-required').each(function(){
+        if($(this).prop("checked") == true){
+          checkbox_check = 1
+        }
+      })
+
+      if(checkbox_check == 0){
+        $('.form-checkbox-required').each(function(){
+          $(this).parent().addClass('v2-application-checkbox-empty')
+        })
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $($('.form-checkbox-required')[0]).offset().top - 100
+        }, 500);
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <i class="icon--notice-flag"></i>
+              <div class="v2-flash-message">
+                Please check one of the boxes
+              </div>
+              <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+              </a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        `)
+        return false
+      }
+
+      if(checked==1){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#${input_to_scroll}`).offset().top - 100
+        }, 500);
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <i class="icon--notice-flag"></i>
+              <div class="v2-flash-message">
+                Please fill up all details.
+              </div>
+              <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+              </a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        `)
+        return false
+      }else{
+        return true
+      }
+    }
+
+    function page_2_validation() {
+      checked = 0
+      input_to_scroll = ""
+
+      text_inputs = $('#v2-application-page-2').find('.p2_required')
+      text_inputs.each(function(){
+        if($(this).val()==""){
+          if(input_to_scroll === ""){
+            input_to_scroll = $(this).attr('id')
+          }
+          $(this).css('border', '2px solid red')
+          checked = 1
+        }else{
+          $(this).css('border', 'none')
+        }
+      })
+
+      if($('#v2-application-page-2-criminal-text-area').css('display') != 'none'){
+        if($('#questionnaire_criminal_conviction_details').val()==""){
+          if(input_to_scroll === ""){
+            input_to_scroll = 'questionnaire_criminal_conviction_details'
+          }
+          $('#questionnaire_criminal_conviction_details').css('border', '2px solid red')
+          checked = 1
+        }else{
+          $('#questionnaire_criminal_conviction_details').css('border', 'none')
+        }
+      }
+
+      checkbox_check = 0
+      $('.form-checkbox-required').each(function(){
+        if($(this).prop("checked") == true){
+          checkbox_check = 1
+        }
+      })
+
+      if(checkbox_check == 0){
+        $('.form-checkbox-required').each(function(){
+          $(this).parent().addClass('v2-application-checkbox-empty')
+        })
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $($('.form-checkbox-required')[0]).offset().top - 100
+        }, 500);
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <i class="icon--notice-flag"></i>
+              <div class="v2-flash-message">
+                Please check one of the boxes
+              </div>
+              <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+              </a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        `)
+        return false
+      }
+
+      if(checked==1){
+        $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#${input_to_scroll}`).offset().top - 100
+        }, 500);
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <i class="icon--notice-flag"></i>
+              <div class="v2-flash-message">
+                Please fill up all details.
+              </div>
+              <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+              </a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        `)
+        return false
+      }else{
+        return true
+      }
+    }
+  </script>
+<% end %>

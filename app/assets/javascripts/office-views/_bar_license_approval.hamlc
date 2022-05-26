@@ -1,0 +1,90 @@
+%p
+  %table
+    %tr
+      %td{colspan: 2}= "IDs uploaded by #{escapeHTML(@name)}"
+      %td.pl10{rowspan: 7}
+        %img{src: "/prospect_photo/#{@prospect_id}", id: "prospect_photo", height: 145}
+      %td.pl10{rowspan: 2}
+        %button.btn.btn-default{ id: 'export_bar_scanned_id_pdf' } Export
+    %tr
+      %td
+        %b Bar License: 
+      %td
+        %select.form-control{id: "barlicensetype#{@prospect_id}"}
+          - for pair in [['',''], ['SALPS', 'SCLPS_2_HR_TRAINING'], ['Scottish PL', 'SCOTTISH_PERSONAL_LICENSE'], ['English PL', 'ENGLISH_PERSONAL_LICENSE'], ['Screen Shot of SALPS','SCREEN_SHOT_OF_SCLPS']]
+            %option{value: pair[1], selected: @bar_license_type == pair[1]}= pair[0]
+    %tr
+      %td
+        %b Number: 
+      %td
+        %input.form-control{id: "barlicensenumber#{@prospect_id}", value: @bar_license_no}
+    %tr
+      %td
+        %b Expiry Date: 
+      %td
+        %input.form-control{id: "barlicenseexpiry#{@prospect_id}", value: @bar_license_expiry}
+    %tr
+      %td
+        %b Issued By: 
+      %td
+        %input.form-control{id: "barlicenseissuedby#{@prospect_id}", value: @bar_license_issued_by}
+
+- for scanned_bar_license in @scanned_bar_licenses
+  // TODO: Why the rand_id?
+  - rand_id = Math.floor(Math.random() * 1000000)
+  - if scanned_bar_license.extension == '.pdf'
+    %iframe{ id: "img#{rand_id}", src: "/office/scanned_bar_license_image/#{scanned_bar_license.id}", width: "600", height:"400", style:"border: none; margin-right: 10px;" }
+  - else
+    %a{href: "/office/scanned_bar_license_image/#{scanned_bar_license.id}?large=true", class: 'zoomimg'}
+      %img{src: "/office/scanned_bar_license_image/#{scanned_bar_license.id}", id: "img#{rand_id}", width: 400, height: 400, data-rotation: 0}
+    %button.btn.btn-default{data-image-id: "#img#{rand_id}", data-scanned-id: scanned_bar_license.id, data-id-approval-rotatable: ''} Rotate
+
+%script
+  $('[data-scanned-bar-license-approval-rotatable]').click(function() {
+    var scanned_bar_license_id = $(this).data('scanned-bar-license-id');
+    var image = $($(this).data('image-id'));
+    var angle = parseInt(image.attr('angle') || 0, 10);
+    angle = (angle+90)%360;
+    image.data('rotation', angle);
+    image.attr('angle', angle);
+    image[0].className = 'rotate'+angle;
+    ServerProxy.saveChanges("/office/rotate_scanned_bar_license/"+scanned_bar_license_id, {}, null, window.db);
+  });
+  
+  $('#barlicensenumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_no]" : newNumber}, null, window.db);
+  });
+  $('#barlicensenumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_no]" : newNumber}, null, window.db);
+    }
+  })
+  $('#barlicensetype#{@prospect_id}').change(function() {
+    var newNationality = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_type]" : newNationality}, null, window.db);
+  })
+  $('#barlicenseissuedby#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_issued_by]" : newNumber}, null, window.db);
+  });
+  $('#barlicenseissuedby#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_issued_by]" : newNumber}, null, window.db);
+    }
+  })
+  $('#barlicenseexpiry#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_expiry]" : newNumber}, null, window.db);
+  });
+  $('#barlicenseexpiry#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[bar_license_expiry]" : newNumber}, null, window.db);
+    }
+  })
+  $('#export_bar_scanned_id_pdf').click(function() {
+    window.open("/office/download_scanned_bar_ids_data/#{@prospect_id}", '_blank');
+  });

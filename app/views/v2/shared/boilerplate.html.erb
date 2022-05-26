@@ -1,0 +1,20 @@
+<div class="<%= controller.action_name %> public">
+  <%= render :partial => 'v2/shared/nav' %>
+  <div class="content">
+    <div class="content-inner">
+      <div class="v2-privacy-header-layer-1"></div>
+      <div class="v2-privacy-header-layer-2"></div>
+      <div class="v2-privacy-header-container">
+        <div class="v2-privacy-header-label d-flex justify-content-center"><%= @title %></div>
+      </div>
+      <div class="v2-privacy-space"></div>
+      <div class="v2-privacy-content-container">
+        <div class="v2-privacy-content">
+          <span>Last Updated <%= @updated_date.strftime('%B %Y') %></span>
+          <%= @message %>
+        </div>
+      </div>
+    </div>
+  </div>
+  <%= render :partial => 'v2/application/footer' %>
+</div>

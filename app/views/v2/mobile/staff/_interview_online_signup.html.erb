@@ -1,0 +1,139 @@
+<% first_week = @interview_calendar[:first] %>
+<% second_week = @interview_calendar[:second] %>
+
+<div id='v2-interview-sign-up' style="<%= @interview ? 'display: none;' : 'display: block;' %>">
+  <div class="v2-interview-title">Book an introduction</div>
+  <% if current_user.interview_induction == false %>
+    <div class="v2-flash-bg-book-intro">
+      <div class="v2-flash-body v2-flash-bg-white-color" style="width: 700px; display: flex; flex-flow: column; align-items: center;">
+        <i class="icon--notice-flag"></i>
+        <div class="v2-flash-message">
+          Two ways to trigger a 5 minute call from the Flair team to join our database full of fabulous people like you!
+        </div>
+        <div class="d-flex justify-content-around w-100 flex-wrap">
+          <%= link_to('Book induction', v2_staff_induction_popup_path, remote: true, onclick: "$('.v2-flash-bg-book-intro').fadeOut()", class: "v2-flash-button no-border pt-3 text-transform-none") %>
+          <%= link_to('Apply 4 jobs', v2_staff_induction_popup_path(to: 'events'), class: "v2-flash-button no-border apply-for-job pt-3 text-transform-none") %>
+        </div>
+
+        <a class="fl-flash__close-btn" onclick="$('.v2-flash-bg-book-intro ').fadeOut()">
+          <span>Close</span>
+        </a>
+        <div class="clear"></div>
+      </div>
+    </div>
+  <% end %>
+  <br>
+  <div class="v2-interview-title-caption" style='margin-bottom: 24px;'>Allow 5 -10 minutes to chat.</div>
+
+  <% if first_week.count == 0 && second_week.count == 0 %>
+    <div class="v2-interview-dates-content">
+      <div class="h5" style="color: white;">
+        We currently have no open interview slots, please feel free to call our office direct and we can arrange a suitable time if not chat right away.
+      </div>
+      <p>FYI: Feel free to apply for jobs which would trigger a direct call from us when recruiting.</p>
+    </div>
+  <% else %>
+    <div class="v2-interview-week-buttons d-flex justify-content-center" style='margin-bottom: 30px;'>
+      <div class='v2-interview-week-buttons-active' id="v2-interview-this-week-button">This Week</div>
+      <% if second_week.count > 0 %>
+        <div id="v2-interview-next-week-button">Next Week</div>
+      <% else %>
+        <div id="v2-interview-next-week-button-disable">Next Week</div>
+      <% end %>
+    </div>
+
+    <%= form_with url: '../staff/sign_up_for_interview', method: :post, html: {id: "v2-book-interview-form"} do |f| %>
+      <ul class='v2-interview-dates-list' id='v2-interview-first-week'>
+        <% first_week.each do |interview_block| %>
+          <li>
+            <div class="v2-interview-dates-block">
+              <div class="v2-interview-dates-title"> <%= interview_block.date.strftime('%A %e %b') %> </div>
+              <% if interview_block.is_morning %>
+                <div class="v2-interview-dates-time-<%= interview_block.morning_applicants > interview_block.morning_interviews && interview_block.date >= Date.today() ? "available" : "unavailable" %>" style='margin-bottom:10px;' id="<%= interview_block.date.strftime('%A-%e-%b') %>-MORNING">
+                  <div class="interview_block_time"> 10am - 1pm</div>
+                  <%= f.radio_button :interview_block, "#{interview_block.id}.MORNING", style: 'display: none;' %>
+                </div>
+              <% end %>
+
+              <% if interview_block.is_afternoon %>
+                <div class="v2-interview-dates-time-<%= interview_block.afternoon_applicants > interview_block.afternoon_interviews && interview_block.date >= Date.today() ? "available" : "unavailable" %>" style='margin-bottom:10px;' id="<%= interview_block.date.strftime('%A-%e-%b') %>-AFTERNOON">
+                  <div class="interview_block_time"> 12:30pm - 4pm</div>
+                  <%= f.radio_button :interview_block, "#{interview_block.id}.AFTERNOON", style: 'display: none;' %>
+                </div>
+              <% end %>
+
+              <% if interview_block.is_evening %>
+                <div class="v2-interview-dates-time-<%= interview_block.evening_applicants > interview_block.evening_interviews && interview_block.date >= Date.today() ? "available" : "unavailable" %>" style='margin-bottom:10px;' id="<%= interview_block.date.strftime('%A-%e-%b') %>-EVENING">
+                  <div class="interview_block_time"> 4pm - 7pm</div>
+                  <%= f.radio_button :interview_block, "#{interview_block.id}.EVENING", style: 'display: none;' %>
+                </div>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+      <ul class='v2-interview-dates-list' id='v2-interview-second-week'>
+        <% second_week.each do |interview_block| %>
+          <li>
+            <div class="v2-interview-dates-block">
+              <div class="v2-interview-dates-title"> <%= interview_block.date.strftime('%A %e %b') %> </div>
+              <% if interview_block.is_morning %>
+                <div class="v2-interview-dates-time-<%= interview_block.morning_applicants > interview_block.morning_interviews ? "available" : "unavailable" %>" style='margin-bottom:10px;' id="<%= interview_block.date.strftime('%A-%e-%b') %>-MORNING">
+                  <div class="interview_block_time"> 10am - 1pm</div>
+                  <%= f.radio_button :interview_block, "#{interview_block.id}.MORNING", style: 'display: none;' %>
+                </div>
+              <% end %>
+
+              <% if interview_block.is_afternoon %>
+                <div class="v2-interview-dates-time-<%= interview_block.afternoon_applicants > interview_block.afternoon_interviews ? "available" : "unavailable" %>" style='margin-bottom:10px;' id="<%= interview_block.date.strftime('%A-%e-%b') %>-AFTERNOON">
+                  <div class="interview_block_time"> 12:30pm - 4pm</div>
+                  <%= f.radio_button :interview_block, "#{interview_block.id}.AFTERNOON", style: 'display: none;' %>
+                </div>
+              <% end %>
+
+              <% if interview_block.is_evening %>
+                <div class="v2-interview-dates-time-<%= interview_block.evening_applicants > interview_block.evening_interviews ? "available" : "unavailable" %>" style='margin-bottom:10px;' id="<%= interview_block.date.strftime('%A-%e-%b') %>-EVENING">
+                  <div class="interview_block_time"> 4pm - 7pm</div>
+                  <%= f.radio_button :interview_block, "#{interview_block.id}.EVENING", style: 'display: none;' %>
+                </div>
+              <% end %>
+            </div>
+          </li>
+        <% end %>
+      </ul>
+
+      <div class="v2-interview-method-title">Fast-track your application:</div>
+      <div class="v2-interview-method-description">
+        Demonstrate the work experience you can offer our clients, add a professional photo, complete all employee admin and tell us your skills and interests.
+      </div>
+      <div style="width: fit-content; margin: auto;">
+        <% if @interview %>
+          <div class="form-check v2-interview-check-box">
+            <%= f.check_box :video_call_interview, {class: 'form-check-input', checked: @interview.video_call_interview == true ? true : false} %>
+            <%= f.label 'video_call_interview', 'Video Call', style: 'width: 170px;' %>
+          </div>
+          <br>
+          <div class="form-check v2-interview-check-box">
+            <%= f.check_box :telephone_call_interview, {class: 'form-check-input', checked: @interview.telephone_call_interview == true ? true : false} %>
+            <%= f.label 'telephone_call_interview', 'Telephone Call', style: 'width: 180px;' %>
+          </div>
+        <% else %>
+          <div class="form-check v2-interview-check-box">
+            <%= f.check_box :video_call_interview, {class: 'form-check-input'} %>
+            <%= f.label 'video_call_interview', 'Video Call', style: 'width: 170px;' %>
+          </div>
+          <br>
+          <div class="form-check v2-interview-check-box">
+            <%= f.check_box :telephone_call_interview, {class: 'form-check-input'} %>
+            <%= f.label 'telephone_call_interview', 'Telephone Call', style: 'width: 180px;' %>
+          </div>
+        <% end %>
+      </div>
+
+      <center>
+        <%= f.submit 'Book Interview', class: 'v2-interview-book-submit', id: 'v2-interview-book-submit' %>
+<!--        <div id="v2-interview-cancel-resched" class="v2-interview-cancel-resched">Cancel Reschedule</div>-->
+      </center>
+    <% end %>
+  <% end %>
+</div>

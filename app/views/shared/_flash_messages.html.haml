@@ -1,0 +1,22 @@
+- if flash[:error].present? || flash[:notice].present?
+  .fl-flash{:class => ('fl-flash--big' if flash[:big].present?)}
+    .fl-flash__body.dark-green
+      - if flash[:error].present?
+        %i.icon--error-flag
+      - else
+        %i.icon--notice-flag
+      - if flash[:title].present?
+        %h2.fl-flash__title
+          = flash[:title]
+      .fl-flash__message
+        = flash[:error] || flash[:notice]
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").fadeOut()'}
+        %span Close
+      .clear
+  - content_for :js do
+    :javascript
+      $(document).ready(function() {
+          $('.flash-backing').fadeIn();
+          $('.flash-backing').click(function() { $('.flash-backing').fadeOut(); })
+          $('.flash form').click(function(event) { event.stopPropagation(); })
+      });

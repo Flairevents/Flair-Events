@@ -1,0 +1,58 @@
+/ .hand-drawn-notice
+/   Click on the tab to see where we have been
+.event-tabs.dark-green.pt1.rounded
+  / Nav tabs
+  %ul.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll{:role => "tablist"}
+    %li.active{:role => "tablist"}
+      %a{"aria-controls" => "tab-sports", "data-toggle" => "tab", :href => "#tab-sports", :role => "tab"} Sports
+    %li{:role => "tablist"}
+      %a{"aria-controls" => "tab-music", "data-toggle" => "tab", :href => "#tab-music", :role => "tab"} Music
+    %li{:role => "tablist"}
+      %a{"aria-controls" => "tab-promo", "data-toggle" => "tab", :href => "#tab-promo", :role => "tab"} Promotional
+    %li{:role => "tablist"}
+      %a{"aria-controls" => "tab-hospitality", "data-toggle" => "tab", :href => "#tab-hospitality", :role => "tab"} Hospitality
+  / Tab panes
+  .tab-content.field.shadow
+    #tab-sports.tab-pane.active{:role => "tabpanel"}
+      .article.pt2.pl2.pr2
+        =image_tag('event-type-sports-colour-rush-circle.jpg', class: 'half float-right')
+        %p Sporting event knowledge is at the core of our management teams’ ability, from small club level meets, to mass participation events on the world stage.  A pre-event consultation can involve anything from detailed map reading, job role breakdown and complex staff deployment plans to live on-course management. We also have experience managing volunteer crews and are accustomed to creating an environment where paid staff and volunteers can work side by side.
+        %p We can supply all kinds of race crew: freelance event or staff managers, labour, bag packing, and frontline staff required to smoothly operate registration, baggage drop, course requirements, and water stations.
+      .table-responsive
+        %table.table.table-expandable
+          = render partial: 'shared/historical_events', locals: {events: @events['Sport']}
+    #tab-music.tab-pane{:role => "tabpanel"}
+      .article.pt2.pl2.pr2
+        =image_tag('event-type-music.jpg', class: 'half float-right')
+        %p For 16 years Flair has delivered professionally organised festival and music concert staffing teams.  Quality along with quantity, smooth planning, and the slick organising of all associated staffing logistics, are paramount to our success.
+        %p Our database is full of general bar staffing, back of house stock runners, and experienced bar managers capable of running 100 meter public bars through to niche VIP structures.  We can also supply promotional teams for bespoke bars, product samplers, drink hawkers and leaflet distributors as well as information stewards, customer service teams, wrist banding and accreditation staff right through to event build, and breakdown and clean-up crews.
+      %ul.nav.nav-tabs.nav-tabs--real-tabs.nested-tabs{:role => "tablist"}
+        %li.active{:role => "music_events"}
+          %a{"aria-controls" => "tab-sports", "data-toggle" => "tab", :href => "#tab-music-concerts", :role => "tab"} Concerts
+        %li{:role => "music_events"}
+          %a{"aria-controls" => "tab-music", "data-toggle" => "tab", :href => "#tab-music-festivals", :role => "tab"} Festivals
+      .tab-content.nested-tabs
+        #tab-music-concerts.tab-pane.active{:role => "tabpanel"}
+          .table-responsive
+            %table.table.table-expandable
+              = render partial: 'shared/historical_events', locals: {events: @events['Concert']}
+        #tab-music-festivals.tab-pane{:role => "tabpanel"}
+          .table-responsive
+            %table.table.table-expandable
+              = render partial: 'shared/historical_events', locals: {events: @events['Festival']}
+    #tab-promo.tab-pane{:role => "tabpanel"}
+      .article.pt2.pl2.pr2
+        =image_tag('event-type-promo.jpg', class: 'half float-right')
+        %p The Flair management team have the ability to seek and select those special individuals to perfectly suit a client’s vision.  We then combine this with a well oiled staffing management package.
+        %p From one day flash drive incentives to UK wide multi-week tours.  Our teams have worked as representatives on street marketing projects; complex data capture drives, performed as brand ambassadors, match day merchandise sellers, mystery shoppers, costume characters and exhibition retail sellers.
+      .table-responsive
+        %table.table.table-expandable
+          = render partial: 'shared/historical_events', locals: {events: @events['Promo']}
+    #tab-hospitality.tab-pane{:role => "tabpanel"}
+      .article.pt2.pl2.pr2
+        =image_tag('event-type-hospitality.jpg', class: 'half float-right')
+        %p Flair steps into the hospitality world with ease and grace, enabling us to provide skilled and experienced servers of hotel and restaurant standard.
+        %p Flair arranges themed parties, Christmas functions, company in-house events, trade shows, delegate seminars, exhibition sales, and front of house staff, including VIP areas and after show parties.  Our hospitality management team run a slick and professional operation and the youthful, dedicated attitude of our workers can create a buzzing atmosphere.
+      .table-responsive
+        %table.table.table-expandable
+          = render partial: 'shared/historical_events', locals: {events: @events['Hospitality']}

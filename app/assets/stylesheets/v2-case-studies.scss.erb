@@ -1,0 +1,1241 @@
+.case-header-bg{
+  height: 580px;
+  width: 100vw;
+  position: absolute;
+  top: -70px;
+  left: 0;
+  background: transparent url("<%= asset_path 'v2/casestudies/case study heading.png' %>") 0% 0% no-repeat padding-box;
+  /*background-size: cover;*/
+  background-size: 101% 101%;
+  z-index: 1;
+}
+
+.case-study .orange-btn{
+  height: 50px;
+  /*width: 231px;
+  border-radius: 3px;*/
+  border: none;
+
+  button{
+    height: 42px;
+    width: 231px;
+    border-radius: 3px;
+    border: 2px solid #FFFFFF;
+    font: normal normal bold 18px/32px Roboto;
+  }
+}
+
+.v2-case-section-1{
+  height: 410px;
+  width: 100vw;
+  z-index: 1;
+
+  h1{
+    text-align: center;
+    font: normal normal bold 60px/65px Roboto;
+    letter-spacing: 0px;
+    color: #FAFAFC;
+    opacity: 1;
+    margin-top: 60px;
+
+    .studies-img{
+
+    }
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 24px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    max-width: 839px;
+  }
+
+  .case-study{
+    height: 72px;
+    color: #FAFAFC;
+    font: normal normal bold 60px/65px Roboto;
+    letter-spacing: 0;
+    position: relative;
+//    background: transparent url("<%#= asset_path 'v2/casestudies/Group 4548.png' %>") 0% 0% no-repeat padding-box;
+    &:after {
+      content: '';
+      display: block;
+      height: 15px;
+      width: 15px;
+      border-radius: 100px;
+      background: #6BCBB8;
+      position: absolute;
+      top: 4px;
+      left: 275px;
+      @media only screen and (max-width: 600px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.case-info{
+  width: 100vw;
+  height: 500px;
+  background: #EBF5FC 0% 0% no-repeat padding-box;
+
+  &.even{
+    background: transparent linear-gradient(130deg, #21145F 0%, #008080 100%) 0% 0% no-repeat padding-box;
+  }
+
+  .left-flair-logo{
+    position: absolute;
+    width: 836px;
+    height: 806px;
+    left: -285px;
+    z-index: 1;
+    background: transparent url("<%= asset_path 'v2/casestudies/Group 4517.png' %>") 0% 0% no-repeat padding-box;
+    /*opacity: 0.15;*/
+  }
+
+  .cs-content{
+    /*margin-left: 612px;*/
+
+    h5, h3{
+      text-align: left;
+      font: normal normal bold 25px/33px Roboto;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+      opacity: 1;
+      line-height: 18px;
+    }
+
+    h5{
+      font: normal normal bold 20px/50px Roboto;
+      line-height: 20px;
+      margin-top: 2px;
+      margin-bottom: 0px;
+    }
+
+    h3{
+      font: normal normal bold 45px/50px Roboto;
+      color: #FAFAFC;
+      line-height: 45px;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/25px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      margin-bottom: 0px;
+      max-width: 670px;
+    }
+
+    a{
+      text-align: left;
+      text-decoration: underline;
+      font: normal normal bold 20px/24px Proxima Nova;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+      opacity: 1;
+    }
+
+    .cs-title{ height: 90px; }
+    .border-line{
+      width: 8px;
+      /*height: 90px;*/
+      /*height: 100%;*/
+      background: #6BCBB8 0% 0% no-repeat padding-box;
+      border-radius: 4px;
+      opacity: 1;
+    }
+
+    .violet{
+      color: #21145F;
+    }
+
+    .white-ish{
+      color: #FAFAFC;
+    }
+  }
+
+  .cs-image{
+    width: 500px;
+    height: 400px;
+
+    &.logistics{
+      background: transparent url("<%= asset_path 'v2/casestudies/logistics-cs.png' %>") 0% 0% no-repeat padding-box;
+    }
+
+    &.promo{
+      background: transparent url("<%= asset_path 'v2/casestudies/promo-cs.png' %>") 0% 0% no-repeat padding-box;
+    }
+    &.hospitality{
+      background: transparent url("<%= asset_path 'v2/casestudies/hospitality-cs.png' %>") 0% 0% no-repeat padding-box;
+    }
+    &.sports{
+      background: transparent url("<%= asset_path 'v2/casestudies/sports-cs.png' %>") 0% 0% no-repeat padding-box;
+    }
+    &.events{
+      background: transparent url("<%= asset_path 'v2/casestudies/events-cs.png' %>") 0% 0% no-repeat padding-box;
+    }
+    &.commercial{
+      background: transparent url("<%= asset_path 'v2/casestudies/commercial-cs.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+}
+
+.v2-case-section-3{
+  z-index: 1;
+}
+
+.v2-case-section-4{
+  .cs-content{
+    p{ max-width: 665px; }
+  }
+}
+
+.v2-case-section-5{
+  .cs-content{
+    p{ max-width: 657px; }
+  }
+}
+
+.v2-case-section-7{
+  .cs-content{
+    p{ max-width: 716px; }
+  }
+}
+
+.v2-case-section-8{
+  width: 100vw;
+  height: 761px;
+
+  .cs-bottom-bg{
+    position: absolute;
+    height: inherit;
+    width: 100vw;
+    background: #FFFFFF url("<%= asset_path 'v2/home/Group 4038' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+  }
+
+  h1{
+    font: normal normal 900 75px/73px Proxima Nova;
+    color: #008080;
+
+    span{
+      color: #EE7623;
+      margin-left: -17px;
+    }
+  }
+}
+
+/****************/
+
+.v2-case-industry-1{
+  width: 100vw;
+  height: 410px;
+  z-index: 1;
+
+  /*.container{ margin-top: 99px; }*/
+
+  h1, h3{
+    text-align: left;
+    font: normal normal bold 40px/65px Roboto;
+    letter-spacing: 0px;
+    color: #FAFAFC;
+    opacity: 1;
+  }
+
+  h1{
+    font: normal normal bold 70px/65px Roboto;
+  }
+
+  h3{
+    font: normal normal 400 40px/45px Roboto;
+  }
+
+  .case-study{
+//    width: 416px;
+    height: 72px;
+    color: #FAFAFC;
+    font: normal normal bold 60px/65px Roboto;
+    letter-spacing: 0;
+    position: relative;
+    &::after {
+      content: '';
+      display: block;
+      height: 15px;
+      width: 15px;
+      border-radius: 100px;
+      background: #6BCBB8;
+      position: absolute;
+      top: 4px;
+      left: 275px;
+      @media only screen and (max-width: 800px) {
+        display: none;
+      }
+    }
+  }
+}
+
+.v2-case-industry-2{
+  height: 150px;
+
+  h5, h3{
+    text-align: left;
+    font: normal normal bold 30px/60px Roboto;
+    letter-spacing: 0px;
+    color: #FAFAFC;
+    opacity: 1;
+    line-height: 30px;
+  }
+
+  h5{
+    font: normal normal bold 20px/50px Roboto;
+    color: #6BCBB8;
+    line-height: 20px;
+    margin-top: 2px;
+  }
+
+  .border-line{
+    width: 5px;
+    height: 100%;
+    background: #6BCBB8 0% 0% no-repeat padding-box;
+    border-radius: 4px;
+  }
+}
+
+.v2-case-industry-3, .v2-case-industry-4{
+  height: 490px;
+  background-color: #FFFFFF;
+
+  h2{
+    text-align: left;
+    font: normal normal bold 35px/30px Roboto;
+    letter-spacing: 0px;
+    color: #008080;
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 20px/39px Proxima Nova;
+    letter-spacing: 0px;
+    color: #04020F;
+    max-width: 720px;
+  }
+
+  .cs-image{
+    width: 394px;
+    height: 406px;
+    background-size: contain;
+    background-repeat: no-repeat;
+
+    &.logistics{
+      background-image: url("<%= asset_path 'v2/casestudies/logistics/Logistic Staff Role.png' %>");
+    }
+    &.promo{
+      background-image: url("<%= asset_path 'v2/casestudies/promo/ECC leaderboard.png' %>");
+    }
+    &.hospitality{
+      background-image: url("<%= asset_path 'v2/casestudies/hospitality/Gin & rum - possible.png' %>");
+    }
+    &.sports{
+      background-image: url("<%= asset_path 'v2/casestudies/sports/CXSports.png' %>");
+      background-position: center;
+    }
+    &.events{
+      background-image: url("<%= asset_path 'v2/casestudies/events/bar girls - website.png' %>");
+      background-size: cover;
+    }
+    &.commercial{
+      background-image: url("<%= asset_path 'v2/casestudies/Call Centre.png' %>");
+    }
+  }
+}
+
+.v2-case-industry-4{
+  height: 762px;
+  background: #EBF5FC 0% 0% no-repeat padding-box;
+
+  .cs-image{
+    width: 541px;
+    height: 592px;
+    background-repeat: no-repeat;
+    background-size: contain;
+
+    &.logistics{
+      background-image: url("<%= asset_path 'v2/casestudies/logistics/Covid Sign.png' %>");
+    }
+    &.promo{
+      background-image: url("<%= asset_path 'v2/casestudies/promo/EEC Sean bike.png' %>");
+    }
+    &.hospitality{
+      background-image: url("<%= asset_path 'v2/casestudies/hospitality/gin&rum.png' %>");
+    }
+    &.sports{
+      background-image: url("<%= asset_path 'v2/casestudies/sports/CXW65R.png' %>");
+    }
+    &.events{
+      background-image: url("<%= asset_path 'v2/casestudies/events/IMG_9337-2.png' %>");
+    }
+    &.commercial{
+      background-image: url("<%= asset_path 'v2/casestudies/Staff Meeting.png' %>");
+    }
+  }
+}
+
+.v2-case-industry-5{
+  height: 436px;
+  background-color: #FFFFFF;
+
+  h2, h5, h3{
+    text-align: left;
+    font: normal normal bold 35px/30px Roboto;
+    letter-spacing: 0px;
+    color: #008080;
+  }
+
+  h5{
+    font: normal normal 400 18px Proxima Nova;
+    color: #21145F;
+  }
+
+  h3{
+    font: normal normal bold 25px/45px Proxima Nova;
+    color: #21145F;
+
+    &:hover, &.active-study{
+      color: #6BCBB8;
+    }
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 20px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #21145F;
+    max-width: 760px;
+  }
+
+  .checkbox{
+    width: 30px;
+    height: 28px;
+    background: transparent url("<%= asset_path 'v2/casestudies/Group 4527.png' %>") 0% 0% no-repeat padding-box;
+    opacity: 1;
+  }
+
+  h3.custom-arrow{
+    align-items: center;
+    display: flex;
+  }
+  h3.custom-arrow:before{
+    /*content: "•";*/
+    background: #21145F;
+    /*width: */
+    content:"\A";
+    width: 8px;
+    height: 8px;
+    border-radius:50%;
+    background: #21145F;
+    display:inline-block;
+    margin:0 10px;
+  }
+
+  i{
+    color: #6BCBB8;
+    font-size: 35px;
+    /*border: 1px solid #707070;*/
+  }
+}
+
+.v2-case-industry-6{
+  height: 500px;
+  background-repeat: no-repeat;
+  background-size: cover;
+
+  &.logistics{
+    background-image: url("<%= asset_path 'v2/casestudies/logistics/Logistics.png' %>");
+    background-position: 0px 0px;
+  }
+  &.promo{
+    background-image: url("<%= asset_path 'v2/casestudies/promo/Promotional.png' %>");
+    background-position: top;
+    background-size: 111%;
+  }
+  &.hospitality{
+    background-image: url("<%= asset_path 'v2/casestudies/hospitality/Hospitality.png' %>");
+    background-position: 0px center;
+    background-size: cover;
+  }
+  &.sports{
+    background-image: url("<%= asset_path 'v2/casestudies/sports/Sports.png' %>");
+    background-position: 0px center;
+    background-size: cover;
+  }
+  &.events{
+    background-image: url("<%= asset_path 'v2/casestudies/events/Events.png' %>");
+    background-position: top;
+  }
+  &.commercial{
+    background-image: url("<%= asset_path 'v2/casestudies/Commercial.png' %>");
+    background-position: top;
+  }
+
+  h1{
+    text-align: left;
+    font: normal normal bold 30px/45px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+  }
+
+  .ellipse-bg{
+    width: 760px;
+    height: 426px;
+    background: transparent url("<%= asset_path 'v2/casestudies/Ellipse 421.png' %>") 0% 0% no-repeat padding-box;
+    position: absolute;
+    right: 50px;
+    margin-top: -210px;
+    z-index: -1;
+  }
+}
+
+.case-study{
+  &.logistics{
+    .v2-case-industry-4{
+      height: 800px;
+      .container p{
+        max-width: 708px;
+      }
+    }
+
+    .v2-case-industry-5{
+      height: 396px;
+    }
+  }
+
+  &.promo{
+    .v2-case-industry-4{
+      height: 830px;
+      .container p{
+        max-width: 708px;
+      }
+    }
+
+    .v2-case-industry-5{
+      height: 396px;
+    }
+  }
+
+  &.hospitality{
+    .v2-case-industry-3{
+      height: 485px;
+    }
+
+    .v2-case-industry-4{
+      height: 760px;
+    }
+    .v2-case-industry-5{
+      height: 412px;
+    }
+  }
+
+  &.sports{
+    .v2-case-industry-3{
+      height: 485px;
+    }
+
+    .v2-case-industry-4{
+      height: 870px;
+    }
+    .v2-case-industry-5{
+      height: 464px;
+    }
+  }
+  &.events{
+    .v2-case-industry-3{
+      height: 485px;
+    }
+
+    .v2-case-industry-4{
+      height: 885px;
+    }
+    .v2-case-industry-5{
+      height: 466px;
+    }
+  }
+  &.commercial{
+    .v2-case-industry-3{
+      height: 485px;
+    }
+
+    .v2-case-industry-4{
+      height: 787px;
+    }
+    .v2-case-industry-5{
+      height: 512px;
+    }
+  }
+}
+
+/* mobile */
+@media only screen and (max-width: 600px){
+  .case-header-bg{
+    height: 584px;
+    width: 100%;
+    position: absolute;
+    top: 30px;
+    left: 0;
+    background: transparent url("<%= asset_path 'v2/mobile/Group 4670.png' %>") 0% 0% no-repeat padding-box;
+    background-size: 100% 584px;
+    z-index: -1;
+  }
+
+  .v2-case-industry-1 {
+    height: 514px;
+    width: 100%;
+    padding: 205px 15px 173px 15px;
+    position: relative;
+
+    h3{
+      text-align: left;
+      font: normal normal bold 35px/35px Roboto;
+      letter-spacing: 0px;
+      color: #FAFAFC;
+      opacity: 1;
+    }
+
+    .case-study{
+      width: 292px;
+      height: 67px;
+      background: transparent url("<%= asset_path 'v2/casestudies/Group 4548.png' %>") 0% 0% no-repeat padding-box;
+      background-size: contain;
+    }
+
+    .orange-btn{
+      height: 51px;
+      width: 188px;
+      border-radius: 3px;
+      border: none;
+      margin-top: 0;
+
+      button{
+        width: 184px;
+        height: 41px;
+        border-radius: 3px;
+        border: 2px solid #FFFFFF;
+        font: normal normal bold 18px/32px Roboto;
+      }
+    }
+
+    .industry-image {
+      position: absolute;
+      bottom: 0;
+      right: 20px;
+      width: 108px;
+      height: 111px;
+
+      &.logistics {
+        background: transparent url("<%= asset_path 'v2/industry/logistics/logistics-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        background-size: contain;
+      }
+
+      &.commercial {
+        background: transparent url("<%= asset_path 'v2/industry/commercial/commercial-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        background-size: contain;
+      }
+
+      &.promo {
+        background: transparent url("<%= asset_path 'v2/industry/promo/promo-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        background-size: contain;
+      }
+
+      &.events {
+        background: transparent url("<%= asset_path 'v2/industry/events/Group 3760.png' %>") 0% 0% no-repeat padding-box;
+        background-size: contain;
+      }
+
+      &.hospitality {
+        background: transparent url("<%= asset_path 'v2/industry/Component 29.png' %>") 0% 0% no-repeat padding-box;
+        background-size: 108px 111px;
+      }
+
+      &.sports {
+        background: transparent url("<%= asset_path 'v2/industry/sports/sports-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        background-size: contain;
+      }
+    }
+  }
+
+  .v2-case-industry-2 {
+    height: auto;
+    padding: 15px;
+
+    .border-line{
+      width: 8px;
+      height: 82px;
+      background: #6BCBB8 0% 0% no-repeat padding-box;
+      border-radius: 4px;
+      opacity: 1;
+      margin-right: 10px;
+    }
+
+    h5 {
+      text-align: left;
+      font: normal normal bold 13px/13px Roboto;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+      opacity: 1;
+      margin: 0;
+      margin-top: 7px;
+      margin-bottom: 5px;
+    }
+
+    h3{
+      text-align: left;
+      font: normal normal bold 20px/25px Roboto;
+      color: #FFFFFF;
+      opacity: 1;
+    }
+  }
+
+  .v2-case-industry-3 {
+    height: auto !important;
+    padding: 32px 15px;
+    background-color: #FFFFFF;
+
+    h2{
+      text-align: left;
+      font: normal normal bold 30px/30px Roboto;
+      letter-spacing: 0px;
+      color: #008080;
+      margin-bottom: 30px;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/30px Proxima Nova;
+      letter-spacing: 0px;
+      color: #04020F;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .cs-image{
+      width: 345px;
+      height: 352px;
+      margin: auto;
+      background-size: cover;
+      border-radius: 5px;
+
+      &.logistics{
+        background: transparent url("<%= asset_path 'v2/casestudies/logistics/Logistic Staff Role.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.promo{
+        background: transparent url("<%= asset_path 'v2/casestudies/promo/ECC leaderboard.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.hospitality{
+        background: transparent url("<%= asset_path 'v2/casestudies/hospitality/Gin & rum - possible.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.sports{
+        background: transparent url("<%= asset_path 'v2/casestudies/sports/CXSports.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 380px;
+      }
+      &.events{
+        background: transparent url("<%= asset_path 'v2/mobile/cs-image-com.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.commercial{
+        background: transparent url("<%= asset_path 'v2/casestudies/Call Centre.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-case-industry-4{
+    padding: 15px;
+    height: auto !important;
+    background: #EBF5FC 0% 0% no-repeat padding-box;
+
+    h2{
+      text-align: left;
+      font: normal normal bold 30px/30px Roboto;
+      letter-spacing: 0px;
+      color: #008080;
+      margin-bottom: 30px;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/30px Proxima Nova;
+      letter-spacing: 0px;
+      color: #04020F;
+      max-width: 100%;
+      margin-bottom: 20px;
+    }
+
+    .cs-image{
+      width: 345px;
+      height: 378px;
+      border-radius: 5px;
+      margin: auto;
+      background-size: contain !important;
+
+      &.logistics{
+        background: transparent url("<%= asset_path 'v2/casestudies/logistics/Covid Sign.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.promo{
+        background: transparent url("<%= asset_path 'v2/casestudies/promo/EEC Sean bike.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.hospitality{
+        background: transparent url("<%= asset_path 'v2/casestudies/hospitality/gin&rum.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.sports{
+        background: transparent url("<%= asset_path 'v2/casestudies/sports/CXW65R.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.events{
+        background: transparent url("<%= asset_path 'v2/casestudies/events/bar girls - website.png' %>") 0% 0% no-repeat padding-box;
+        height: 320px;
+      }
+      &.commercial{
+        background: transparent url("<%= asset_path 'v2/casestudies/Staff Meeting.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-case-industry-5{
+    height: auto !important;
+    padding: 25px 15px;
+    background-color: #FFFFFF;
+
+    h2 {
+      text-align: left;
+      font: normal normal bold 35px/30px Roboto;
+      letter-spacing: 0px;
+      color: #008080;
+      margin-bottom: 30px;
+    }
+
+    h1 {
+      text-align: left;
+      font: normal normal bold 35px/30px Roboto;
+      letter-spacing: 0px;
+      color: #008080;
+      margin-bottom: 20px;
+    }
+
+    .categories  {
+      h2 {
+        margin-bottom: 16px;
+      }
+      h5 {
+        font: normal normal bold 20px/35px Proxima Nova;
+        color: #21145F;
+        padding: 0;
+      }
+    }
+
+    h5{
+      font: normal normal 400 18px Proxima Nova;
+      color: #21145F;
+      margin: 0;
+      margin-left: 10px;
+      padding-top: 12px;
+      max-width: 90%;
+    }
+
+    h3{
+      font: normal normal bold 25px/45px Proxima Nova;
+      color: #21145F;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/30px Proxima Nova;
+      letter-spacing: 0px;
+      color: #21145F;
+      max-width: 100%;
+      margin-bottom: 30px;
+    }
+
+    .checkbox{
+      width: 26px;
+      height: 26px;
+      background: transparent url("<%= asset_path 'v2/casestudies/Group 4527.png' %>") 0% 0% no-repeat padding-box;
+      opacity: 1;
+      background-size: contain;
+    }
+
+    h3.custom-arrow{
+      align-items: center;
+      display: flex;
+    }
+    h3.custom-arrow:before{
+      /*content: "•";*/
+      background: #21145F;
+      /*width: */
+      content:"\A";
+      width: 8px;
+      height: 8px;
+      border-radius:50%;
+      background: #21145F;
+      display:inline-block;
+      margin:0 10px;
+    }
+
+    i{
+      color: #6BCBB8;
+      font-size: 35px;
+      /*border: 1px solid #707070;*/
+    }
+  }
+
+  .v2-case-industry-6{
+    padding: 54px 17px;
+    height: 400px;
+    position: relative;
+    background: #263539;
+    z-index: 0;
+
+    .v2-home-bottom {
+      bottom: -25px;
+    }
+
+    .orange-btn{
+      height: 46px !important;
+      width: 202px !important;
+      border-radius: 3px;
+      border: none;
+      margin-top: 0;
+      position: relative;
+      z-index: 10;
+
+      button{
+        width: 198px !important;
+        height: 42px !important;
+        border-radius: 3px;
+        border: 2px solid #FFFFFF;
+        font: normal normal bold 16px/30px Roboto;
+      }
+    }
+
+    .bg-image {
+      position: absolute;
+      z-index: 1;
+
+      &.logistics{
+        background: transparent url("<%= asset_path 'v2/mobile/Group 4673.png' %>") 0% 0% no-repeat padding-box;
+        width: 343px;
+        height: 192px;
+        bottom: -25px;
+        right: 0;
+      }
+      &.promo{
+        background: #263539 url("<%= asset_path 'v2/mobile/Group 4675.png' %>") 0% 0% no-repeat padding-box;
+        width: 331px;
+        height: 210px;
+        bottom: -15px;
+        right: 0;
+      }
+      &.hospitality{
+        background: transparent url("<%= asset_path 'v2/mobile/Group 4543.png' %>") 0% 0% no-repeat padding-box;
+        width: 375px;
+        height: 212px;
+        bottom: -25px;
+      }
+      &.sports{
+        background: transparent url("<%= asset_path 'v2/mobile/Group 4544.png' %>") 0% 0% no-repeat padding-box;
+        width: 345px;
+        height: 192px;
+        bottom: -15px;
+        right: 0;
+      }
+      &.events{
+        background: transparent url("<%= asset_path 'v2/mobile/Group 4545.png' %>") 0% 0% no-repeat padding-box;
+        width: 349px;
+        height: 210px;
+        bottom: -15px;
+        right: 0;
+      }
+      &.commercial{
+        background: transparent url("<%= asset_path 'v2/mobile/Group 4546.png' %>") 0% 0% no-repeat padding-box;
+        width: 375px;
+        height: 262px;
+        bottom: -15px;
+        right: 0;
+      }
+    }
+
+
+    h1{
+      text-align: left;
+      font: normal normal bold 16px/30px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      margin-bottom: 41px;
+    }
+
+    .ellipse-bg{
+      width: 760px;
+      height: 426px;
+      background: transparent url("<%= asset_path 'v2/casestudies/Ellipse 421.png' %>") 0% 0% no-repeat padding-box;
+      position: absolute;
+      right: 50px;
+      margin-top: -210px;
+      z-index: -1;
+    }
+  }
+
+  /*****************/
+
+  .v2-case-section-1{
+    height: 514px;
+    width: 100%;
+    z-index: 1;
+    padding: 214px 15px 169px 15px;
+
+    h1{
+      text-align: left;
+      font: normal normal bold 22px/30px Roboto;
+      letter-spacing: 0px;
+      color: #FAFAFC;
+      opacity: 1;
+      margin-top: 0;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 24px/30px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      max-width: 100%;
+    }
+
+    .case-study{
+      width: 292px;
+      height: 55px;
+      background: transparent url("<%= asset_path 'v2/casestudies/Group 4548.png' %>") 0% 0% no-repeat padding-box;
+      background-size: contain;
+      margin-left: -2px;
+    }
+  }
+
+  .v2-case-section-1-1 {
+    padding: 23px 15px;
+    background: white;
+    p {
+      text-align: center;
+      font: normal normal bold 20px/25px Proxima Nova;
+      color: #21145F;
+    }
+  }
+
+  .case-info{
+    width: 100%;
+    height: auto;
+    background: #EBF5FC 0% 0% no-repeat padding-box;
+    padding: 18px 15px;
+
+    &.even{
+      background: transparent linear-gradient(130deg, #21145F 0%, #008080 100%) 0% 0% no-repeat padding-box;
+      h3, p {
+        color: #F2FBF9 !important;
+      }
+    }
+
+    .left-flair-logo{
+      position: absolute;
+      width: 836px;
+      height: 806px;
+      left: -285px;
+      background: transparent url("<%= asset_path 'v2/casestudies/Group 4517.png' %>") 0% 0% no-repeat padding-box;
+      /*opacity: 0.15;*/
+    }
+
+    .cs-content{
+      /*margin-left: 612px;*/
+
+      h5.first-title {
+        margin-bottom: 5px;
+        padding-top: 10px;
+      }
+
+      h5 {
+        text-align: left;
+        font: normal normal bold 16px/16px Roboto;
+        letter-spacing: 0px;
+        color: #6BCBB8;
+        opacity: 1;
+        margin: 0;
+      }
+
+      h3 {
+        text-align: left;
+        font: normal normal bold 22px/25px Roboto;
+        letter-spacing: 0px;
+        color: #FAFAFC;
+        opacity: 1;
+      }
+
+      p{
+        text-align: left;
+        font: normal normal 400 18px/25px Proxima Nova;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+        margin-bottom: 0px;
+        max-width: 670px;
+      }
+
+      a{
+        text-align: left;
+        text-decoration: underline;
+        font: normal normal bold 16px/16px Proxima Nova;
+        letter-spacing: 0px;
+        color: #6BCBB8 !important;
+        opacity: 1;
+      }
+
+      .border-line{
+        width: 8px;
+        height: 82px;
+        background: #6BCBB8 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+        opacity: 1;
+      }
+
+      .violet{
+        color: #21145F;
+      }
+
+      .white-ish{
+        color: #FAFAFC;
+      }
+    }
+
+    .cs-image{
+      width: 345px;
+      height: 230px;
+      margin:auto;
+      background-size: 345px 230px !important;
+      margin-top: 23px;
+      border-radius: 5px;
+
+      &.logistics{
+        background: transparent url("<%= asset_path 'v2/casestudies/logistics-cs.png' %>") 0% 0% no-repeat padding-box;
+      }
+
+      &.promo{
+        background: transparent url("<%= asset_path 'v2/casestudies/promo-cs.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.hospitality{
+        background: transparent url("<%= asset_path 'v2/casestudies/hospitality-cs.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.sports{
+        background: transparent url("<%= asset_path 'v2/casestudies/sports-cs.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.events{
+        background: transparent url("<%= asset_path 'v2/casestudies/events-cs.png' %>") 0% 0% no-repeat padding-box;
+      }
+      &.commercial{
+        background: transparent url("<%= asset_path 'v2/casestudies/commercial-cs.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-case-section-8{
+    width: 100%;
+    height: auto;
+    padding: 30px 35px 225px 35px;
+    background: #FFFFFF url("<%= asset_path 'v2/casestudies/Mask Group 94' %>") 0% 0% no-repeat padding-box;
+    background-size: 1000px;
+    background-position: -75px 105px;
+    position: relative;
+
+    h1 {
+      font: normal normal bold 40px/40px Roboto;
+      color: #008080;
+      text-align: center;
+    }
+
+    span {
+      color: #EE7623;
+      font: normal normal bold 40px/40px Roboto;
+    }
+
+    .v2-home-btns {
+      width: 143px !important;
+      height: 34px !important;
+
+      button {
+        width: 139px !important;
+        height: 30px !important;
+        font: normal normal bold 12px/18px Roboto;
+      }
+    }
+
+    .v2-home-bottom {
+      position: absolute;
+      bottom: 0;
+    }
+  }
+}
+
+@media only (min-width: 1200px) and (max-width: 1299px){
+  .v2-case-section-8 {
+    height: 610px;
+    .cs-bottom-bg {
+      background-position: 0px -76px;
+    }
+  }
+}
+
+@media only (min-width: 1300px) and (max-width: 1399px){
+  .v2-case-section-8 {
+    height: 656px;
+    .cs-bottom-bg {
+      background-position: 0px -75px;
+    }
+  }
+}
+
+@media only (min-width: 1400px) and (max-width: 1499px){
+
+}
+
+@media only (min-width: 1500px) and (max-width: 1599px){
+
+}
+
+@media only (min-width: 1600px) and (max-width: 1699px){
+  .v2-case-section-8 {
+    .cs-bottom-bg {
+      background-position: 0px -97px;
+    }
+  }
+}
+
+@media only (min-width: 1700px) and (max-width: 1799px){
+  .v2-case-section-8 {
+    .cs-bottom-bg {
+      background-position: 0px -109px;
+    }
+  }
+}
+
+@media only (min-width: 1800px) and (max-width: 1899px){
+  .v2-case-section-8 {
+    .cs-bottom-bg {
+      background-position: 0px -125px;
+    }
+  }
+}
+
+@media only (min-width: 1900px) and (max-width: 2000px){
+  .v2-case-section-8 {
+    .cs-bottom-bg {
+      background-position: 0px -128px;
+    }
+  }
+}

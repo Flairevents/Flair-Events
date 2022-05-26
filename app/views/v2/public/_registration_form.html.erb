@@ -1,0 +1,104 @@
+<div class="v2-registration-form">
+  <%= form_tag "#{Flair::Application.config.base_https_url}/register", class: 'registration_form' do %>
+    <%= hidden_field_tag 'register', '1' %>
+
+    <div class="d-flex flex-row row">
+      <div class="col p-0">
+        <input aria-describedby="basic-addon1" class="form-control v2-registration-first-name v2-inputs" id="register_1" name="first_name" type="text" placeholder="First Name*" autocomplete="off" value="<%= @first_name %>">
+      </div>
+      <div class="col p-0" style="padding-left: 9px !important;">
+        <input aria-describedby="basic-addon2" class="form-control v2-registration-last-name v2-inputs" id="register_2" name="last_name" type="text" placeholder="Last Name*" autocomplete="off" value="<%= @last_name %>">
+      </div>
+    </div>
+
+    <input aria-describedby="basic-addon3" class="form-control v2-registration-email v2-inputs" id="register_3" name="email" type="email" placeholder="Email Address*" autocomplete="off" value="<%= @email %>">
+
+    <input aria-describedby="basic-addon5" class="form-control v2-registration-password v2-inputs" id="register_4" name="password" type="password" placeholder="Password*" autocomplete="off" value="<%= @password %>">
+
+    <input aria-describedby="basic-addon5" class="form-control v2-registration-password v2-inputs" id="register_5" name="password_confirm" type="password" placeholder="Confirm Password*" autocomplete="off" value="<%= @password_confirm %>">
+
+    <input aria-describedby="basic-addon6" class="form-control v2-registration-mobile v2-inputs" id="register_6" name="mobile" type="tel" placeholder="Phone Number*" pattern='\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*' title='0 + 10 digits' autocomplete="off" value="<%= @mobile %>">
+
+    <div class="d-flex flex-row">
+      <div class="col p-0">
+        <input aria-describedby="basic-addon6" class="form-control v2-registration-city v2-inputs" id="register_7" name="city" type="text" placeholder="City*" autocomplete="off" value="<%= @city %>">
+      </div>
+      <div class="col p-0" style="padding-left: 9px !important;">
+        <input aria-describedby="basic-addon7" class="form-control v2-registration-postal v2-inputs" id="register_8" name="post_code" type="text" placeholder="Post code*" pattern='[a-zA-Z][a-zA-Z0-9]{1,3}\s?\d[a-zA-Z]{2}' title='Valid UK Postal Code' autocomplete="off" value="<%= @post_code %>">
+      </div>
+    </div>
+
+    <div class="form-check v2-application-checkbox" style="margin-top: 26px;margin-left: 24px;">
+      <input type="checkbox" name="agree_to_policy" id="agree_to_policy" value="1" aria-required="true" class="form-check-input v2-registration-checkbox user-error" aria-invalid="true" style='display: block;margin-top: 2px;margin-left:-28px;' required>
+
+      <label class="form-check-label v2-registration-checkbox-label" for="agree_to_policy">
+        I am happy to receive job offers and shift information from Flair. Set your communication preferences in your profile and unsubscribe at any time.
+      </label>
+    </div>
+
+    <div>
+      <input class="v2-registration-submit-button" id='register_submit' name="commit" type="submit" value="Register">
+    </div>
+
+    <span class="v2-registration-already-registered">Already have an account?  <a href="/login">Log in</a></span>
+  <% end %>
+</div>
+
+<% content_for :js do %>
+  <script>
+
+      $(document).ready(function() {
+          $('#date_of_birth_day option:first-child').html('DD');
+          $('#date_of_birth_month option:first-child').html('MM');
+          $('#date_of_birth_year option:first-child').html('YYYY');
+          $(".reg_back").css("background-color", "#a3d39c");
+      });
+
+      $('#register_submit').on('click', function(){
+        var i;
+        check = 0;
+        for (i=1;i<9;i++){
+          if ($(`#register_${i}`).val() == ''){
+            if (!$(`#register_${i}`).hasClass('v2-registration-error')){
+              $(`#register_${i}`).addClass('v2-registration-error');
+            }
+            check = 1
+          }else{
+            $(`#register_${i}`).removeClass('v2-registration-error');
+          }
+        }
+
+        if($('#register_4').val() != $('#register_5').val()){
+          $('body').append(`
+            <div class="v2-flash-bg">
+              <div class="v2-flash-body">
+                <i class="icon--notice-flag"></i>
+                <div class="v2-flash-message">
+                Password and Confirm Password does not match.
+                </div>
+                <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+                </a>
+                <div class="clear"></div>
+              </div>
+            </div>
+          `)
+          if (!$(`#register_4`).hasClass('v2-registration-error')){
+            $(`#register_4`).addClass('v2-registration-error');
+          }
+          if (!$(`#register_5`).hasClass('v2-registration-error')){
+            $(`#register_5`).addClass('v2-registration-error');
+          }
+
+          check = 1
+        }
+
+        if(check == 1){
+          return false;
+        }else{
+          return true
+        }
+      })
+
+  </script>
+<% end %>

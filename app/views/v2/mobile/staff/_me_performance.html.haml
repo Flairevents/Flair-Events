@@ -1,0 +1,32 @@
+.h5.mt0.mb0{style: 'font-weight: 500; margin-top: 10px; margin-bottom: 18px;'}
+  .text-center
+    =@prospect.first_name
+    =@prospect.last_name
+-#-if @prospect.date_start
+-#  .p.mb1
+-#    ="Started with Flair: #{@prospect.date_start.strftime('%b %-d, %Y')}"
+.fl-performance
+  .fl-performance__block
+    .fl-performance__block__number
+      -(1..5).each do |i|
+        -if i <=  @average_rating.to_f.round
+          -#%span{class:"glyphicon yellow-star"}
+          %span{style: "font-size:100%;color:#DBBF11; margin-left:5px; margin-right: 5px;"} &starf;
+        -else
+          -#%span{class:"glyphicon glyphicon-star-empty"}
+          %span{style: "font-size:100%;color:white; margin-left:5px; margin-right: 5px;"} &starf;
+    %p.fl-performance__block__heading
+      Average
+      = " " + @average_rating
+  -#.fl-performance__block
+  -#  %h5.fl-performance__block__heading Events
+  -#  .fl-performance__block__number= @past_gigs.length
+  -#.fl-performance__block
+  -#  %h5.fl-performance__block__heading Flair Level
+  -#  .fl-performance__block__number
+  -#    %span#flair-level= @flair_level
+  -#.fl-performance__block
+  -#  %h5.fl-performance__block__heading Badges Earned
+  -#  .fl-performance-badge.fl-performance-badge--work-ethics
+  -#  .fl-performance-badge.fl-performance-badge--leadership
+  -#  .fl-performance-badge.fl-performance-badge--team-player

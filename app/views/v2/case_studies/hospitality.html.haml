@@ -1,0 +1,69 @@
+- content_for :head do
+  %title Gin & Rum Festival tour with Flair People
+  %meta{ name: "description", content: "Flair's “low maintenance' industry experience, once briefed we engaged 29 high calibra teams who could learn fast, talk confidently to upsell products. Covering a range of positions per venue our national database provided the bespoke level required. Being fully staffed works with the right people."}
+.public.case-study.hospitality
+  = render :partial => 'v2/shared/nav'
+  .content
+    .container-fluid.px-0.d-flex
+      .case-header-bg
+      .v2-case-industry-1.d-flex.align-items-center
+        .container.px-0
+          .case-study Case Studies
+          %h3 HOSPITALITY
+    .v2-case-industry-2.d-flex.align-items-center
+      .container.px-0.d-flex
+        .d-flex.flex-inline
+          .border-line
+          .d-flex.flex-column.ml-05
+            %h5 GIN & RUM FESTIVAL TOUR
+            %h3 Supporting our client's new venture.
+    .v2-case-industry-3.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column.mr1
+          %h2 Key Challenge:
+          %p.mt2 With an ambitious season ahead, our client was looking for people with some niche skills to ensure an outstanding visitor experience. Derby Bars expressly needed talented bar and event staff who could absorb detailed information, and then talk confidently to the public to upsell products.
+        .cs-image.d-flex.hospitality
+    .v2-case-industry-4.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-around
+        .cs-image.d-flex.hospitality.mr1
+        .d-flex.flex-column
+          %h2 How we helped:
+          %p.mt2 Labelled the UK's largest touring Gin & Rum festival and taking in 29 two-day events across the country, this popular crowd-please requires a small army of hard-working, talented people to bring it to life. First, we drilled down into the range of tasks that each event would require. From this, we devised a clear set of roles and skill sets that each candidate would need.
+          %p.mt1 Staffing these events was most definitely not a numbers game. As well as reliable and personable hosts to meet and greet guests, check tickets and deliver key information, our teams would also comprise of experienced bar staff, cocktail specialists and more.
+          %p.mt1 Particularly important was the need for a set of candidates who could work with the client to understand the key messaging of whichever partner brands had been lined up for that weekend's event. These individuals would need to learn about new products prior to arrival so they could be confidently explained to visitors. Flair took care of all these requirements and the events were hailed as a major success.
+    .v2-case-industry-5.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-around
+        .d-flex.flex-column
+          %h2 The Results
+          %p.mt2 Gin & Rum festivals are now into their fourth year of sold-out venues. Our client consistently puts their trust in Flair and likes our “low maintenance approach”. Briefed once, we plan, deliver and manage their teams.
+          .d-flex.flex-inline.align-items-center.mt1
+            .checkbox
+            %h5.ml-05 Niche staffed pulled from our database.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Successfully upsold products.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Delivered outstanding customer experience.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Becomes the UK's largest Gin & Rum festival tour.
+        .d-flex.flex-column
+          %h2.mb1 Case Studies
+          - ["Festivals & Events", "Hospitality", "Logistics", "Promotional", "Sports", "Commercial"].each do |f|
+            %a{ href: v2_case_industry_path(industry: f == "Festivals & Events" ? "events" : f.downcase) }
+              .d-flex.flex-inline.align-items-center
+                %i.fa.fa-caret-right
+                %h3.ml-05{ class: f.downcase == "hospitality" ? 'active-study' : '' }=f
+    .v2-case-industry-6.d-flex.align-items-start.hospitality
+      .container.px-0.d-flex.mt5
+        .d-flex.flex-column
+          %h1 Our job is to make our client's job easier.
+          %h1 Workforce solutions delivered with event expertise.
+          %h1 Tell us how can we help?
+          .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt1
+            %a{href: "/contact"}
+              %button.v2-home-staff-req-btn.join-team Chat with us today
+
+    .v2-home-bottom
+  = render :partial => 'v2/application/footer'

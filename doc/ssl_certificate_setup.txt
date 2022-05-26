@@ -1,0 +1,41 @@
+** SSL Certificate Request 2016 **
+
+Login to Geotrust account. Renew.
+
+Generate CSR using existin public key:
+
+deploy@s19238239:~$ openssl req -new -sha256 -key /var/www/flair/current/certs/public.key -out eventstaffing.co.uk.csr
+You are about to be asked to enter information that will be incorporated
+into your certificate request.
+What you are about to enter is what is called a Distinguished Name or a DN.
+There are quite a few fields but you can leave some blank
+For some fields there will be a default value,
+If you enter '.', the field will be left blank.
+
+Country Name (2 letter code) [AU]:GB
+State or Province Name (full name) [Some-State]:United Kingdom
+Locality Name (eg, city) []:Perth
+Organization Name (eg, company) [Internet Widgits Pty Ltd]:Flair Event Staffing
+Organizational Unit Name (eg, section) []:
+Common Name (e.g. server FQDN or YOUR name) []:eventstaffing.co.uk
+Email Address []:
+
+Please enter the following 'extra' attributes
+to be sent with your certificate request
+A challenge password []:
+An optional company name []:
+
+Download Other/x509 certificates from Geotrust
+
+INSTALLING SSL Certificate
+
+in flair/certs (dev machine):
+
+	●	Copy downloaded certificate files into a folder named after the current year
+
+  ● Cat together the certificates (or as instructed by the certificate vendor) into certs/public_chained.crt
+	  ie. cat ssl_certificate.cer IntermediateCA.cer > ../public_chained.crt
+
+    Note: We don't need to change the public key. We use the same one to generate the csr each time.
+
+	●	commit, push and deploy

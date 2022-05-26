@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <title>Flair Event Staffing</title>
+  <%= favicon_link_tag asset_path('favicon.ico') %>
+  <%= stylesheet_link_tag    "office", media: "all" %>
+  <%= javascript_include_tag "office" %>
+  <%= csrf_meta_tags %>
+  <meta name="robots" content="noindex">
+</head>
+<body>
+
+<%= yield %>
+<%= yield :js %>
+
+</body>
+</html>

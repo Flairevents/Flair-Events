@@ -1,0 +1,345 @@
+<%= form_for @questionnaire, method: :post, url: '../staff/update_question_skills', html: {multipart: true, id: 'v2-skills-form'} do |f| %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <div class="v2-application-page-skill-top-text">
+    Highlight the skill level can you offer an employer?
+  </div>
+  <div class="v2-application-page-skill-container  d-flex flex-wrap justify-content-around">
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-1">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 850.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Sports & Outdoors</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-1-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_sport_and_outdoor=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_sport_and_outdoor, 'NONE', checked: @questionnaire.has_sport_and_outdoor=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_sport_and_outdoor=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_sport_and_outdoor, 'SOME', checked: @questionnaire.has_sport_and_outdoor=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_sport_and_outdoor=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_sport_and_outdoor, 'MEDIUM', checked: @questionnaire.has_sport_and_outdoor=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_sport_and_outdoor=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_sport_and_outdoor, 'HIGH', checked: @questionnaire.has_sport_and_outdoor=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-2">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 882.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Events & festivals</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-2-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_festivals_and_concerts=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_festivals_and_concerts, 'NONE', checked: @questionnaire.has_festivals_and_concerts=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_festivals_and_concerts=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_festivals_and_concerts, 'SOME', checked: @questionnaire.has_festivals_and_concerts=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_festivals_and_concerts=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_festivals_and_concerts, 'MEDIUM', checked: @questionnaire.has_festivals_and_concerts=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_festivals_and_concerts=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_festivals_and_concerts, 'HIGH', checked: @questionnaire.has_festivals_and_concerts=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-3">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 879.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Promotional</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-3-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_promotional_and_street_marketing=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_promotional_and_street_marketing, 'NONE', checked: @questionnaire.has_promotional_and_street_marketing=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_promotional_and_street_marketing=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_promotional_and_street_marketing, 'SOME', checked: @questionnaire.has_promotional_and_street_marketing=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_promotional_and_street_marketing=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_promotional_and_street_marketing, 'MEDIUM', checked: @questionnaire.has_promotional_and_street_marketing=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_promotional_and_street_marketing=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_promotional_and_street_marketing, 'HIGH', checked: @questionnaire.has_promotional_and_street_marketing=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-4">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 836.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Bar Work</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-4-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_bar, 'NONE', checked: @questionnaire.has_bar=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_bar, 'SOME', checked: @questionnaire.has_bar=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_bar, 'MEDIUM', checked: @questionnaire.has_bar=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_bar, 'HIGH', checked: @questionnaire.has_bar=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-5">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 836.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Hospitality</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-5-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar_and_hospitality=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_bar_and_hospitality, 'NONE', checked: @questionnaire.has_bar_and_hospitality=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar_and_hospitality=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_bar_and_hospitality, 'SOME', checked: @questionnaire.has_bar_and_hospitality=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar_and_hospitality=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_bar_and_hospitality, 'MEDIUM', checked: @questionnaire.has_bar_and_hospitality=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_bar_and_hospitality=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_bar_and_hospitality, 'HIGH', checked: @questionnaire.has_bar_and_hospitality=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-6">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 880.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Logistics</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-6-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_logistics=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_logistics, 'NONE', checked: @questionnaire.has_logistics=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_logistics=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_logistics, 'SOME', checked: @questionnaire.has_logistics=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_logistics=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_logistics, 'MEDIUM', checked: @questionnaire.has_logistics=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_logistics=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_logistics, 'HIGH', checked: @questionnaire.has_logistics=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-7">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 953.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Office</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-7-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_reception_and_office_admin=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_reception_and_office_admin, 'NONE', checked: @questionnaire.has_reception_and_office_admin=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_reception_and_office_admin=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_reception_and_office_admin, 'SOME', checked: @questionnaire.has_reception_and_office_admin=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_reception_and_office_admin=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_reception_and_office_admin, 'MEDIUM', checked: @questionnaire.has_reception_and_office_admin=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_reception_and_office_admin=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_reception_and_office_admin, 'HIGH', checked: @questionnaire.has_reception_and_office_admin=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="v2-application-page-skill-sections v2-application-page-skill-sections-mobile v2-application-page-skill-sections-8">
+      <div class="row v2-p-m-0">
+        <div class="col-10 d-flex flex-row bd-highlight mb-3 mt-1">
+          <%= image_tag 'v2/Group 952.png', class: 'v2-application-page-1-category-icon' %>
+          <div class="v2-application-page-1-category-label">Retail</div>
+        </div>
+        <div class="v2-application-checkbox-container d-flex mb-2" id="v2-application-page-1-category-8-content">
+          <div class="d-flex justify-content-around w-100">
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_merchandise_and_retail=='NONE' ? '-active' : '' %>">
+              <div>Starter</div>
+              <%= f.radio_button :has_merchandise_and_retail, 'NONE', checked: @questionnaire.has_merchandise_and_retail=='NONE', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_merchandise_and_retail=='SOME' ? '-active' : '' %>">
+              <div>Some</div>
+              <%= f.radio_button :has_merchandise_and_retail, 'SOME', checked: @questionnaire.has_merchandise_and_retail=='SOME', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_merchandise_and_retail=='MEDIUM' ? '-active' : '' %>">
+              <div>Lots</div>
+              <%= f.radio_button :has_merchandise_and_retail, 'MEDIUM', checked: @questionnaire.has_merchandise_and_retail=='MEDIUM', class: 'form-check-input' %>
+            </div>
+
+            <div class="v2-application-page-1-experience-checkbox<%= @questionnaire.has_merchandise_and_retail=='HIGH' ? '-active' : '' %>">
+              <div>Expert</div>
+              <%= f.radio_button :has_merchandise_and_retail, 'HIGH', checked: @questionnaire.has_merchandise_and_retail=='HIGH', class: 'form-check-input' %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="d-flex justify-content-center v2-skill-submit-button">
+      <button class="v2-application-page-button v2-skill-submit-button">Next</button>
+      <%#= link_to 'submit', v2_staff_update_question_skills_path(last_submit: 'last submit'), class:"v2-application-page-button" %>
+    </div>
+  </div>
+
+<% end %>
+
+
+<% content_for_once :js do %>
+  <script>
+
+    $('.v2-application-page-1-category-container').on('click', function(){
+      id = $(this).attr('category-id')
+
+      if ($(`#v2-application-page-1-category-${id}-content`).css('display') == 'block') {
+        $(`#v2-application-page-1-category-${id}-content`).css('display', 'none')
+
+        $(this).find('.v2-application-page-1-category-arrow-icon').parent().html(`<%= image_tag 'v2/Path 3303.png', class: 'v2-application-page-1-category-arrow-icon' %>`)
+      }else{
+        all_skills = $('.v2-application-page-1-category-container')
+
+        all_skills.each(function () {
+          skill_id = $(this).attr('category-id')
+          $(`#v2-application-page-1-category-${skill_id}-content`).css('display', 'none')
+
+          $(this).find('.v2-application-page-1-category-arrow-icon').parent().html(`<%= image_tag 'v2/Path 3303.png', class: 'v2-application-page-1-category-arrow-icon' %>`)
+        })
+
+        $(`#v2-application-page-1-category-${id}-content`).css('display', 'block')
+
+        $(this).find('.v2-application-page-1-category-arrow-icon').parent().html(`<%= image_tag 'v2/Path 3329.png', class: 'v2-application-page-1-category-arrow-icon' %>`)
+      }
+
+      v2_profile_bg_size('#v2-profile-applications-skill-container')
+    })
+
+    $('body').on('click', '.v2-application-page-1-experience-checkbox', function(){
+      $($(this).children('input')[0]).prop("checked", true);
+      var container_id = $(this).parent().parent().attr('id');
+
+      var divs = $(`#${container_id} div .v2-application-page-1-experience-checkbox-active`);
+
+      $.each(divs, function(index, div){
+        $(div).removeClass('v2-application-page-1-experience-checkbox-active');
+        $(div).addClass('v2-application-page-1-experience-checkbox');
+      })
+
+      $(this).removeClass('v2-application-page-1-experience-checkbox')
+      $(this).addClass('v2-application-page-1-experience-checkbox-active')
+      // $('#v2-skills-form').submit()
+    })
+
+    $('body').on('click', '.v2-application-page-1-experience-checkbox-active', function(){
+      $($(this).children('input')[0]).prop("checked", false);
+      var container_id = $(this).parent().parent().attr('id');
+
+      var divs = $(`#${container_id} div .v2-application-page-1-experience-checkbox`);
+
+      // $.each(divs, function(index, div){
+      //   $(div).removeClass('v2-application-page-1-experience-checkbox-active');
+      //   $(div).addClass('v2-application-page-1-experience-checkbox');
+      // })
+
+      $(this).removeClass('v2-application-page-1-experience-checkbox-active')
+      $(this).addClass('v2-application-page-1-experience-checkbox')
+      // $('#v2-skills-form').submit()
+    })
+
+    $('#v2-skills-form input[type="checkbox"]').on('change', function(){
+      // $('#v2-skills-form').submit()
+      category = $(this).attr('category')
+      skill = $(this).attr('id')
+      if($(this).prop('checked') == true){
+        remove = null
+      }else{
+        remove = "true"
+      }
+
+      $.ajax({
+        url: "../staff/update_question_skills_sub",
+        type: 'POST',
+        data: {category: category, remove: remove, skill: skill},
+        success: function (result) {
+
+        }
+      })
+    })
+
+  </script>
+<% end %>

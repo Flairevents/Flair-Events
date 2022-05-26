@@ -1,0 +1,157 @@
+<div class="v2-profile-kid-container">
+    <div class="row mobile-hide" style='margin-bottom: 27px;'>
+        <div class="col-8 v2-profile-kid-label">
+            Key Information Document
+        </div>
+
+        <div class="col d-flex flex-row-reverse bd-highlight">
+            <%= form_tag '../staff/kid', class: 'v2-kid-form' do %>
+                <input type="hidden" name="agreed" value='true'>
+                <%= submit_tag 'I AGREE', class: 'v2-profile-kid-agree-button' %>
+            <% end %>
+        </div>
+    </div>
+    <div class="web-hide">
+        <div class="v2-profile-kid-label">
+            Key Information Document
+        </div>
+        <%= form_tag '../staff/kid', class: 'v2-kid-form' do %>
+            <input type="hidden" name="agreed" value='true'>
+            <center>
+                <%= submit_tag 'I AGREE', class: 'v2-profile-kid-agree-button' %>
+            </center>
+        <% end %>
+    </div>
+
+    <div class="v2-profile-kid-content-container" style='margin-bottom: 20px;'>
+        <div class="row" style='margin-right: 51px;margin-left: 51px;padding-top: 45px;margin-bottom:51px;'>
+            <div class="col-3"></div>
+            <div class="col v2-profile-kid-content-title text-center">GENERAL INFORMATION</div>
+            <div class="col-3 d-flex flex-row-reverse bd-highlight v2-profile-kid-content-logo">
+                <%= image_tag 'v2/Group 40.png' %>
+            </div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Name of employment business</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">Flair People Ltd.</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Type of contact you will be engaged under</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">Contact for Services</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Who will be responsible for paying you</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">Flair people Ltd</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">How often you will be paid</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">Weekly, Each Friday the week following your working hours.</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Expected or minimum rate of pay</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">
+                23 years+ £8.91 per hour <br>
+                21-22 years £8.36 per hour <br>
+                18-20 years £6.56 per hour <br>
+                U18 £4.62 per hour
+            </div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Deductions from your pay required by law</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">
+                Income tax, National Insurance Contributions, pension <br>
+                Contributions (if applicable) and student loan (if applicable)
+            </div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Any other deductions or costs from your pay</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">None</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Any fees for goods or services</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">None</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Holiday Entitlement and pay</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">
+                28 days a year pro-rate, proportional to the hourly rate of pay at 12.07%
+            </div>
+        </div>
+        <div class="row" style='padding-bottom: 50px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Additional Benefits</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">None</div>
+        </div>
+    </div>
+
+    <div class="v2-profile-kid-content-container" style='margin-bottom: 26px;'>
+        <div class="row" style='margin-right: 51px;margin-left: 51px;padding-top: 45px;margin-bottom:51px;'>
+            <div class="col-3"></div>
+            <div class="col v2-profile-kid-content-title text-center">EXAMPLE OF YOUR PAY</div>
+            <div class="col-3"></div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Example of gross rate of pay</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">£250.40 weekly</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Deductions from your wage required by law</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">
+                £2 Income tax <br>
+                £10 NI <br>
+                Actual tax deductions always based on personal circumstances.
+            </div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Any other deductions or costs from your wage</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">£6.60 pension if applicable</div>
+        </div>
+        <div class="row" style='margin-bottom: 14px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Any fees for goods or services:</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">None</div>
+        </div>
+        <div class="row" style='padding-bottom: 50px;'>
+            <div class="col v2-p-m-0 text-right v2-profile-kid-content-text-left">Example net take home pay:</div>
+            <div class="col v2-p-m-0 text-left v2-profile-kid-content-text-right">£231.80</div>
+        </div>
+    </div>
+
+    <div class="text-center v2-profile-kid-content-text-right" style='margin-bottom: 51px; padding-right: 0px'>
+        The Employment Agency Standards (EAS) Inspectorate is the government authority responsible for the <br>
+        enforcement of certain agency worker rights. You can raise a concern with them directly on 020 7215 5000 or <br>
+        through the Acas helpline on 0300 123 1100, Monday to Friday, 8am to 6pm.
+    </div>
+
+    <center>
+        <%= form_tag '../staff/kid', class: 'v2-kid-form' do %>
+            <input type="hidden" name="agreed" value='true'>
+            <%= submit_tag 'I AGREE', class: 'v2-profile-kid-agree-button' %>
+        <% end %>
+    </center>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $('.v2-kid-form').on('submit', function(e){
+        e.preventDefault()
+        $.ajax({
+            url: "../staff/kid",
+            type: 'POST',
+            data: {agreed: 'true'},
+            success: function (result) {
+
+            }
+        })
+        $('#v2-profile-kid').css('display', 'none');
+        $('#v2-profile-terms').css('display', 'none');
+        $('#v2-profile-personal-details').css('display', 'block');
+
+        v2_profile_bg_size('.v2-profile-content')
+
+        if ($('#kid').prop('checked') == false){
+            $('#kid').prop('checked', true)
+        }
+
+        return false
+    })
+  </script>
+<% end %>

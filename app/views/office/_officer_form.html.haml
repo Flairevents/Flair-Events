@@ -1,0 +1,23 @@
+= form_for officer, url: '#', html: {class: 'record-details-form', autocomplete: 'off'} do |f|
+  %table
+    %tr
+      %td First Name:
+      %td= f.text_field :first_name, class: 'form-control'
+    %tr
+      %td Last Name:
+      %td= f.text_field :last_name, class: 'form-control'
+    %tr
+      %td E-mail:
+      %td= f.text_field :email, class: 'form-control'
+    %tr
+      %td Role:
+      %td= f.select :role, [['Admin', 'admin'], ['Manager', 'manager'], ['Staffer', 'staffer'], ['Archived', 'archived']], {}, class: 'form-control'
+    %tr
+      %td Active Operational Manager:
+      %td= f.check_box :active_operational_manager
+    %tr
+      %td Senior Manager:
+      %td= f.check_box :senior_manager
+    %tr.password-edit-field
+      %td Password:
+      %td= text_field_tag :password, '', id: 'officer_password', class: 'form-control'

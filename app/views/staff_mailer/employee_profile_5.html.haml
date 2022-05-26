@@ -1,0 +1,20 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td We are reaching out to see if you have any questions regarding your staff profile as we would like to offer you an interview. We have over the phone interview slots available every day for this week.
+  %tr
+    %td
+      Login
+      %a{ href: "#{Flair::Application.config.base_https_url}/login" } here
+      to book
+  %tr
+    %td We offer exciting opportunities with some of the top brands in the UK and pay weekly. It would be great to have you on our team.
+  %tr
+    %td Enjoy flexible work that suits your lifestyle.
+= render partial: 'staff_mailer/signature'

@@ -1,0 +1,1605 @@
+.public.login
+  = render :partial => "v2/shared/nav"
+  .content
+    .content-inner.white
+      .row.expanded--restricted.dark-green.pt2.pb2
+        .small-12.columns
+          %h1.text-center Style Guide
+      .row.band-heading.expanded--restricted
+        %h2 Colors
+      .row.pt2
+        .small-4.medium-3.column.mb2
+          .field.color-swatch .field
+        .small-4.medium-3.column.mb2
+          .field-light.color-swatch .field-light
+        .small-4.medium-3.column.mb2
+          .yellow.color-swatch .yellow
+        .small-4.medium-3.column.mb2
+          .green.color-swatch .green
+        .small-4.medium-3.column.mb2
+          .dark-green.color-swatch .dark-green
+        .small-4.medium-3.column.mb2
+          .bright-yellow.color-swatch .bright-yellow
+        .small-4.medium-3.column.mb2
+          .color-swatch.white.outline .white
+        .small-4.medium-3.column.mb2
+          .black.color-swatch .black
+      .row.band-heading.expanded--restricted
+        %h2 Visual Design Mood Words
+      .row.pt2
+      .row.band-heading.expanded--restricted
+        %h2 Typography
+      .row.pt2.expanded--restricted.pb3
+        .column.small-12.article
+          .h1 Heading 1 Page Title
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolores, veritatis iste sequi necessitatibus voluptatibus voluptatum tempore eos id ea, at aperiam, nulla! Sequi, commodi. Error eaque, quasi voluptates assumenda magnam ut eos tenetur. Quasi maxime est sapiente eveniet optio dolore sed adipisci perferendis, consequatur blanditiis. Necessitatibus error minus, reprehenderit quibusdam perspiciatis?
+          .h2 Heading 2
+          %p Alias deserunt dicta, minus, repellendus ipsa itaque at aliquid maiores cupiditate ad accusantium blanditiis illo rem laboriosam voluptatum quis inventore, expedita eaque! Nam fuga nobis, voluptatibus porro optio incidunt dolorem asperiores, magni, maxime reiciendis veniam magnam suscipit accusamus tenetur officiis, quis nihil amet impedit. Blanditiis quis nihil recusandae.
+          .h3 Heading 3
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolores, veritatis iste sequi necessitatibus voluptatibus voluptatum tempore eos id ea, at aperiam, nulla! Sequi, commodi. Error eaque, quasi voluptates assumenda magnam ut eos tenetur. Quasi maxime est sapiente eveniet optio dolore sed adipisci perferendis, consequatur blanditiis. Necessitatibus error minus, reprehenderit quibusdam perspiciatis?
+          .h4 Heading 4
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolores, veritatis iste sequi necessitatibus voluptatibus voluptatum tempore eos id ea, at aperiam, nulla! Sequi, commodi.
+          .h5 Heading 5
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolores, veritatis iste sequi necessitatibus voluptatibus voluptatum tempore eos id ea, at aperiam, nulla! Sequi, commodi.
+          .h6 Heading 6
+          %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quaerat dolores, veritatis iste sequi necessitatibus voluptatibus voluptatum tempore eos id ea, at aperiam, nulla! Sequi, commodi. Error eaque, quasi voluptates assumenda magnam ut eos tenetur. Quasi maxime est sapiente eveniet optio dolore sed adipisci perferendis, consequatur blanditiis. Necessitatibus error minus, reprehenderit quibusdam perspiciatis?
+      .row.band-heading.expanded--restricted
+        %h2 Modules
+      .row.pt2.expanded--restricted
+        .column.small-12.article
+          %h4 Testimonial Carousel
+      .row.padding-top-bottom.row.dark-green.expanded--restricted
+        .column.small-12
+          .testimonial-carousel.flexslider-container
+            %ul.slides
+              = render partial: 'shared/testimonial_client'
+              = render partial: 'shared/testimonial_staff'
+      .row.pt1.expanded--restricted.pb3
+        .column.small-12.article
+          %p The <code>.testimonial-carousel</code> module
+      .row.band-heading.expanded--restricted
+        %h2 Band Headings
+      .row.pt2.expanded--restricted.pb1
+        .column.small-12.article
+          %p Full band headings is the one above.  Half-width ones are shown below.
+      .row.expanded.row--collapse
+        .column.small-12.medium-6.field
+          .band-heading.restrict-left
+            %h3 Need Staff?
+          .p2.restrict-left
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam cumque facilis accusantium saepe non voluptatem doloremque sed provident, obcaecati ipsam repellendus ex odit aliquid nobis similique quos, harum, illum autem!
+        .column.small-12.medium-6.field-light
+          .band-heading.restrict-right
+            %h3 Want to Work?
+          .p2.restrict-right
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam cumque facilis accusantium saepe non voluptatem doloremque sed provident, obcaecati ipsam repellendus ex odit aliquid nobis similique quos, harum, illum autem!
+      .row.pt2.expanded--restricted.pb1
+        .column.small-12.article
+          %p Three side by side
+      .row.row--collapse
+        .column.small-12.medium-4.field
+          .band-heading
+            %h3 Need Staff?
+          .p2
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam cumque facilis accusantium saepe non voluptatem doloremque sed provident, obcaecati ipsam repellendus ex odit aliquid nobis similique quos, harum, illum autem!
+        .column.small-12.medium-4.field-light
+          .band-heading
+            %h3 Want to Work?
+          .p2
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam cumque facilis accusantium saepe non voluptatem doloremque sed provident, obcaecati ipsam repellendus ex odit aliquid nobis similique quos, harum, illum autem!
+        .column.small-12.medium-4.field
+          .band-heading
+            %h3 Want to Work?
+          .p2
+            %p Lorem ipsum dolor sit amet, consectetur adipisicing elit. Numquam cumque facilis accusantium saepe non voluptatem doloremque sed provident, obcaecati ipsam repellendus ex odit aliquid nobis similique quos, harum, illum autem!
+      .row.pt2.expanded--restricted.pb1
+        .column.small-12.article
+          %p Full band headings is the one above.  Half-width ones are shown below.
+      .row.band-heading.expanded--restricted
+        %h2 Icons
+      .row.pt2.pb2
+        .column.small-12
+          %ul.horizontal-list
+            %li.media-with-caption
+              =image_tag 'icon-register.png', class: 'flair-icon media-with-caption__media'
+              .media-with-caption__body
+                Register.
+            %li.media-with-caption
+              =image_tag 'icon-get-interviewed.png', class: 'flair-icon media-with-caption__media'
+              .media-with-caption__body
+                Interviewed.
+            %li.media-with-caption
+              =image_tag 'icon-see-you-at-the-event.png', class: 'flair-icon media-with-caption__media'
+              .media-with-caption__body
+                See you there!
+            %li.media-with-caption
+              =image_tag 'icon-contact-us.png', class: 'flair-icon media-with-caption__media'
+              .media-with-caption__body
+                Contact us.
+            %li.media-with-caption
+              =image_tag 'icon-share-your-ideas.png', class: 'flair-icon media-with-caption__media'
+              .media-with-caption__body
+                Share your ideas.
+            %li.media-with-caption
+              =image_tag 'icon-let-us-do-the-rest.png', class: 'flair-icon media-with-caption__media'
+              .media-with-caption__body
+                Let us do the rest!
+      .row.band-heading.expanded--restricted
+        %h2 Buttons
+      .row.pt2.pb2
+        .column.small-12
+          %a.btn{href: '/about'} Find Out More
+      .row.band-heading.expanded--restricted
+        %h2 Tabs
+      .row.pt2.pb2
+        .column.small-12
+          .field.shadow
+            / Nav tabs
+            %ul.nav.nav-tabs.nav-tabs--scroll{:role => "tablist"}
+              %li.active{:role => "tablist"}
+                %a{"aria-controls" => "tab-music", "data-toggle" => "tab", :href => "#tab-music", :role => "tab"} Music
+              %li{:role => "tablist"}
+                %a{"aria-controls" => "tab-promo", "data-toggle" => "tab", :href => "#tab-promo", :role => "tab"} Promo
+              %li{:role => "tablist"}
+                %a{"aria-controls" => "tab-hospitality", "data-toggle" => "tab", :href => "#tab-hospitality", :role => "tab"} Hospitality
+            / Tab panes
+            .tab-content
+              #tab-music.tab-pane.active{:role => "tabpanel"}
+                .article.p2
+                  =image_tag('event-type-music.jpg', class: 'half float-right')
+                  %p For 16 years Flair has delivered professionally organised festival and music concert staffing teams.  Quality along with quantity, smooth planning and the slick organising of all associated staffing logistics are paramount to our success.
+                  %p Our database is full of general bar staffing, back of house stock runners, experienced bar managers capable of running 100 meter public bars through to niche VIP structures.  We can also supply promotional  teams for bespoke bars, product samplers, drink hawkers and leaflet distributors as well as information stewards, customer service teams, wrist banding and accreditation staff right through to event build, breakdown and clean-up crews.
+                %ul.nav.nav-tabs{:role => "tablist"}
+                  %li.active{:role => "music_events"}
+                    %a{"aria-controls" => "tab-sports", "data-toggle" => "tab", :href => "#tab-music-concerts", :role => "tab"} Concerts
+                  %li{:role => "music_events"}
+                    %a{"aria-controls" => "tab-music", "data-toggle" => "tab", :href => "#tab-music-festivals", :role => "tab"} Festivals
+                .tab-content.nested-tabs
+                  #tab-music-concerts.tab-pane.active{:role => "tabpanel"}
+                    .article.p2
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ratione voluptatibus soluta? At aliquam, illo laboriosam veritatis unde omnis iste.
+                  #tab-music-festivals.tab-pane{:role => "tabpanel"}
+                    .article.p2
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Pariatur ratione voluptatibus soluta? At aliquam, illo laboriosam veritatis unde omnis iste.
+              #tab-promo.tab-pane{:role => "tabpanel"}
+                .article.p2
+                  =image_tag('event-type-promo.jpg', class: 'half float-right')
+                  %p The Flair management team have the ability to seek and select those special individuals to perfectly suit a client’s vision.  We then combine this with a well oiled staffing management package.
+                  %p From one day flash drive incentives to UK wide multi-week tours.  Our teams have worked as representatives on street marketing projects; complex data capture drives, performed as brand ambassadors, match day merchandise sellers, mystery shoppers, costume characters and exhibition retail sellers.
+              #tab-hospitality.tab-pane{:role => "tabpanel"}
+                .article.p2
+                  =image_tag('event-type-hospitality.png', class: 'half float-right')
+                  %p Flair steps into the hospitality world with ease and grace, enabling us to provide skilled and experienced servers of hotel and restaurant standard.
+                  %p Themed parties, Christmas functions, company in-house events, trade shows, delegate seminars, exhibition sales and front of house staff through to VIP areas and after show parties.  Our hospitality management team run a slick and professional operation and the youthful, dedicated attitude of our workers can create a buzzing atmosphere.
+      .row.band-heading.expanded--restricted
+        %h2 Tables
+      .row
+        .column.small-12.p3
+          .h5 Normal table:
+          .table-responsive
+            %table.table
+              %thead
+                %tr.head-row{:valign => "bottom"}
+                  %th
+                    Event
+                    %i.event-list-flag
+                  %th Location
+                  %th Dates
+                  %th Staff
+              %tbody
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td London
+                  %td.nowrap 20 - 21 Nov 15
+                  %td 58
+                %tr{:valign => "bottom"}
+                  %td WestRun London
+                  %td Fulham
+                  %td.nowrap 15 Nov 15
+                  %td 22
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Manchester
+                  %td.nowrap 6 - 7 Nov 15
+                  %td 81
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Edinburgh
+                  %td.nowrap 17 - 18 Oct 15
+                  %td 87
+          .h5.mt2 Expandable table:
+          .table-responsive
+            %table.event-list.table.table-expandable
+              %thead
+                %tr.head-row{:valign => "bottom"}
+                  %th
+                    Event
+                    %i.event-list-flag
+                  %th Location
+                  %th Dates
+                  %th Staff
+              %tbody
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td London
+                  %td.nowrap 20 - 21 Nov 15
+                  %td 58
+                %tr{:valign => "bottom"}
+                  %td WestRun London
+                  %td Fulham
+                  %td.nowrap 15 Nov 15
+                  %td 22
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Manchester
+                  %td.nowrap 6 - 7 Nov 15
+                  %td 81
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Edinburgh
+                  %td.nowrap 17 - 18 Oct 15
+                  %td 87
+                %tr{:valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Nottingham
+                  %td.nowrap 9 - 10 Oct 15
+                  %td 88
+                %tr{:valign => "bottom"}
+                  %td Wild Warrior
+                  %td Ashbourne, Derbyshire
+                  %td.nowrap 27 Sep 15
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Spartan Beast
+                  %td Battle, Sussex
+                  %td.nowrap 27 Sep 15
+                  %td 93
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Blacklight Run
+                  %td Edinburgh
+                  %td.nowrap 26 Sep 15
+                  %td 26
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Cardiff
+                  %td.nowrap 26 - 27 Sep 15
+                  %td 90
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Obstacle Rush
+                  %td Liverpool
+                  %td.nowrap 26 Sep 15
+                  %td 76
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Culture Crawl
+                  %td Edinburgh
+                  %td.nowrap 25 Sep 15
+                  %td 25
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Winchester
+                  %td.nowrap 21 - 30 Sep 15
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Spartan
+                  %td Battle, Sussex
+                  %td.nowrap 20 Sep 15
+                  %td 21
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Obstacle Rush
+                  %td Surrey
+                  %td.nowrap 19 Sep 15
+                  %td 63
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Cycle Trans Pennine
+                  %td Across North
+                  %td.nowrap 19 - 20 Sep 15
+                  %td 12
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Maggies Culture Crawl
+                  %td London
+                  %td.nowrap 18 Sep 15
+                  %td 12
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Run to the Beat
+                  %td Wembley Stadium, London
+                  %td.nowrap 13 Sep 15
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Obstacle Rush
+                  %td Sheffield
+                  %td.nowrap 12 Sep 15
+                  %td 69
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Coast to Coast
+                  %td West Scotland
+                  %td.nowrap 10 - 13 Sep 15
+                  %td 24
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Ironman UK
+                  %td Tenby
+                  %td.nowrap 9 - 14 Sep 15
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Cheshire
+                  %td.nowrap 8 - 14 Sep 15
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Obstacle Rush
+                  %td Stockton
+                  %td.nowrap 5 Sep 15
+                  %td 62
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Gauntlet Games
+                  %td Woodhall Park
+                  %td.nowrap 5 Sep 15
+                  %td 12
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Man Vs Mountain
+                  %td Caernarfon
+                  %td.nowrap 4 - 5 Sep 15
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Stockton
+                  %td.nowrap 28 - 29 Aug 15
+                  %td 69
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Cirencester
+                  %td.nowrap 18 - 24 Aug 15
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Dozen London East
+                  %td Billericay
+                  %td.nowrap 15 Aug 15
+                  %td 33
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Total Warrior
+                  %td Shap
+                  %td.nowrap 1 - 2 Aug 15
+                  %td 11
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Yorkshire
+                  %td.nowrap 28 Jul - 3 Aug 15
+                  %td 22
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Shelter River Rat Race
+                  %td London
+                  %td.nowrap 24 - 25 Jul 15
+                  %td 11
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td America's Cup World Series
+                  %td Portsmouth
+                  %td.nowrap 23 - 26 Jul 15
+                  %td 130
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Spartan Edinburgh
+                  %td Edinburgh
+                  %td.nowrap 19 Jul 15
+                  %td 37
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Rush Obstacle
+                  %td Newcastle
+                  %td.nowrap 17 - 19 Jul 15
+                  %td 72
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Ironman UK
+                  %td Bolton
+                  %td.nowrap 15 - 20 Jul 15
+                  %td 26
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Dozen Races
+                  %td Usk Castle, Monmouthshire
+                  %td.nowrap 11 Jul 15
+                  %td 24
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Crossing
+                  %td NW Yorkshire &amp; Humberside
+                  %td.nowrap 10 - 12 Jul 15
+                  %td 3
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Rush Obstacle
+                  %td Bath
+                  %td.nowrap 10 - 11 Jul 15
+                  %td 71
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Rush Obstacle
+                  %td Uttoxeter
+                  %td.nowrap 3 - 4 Jul 15
+                  %td 73
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Colour Vibe 5k
+                  %td East Sussex
+                  %td.nowrap 28 Jun 15
+                  %td 6
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Total Warrior
+                  %td Bramham Park, Leeds
+                  %td.nowrap 27 - 28 Jun 15
+                  %td 13
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Rush Obstacle
+                  %td London
+                  %td.nowrap 27 - 28 Jun 15
+                  %td 76
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Trailblazer Clumber Park
+                  %td Nottingham
+                  %td.nowrap 27 Jun 15
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Wall
+                  %td Carlisle - Gateshead
+                  %td.nowrap 20 - 21 Jun 15
+                  %td 29
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Water Wipe Out
+                  %td Nottingham
+                  %td.nowrap 20 Jun 15
+                  %td 51
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Drumlanrig Castle, Scotland
+                  %td.nowrap 16 - 23 Jun 15
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td RocknRoll Marathon
+                  %td Liverpool Waterfront
+                  %td.nowrap 14 Jun 15
+                  %td 47
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Rush Obstacle
+                  %td Milton Keynes
+                  %td.nowrap 12 - 14 Jun 15
+                  %td 69
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Bedgebury Trailblazer
+                  %td Kent
+                  %td.nowrap 6 Jun 15
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Color Rush Obstacle
+                  %td Windsor
+                  %td.nowrap 5 - 7 Jun 15
+                  %td 93
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Midlands, Kettering
+                  %td.nowrap 26 May - 2 Jun 15
+                  %td 40
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Colour Vibe 5k
+                  %td Bristol
+                  %td.nowrap 17 May 15
+                  %td 19
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Grand Shaftesbury Triathlon
+                  %td Dorset
+                  %td.nowrap 16 - 17 May 15
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Cardiff 24 Challenge
+                  %td London &amp; Cardiff
+                  %td.nowrap 16 - 17 May 15
+                  %td 8
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td Oxford
+                  %td.nowrap 10 May 15
+                  %td 26
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Hackney Half Marathon
+                  %td Hackney, London
+                  %td.nowrap 10 May 15
+                  %td 50
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td May Day Triathlon
+                  %td Winchester
+                  %td.nowrap 4 May 15
+                  %td 22
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Colour Vibe 5k
+                  %td Edinburgh
+                  %td.nowrap 3 May 15
+                  %td 30
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Henley, London
+                  %td.nowrap 28 Apr - 4 May 15
+                  %td 24
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Southampton Half Marathon
+                  %td Southampton
+                  %td.nowrap 26 Apr 15
+                  %td 19
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td RNLI Slipway
+                  %td Bradford
+                  %td.nowrap 25 Apr 15
+                  %td 4
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Dozen London South
+                  %td Kent
+                  %td.nowrap 18 Apr 15
+                  %td 24
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Wild Run
+                  %td Derby, Derbyshire
+                  %td.nowrap 18 Apr 15
+                  %td 38
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Good Friday Triathlon
+                  %td Abingdon, Oxford
+                  %td.nowrap 3 Apr 15
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Adidas Energy Takeover
+                  %td Lambeth
+                  %td.nowrap 25 Mar 15
+                  %td 60
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Winchester Duathlon
+                  %td Winchester
+                  %td.nowrap 22 Mar 15
+                  %td 17
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mighty Deerstalker
+                  %td South Edinburgh
+                  %td.nowrap 13 - 15 Mar 15
+                  %td 70
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td London
+                  %td.nowrap 22 Nov 14
+                  %td 99
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Manchester
+                  %td.nowrap 8 Nov 14
+                  %td 74
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Winchester
+                  %td.nowrap 20 - 28 Oct 14
+                  %td 23
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Leatherhead Duathlon
+                  %td Leatherhead Leisure Centre
+                  %td.nowrap 19 Oct 14
+                  %td 15
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Edinburgh
+                  %td.nowrap 19 Oct 14
+                  %td 100
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Cambridge Town &amp; Gown
+                  %td Cambridge
+                  %td.nowrap 12 Oct 14
+                  %td 22
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Nottingham
+                  %td.nowrap 10 - 11 Oct 14
+                  %td 85
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td HOWSC Triathlon
+                  %td New Forest Hampshire
+                  %td.nowrap 28 Sep 14
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of Fittest
+                  %td Cardiff
+                  %td.nowrap 27 - 28 Sep 14
+                  %td 51
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Dozen London South
+                  %td Kent
+                  %td.nowrap 27 - 28 Sep 14
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Wild Warrior Run
+                  %td Derbyshire
+                  %td.nowrap 21 Sep 14
+                  %td 36
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Ryder Cup
+                  %td Perthshire
+                  %td.nowrap 20 - 28 Sep 14
+                  %td 87
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Run to the Beat
+                  %td Wembley Stadium, London
+                  %td.nowrap 14 Sep 14
+                  %td 25
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Thames Path Challenge
+                  %td Bishops Park, Fulham
+                  %td.nowrap 12 - 14 Sep 14
+                  %td 11
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Coast 2 Coast
+                  %td Nairn to Glencoe
+                  %td.nowrap 12 - 14 Sep 14
+                  %td 44
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Cheshire
+                  %td.nowrap 7 - 15 Sep 14
+                  %td 26
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Man Vs Mountain
+                  %td Caernarfon
+                  %td.nowrap 5 - 6 Sep 14
+                  %td 17
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mudderella
+                  %td Boughton House, Kettering
+                  %td.nowrap 26 Aug - 1 Sep 14
+                  %td 32
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Stockton
+                  %td.nowrap 24 Aug 14
+                  %td 40
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Isle Of Wight Challenge
+                  %td Northwood Park, West Cowes
+                  %td.nowrap 22 - 24 Aug 14
+                  %td 4
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Dozen London East
+                  %td Barleylands Farm, Billericay
+                  %td.nowrap 16 - 17 Aug 14
+                  %td 33
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Shelter River Rat Race
+                  %td London
+                  %td.nowrap 16 Aug 14
+                  %td 60
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Cirencester
+                  %td.nowrap 11 - 18 Aug 14
+                  %td 23
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Skipton, Yorkshire
+                  %td.nowrap 2 - 4 Aug 14
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td IKO Man
+                  %td Armitage Centre
+                  %td.nowrap 12 Jul 14
+                  %td 4
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Kettering
+                  %td.nowrap 12 - 14 Jul 14
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Crossing
+                  %td NW Yorkshire &amp; Humberside
+                  %td.nowrap 11 - 13 Jul 14
+                  %td 9
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Eastleigh Open Water Triathlon
+                  %td Eastleigh
+                  %td.nowrap 29 Jun 14
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Trailblazer Series
+                  %td Worksop
+                  %td.nowrap 28 Jun 14
+                  %td 38
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Dozen Races
+                  %td Usk Castle, Monmouthshire
+                  %td.nowrap 21 - 22 Jun 14
+                  %td 12
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Wall
+                  %td Carlisle - Gateshead
+                  %td.nowrap 21 - 22 Jun 14
+                  %td 39
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Total Warrior
+                  %td Bramham Park, Leeds, LS23 6LT
+                  %td.nowrap 21 - 22 Jun 14
+                  %td 13
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Water WipeOut
+                  %td Nottingham
+                  %td.nowrap 21 Jun 14
+                  %td 28
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Edinburgh
+                  %td.nowrap 14 - 17 Jun 14
+                  %td 28
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dogs Unite for Guide Dogs
+                  %td London
+                  %td.nowrap 14 Jun 14
+                  %td 38
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Trailblazer Series
+                  %td Kent
+                  %td.nowrap 7 Jun 14
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Leatherhead Triathlon
+                  %td Leatherhead
+                  %td.nowrap 1 Jun 14
+                  %td 17
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Cardiff 24 Relay Challenge
+                  %td Cardiff
+                  %td.nowrap 31 May 14
+                  %td 3
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Trailblazer Series
+                  %td Forest of Dean
+                  %td.nowrap 24 May 14
+                  %td 29
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Walkerburn Rugby Annual Sevens
+                  %td Innerleithen
+                  %td.nowrap 24 May 14
+                  %td 6
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mad Monk X-Runner
+                  %td Derby
+                  %td.nowrap 17 May 14
+                  %td 37
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td Oxford
+                  %td.nowrap 11 May 14
+                  %td 27
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td May Day Triathlon
+                  %td Winchester
+                  %td.nowrap 5 May 14
+                  %td 15
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mountain Warehouse Dog Walking Day
+                  %td Hever Castle, Kent
+                  %td.nowrap 27 Apr 14
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder London
+                  %td Henley-On-Thames
+                  %td.nowrap 26 - 28 Apr 14
+                  %td 50
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Good Friday Triathlon
+                  %td Oxford
+                  %td.nowrap 18 Apr 14
+                  %td 30
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Andover Triathlon
+                  %td Andover
+                  %td.nowrap 6 Apr 14
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Wild Run
+                  %td Derby
+                  %td.nowrap 29 Mar 14
+                  %td 28
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mighty DeerStalker
+                  %td Innerleithen
+                  %td.nowrap 15 Mar 14
+                  %td 61
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Town &amp; Gown Durham
+                  %td Durham
+                  %td.nowrap 9 Mar 14
+                  %td 15
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Its a Knock Out
+                  %td Nottingham
+                  %td.nowrap 1 Mar - 4 Oct 14
+                  %td 19
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Its a Knock Out
+                  %td Bournemouth
+                  %td.nowrap 1 Mar - 19 Oct 14
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Its a Knock Out
+                  %td Bristol
+                  %td.nowrap 1 Mar - 4 Oct 14
+                  %td 19
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td London
+                  %td.nowrap 15 - 17 Nov 13
+                  %td 185
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Manchester
+                  %td.nowrap 8 - 9 Nov 13
+                  %td 97
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Back 2 the Trenches
+                  %td Midlands
+                  %td.nowrap 19 Oct 13
+                  %td 11
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Edinburgh
+                  %td.nowrap 18 - 19 Oct 13
+                  %td 106
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Nottingham
+                  %td.nowrap 11 - 12 Oct 13
+                  %td 102
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Royal Parks Half Marathron
+                  %td London Central
+                  %td.nowrap 6 Oct 13
+                  %td 236
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Cambridge Town &amp; Gown
+                  %td Cambridge
+                  %td.nowrap 6 Oct 13
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Cheshire
+                  %td.nowrap 4 - 5 Oct 13
+                  %td 34
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Edinburgh
+                  %td.nowrap 29 Sep 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Bristol
+                  %td.nowrap 28 Sep 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Cardiff
+                  %td.nowrap 27 - 28 Sep 13
+                  %td 75
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Cardiff
+                  %td.nowrap 22 Sep 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Manchester
+                  %td.nowrap 21 Sep 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Wales
+                  %td.nowrap 20 - 21 Sep 13
+                  %td 45
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britian
+                  %td Portsmouth
+                  %td.nowrap 15 Sep 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Coast 2 Coast Endurance Race
+                  %td Highlands, Scotland
+                  %td.nowrap 12 - 14 Sep 13
+                  %td 40
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Wild Thing
+                  %td Derbyshire
+                  %td.nowrap 7 Sep 13
+                  %td 5
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Sheffield
+                  %td.nowrap 7 Sep 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Man Vs Mountain
+                  %td Caernarfon / Llanberis Wales
+                  %td.nowrap 6 - 7 Sep 13
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Yorkshire
+                  %td.nowrap 5 - 7 Sep 13
+                  %td 76
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Coventry
+                  %td.nowrap 31 Aug 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britain
+                  %td Sheffield
+                  %td.nowrap 31 Aug 13
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td British Gas Swim Britian
+                  %td Oxfordshire
+                  %td.nowrap 31 Aug 13
+                  %td 25
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Stockton on Tees
+                  %td.nowrap 24 Aug 13
+                  %td 70
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Edinburgh
+                  %td.nowrap 23 - 24 Aug 13
+                  %td 54
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Glasgow City Centre
+                  %td.nowrap 17 - 18 Aug 13
+                  %td 54
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Marie Curie Cancer Care Etape
+                  %td Tatton Park
+                  %td.nowrap 17 - 18 Aug 13
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Crossing Endurance Race
+                  %td Whitehaven  to Scarborough
+                  %td.nowrap 11 - 14 Jul 13
+                  %td 3
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td JP Morgan Chase, Charity Run
+                  %td Battersea Park, London
+                  %td.nowrap 10 - 11 Jul 13
+                  %td 150
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Eton Open Water
+                  %td Eton Dorney
+                  %td.nowrap 30 Jun 13
+                  %td 40
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td WaterWipeOut
+                  %td Nottingham
+                  %td.nowrap 29 Jun 13
+                  %td 11
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runday Luton Hoo
+                  %td Luton
+                  %td.nowrap 23 Jun 13
+                  %td 19
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Wall Endurance Race
+                  %td Carlisle to Newcastle
+                  %td.nowrap 21 - 23 Jun 13
+                  %td 46
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Bedgebury Forest, Kent
+                  %td.nowrap 8 Jun 13
+                  %td 33
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Winchester
+                  %td.nowrap 8 - 9 Jun 13
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td City To Summit Endurance Race
+                  %td Edinburgh to Ben Nevis
+                  %td.nowrap 31 May - 2 Jun 13
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Forest of Dean, Wales
+                  %td.nowrap 25 May 13
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Clumber Park, Nottingham
+                  %td.nowrap 19 May 13
+                  %td 25
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Warwick Castle, Bike Race
+                  %td Warwick
+                  %td.nowrap 19 May 13
+                  %td 31
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Dirty Weekend Obstacle Race
+                  %td Burghley House, Stamford
+                  %td.nowrap 12 - 14 May 13
+                  %td 288
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 12 May 13
+                  %td 15
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Tough Mudder
+                  %td Kettering
+                  %td.nowrap 4 - 5 May 13
+                  %td 132
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Road Trip, Endurance Event
+                  %td London to Edinburgh
+                  %td.nowrap 3 - 6 May 13
+                  %td 34
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Horseplay 10k Race
+                  %td Henley on Thames
+                  %td.nowrap 23 Mar 13
+                  %td 33
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mighty Deer Stalker
+                  %td Traquair House, Innerleithen
+                  %td.nowrap 15 - 17 Mar 13
+                  %td 63
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Age UK 10k Run
+                  %td Crystal Palace, London
+                  %td.nowrap 10 Mar 13
+                  %td 21
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Yorkshire Terrier
+                  %td Yorkshire
+                  %td.nowrap 9 Mar 13
+                  %td 29
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Legends Of Sherwood
+                  %td Sherwood Forest, Notts
+                  %td.nowrap 2 Mar 13
+                  %td 28
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td London
+                  %td.nowrap 16 - 17 Nov 12
+                  %td 178
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Gunpowder Plod 5km &amp; Firework
+                  %td Knavesmire, York
+                  %td.nowrap 4 - 5 Nov 12
+                  %td 57
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Manchester
+                  %td.nowrap 3 Nov 12
+                  %td 82
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Edinburgh
+                  %td.nowrap 21 Oct 12
+                  %td 91
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Nottingham
+                  %td.nowrap 14 Oct 12
+                  %td 84
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Cardiff
+                  %td.nowrap 7 Oct 12
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Royal Parks Half Marathon
+                  %td London Central
+                  %td.nowrap 7 Oct 12
+                  %td 229
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Coast 2 Coast Endurance Race
+                  %td Highlands, Scotland
+                  %td.nowrap 14 - 16 Sep 12
+                  %td 40
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Stockton City Centre
+                  %td.nowrap 24 - 27 Aug 12
+                  %td 59
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London 2012 Olympic Games
+                  %td Hyde Park London
+                  %td.nowrap 1 - 12 Aug 12
+                  %td 161
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td JP Morgan Chase, Charity Run
+                  %td Battersea Park, London
+                  %td.nowrap 11 - 12 Jul 12
+                  %td 136
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Basecamp Music Festival
+                  %td Sheffield
+                  %td.nowrap 6 - 8 Jul 12
+                  %td 2
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td The Wall Endurance Race
+                  %td Carlisle to Newcastle
+                  %td.nowrap 22 - 24 Jun 12
+                  %td 40
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Clumber Park, Nottingham
+                  %td.nowrap 9 Jun 12
+                  %td 29
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Forest of Dean, Wales
+                  %td.nowrap 26 May 12
+                  %td 31
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Warwick Castle, Bike Race
+                  %td Warwick
+                  %td.nowrap 20 May 12
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Soldiers Challenge Adventure Race
+                  %td London
+                  %td.nowrap 19 May 12
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 13 May 12
+                  %td 42
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Bedgebury Forest, Kent
+                  %td.nowrap 12 May 12
+                  %td 27
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Cambridge Town &amp; Gown
+                  %td Cambridge
+                  %td.nowrap 29 Apr 12
+                  %td 26
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Horseplay 10k Race
+                  %td Henley on Thames
+                  %td.nowrap 24 Mar 12
+                  %td 27
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mighty Deer Stalker
+                  %td Traquair House, Innerleithen
+                  %td.nowrap 16 - 18 Mar 12
+                  %td 60
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Yorkshire Terrier
+                  %td Yorkshire
+                  %td.nowrap 10 Mar 12
+                  %td 28
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Legends Of Sherwood
+                  %td Sherwood Forest, Notts
+                  %td.nowrap 3 Mar 12
+                  %td 26
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td London
+                  %td.nowrap 12 - 13 Nov 11
+                  %td 147
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Bowlers Boxing Night
+                  %td Manchester
+                  %td.nowrap 28 Oct 11
+                  %td 28
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Edinburgh
+                  %td.nowrap 16 Oct 11
+                  %td 82
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Royal Parks Half Marathon
+                  %td London Central
+                  %td.nowrap 9 Oct 11
+                  %td 160
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Nottingham
+                  %td.nowrap 6 - 9 Oct 11
+                  %td 96
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Men's Health Survival of the Fittest
+                  %td Cardiff Central
+                  %td.nowrap 2 Oct 11
+                  %td 11
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Half Marathon
+                  %td Oxford
+                  %td.nowrap 25 Sep 11
+                  %td 25
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Coast 2 Coast Endurance Race
+                  %td Highlands, Scotland
+                  %td.nowrap 16 - 18 Sep 11
+                  %td 48
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Skye Rider
+                  %td Central London Venues
+                  %td.nowrap 4 Sep 11
+                  %td 265
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Stockton on Tees
+                  %td.nowrap 28 Aug 11
+                  %td 65
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td River Rat Race
+                  %td Glasgow City Centre
+                  %td.nowrap 21 Aug 11
+                  %td 56
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Triathlon
+                  %td Excel London
+                  %td.nowrap 30 - 31 Jul 11
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Green Belter Challenge
+                  %td Carron valley, Scotland
+                  %td.nowrap 16 Jul 11
+                  %td 17
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Green Belter Challenge
+                  %td Bedgebury Forest, Kent
+                  %td.nowrap 2 Jul 11
+                  %td 13
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nite Ride
+                  %td London Central
+                  %td.nowrap 12 Jun 11
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Bedgbury Trail Blazer
+                  %td Pipingford Estate,  Sussex
+                  %td.nowrap 4 Jun 11
+                  %td 13
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Blenheim Triathlon
+                  %td Blenheim Palace
+                  %td.nowrap 4 - 5 Jun 11
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Bedgbury Trail Blazer
+                  %td Henley on Thames
+                  %td.nowrap 28 May 11
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Forest of Dean, Wales
+                  %td.nowrap 22 May 11
+                  %td 37
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 15 May 11
+                  %td 43
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Kent
+                  %td.nowrap 14 May 11
+                  %td 27
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Runners World Trail Blazer
+                  %td Clumber Park, Nottingham
+                  %td.nowrap 7 May 11
+                  %td 29
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Legends Of Sherwood
+                  %td Sherwood Forest, Notts
+                  %td.nowrap 2 Apr 11
+                  %td 21
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Soldiers Challenge
+                  %td London
+                  %td.nowrap 26 Mar 11
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Mighty Deer Stalker
+                  %td Traquair House, Innerleithen
+                  %td.nowrap 19 Mar 11
+                  %td 47
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Horseplay 10k Race
+                  %td Henley on Thames
+                  %td.nowrap 12 Mar 11
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td MH: Survival of the Fittest
+                  %td Edinburgh
+                  %td.nowrap 16 - 17 Oct 10
+                  %td 82
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Royal Parks Half Marathon
+                  %td London Central
+                  %td.nowrap 10 Oct 10
+                  %td 140
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td MH: Survival of the Fittest
+                  %td Nottingham
+                  %td.nowrap 7 - 10 Oct 10
+                  %td 92
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Run to the Beat
+                  %td London
+                  %td.nowrap 26 Sep 10
+                  %td 15
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td SkyRider London
+                  %td London
+                  %td.nowrap 5 Sep 10
+                  %td 111
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Blenheim Triathlon
+                  %td Blenheim Palace
+                  %td.nowrap 5 - 6 Jun 10
+                  %td 12
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 16 May 10
+                  %td 78
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nike 10k Nite series
+                  %td Battersea Park, London
+                  %td.nowrap 24 Oct 09
+                  %td 134
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Royal Parks Half Marathon
+                  %td London Central
+                  %td.nowrap 11 Oct 09
+                  %td 140
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Run to the Beat
+                  %td London
+                  %td.nowrap 27 Sep 09
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td SkyRider London
+                  %td London
+                  %td.nowrap 20 Sep 09
+                  %td 111
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Duathlon
+                  %td Victoria Dock, London
+                  %td.nowrap 12 - 13 Sep 09
+                  %td 15
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Triathlon
+                  %td Excel London
+                  %td.nowrap 1 - 2 Aug 09
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Medway Town&amp;Gown
+                  %td Medway
+                  %td.nowrap 21 Jun 09
+                  %td 20
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Blenheim Triathlon
+                  %td Blenheim Palace
+                  %td.nowrap 6 - 7 Jun 09
+                  %td 16
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 17 May 09
+                  %td 61
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Royal Parks Half Marathon
+                  %td London Central
+                  %td.nowrap 12 Oct 08
+                  %td 165
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Run to the Beat
+                  %td London
+                  %td.nowrap 5 Oct 08
+                  %td 18
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Freewheeler 12cycle Event
+                  %td Various Central London
+                  %td.nowrap 21 Sep 08
+                  %td 235
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Duathlon
+                  %td London
+                  %td.nowrap 14 Sep 08
+                  %td 75
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Palace to Palace
+                  %td London - Warwick
+                  %td.nowrap 7 Sep 08
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td London Triathlon
+                  %td Victoria Dock, London
+                  %td.nowrap 2 - 3 Aug 08
+                  %td 45
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Blenheim Triathlon
+                  %td Blenheim Palace
+                  %td.nowrap 7 - 8 Jun 08
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Ricky Hatton
+                  %td Mancehster
+                  %td.nowrap 24 May 08
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 18 May 08
+                  %td 61
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Freewheeler 12cycle Event
+                  %td Various Central London
+                  %td.nowrap 23 Sep 07
+                  %td 259
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Palace to Palace
+                  %td London - Warrick
+                  %td.nowrap 16 Sep 07
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td City Chase
+                  %td London Central
+                  %td.nowrap 21 Jul 07
+                  %td 80
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 20 May 07
+                  %td 55
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Walk for Shelter
+                  %td London
+                  %td.nowrap 29 Oct 06
+                  %td 14
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Rowing Championships
+                  %td Dorney Lake, Eaton
+                  %td.nowrap 14 - 27 Aug 06
+                  %td 41
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Rat Race Urban Race
+                  %td Edinburgh
+                  %td.nowrap 4 - 6 Aug 06
+                  %td 30
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 21 May 06
+                  %td 54
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Rat Race Urban Race
+                  %td Edinburgh
+                  %td.nowrap 6 - 7 Aug 05
+                  %td 35
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td JP Morgan Chase, Charity Run
+                  %td Battersea Park, London
+                  %td.nowrap 6 Jul 05
+                  %td 130
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 15 May 05
+                  %td 22
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nike 10k Nite series
+                  %td Battersea Park, London
+                  %td.nowrap 28 Nov 04
+                  %td 174
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nike Event Production
+                  %td London
+                  %td.nowrap 9 - 13 Nov 04
+                  %td 10
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td JP Morgan Chase, Charity Run
+                  %td Richmond Park, London
+                  %td.nowrap 7 - 8 Jul 04
+                  %td 110
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Feet Beat
+                  %td Oxford
+                  %td.nowrap 23 May 04
+                  %td 22
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 16 May 04
+                  %td 39
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nike 10k
+                  %td Richmond Park
+                  %td.nowrap 7 Sep 03
+                  %td 125
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Oxford Town &amp; Gown
+                  %td University Parks
+                  %td.nowrap 18 May 03
+                  %td 30
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nike 10k
+                  %td Richmond Park
+                  %td.nowrap 21 - 22 Sep 02
+                  %td 98
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td Nike 10k
+                  %td Richmond Park
+                  %td.nowrap 21 - 22 Jul 01
+                  %td 98
+                %tr{:style => "display: none;", :valign => "bottom"}
+                  %td World Super Bikes
+                  %td Castle Donnington
+                  %td.nowrap 26 - 27 May 01
+                  %td 18
+      .row.band-heading.expanded--restricted
+        %h2 Backgrounds
+      .row.pt2.white
+      .row.pt2.fl-background-sample.expanded.background.background-carousel
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-carousel
+      .row.pt2.fl-background-sample.expanded.background.background-crowd
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-crowd
+      .row.pt2.fl-background-sample.expanded.background.background-staff-fun
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-staff-fun
+      .row.pt2.fl-background-sample.expanded.background.background-amusement
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-amusement
+      .row.pt2.fl-background-sample.expanded.background.background-cds
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-cds
+      .row.pt2.fl-background-sample.expanded.background.background-desk
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-desk
+      .row.pt2.fl-background-sample.expanded.background.background-fest
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-fest
+      .row.pt2.fl-background-sample.expanded.background.background-park
+      .row.pt1.pb2.white.text-right.expanded--restricted
+        .column.small-12.article
+          \.background-park
+      .row.band-heading.expanded--restricted
+        %h2 Text Alignment with Flex Box
+      .row.pt2
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--top.flex--left .flex--top.flex--left
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--top.flex--center .flex--top.flex--center
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--top.flex--right .flex--top.flex--right
+      .row.pt2
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--middle.flex--left .flex--middle.flex--left
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--middle.flex--center .flex--middle.flex--center
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--middle.flex--right .flex--middle.flex--right
+      .row.pt2.pb2
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--bottom.flex--left .flex--bottom.flex--left
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--bottom.flex--center .flex--bottom.flex--center
+        .small-4.medium-4.column
+          .fl-box-sample.field.flex--bottom.flex--right .flex--bottom.flex--right
+      .row.band-heading.expanded--restricted
+        %h2 SVG Icons
+      .row.pt2
+        .small-12.column
+          = render partial: 'shared/flair_icons.svg'
+          %svg.icon-school
+            <use xlink:href="#school" />
+
+
+  .content-after
+  = render :partial => "footer"

@@ -1,0 +1,222 @@
+%div.refresh-data-home{style: 'float:right'}
+  %a.refresh-data{href: 'javascript:void(0)'} Refresh
+
+%h4 Summary
+
+- today = getToday()
+- this_tax_week = @db.queryAll('tax_weeks', {includes_date: today})[0]
+- snds_report = @db.queryAll('admin_log_entries', {type: 'snds_report'}).sort((a, b) -> if a.data.activity_end < b.data.activity_end then 1 else -1)[0]?.data
+
+%table.zone_summary.summary-table
+  %tr
+    %th Employees
+    %th Requests
+    %th Spare
+    %th Applicants
+    %th No ID
+    %th No TC
+    %th No Bank
+    %th No NI
+    %th TODO
+    %th My Tasks
+    %th Email Status
+    %th In Year Active
+    %th App last month
+    %th App in month
+  %tr
+    - prospects = @db.queryAll('prospects')
+    %td= @db.queryAll('prospects', {status: 'EMPLOYEE'}).length
+    - if (requests_count = @db.queryAll('gig_requests', {future_only: true, not_applicant: true, ignored: false, spare: 'false', gig_id: null}).map((gr) -> gr.prospect_id).uniqueItems().length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("team", "showRequests")'}= requests_count
+    - else
+      %td 0
+    - if (spare_requests_count = @db.queryAll('gig_requests', {future_only: true, not_applicant: true, ignored: false, spare: 'true'}).map((gr) -> gr.prospect_id).uniqueItems().length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("team", "showSpareRequests")'}= spare_requests_count
+    - else
+      %td 0
+    %td= @db.queryAll('prospects', {status: 'APPLICANT'}).length
+
+    - if (no_id_count = @db.queryAll('prospects', {status: 'EMPLOYEE', is_live: 'true', no_id: true}).length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("team", "showNoId")'}= no_id_count
+    - else
+      %td 0
+
+    - if (no_tax_choice_count = @db.queryAll('prospects', {status: 'EMPLOYEE', is_live: 'true', tax_choice: null}).length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("team", "showNoTaxChoice")'}= no_tax_choice_count
+    - else
+      %td 0
+
+    - if (no_bank_count = @db.queryAll('prospects', {status: 'EMPLOYEE', is_live: 'true', no_bank: true}).length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("team", "showNoBankInfo")'}= no_bank_count
+    - else
+      %td 0
+
+    - if (no_ni_count = @db.queryAll('prospects', {status: 'EMPLOYEE', is_live: 'true', ni_number: null}).length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("team", "showNoNINumber")'}= no_ni_count
+    - else
+      %td 0
+
+    - if (change_request_total = @db.queryAll('todos').length) > 0
+      %td
+        %a{href: 'javascript:void(0)', onclick: 'viewManager.send("todos", "showAllTodos")'}= change_request_total
+    - else
+      %td 0
+
+    %td
+      - officer = @db.findId('officers', currentOfficerId)
+      - if officer? && officer.n_incomplete_tasks_this_week > 0
+        %a{href: 'javascript:void(0)', onclick: "viewManager.send('planner', 'showTasksForOfficer', {officer_id: #{officer.id}, tax_week_id: #{this_tax_week.id}})"}= officer.n_incomplete_tasks_this_week
+
+    - if snds_report
+      %td{class='snds-#{snds_report.filter_result}'}
+        %div{data-toggle='tooltip' title='#{snds_report.activity_start} - #{snds_report.activity_end}; #{snds_report.complaint_rate} complaints'}
+          =snds_report.filter_result
+    - else
+      %td
+
+    %td = @active_people_last_year
+    %td{style: "width: 100px"}
+      %a{href: 'javascript:void(0)', onclick: 'viewManager.send("applicants", "applicantLastMonth")'}= @last_month_applicants
+    %td
+      %a{href: 'javascript:void(0)', onclick: 'viewManager.send("applicants", "applicantThisMonth")'}= @current_month_applicants
+
+%div{style: 'clear:both'}
+
+%h4 Events
+
+- active_tax_weeks = @db.queryAll('tax_weeks', { has_active_events: true }, 'date_start')
+- active_events = []
+- for tax_week in active_tax_weeks
+  - for event in @db.findIds('events', tax_week.active_events).sort(eventSortByEventDates.bind(null, tax_week.id))
+    - if (event.show_in_home && !event.payroll_pending[tax_week.id])
+      - active_events.push({event: event, tax_week_id: tax_week.id})
+- pending_tax_weeks = @db.queryAll('tax_weeks', { has_pending_events: true }, 'date_start')
+- pending_events = []
+- for tax_week in pending_tax_weeks
+  - for event in @db.findIds('events', tax_week.pending_events).sort(eventSortByEventDates.bind(null, tax_week.id))
+    - if (event.show_in_home && event.payroll_pending[tax_week.id])
+      - pending_events.push({event: event, tax_week_id: tax_week.id})
+- to_approve_tax_weeks = @db.queryAll('tax_weeks', { has_to_approve_events: true }, 'date_start')
+- to_approve_events = []
+- for tax_week in to_approve_tax_weeks
+  - for event in @db.findIds('events', tax_week.to_approve_events).sort(eventSortByEventDates.bind(null, tax_week.id))
+    - if (event.show_in_home && event.payroll_to_approve[tax_week.id])
+      - to_approve_events.push({event: event, tax_week_id: tax_week.id})
+
+- active_tab_name = 'active-events'
+- pending_tab_name = 'pending-events'
+- to_approve_tab_name = 'to-approve'
+
+%ul.nav.nav-tabs
+  %li.active
+    %a{href: '#'+active_tab_name, :"data-toggle" => 'tab'}= "Active (#{active_events.length})"
+  %li
+    %a{href: '#'+pending_tab_name, :"data-toggle" => 'tab'}= "Pending Payroll (#{pending_events.length})"
+  %li
+    %a{href: '#'+to_approve_tab_name, :"data-toggle" => 'tab'}= "To Approve (#{to_approve_events.length})"
+
+- adminHighlighted = {}
+
+.tab-content#home-events
+  - for info in [{eventsInfo: active_events, tabName: active_tab_name}, {eventsInfo: pending_events, tabName: pending_tab_name}, {eventsInfo: to_approve_events, tabName: to_approve_tab_name}]
+    .tab-pane{id: info.tabName, class: (if info.tabName == 'active-events' then 'active' else '')}
+      - unless info.eventsInfo.length == 0
+        - firstEventInfo = info.eventsInfo[0]
+        - previousWeekOfYear = getWeekOfYear(firstEventInfo.event.event_dates[firstEventInfo.tax_week_id][0].date)
+        %table.fixed-header
+          %tr
+            %th Name
+            %th Need
+            %th Asgn
+            %th Hired
+            %th Rqst
+            %th Spare
+            %th Appl
+            %th Web
+            %th Levels
+            %th Staff HQ
+            %th Tasks
+            %th Site Manager
+            %th Senior HQ
+            %th Dates
+            %th Location
+            %th Status
+          - for eventInfo in info.eventsInfo
+            - event = eventInfo.event
+            - tax_week_id = eventInfo.tax_week_id
+            - event_dates = event.event_dates[tax_week_id]
+            - first_date = event_dates[0].date
+            - last_date = event_dates[event_dates.length-1].date
+            - staff_needed_for_assignments = event.staff_needed_for_assignments[tax_week_id] || 0
+            - if last_date.getTime() < today.getTime()
+              - row_class = 'home--finished-event'
+            - else if (first_date.getMonth()+1) %2 == 0
+              - row_class = 'home--even-month'
+            - else
+              - row_class = 'home--odd-month'
+
+            - weekOfYear = getWeekOfYear(first_date)
+            - if weekOfYear != previousWeekOfYear
+              - row_class += ' new-week'
+              - previousWeekOfYear = weekOfYear
+
+            %tr{class: "#{row_class}"}
+              - if event.admin_completed && !adminHighlighted[event.id]?
+                - adminHighlighted[event.id] = true
+                %td
+                  %span.hilite=event.name
+              - else
+                %td= event.name
+              %td= event.staff_needed
+              %td=
+                - if event.n_gig_assignments[tax_week_id] > 0
+                  - assigned_class = if event.n_gig_assignments[tax_week_id] < staff_needed_for_assignments then 'red-text--bold' else if event.n_gig_assignments[tax_week_id] > staff_needed_for_assignments then 'blue-text' else ''
+                  %a{href: 'javascript:void(0)', class: assigned_class, onclick: "viewManager.send('gigs', 'showAssignedForEvent', {event_id: #{event.id}, tax_week_id: #{tax_week_id}, spare: 'false'})"}= event.n_gig_assignments[tax_week_id]
+                - else
+                  0
+                = " / " + staff_needed_for_assignments
+              %td
+                - if event.n_active_gigs > 0
+                  - gigs_class = if event.n_active_gigs < event.staff_needed then 'red-text--bold' else ''
+                  %a{href: 'javascript:void(0)', class: gigs_class, onclick: "viewManager.send('gigs', 'showHiredForEvent', {event_id: #{event.id}, tax_week_id: #{tax_week_id}})"}= event.n_active_gigs
+                  - if event.additional_staff > 0
+                    = " (+#{event.additional_staff})"
+              %td
+                - if event.n_gig_requests > 0
+                  %a{href: 'javascript:void(0)', onclick: "viewManager.send('gigs', 'showRequestsForEvent', {event_id: #{event.id}, spare: 'false'})"}= event.n_gig_requests
+              %td
+                - if event.n_gig_requests_spare > 0
+                  %a{href: 'javascript:void(0)', onclick: "viewManager.send('gigs', 'showRequestsForEvent', {event_id: #{event.id}, spare: 'true'})"}= event.n_gig_requests_spare
+              %td
+                - if event.n_gig_requests_applicant > 0
+                  %a{href: 'javascript:void(0)', onclick: "viewManager.send('applicants', 'showApplicantsForEvent', {event_id: #{event.id}})"}= event.n_gig_requests_applicant
+              %td
+                - if event.show_in_public
+                  ✓
+              %td
+                - is_interest = event.fullness == "REGISTER_INTEREST"
+                = if is_interest then "INTEREST" else event.fullness
+              %td
+                - officer = @db.findId('officers', event.office_manager_id)
+                = if officer then officer.first_name else ""
+              %td
+                - if event.show_in_planner
+                  -if event.n_incomplete_tasks > 0
+                    %a{href: 'javascript:void(0)', onclick: "viewManager.send('planner', 'showTasksForEvent', {event_id: #{event.id}})"}= event.n_incomplete_tasks
+                  -else
+                    0
+              %td= event.site_manager
+              %td=
+                - officer = @db.findId('officers', event.senior_manager_id)
+                = if officer then officer.first_name else ""
+              %td = printSortedEventDates(event_dates)
+
+              / %td= regionForRecord(event)
+              %td= event.location
+              %td= if event.show_in_ongoing == true then event.ongoing_status else event.status

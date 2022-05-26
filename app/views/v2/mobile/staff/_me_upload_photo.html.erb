@@ -1,0 +1,52 @@
+<div class="content upload-photo text-center">
+  <div class="photo-edit"></div>
+  <div class="staffzone-photo-area">
+    <div class="container">
+      <div class="modal fade" id="edit-uploaded-photo" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content mt5 v2-upload-photo-container">
+            <div class="modal-body out-team-message_moda" style="color: white;">
+              <div class="v2-upload-photo-header">
+                <% if @prospect.photo.present? %>
+                  <div id="photo_present" present="true" style="display:none;"></div>
+                  Edit your photo
+                <% else %>
+                  <div id="photo_present" present="false" style="display:none;"></div>
+                  Photo time
+                <% end %>
+              </div>
+              <div class="v2-upload-photo-caption v2-upload-photo-caption-desk">Upload a selfie <br /> Happy, professional head shots please.</div>
+              <div class="v2-upload-photo-caption v2-upload-photo-caption-mobile">Upload a selfie <br /> Happy,  professional head shots please.</div>
+              <div class="v2-upload-photo-caption v2-upload-photo-caption-drag" style="display: none">Zoom, drag or double click to reload.</div>
+              <div class="v2-profile-photo-show-container">
+                <% if @prospect.photo.present? %>
+                  <img class="v2-profile-image v2-upload-photo-teal-image" src="<%= @prospect.photo_url %>"/>
+                <% else %>
+                  <%= image_tag 'v2/logo_teal.png', class: 'v2-upload-photo-teal-image' %>
+                  <%= image_tag 'v2/Group 401.png', class: 'v2-upload-photo-camera-image' %>
+                <% end %>
+              </div>
+              <div class="croppie-photo-preview"></div>
+              <div id="photo-upload">
+                <%= form_tag '../staff/upload_photo', multipart: true, id: 'photo-form' do |f| %>
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <%= file_field_tag :photo, required: true, accept: @accepted_images, id: 'photo-input', class: 'input-center', style: 'display:none;' %>
+                  <%= hidden_field_tag :cropLeftX %>
+                  <%= hidden_field_tag :cropTopY %>
+                  <%= hidden_field_tag :cropRightX %>
+                  <%= hidden_field_tag :cropBottomY %>
+                  <%= hidden_field_tag :orientation %>
+                  <div class="text-center">
+                    <button class="fl-flash__close-btn" data-dismiss="modal" style="color: white;border:none;" id="upload-photo-close" type="button"></button>
+                    <%= submit_tag 'SAVE', class: 'v2-upload-phot-submit', id: 'submit-photo', style: 'display:none;' %>
+                    <button class='v2-upload-phot-submit' id="upload-photo">UPLOAD</button>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

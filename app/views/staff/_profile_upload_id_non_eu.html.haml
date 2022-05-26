@@ -1,0 +1,80 @@
+.non-eu
+  %h4 Non UK/EU: Valid EU Work Permission Required
+  %p All scans or photos MUST:
+  %ul
+    %li be in full colour
+    %li include ALL text. Please do not miss any part of the ID
+    %li be flat and looking directly onto the document
+    %li avoid using flash to avoid shine or glare
+  %h5 ID Type
+  .form-control
+    =radio_button_tag 'non_eu_id_type', 'Work Visa', (@prospect.id_type != 'Biometric Residency Permit'), {onchange: "non_eu_id_type_changed();"}
+    =label_tag :work_visa, 'Work Visa'
+    &nbsp;
+    =radio_button_tag 'non_eu_id_type', 'Biometric Residency Permit', (@prospect.id_type == 'Biometric Residency Permit'), {onchange: "non_eu_id_type_changed();"}
+    =label_tag :biometric_residency_permit, 'Biometric Residency Permit'
+  %hr
+  = form_tag '/staff/upload_passport_and_visa', multipart: true, class: 'fl-form' do
+    %h5 Passport
+    =render partial: 'profile_upload_id_passport'
+    %hr
+    .non_eu_id_upload_form
+    .row
+      .column.small-12.medium-6
+        .upload-field
+          .field-label-above
+            Issue Date
+            %a.help{onclick: '$(".non-eu-id-issue-popup").show()'}
+              %i.glyphicon.glyphicon-question-sign
+          .date-input-group
+            = select_date Date.today, {prefix: 'visa_issue_date', start_year: Date.today.year-10, end_year: Date.today.year, order: [:day, :month, :year], use_short_month: true}, {class: "form-control"}
+      .column.small-12.medium-6
+        .upload-field
+          .field-label-above
+            %span#visa-no-label Visa Number
+            %a.help{onclick: '$(".non-eu-id-number-popup").show()'}
+              %i.glyphicon.glyphicon-question-sign
+          = text_field_tag :visa_no, nil, required: true, class: "form-control"
+    .row
+      .column
+        .upload-field
+          .field-label-above
+            Expiry Date
+            %a.help{onclick: '$(".non-eu-id-expiry-popup").show()'}
+              %i.glyphicon.glyphicon-question-sign
+          .row
+            .column.small-12.medium-6
+              .date-input-group
+                = select_date Date.today, {prefix: 'visa_expiry', start_year: Date.today.year, end_year: Date.today.year+10, order: [:day, :month, :year], use_short_month: true}, {class: "form-control"}
+            .column.small-12.medium-6
+              .fl-form__checkbox{style: 'padding-top: 0.4em'}
+                %input#visa-indefinite{type: 'checkbox', name: 'visa_indefinite'}
+                %label{for: 'visa-indefinite'} Indefinite Leave to Remain
+                %a.help{onclick: '$(".non-eu-id-indefinite-popup").show()'}
+                  %i.glyphicon.glyphicon-question-sign
+    .row.pt1.pb1
+      .column.small-12.text-right
+        = submit_tag (@prospect.has_id? ? 'Update' : 'Submit'), class: 'btn btn-default'
+  .passport-pic-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-non-eu-passport-picture.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  .passport-front-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-non-eu-passport-front.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  .passport-expiry-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-non-eu-passport-expiry.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  .passport-number-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-non-eu-passport-number.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  - content_for_once :js do
+    :javascript
+      $('#non_eu_id_type_Work_Visa').change();

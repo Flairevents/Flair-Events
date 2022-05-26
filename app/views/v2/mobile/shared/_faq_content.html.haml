@@ -1,0 +1,8 @@
+%ul.accordion-list.list-expandable
+  - entries.each do |entry|
+    %li.accordion-item.question
+      .header
+        = entry.question.html_safe
+      .accordion-item__expanded.answer
+        .p
+          = entry.answer.html_safe

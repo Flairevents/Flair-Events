@@ -1,0 +1,18 @@
+.message-box.mt2
+  %ol{style: 'height: 190px; overflow: auto; padding: 15px;'}
+    -@messages.each do |message|
+      %li= message
+  -#%ul
+  -#  -@optional_messages.each do |message|
+  -#    %li= message
+  .row.bottom-button{style: 'margin-top: 30px;'}
+    .column.small-6
+      .yellow-button-staff.message-button{style: 'margin-left: auto;'}
+        %a.pop-up-request-quote#reschedule-interview{href: '/contact', style: 'width: 100%; color: #005949;'}
+          %p.bottom-button.covid-box-btn{style: 'margin-top:8px'}
+            %b{style: 'color: #005949'} Message Flair
+    .column.small-6
+      .yellow-button-staff.message-button
+        %a.pop-up-request-quote{href: 'tel:01612412441', style: 'width: 100%; color: #005949;'}
+          %p.bottom-button.covid-box-btn{style: 'margin-top:8px'}
+            %b{style: 'color: #005949'} Call Flair

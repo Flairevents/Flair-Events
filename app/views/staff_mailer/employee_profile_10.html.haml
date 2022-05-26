@@ -1,0 +1,22 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td You could be the next person we hire? Make it happen today.
+  %tr
+    %td
+      Login
+      %a{ href: "#{Flair::Application.config.base_https_url}/login" } here
+      to complete your profile and schedule your interview
+  %tr
+    %td We offer exciting opportunities in a variety of sectors:
+  %tr
+    %td Sports, hospitality, commercial, promotional, industrial and festivals & events.
+  %tr
+    %td I look forward to speaking with you!
+= render partial: 'staff_mailer/signature'

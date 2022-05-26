@@ -1,0 +1,11 @@
+<p>Hi <%= @name %>,</p>
+
+<p>To confirm your e-mail address and set your password, please click the following link.</p>
+
+<p><a href="<%= Flair::Application.config.base_https_url %>/client/activate?token=<%= @token %>">Confirm my email address and set my account password</a></p>
+
+<p>If you can't use the above link, you can cut-and-paste the following address into your browser's address bar:</p>
+
+<p><%= Flair::Application.config.base_https_url %>/client/activate?token=<%= @token %></p>
+
+<%= render partial: 'signature' %>

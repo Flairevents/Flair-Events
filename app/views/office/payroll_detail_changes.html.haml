@@ -1,0 +1,36 @@
+-#:javascript
+-#  <a href="javascript:window.print();">Print</a>
+
+#weekly-changes
+  %a.noprint{:href=>"javascript:window.print();"}Print
+  %p.title Changes for #{@tax_week_description}
+  #change-list
+    -if @changes.length > 0
+      %p.title Employee Detail Changes:
+      -@changes.each do |prospect_id, prospect_changes|
+        %p.name
+          =Prospect.find(prospect_id).name
+          %ul
+            -prospect_changes.each do |change|
+              %li
+                <b>#{change[:name]}</b>: #{change[:new_value]} <i>(previously #{change[:old_value]})</i>
+    -else
+      %p.title No Employee Detail Changes.
+
+  #leavers-list
+    -if @leavers.length > 0
+      %p.title Leavers:
+      -@leavers.each do |leaver|
+        %p
+          <b>#{leaver[:name]}</b> (#{leaver[:id]})
+    -else
+      %p.title No Leavers.
+
+  #returners-list
+    -if @returners.length > 0
+      %p.title Returners:
+      -@returners.each do |returner|
+        %p
+          <b>#{returner[:name]}</b> (#{returner[:id]})
+    -else
+      %p.title No Returners.

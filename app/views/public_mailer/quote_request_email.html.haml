@@ -1,0 +1,39 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding-top: 30px;" }
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Contact Name:
+    %td= "#{@qoute.name}"
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Company Name:
+    %td= @qoute.company_name
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Telephone:
+    %td= @qoute.telephone
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Email:
+    %td= @qoute.email
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 20px 0px;" }
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Job Position:
+    %td= @qoute.job_position
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Location:
+    %td= @qoute.location
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Industry:
+    %td= @qoute.job_category
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Start Date:
+    %td= @qoute.start_date.strftime('%d-%m-%Y')
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} End Date:
+    %td
+      - if @qoute.finish_date != nil
+        = @qoute.finish_date.strftime('%d-%m-%Y')
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Notes:
+    %td= @qoute.other_facts

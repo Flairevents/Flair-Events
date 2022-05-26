@@ -1,0 +1,45 @@
+.tax-code
+  = form_tag '/staff/update_tax_choice' do |f|
+    %h3 Starter Checklist: Instructions for Employees
+    - if @prospect.date_tax_choice.present?
+      .original-tax-date
+        %p= "You submitted this tax declaration on: #{@prospect.date_tax_choice.for_show}."
+    %p As a new employee, your employer needs the below information, before your first payday, to tell HMRC about you and help them use the correct tax code.
+    %p All earnings will be processed within your indicated brackets on a W1M1 basis, as legally required, until such time as we receive a P9 Tax Code Notice direct from HMRC.
+    %p Flair Events payroll is processed each Wednesday to ensure employee bank payments are received each Friday.
+    %h4 Employee Statement
+    .form-control#tax-choice-inputs
+      %p You need to select only one of the following statements: A, B, or C
+      .fl-form__radio
+        =radio_button_tag(:tax_choice, 'A', @prospect.tax_choice == 'A', required: true)
+        =label_tag(:tax_choice_A, "A – This is my first job since last 6 April and I have not been receiving taxable Jobseeker’s Allowance, Employment and Support Allowance, taxable Incapacity Benefit, State or Occupational pension.")
+      .fl-form__radio
+        =radio_button_tag(:tax_choice, 'B', @prospect.tax_choice == 'B', required: true)
+        =label_tag(:tax_choice_B, "B – This is now my only job, but since last 6 April I have had another job, or received taxable Jobseeker’s Allowance, Employment and Support Allowance or taxable Incapacity Benefit. I do not receive a State or Occupational Pension.")
+      .fl-form__radio
+        =radio_button_tag(:tax_choice, 'C', @prospect.tax_choice == 'C', required: true)
+        =label_tag(:tax_choice_C, "C – As well as my new job, I have another job or receive a State or Occupational Pension.")
+    .student-loan
+      %h4 Student Loan Statement
+      .form-control
+        %p Do you have a student loan which is not fully repaid and all of the following apply:
+        %ul
+          %li You left a course of UK higher education before last 6 April?
+          %li You received your first student loan installment on or after 1 September 1998?
+        .text-center.mt1.mb1
+          %span.fl-form__radio.mr1
+            = radio_button_tag(:student_loan, true, @prospect.student_loan, required: true)
+            = label_tag(:student_loan_true, 'Yes')
+          %span.fl-form__radio
+            = radio_button_tag(:student_loan, false, !@prospect.student_loan, required: true)
+            = label_tag(:student_loan_false, 'No')
+    .row
+      .column.small-12.text-right.pt1.pb1
+        = submit_tag (@prospect.has_tax_choice? ? 'Update' : 'Submit'), class: 'btn btn-default'
+
+  .row.sb1
+    .column.small-12
+      .extra-info
+        See
+        %a{href: '/join_us#faq'} FAQ
+        for more details

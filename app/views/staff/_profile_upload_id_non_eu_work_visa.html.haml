@@ -1,0 +1,39 @@
+%h5 Work Visa
+.row
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Front of Visa Card or Visa Stamp in Passport
+        %a.help{onclick: '$(".non-eu-id-front-popup").show()'}
+          %i.glyphicon.glyphicon-question-sign
+      = file_field_tag :working_visa, required: true, class: "form-control", accept: @accepted_images
+.non-eu-id-front-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-working-visa-front.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-number-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-working-visa-number.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-issue-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-working-visa-issue.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-expiry-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-working-visa-expiry.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-indefinite-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-indefinite.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-indefinite-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-indefinite.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close

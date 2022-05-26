@@ -1,0 +1,13 @@
+%table.table-widget{style: 'width:100%', cellspacing: 0}
+  %tr.tr-head
+    %td.table-th Date
+    %td.table-th Event
+    %td.table-th Rating
+    %td.table-th Notes
+  - i = 0
+  - @profile_timesheet_notes.each do |note|
+    %tr{class: (i = ((i + 1) % 2)).odd? ? 'tr-even' : 'tr-odd'}
+      %td.td= note[:date]
+      %td.td= note[:event]
+      %td.td= note[:rating]
+      %td.td= note[:notes]

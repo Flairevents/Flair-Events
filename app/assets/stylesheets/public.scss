@@ -1,0 +1,96 @@
+// This will compile into a file which contains all the css needed for the Flair "Public Zone" pages
+//= require boostrap.min
+//= require flexslider/flexslider
+//= require flair-bootstrap
+//= require flair-base
+//= require flair-layout
+//= require flair-modules
+//= require v2
+//= require v2-job-board
+//= require v2-clients
+//= require v2-home
+//= require card-slider-style
+//= require v2-workers
+//= require v2-about
+//= require v2-industry
+//= require v2-case-studies
+//= require staff-skill
+//= require slick.min
+@charset "UTF-8";
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: font-url('glyphicons-halflings-regular.eot');
+  src: font-url('glyphicons-halflings-regular.eot?#iefix') format("embedded-opentype"), font-url('glyphicons-halflings-regular.woff2') format("woff2"), font-url('glyphicons-halflings-regular.woff') format("woff"), font-url('glyphicons-halflings-regular.ttf') format("truetype"), font-url('glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format("svg");
+}
+
+@font-face{
+  font-family: 'Futura';
+  font-weight: 700;
+  font-style: normal;
+  src: font-url('FuturaBold.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: 'Futura';
+  font-weight: 600;
+  font-style: normal;
+  src: font-url('FuturaHeavy.ttf') format('truetype');
+}
+//
+// @font-face{
+//   font-family: 'Futura Std';
+//   src: font-url('FuturaStdBook.woff');
+//   font-weight: normal;
+// }
+//
+// @font-face{
+//   font-family: 'Futura Std';
+//   src: font-url('FuturaStdMedium.woff');
+//   font-weight: 500;
+// }
+//
+// @font-face{
+//   font-family: 'Futura';
+//   src: font-url('futura.ttf');
+//   font-weight: normal;
+// }
+//
+// @font-face{
+//   font-family: 'Futura';
+//   src: font-url('unicode.futurab.ttf');
+//   font-weight: bold;
+// }
+
+@font-face{
+  font-family: "Proxima Nova";
+  font-weight: 400;
+  font-style: normal;
+  src: font-url('ProximaNovaRegular.ttf') format('truetype');
+}
+
+@font-face{
+  font-family: "Proxima Nova";
+  font-weight: 500;
+  font-style: normal;
+  src: font-url('ProximaNovaMedium.otf') format('opentype');
+}
+
+@font-face{
+  font-family: "Proxima Nova";
+  font-weight: 700;
+  font-style: normal;
+  src: font-url('ProximaNovaBold.otf') format('opentype');
+}
+
+@media only (min-width: 992px) and (max-width: 1024px){
+  .container, .container-lg, .container-md, .container-sm {
+      max-width: 100%;
+  }
+}
+
+.ui-loader.ui-corner-all.ui-body-a.ui-loader-default {
+  display: none;
+}

@@ -1,0 +1,41 @@
+%footer.text-center
+  .row.social-media-links.light-green.expanded--restricted.reg_back.staff-background
+    .small-12
+      %a.mr1
+        = image_tag 'icon_insta.png'
+      %a.fb-like.mr1{href: "https://www.facebook.com/flaireventstaffinglimited", 'data-send': "false", 'data-layout': "button_count", 'data-show-faces': "false", 'data-width': "90"}
+        = image_tag 'icon_fb.png'
+      %a.mr1{href: "https://twitter.com/flaireventstaff", "data-show-count": "false"}
+        = image_tag 'icon_twitter.png'
+      %a.mr1
+        = image_tag 'icon_linkedin.png'
+
+  .row.footer-inner.light-green.pb1.expanded--restricted.reg_back.staff-background
+    .column.small-12.pb1
+      %ul.info-links.mb0.inline
+        %li
+          %a{href: '/'} Home
+        -if current_user
+          %li
+            %a{href: '/staff/events'} Job Board
+        -else
+          %li
+            %a{href: '/events'} Job Board
+        %li
+          %a{href: '/join_us'} Join Us
+        %li
+          %a{href: '/about'} About
+        %li
+          %a{href: '/contact'} Contact
+        %li
+          %a{href: '/login'} Login
+        %li
+          %a{href: '/privacy'} Privacy
+  .row.dark-green.expanded--restricted
+    .column.small-12.copyright-notice.padding-top-bottom.background-amusement
+      .copyright-logo
+      .copyright-inner
+        &copy;
+        ="2000 - #{Date.today.year} Flair Event Staffing & Management"
+.svg-include.hidden
+  = render :partial => 'shared/flair_icons.svg'

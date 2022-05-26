@@ -1,0 +1,40 @@
+- sample_pic_class    = '.passport-pic-popup'    if sample_pic_class.nil?
+- sample_front_class  = '.passport-front-popup'  if sample_front_class.nil?
+- sample_expiry_class = '.passport-expiry-popup' if sample_expiry_class.nil?
+- sample_number_class = '.passport-number-popup' if sample_number_class.nil?
+
+.row
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Picture Page
+        -if sample_pic_class
+          %a.help{onclick: "$('#{sample_pic_class}').show()"}
+            %i.glyphicon.glyphicon-question-sign
+      = file_field_tag :picture_page, required: true, class: "form-control", accept: @accepted_images
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Front Cover
+        -if sample_front_class
+          %a.help{onclick: "$('#{sample_front_class}').show()"}
+            %i.glyphicon.glyphicon-question-sign
+      = file_field_tag :front_cover, required: true, class: "form-control", accept: @accepted_images
+.row
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Expiry Date
+        -if sample_expiry_class
+          %a.help{onclick: "$('#{sample_expiry_class}').show()"}
+            %i.glyphicon.glyphicon-question-sign
+      .date-input-group
+        = select_date Date.today, {prefix: 'id_expiry', start_year: Date.today.year, end_year: Date.today.year+10, order: [:day, :month, :year], use_short_month: true}, {class: "form-control"}
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Passport Number
+        -if sample_number_class
+          %a.help{onclick: "$('#{sample_number_class}').show()"}
+            %i.glyphicon.glyphicon-question-sign
+      = text_field_tag :id_no, nil, required: true, class: "form-control"

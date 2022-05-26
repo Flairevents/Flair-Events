@@ -1,0 +1,27 @@
+.column.small-12.medium-6.mt3.available-slots{id: week_day.strftime("%d-%m-%Y"), style: 'display: none;'}
+  .text-left.mb1
+    <strong>Select Time On: #{week_day.strftime('%a %b %-d')}</strong>
+  .div
+    .table.slots-table.mb1.text-left{style: 'height: 200px; overflow: auto; padding: 0.3rem; padding-left: 1rem;'}
+      - values.each do |time_slot|
+        %tr{style: 'border: 1px solid;'}
+          %td.mb1
+            -interview_status = 'OPEN'
+            -case time_slot.second.first[:status]
+              -when 'OPEN'
+                -interview_status = 'OPEN'
+              -when 'FULL'
+                -interview_status = 'FULL'
+              -when 'SIGNED-UP'
+                -interview_status = 'SIGNED-UP'
+            %span.interview-slot{style: 'width: 2em; margin: 6px'}
+              -if interview_status == 'FULL'
+                .fl-icon.fl-icon--close-mark{style: 'height: 15px; width: 15px; margin-top: 12px;'}
+              -else
+                = form.radio_button 'slot_id', time_slot.second.first[:id], required: true, style: 'height: 15px; width: 15px; margin-top: 12px;'
+              =label_tag 'slot_id_'+time_slot.second.first[:id].to_s, time_slot.first.strftime('%l:%M%p'), style: 'margin-left: 10px', class: interview_status == 'FULL' ? 'cut-text' : ''
+              -if interview_status == 'FULL'
+                %small{style: 'margin-left: 10px; font-size: 13px;'} Fully Booked
+        %br
+    .text-right
+      %button.yellow-button-home.mt1{:type => "submit", style: 'color: #005949'} Book Now

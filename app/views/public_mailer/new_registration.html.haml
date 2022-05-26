@@ -1,0 +1,31 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-weight: 700; font-size: 20px; padding: 10px 0px;" }
+  %tr
+    %td Welcome to Flair!
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 16px;" }
+  %tr
+    %td
+      Re-enter the site
+      %a{ href: "#{Flair::Application.config.base_https_url}/staff?token=#{@token}", style: 'color: #F8A727;' } here
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 15px 0px 10px; line-height: 25px;" }
+  %tr
+    %td The sooner you fill out the details the quicker you can start working and earning weekly pay.
+  %tr
+    %td On average a job gets snapped up every minute, we want you to be the next hired candidate!
+  %tr
+    %td
+      If the above link doesn't work, please copy and paste the following into a new browser:
+      %span{ style: 'color: #0099cc; text-decoration: underline;'} #{Flair::Application.config.base_https_url}/staff?token=#{@token}
+%table{ style: "font-family: 'Lato', sans-serif; font-weight: 700; font-size: 20px; padding: 10px 0px 15px;" }
+  %tr
+    %td Do Flexible Work That Makes You Happy
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Kind Regards,
+= render partial: 'signature'

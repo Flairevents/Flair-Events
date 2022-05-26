@@ -1,0 +1,31 @@
+<% content_for :head do %>
+  <title>Get A Tailored Quote for our Staffing</title>
+  <meta name="description" content="No two events or commercial staffing needs are the same - which is why all Flair quotes are tailer-made to the client's exact spec. We're competitive, too!" />
+<% end %>
+
+<div class="login">
+  <%= render :partial => "v2/mobile/shared/nav" %>
+  <div class="v2-client-login-background"></div>
+  <div class="content">
+    <div class="content-spacer"></div>
+    <div class="content-inner">
+      <div class="fit-content" style="margin:auto;">
+        <div class="v2-client-login-quote-container-first">
+          our quotes are as
+        </div>
+        <div class="v2-client-login-quote-container-second">
+          individual
+        </div>
+        <div class="v2-client-login-quote-container-third">
+          as our clients
+        </div>
+      </div>
+
+      <div class="v2-client-login-form-container">
+        <%= render :partial => 'v2/mobile/client/login_form' %>
+      </div>
+    </div>
+  </div>
+  <div class="content-after"></div>
+  <%= render :partial => "v2/mobile/application/footer" %>
+</div>

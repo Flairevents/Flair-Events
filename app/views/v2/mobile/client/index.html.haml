@@ -1,0 +1,170 @@
+- content_for :head do
+  %title Flexible staffing solutions delivered by event professionals.
+  %meta{ name: "description", content: "Never be understaffed again. We offer full-service flexible workforce solutions that adapt your needs. Flair take care of everything from scheduling to payroll."}
+.client
+  = render partial: 'v2/mobile/shared/nav'
+  .content
+    -# .content-spacer
+    .content-inner
+      .v2-clients-top-bg-cover
+      .v2-clients-top-box-logo
+      .container.px-0
+        .v2-clients-top-box{style: "padding-right:0;"}
+          .row.position-relative
+            %h5.v2-clients-welcome-label-2.mt3.px-0
+              When having the right staff is important
+              %span.teal .
+            .v2-clients-welcome-label-3.px-0 Flair delivers stress-free flexible staffing solutions for businesses of all shapes and sizes.
+            %div.px-0
+              %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}/client"}
+                %button.v2-clients-hire-btn Hire People
+            .v2-clients-image
+        .v2-clients-nav
+          .d-flex.justify-content-center
+            %ul.v2-clients-people-nav.d-flex
+              %li.v2-clients-people-item.first
+                .title FLEXIBLE STAFFING
+                %div
+                  %center
+                    %img{src: asset_path("v2/clients/flexible_staffing.png")}
+              %li.v2-clients-people-item.second
+                .title HIGH VOLUME
+                %div
+                  %center
+                    %img{src: asset_path("v2/clients/high_volume.png")}
+              %li.v2-clients-people-item.third
+                .title MANAGED TEAMS
+                %div
+                  %center
+                    %img{src: asset_path("v2/clients/managed_teams.png")}
+              %li.v2-clients-people-item.fourth
+                .title TEMP TO HIRE
+                %div
+                  %center
+                    %img{src: asset_path("v2/clients/teamwork.png")}
+      .v2-clients-people
+        %h2.v2-clients-people-title The people behind your people
+        .v2-clients-people-separator
+        %p.v2-clients-people-message Flair’s experienced in-house staffing experts work hard to deliver hand-picked teams that are capable of dealing with whatever you need. Whether we’re supplying great people for last-minute gaps in staffing or building teams for strategically-planned future events, we will work closely with you to ensure that you’re happy with each stage of the project and that you are as involved as you want to be. While tech and apps have recently enabled us to streamline certain processes, they will never replace our people-centered approach.
+      .v2-clients-flexibility-box-1
+        .position-relative
+          %h2.v2-clients-flex-title.text-white Game-changing flexibility
+          .v2-clients-flex-separator{style: "border: 1px solid white"}
+          %p.v2-clients-flex-message.text-white While many fluctuations in demand for staff can be predicted and prepared for, others take businesses by surprise. Over or under-staffing can greatly affect profits – and also dent morale by putting undue stress on your key workers. If you see or anticipate a sudden spike in activity, lean on us to find just the right people to take the strain – leaving you free to do what you do best and drive your company forward.
+      %ul.v2-clients-flexibility-nav
+        %li.v2-clients-flexibility-item
+          .d-flex.flex-row.justify-content-center
+            %img{src: asset_path("v2/clients/Group 2329.png")}
+          .d-flex.flex-row.justify-content-center
+            %label{style: "margin-top: 15px;"}
+              We
+              %span value
+              the importance of first impressions. Experienced teams arrive prepared and
+              %span ready to work.
+        %li.v2-clients-flexibility-item
+          .d-flex.flex-row.justify-content-center
+            %img{src: asset_path("v2/clients/Group 1474.png")}
+          .d-flex.flex-row.justify-content-center
+            %label{style: "margin-top: 15px;"}
+              We do the
+              %span legwork
+              so you don’t have to. No matter how complex, we can
+              %span meet your requirements.
+        %li.v2-clients-flexibility-item
+          .d-flex.flex-row.justify-content-center
+            %img{src: asset_path("v2/clients/Group 1432.png")}
+          .d-flex.flex-row.justify-content-center
+            %label{style: "margin-top: 15px;"}
+              Our
+              %span experience
+              counts. Twenty years of staffing means you can
+              %span depend on us.
+
+      .v2-clients-skills-box.mt3
+        %h2.v2-clients-skills-title A Database of Transferable Skills
+        .v2-clients-skills-separator
+        %p.v2-clients-skills-message We focus on creating partnerships with companies and building relationships with our teams – this enables us to retain talent and deliver motivated workers to clients time and again. We’re proud of our pool of workers, many of whom have transferable skills that allow our staffing solutions to flow between different industries.
+        .d-flex.justify-content-center.flex-column.container.px-0.align-items-center
+          %ul.v2-skills-list.d-flex.flex-wrap
+            %li.v2-skills-item.d-flex.justify-content-center
+              .bg-image
+              .circular
+              %a.d-flex.align-items-center.justify-content-center EVENTS
+              .desc.d-flex.flex-column
+                %span Versatile, motivated workers
+                %span ready to spring into action.
+            %li.v2-skills-item.d-flex.justify-content-center
+              .bg-image
+              .circular
+              %a.d-flex.align-items-center.justify-content-center SPORTS
+              .desc.d-flex.flex-column
+                %span Active and supportive
+                %span people-people who can
+                %span make things run smoothly.
+            %li.v2-skills-item.d-flex.justify-content-center
+              .bg-image
+              .circular
+              %a.d-flex.align-items-center.justify-content-center HOSPITALITY
+              .desc.d-flex.flex-column
+                %span Personable skilled workers
+                %span with an understanding of the
+                %span sector’s unique requirements.
+            %li.v2-skills-item.d-flex.justify-content-center
+              .bg-image
+              .circular
+              %a.d-flex.align-items-center.justify-content-center LOGISTICS
+              .desc.d-flex.flex-column
+                %span Reliable, unflappable people
+                %span with experience in keeping
+                %span things running.
+            %li.v2-skills-item.d-flex.justify-content-center
+              .bg-image
+              .circular
+              %a.d-flex.align-items-center.justify-content-center COMMERCIAL
+              .desc.d-flex.flex-column
+                %span Specialist workers with the
+                %span right skill set for the job.
+            %li.v2-skills-item.d-flex.justify-content-center
+              .bg-image
+              .circular
+              %a.d-flex.flex-column.align-items-center.justify-content-center
+                %span PROMOTIONAL
+                %span & MARKETING
+              .desc.d-flex.flex-column
+                %span Lively and engaging people
+                %span who will connect with
+                %span your audience.
+        .mt2
+          %p.client-contact Can't find what your looking for?
+          .hire-btns.d-flex.align-items-center.justify-content-center
+            %a{href: "/hire"}
+              %button.v2-clients-hire-btns.hire Staff Request
+      .v2-clients-mesg-box
+        %h2.v2-clients-mesg-title We're here to work for you...
+        .v2-clients-mesg-content-1.d-flex.flex-inline
+          %q 
+            The refreshing thing is you always know where you stand. If Flair cannot support in an area, they will be 100% up front and tell you, in advance. Support, service, communication and commitment is 100%. We have great respect and loyalty towards Flair.
+        .v2-clients-mesg-content-2
+          %h2 Steve Hobbs,
+          %div Operations Director, LHG
+      .v2-clients-hire
+        %h2.v2-clients-hire-title.text-center Prices as individual as our clients
+        .v2-clients-hire-separator
+        %p.v2-clients-hire-message Instead of rigid rate cards, we prefer to offer competitive quotes based on your unique staffing requirements. There are a multitude of factors to take into account, from the skills and experience of your required workforce to location, venue, shift patterns and the correct wage levels. It is important to us to not only meet your expectations, but to go above and beyond – at a price that works for everyone.
+        %h2.v2-clients-help-title{style: 'margin-top: 25px;margin-bottom: 15px;'} You're in control
+        %p.v2-clients-help-message COVID-19 has made contactless interaction and the controlled movement of people more important than ever. Flair’s very own web App is a virtual staffing list and time sheet rolled into one that gives clients, site managers and individuals complete control.
+        %h2.v2-clients-help-question So, how can we help you?
+        .v2-clients-hire-buttons.d-flex.flex-inline.justify-content-between
+          .hire-btns.d-flex.align-items-center.justify-content-center
+            %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}/client"}
+              %button.v2-clients-hire-btns.hire Hire Staff
+          
+          .hire-btns.contact.d-flex.align-items-center.justify-content-center
+            %a(href="tel:01612412441") 
+              %button.v2-clients-hire-btns.contact 
+                Contact Us
+                %i.fa.fa-phone
+      .v2-clients-help-bg
+      .v2-clients-help-bottom
+
+= render partial: 'v2/mobile/application/footer'

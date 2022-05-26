@@ -1,0 +1,14 @@
+= form_for faq_entry, url: '#', html: {class: 'record-details-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  %table
+    %tr
+      %th Section
+      %td= f.select :topic, options_for_select([['Joining Flair','joining_flair'],['Pre Event','pre_event'],['Event Days','event_days'],['Post Event','post_event']]), {}, class: 'form-control'
+    %tr
+      %th Position
+      %td= f.text_field :position, class: 'form-control'
+    %tr
+      %th Question
+      %td= f.text_field :question, size: 100, class: 'form-control'
+    %tr
+      %th Answer
+      %td= f.text_area :answer, class: 'tinymce', :"data-prop" => 'answer'

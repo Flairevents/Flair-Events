@@ -1,0 +1,588 @@
+<% if @prospect.status != "APPLICANT" && @prospect.has_personal_details? %>
+  <div class="v2-profile-header-content" id='v2-profile-landing-content'>
+    <div class="v2-profile-applications-content-layer-1"></div>
+    <div class="v2-profile-applications-content-layer-2"></div>
+    <div class="v2-profile-applications-content-layer-3"></div>
+    <div class="v2-profile-applications-content-layer-4"></div>
+    <div class="d-flex justify-content-center">
+      <div class="v2-profile-content">
+        <div id="v2-profile-team-landing">
+          <%= render partial: 'v2/mobile/staff/profile_team_landing' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="v2-profile-header-content" id='v2-profile-landing-content'>
+    <div class="v2-profile-applications-content-layer-1"></div>
+    <div class="v2-profile-applications-content-layer-2"></div>
+    <div class="v2-profile-applications-content-layer-3"></div>
+    <div class="v2-profile-applications-content-layer-4"></div>
+    <div class="d-flex justify-content-center">
+      <div class="v2-profile-content">
+        <div id="v2-profile-team-landing">
+          <%= render partial: 'v2/mobile/staff/profile_personal_details' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
+<div class="v2-profile-header-content" id='v2-profile-my-profile-content' style="<%= @prospect.status != "APPLICANT" ? 'display: none;' : '' %>">
+  <div class="v2-profile-applications-content-layer-1"></div>
+  <div class="v2-profile-applications-content-layer-2"></div>
+  <div class="v2-profile-applications-content-layer-3"></div>
+  <div class="v2-profile-applications-content-layer-4"></div>
+  <div class="d-flex justify-content-center">
+    <div class="v2-profile-content">
+      <div id="v2-profile-personal-details" style="width: 94%;margin:auto;">
+        <%= render partial: 'v2/mobile/staff/profile_personal_details' %>
+      </div>
+      <div id="v2-profile-kid">
+        <%= render partial: 'v2/mobile/staff/profile_kid' %>
+      </div>
+      <div id="v2-profile-terms">
+        <%= render partial: 'v2/mobile/staff/profile_terms' %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="v2-profile-header-content" id='v2-profile-applications-content'>
+  <div class="v2-profile-applications-content-layer-1"></div>
+  <div class="v2-profile-applications-content-layer-2"></div>
+  <div class="v2-profile-applications-content-layer-3"></div>
+  <div class="v2-profile-applications-content-layer-4"></div>
+  <div class="d-flex justify-content-center">
+    <div class="v2-profile-content">
+      <%= render partial: 'v2/mobile/staff/profile_application' %>
+    </div>
+  </div>
+</div>
+<div id="prospect_check" style="display:none;" status="<%= @prospect.status %>"></div>
+<div id="prospect_personal_details" style="display:none;" status="<%= @prospect.has_personal_details? %>"></div>
+<% if @prospect.status == 'APPLICANT' %>
+  <div class='v2-profile-header-content' id='v2-profile-book-interview-content'>
+    <div class="v2-profile-applications-content-layer-1"></div>
+    <div class="v2-profile-applications-content-layer-2"></div>
+    <div class="v2-profile-applications-content-layer-3"></div>
+    <div class="v2-profile-applications-content-layer-4"></div>
+    <div class="d-flex justify-content-center">
+      <div class="v2-profile-content">
+        <%= render partial: 'v2/mobile/staff/interviews' %>
+      </div>
+    </div>
+  </div>
+<% end %>
+<div id="v2-redirect-flash" style="display: none;"><%= flash[:redirect] %></div>
+<div class='v2-profile-header-content' id='v2-profile-explore-jobs-content'>
+  <div class="v2-profile-applications-content-layer-1"></div>
+  <div class="v2-profile-applications-content-layer-2"></div>
+  <div class="v2-profile-applications-content-layer-3"></div>
+  <div class="v2-profile-applications-content-layer-4"></div>
+  <div class="d-flex justify-content-center">
+    <div class="v2-profile-content">
+      <%= render partial: 'v2/mobile/staff/contracts' %>
+    </div>
+  </div>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+
+      // identification checkbox
+      $('body').on('click', '#v2-profile-identification-checkbox-1', function(){
+        $('#v2-profile-identification-checkbox-2').prop("checked", false);
+
+        height = $('#v2-profile-applications-identification-container').height() + 500
+
+        $('.v2-profile-applications-content-layer-1').css('height', height)
+        $('.v2-profile-applications-content-layer-2').css('height', height)
+        $('.v2-profile-applications-content-layer-3').css('height', height)
+        $('.v2-profile-applications-content-layer-4').css('height', height)
+      })
+
+      $('body').on('click', '#v2-profile-identification-checkbox-2', function(){
+        $('#v2-profile-identification-checkbox-1').prop("checked", false);
+
+        height = $('#v2-profile-applications-identification-container').height() + 500
+
+        $('.v2-profile-applications-content-layer-1').css('height', height)
+        $('.v2-profile-applications-content-layer-2').css('height', height)
+        $('.v2-profile-applications-content-layer-3').css('height', height)
+        $('.v2-profile-applications-content-layer-4').css('height', height)
+      })
+
+      $('body').on('click', '#v2-profile-identification-passport-checkbox-1', function(){
+        $('#v2-profile-identification-passport-checkbox-2').prop("checked", false);
+
+        height = $('#v2-profile-applications-identification-container').height() + 500
+
+        $('.v2-profile-applications-content-layer-1').css('height', height)
+        $('.v2-profile-applications-content-layer-2').css('height', height)
+        $('.v2-profile-applications-content-layer-3').css('height', height)
+        $('.v2-profile-applications-content-layer-4').css('height', height)
+      })
+
+      $('body').on('click', '#v2-profile-identification-passport-checkbox-2', function(){
+        $('#v2-profile-identification-passport-checkbox-1').prop("checked", false);
+
+        height = $('#v2-profile-applications-identification-container').height() + 500
+
+        $('.v2-profile-applications-content-layer-1').css('height', height)
+        $('.v2-profile-applications-content-layer-2').css('height', height)
+        $('.v2-profile-applications-content-layer-3').css('height', height)
+        $('.v2-profile-applications-content-layer-4').css('height', height)
+      })
+
+      $(document).ready(function() {
+        url = window.location.href;
+        prospect_status = $('#prospect_check').attr('status')
+        redirect = $('#v2-redirect-flash').text()
+          prospect_details_full = $('#prospect_personal_details').attr('status')
+
+          if(redirect!=""){
+          url = "<%= Flair::Application.config.base_https_url %>/staff#" + redirect
+        }
+          if(prospect_details_full=="false"){
+              url = "<%= Flair::Application.config.base_https_url %>/staff#"
+          }
+
+          if ($('#applied_true').text() == "present" ) {
+              if (url == "<%= Flair::Application.config.base_https_url %>/staff") {
+                  url = "<%= Flair::Application.config.base_https_url %>/staff#jobs"
+                  window.location.href = "<%= Flair::Application.config.base_https_url %>/staff#jobs"
+              }
+          }
+
+        switch (url) {
+          case "<%= Flair::Application.config.base_https_url %>/staff#profile":
+            $('#v2-profile-my-profile-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-my-profile-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-my-profile').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-my-profile').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-kid').css('display', 'none');
+            $('#v2-profile-terms').css('display', 'none');
+            $('#v2-profile-personal-details').css('display', 'block');
+            $('#v2-profile-my-profile-content').css('display', 'block');
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-applications div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            $('#v2-profile-explore-jobs div').remove();
+
+            v2_profile_bg_size('.v2-profile-content')
+            break;
+
+          case "<%= Flair::Application.config.base_https_url %>/staff#application":
+              $('#v2-profile-applications-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-applications-content').addClass('v2-profile-header-content-active');
+              if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+                  $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+              }
+
+              $('#v2-profile-landing-content div').remove();
+
+              $('#v2-profile-my-profile div').remove();
+
+              $('#v2-profile-book-interview div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+              $('#v2-profile-applications-application-container').css('display', 'none');
+              $('#v2-profile-applications-tax-content-container').css('display', 'none');
+              $('#v2-profile-applications-bank-container').css('display', 'none');
+              $('#v2-profile-applications-identification-container').css('display', 'none');
+              $('#v2-profile-applications-skill-container').css('display', 'block');
+
+              $('#v2-profile-application-header-skills .v2-profile-application-header-container').find('img').each(function(){
+                  $(this).css('display', 'none')
+              })
+              $('#v2-profile-application-header-skills .v2-profile-application-header-container #selected').css('display', 'block')
+
+              click_category('tax')
+              click_category('bank')
+              click_category('identification')
+              click_category('application')
+
+              v2_profile_bg_size('#v2-profile-applications-skill-container')
+            break;
+
+          case "<%= Flair::Application.config.base_https_url %>/staff#interview":
+            if(prospect_status == "APPLICANT"){
+              $('#v2-profile-book-interview-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-book-interview-content').addClass('v2-profile-header-content-active');
+
+              if($('#v2-profile-book-interview').find('.v2-profile-header-menu-active').length == 0){
+                $('#v2-profile-book-interview').append('<div class="v2-profile-header-menu-active"></div>');
+              }
+
+              $('#v2-profile-landing-content div').remove();
+
+              $('#v2-profile-my-profile div').remove();
+
+              $('#v2-profile-applications div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+
+              v2_profile_bg_size('#v2-book-interview')
+            }else{
+              $('#v2-profile-my-profile-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-my-profile-content').addClass('v2-profile-header-content-active');
+
+              if($('#v2-profile-my-profile').find('.v2-profile-header-menu-active').length == 0){
+                $('#v2-profile-my-profile').append('<div class="v2-profile-header-menu-active"></div>');
+              }
+
+              $('#v2-profile-kid').css('display', 'none');
+              $('#v2-profile-terms').css('display', 'none');
+              $('#v2-profile-personal-details').css('display', 'block');
+
+              $('#v2-profile-landing-content div').remove();
+
+              $('#v2-profile-applications div').remove();
+
+              $('#v2-profile-book-interview div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+
+              v2_profile_bg_size('.v2-profile-content')
+            }
+            break;
+            case "<%= Flair::Application.config.base_https_url %>/staff#interview?popup=noPopup":
+                $('.v2-flash-bg-book-intro').hide();
+              if(prospect_status == "APPLICANT"){
+              $('#v2-profile-book-interview-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-book-interview-content').addClass('v2-profile-header-content-active');
+
+              if($('#v2-profile-book-interview').find('.v2-profile-header-menu-active').length == 0){
+                $('#v2-profile-book-interview').append('<div class="v2-profile-header-menu-active"></div>');
+              }
+
+              $('#v2-profile-landing-content div').remove();
+
+              $('#v2-profile-my-profile div').remove();
+
+              $('#v2-profile-applications div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+
+              v2_profile_bg_size('#v2-book-interview')
+            }else{
+              $('#v2-profile-my-profile-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-my-profile-content').addClass('v2-profile-header-content-active');
+
+              if($('#v2-profile-my-profile').find('.v2-profile-header-menu-active').length == 0){
+                $('#v2-profile-my-profile').append('<div class="v2-profile-header-menu-active"></div>');
+              }
+
+              $('#v2-profile-kid').css('display', 'none');
+              $('#v2-profile-terms').css('display', 'none');
+              $('#v2-profile-personal-details').css('display', 'block');
+
+              $('#v2-profile-landing-content div').remove();
+
+              $('#v2-profile-applications div').remove();
+
+              $('#v2-profile-book-interview div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+
+              v2_profile_bg_size('.v2-profile-content')
+            }
+            break;
+
+          case "<%= Flair::Application.config.base_https_url %>/staff#jobs":
+            $('#v2-profile-explore-jobs-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-explore-jobs-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-explore-jobs').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-explore-jobs').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-applications div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+              if($(this).hasClass('v2-jobs-button-active') != true){
+                  if(prospect_status == 'APPLICANT') {
+                      $('#v2-jobs-applied-button').addClass('v2-jobs-button-active');
+                      $('#v2-jobs-completed-button').removeClass('v2-jobs-button-active');
+                      $('#v2-jobs-hired-button').removeClass('v2-jobs-button-active');
+
+                      $('#v2-explore-jobs-hired-content').css('display', 'none');
+                      $('#v2-explore-jobs-applied-content').css('display', 'block');
+                      $('#v2-explore-jobs-completed-content').css('display', 'none');
+                  } else {
+                      $('#v2-jobs-hired-button').addClass('v2-jobs-button-active');
+                      $('#v2-jobs-completed-button').removeClass('v2-jobs-button-active');
+
+                      $('#v2-explore-jobs-hired-content').css('display', 'block');
+                      $('#v2-explore-jobs-applied-content').css('display', 'none');
+                      $('#v2-explore-jobs-completed-content').css('display', 'none');
+                  }
+              }
+
+            v2_profile_bg_size('.v2-explore-jobs-container')
+            break;
+
+          case "<%= Flair::Application.config.base_https_url %>/staff#jobs-applied":
+            $('#v2-profile-explore-jobs-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-explore-jobs-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-explore-jobs').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-explore-jobs').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-applications div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            v2_profile_bg_size('.v2-explore-jobs-container')
+
+            $('#v2-jobs-applied-button').addClass('v2-jobs-button-active')
+            $('#v2-jobs-hired-button').removeClass('v2-jobs-button-active');
+            $('#v2-jobs-completed-button').removeClass('v2-jobs-button-active');
+
+            $('#v2-explore-jobs-hired-content').css('display', 'none');
+            $('#v2-explore-jobs-applied-content').css('display', 'block');
+            $('#v2-explore-jobs-completed-content').css('display', 'none');
+            break;
+          case "<%= Flair::Application.config.base_https_url %>/staff#application-skills":
+            // Go to application page
+            $('#v2-profile-applications-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-applications-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            $('#v2-profile-explore-jobs div').remove();
+
+            // Hide other tabs in application page and only show skills tab
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'block');
+
+            $('#v2-profile-application-header-skills .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-skills .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('tax')
+            click_category('bank')
+            click_category('identification')
+            click_category('application')
+
+            v2_profile_bg_size('#v2-profile-applications-skill-container')
+            break;
+          case "<%= Flair::Application.config.base_https_url %>/staff#application-form":
+            // Go to application page
+            $('#v2-profile-applications-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-applications-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            $('#v2-profile-explore-jobs div').remove();
+
+            // Hide other tabs in application page and only show skills tab
+            $('#v2-profile-applications-application-container').css('display', 'block');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-application .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-application .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('tax')
+            click_category('bank')
+            click_category('identification')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-application-container')
+            break;
+          case "<%= Flair::Application.config.base_https_url %>/staff#application-tax":
+            // Go to application page
+            $('#v2-profile-applications-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-applications-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            $('#v2-profile-explore-jobs div').remove();
+
+            // Hide other tabs in application page and only show tax tab
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'block');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-tax .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-tax .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('application')
+            click_category('bank')
+            click_category('identification')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-tax-content-container')
+            break;
+          case "<%= Flair::Application.config.base_https_url %>/staff#application-bank":
+            // Go to application page
+            $('#v2-profile-applications-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-applications-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            $('#v2-profile-explore-jobs div').remove();
+
+            // Hide other tabs in application page and only show bank tab
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'block');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-bank .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-bank .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('application')
+            click_category('tax')
+            click_category('identification')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-bank-container')
+            break;
+          case "<%= Flair::Application.config.base_https_url %>/staff#application-identification":
+            // Go to application page
+            $('#v2-profile-applications-content').removeClass('v2-profile-header-content');
+            $('#v2-profile-applications-content').addClass('v2-profile-header-content-active');
+
+            if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+              $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+            }
+
+            $('#v2-profile-landing-content div').remove();
+
+            $('#v2-profile-my-profile div').remove();
+
+            $('#v2-profile-book-interview div').remove();
+
+            $('#v2-profile-explore-jobs div').remove();
+
+            // Hide other tabs in application page and only show identification tab
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'block');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-identification .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-identification .v2-profile-application-header-container #selected').css('display', '')
+
+            click_category('application')
+            click_category('tax')
+            click_category('bank')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-identification-container')
+            break;
+
+          default:
+            if(prospect_status == "APPLICANT"){
+              $('#v2-profile-my-profile-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-my-profile-content').addClass('v2-profile-header-content-active');
+
+              if($('#v2-profile-my-profile').find('.v2-profile-header-menu-active').length == 0){
+                $('#v2-profile-my-profile').append('<div class="v2-profile-header-menu-active"></div>');
+              }
+
+              $('#v2-profile-kid').css('display', 'none');
+              $('#v2-profile-terms').css('display', 'none');
+              $('#v2-profile-personal-details').css('display', 'block');
+
+              $('#v2-profile-landing-content div').remove();
+
+              $('#v2-profile-applications div').remove();
+
+              $('#v2-profile-book-interview div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+
+              v2_profile_bg_size('.v2-profile-content')
+            }else{
+              $('#v2-profile-landing-content').removeClass('v2-profile-header-content');
+              $('#v2-profile-landing-content').addClass('v2-profile-header-content-active');
+
+              $('#v2-profile-team-landing').css('display', 'block');
+
+              $('#v2-profile-applications div').remove();
+
+              $('#v2-profile-my-profile div').remove();
+
+              $('#v2-profile-book-interview div').remove();
+
+              $('#v2-profile-explore-jobs div').remove();
+
+              v2_profile_bg_size('.v2-profile-content')
+            }
+            break;
+        }
+      });
+
+  </script>
+<% end %>

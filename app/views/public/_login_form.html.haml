@@ -1,0 +1,17 @@
+= form_tag "#{Flair::Application.config.base_https_url}/login", class: 'fl-login-form' do
+  .mb1
+    .input-group
+      .input-group__icon.fl-icon--email
+      %input.form-control.error{"aria-describedby" => "basic-addon1", :placeholder => "Email", :type => "email", :id => "login_email", :name => "login_email", :required => "", value: @login_email}
+  .mb1
+    .input-group
+      .input-group__icon.fl-icon--lock
+      %input.form-control.error{"aria-describedby" => "basic-addon2", :placeholder => "Password", :type => "password", :id => "login_password", :name => "login_password", :required => ""}
+  .fl-login-form__footer
+    .row.expanded
+      .column.small-6
+        %a.forgot-password-link{href: '/forgot_password'} Forgot password?
+      .column.small-6.text-right
+        %button.btn.btn-default{type: "submit", name: "target", value: @target} Login
+        .p Not a member yet? <a href="/register">Register</a>
+  %div{style: 'clear:both'}

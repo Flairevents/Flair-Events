@@ -1,0 +1,318 @@
+.staff_zone.me
+  -if @prospect.status == 'EMPLOYEE'
+    #prospectStatusEmployee
+  - else
+    #prospectStatusApplicant
+  .background.background-laynards-original.background--fixed
+  = render partial: 'shared/nav'
+  .content.field-light.very-translucent
+    -if current_user.deactivated?
+      .row.pt1.pb1
+        .column.small-12
+          .rounded
+            .field.pt1.pb1
+              .row.p1
+                .column.small-12
+                  %p.text-center Your account is deactivated. Click on the button below to reactivate.
+              .row.align-center
+                .column.small-12
+                %a.btn.btn-default{href: '/staff/reactivate_account'} Reactivate Account
+    -else
+      .row.pt1.pb1
+        .column.small-12
+          .row.field.clearfix.p1.rounded.shadow.border-shadow.staff-top-panel.green-gradient-background{style: 'margin-left: 0px; margin-right: 0px;'}
+            .column.small-12.medium-4
+              .progress-radial{class: "progress-#{@progress_percent}"}
+                .overlay
+                  =image_tag 'flair-person.png', class: 'booked-interview-info-image'
+                  -#="#{@progress_percent}%"
+              %div
+                %p.h6.pt2= "Hello #{@prospect.first_name}!"
+                -#%p.small=@welcome_text
+
+            .column.small-12.medium-8.hidden-xs.align-middle
+              .row{style: 'font-size: 16px;'}
+                -btn_classes = @profile_link_active ? nil : 'btn-disabled'
+                -href =        @profile_link_active ? '#profile' : nil
+                -title =       nil
+                -data_toggle = nil
+                .column.small-3
+                  .yellow-button-staff
+                    %a.pop-up-request-quote.ml05.mr05{href: href, class: btn_classes, title: title, data_toggle: data_toggle}
+                      %p.bottom-button.covid-box-btn
+                        %b{style: 'color: #005949'}
+                          -if !@prospect.not_applicant
+                            -unless @prospect.has_personal_details?
+                              .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-top-bar-check-mark
+                            -else
+                              .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark
+                          .details.text-left{class: @prospect.not_applicant ? 'text-center' : '', style: 'margin-top:8px'}
+                            -if @prospect.not_applicant
+                              Profile
+                            -else
+                              Details
+                          -#-if @profile_link_active && @profile_badge_count > 0
+                          -#  %span.badge= @profile_badge_count
+                -if !@prospect.not_applicant
+                  .column.small-3
+                    -btn_classes = nil
+                    -href =        @training_link_active ? '#training' : nil
+                    -data_toggle = @training_link_active ? nil : 'tooltip'
+                    -title =       @training_link_active ? nil : "You must apply for an interview to unlock the Training section"
+                    .yellow-button-staff
+                      %a.pop-up-request-quote.ml05.mr05#application{:href => "#profile"}
+                        %p.bottom-button.covid-box-btn
+                          %b{style: 'color: #005949'}
+                            -unless @prospect.answered_whole_questions?
+                              .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-top-bar-check-mark
+                            -else
+                              .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark
+                            .application.text-left{style: 'margin-top:8px'} Application
+                          -#-if @training_badge_count > 0
+                          -#  %span.badge= @training_badge_count
+
+                -if !@prospect.not_applicant
+                  .column.small-3
+                    -btn_classes = @interview_link_active ? nil : 'btn-disabled'
+                    -href =        @interview_link_active ? '#interview' : nil
+                    -data_toggle = @interview_link_active ? nil : 'tooltip'
+                    -title =       @interview_link_active ? nil : "You must complete your profile to unlock Interview Sign-up"
+                    .yellow-button-staff
+                      %a.pop-up-request-quote.ml05.mr05{href: href, class: btn_classes, title: title, data_toggle: data_toggle}
+                        %p.bottom-button.covid-box-btn
+                        %b{style: 'color: #005949'}
+                          -unless @progress_percent.to_i >= 75
+                            .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-top-bar-check-mark
+                          -else
+                            .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark
+                          .book-interview.text-left{style: 'margin-top:8px'} Book Interview
+                        -#-if @interview_link_active && @interview_badge_count > 0
+                        -#  %span.badge= @interview_badge_count
+
+                .column.small-3
+                  -btn_classes = @events_link_active? nil : 'btn-disabled'
+                  -href =        @events_link_active ? '#contracts' : nil
+                  -data_toggle = @events_link_active ? nil : 'tooltip'
+                  -title =       @events_link_active ? nil : "You must complete your profile to unlock Contract Sign-up"
+                  .yellow-button-staff
+                    %a.pop-up-request-quote.ml05.mr05{href: href, class: btn_classes, title: title, data_toggle: data_toggle}
+                      %p.bottom-button.covid-box-btn
+                        %b{style: 'color: #005949'}
+                          -if !@prospect.not_applicant
+                            .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-top-bar-check-mark
+                          .hired-get.text-left{class: @prospect.not_applicant ? 'text-center' : '', style: 'margin-top:8px'}
+                            -if @prospect.not_applicant
+                              Contracts
+                            -else
+                              Get Hired
+                          -#-if @events_link_active && @contracts_badge_count > 0
+                          -#  %span.badge= @contracts_badge_count
+                -if @prospect.not_applicant
+                  .column.small-3
+                    -btn_classes = nil
+                    -href =        nil
+                    -data_toggle = nil
+                    -title =       nil
+                    .yellow-button-staff
+                      %a.pop-up-request-quote.ml05.mr05{href: href, class: btn_classes, title: title, data_toggle: data_toggle}
+                        %p.bottom-button.covid-box-btn
+                        %b{style: 'color: #005949'}
+                          .book-interview.text-center{style: 'margin-top:8px'} E-Learning
+
+          -#-btn_classes = @news_link_active ? nil : 'btn-disabled'
+          -#-href =        @news_link_active ? '#news' : nil
+          -#-data_toggle = @news_link_active ? nil : 'tooltip'
+          -#-title =       @news_link_active ? nil : "You must be an employee to unlock the News section"
+          -#%a.btn.btn-default.ml05.mr05{href: href, class: btn_classes, title: title, data_toggle: data_toggle}
+          -#  News
+          -#  -if @news_link_active && @news_badge_count > 0
+          -#    %span.badge= @news_badge_count
+
+          -#-btn_classes = @library_link_active ? [] : 'btn-disabled'
+          -#-href =        @library_link_active ? '#library' : nil
+          -#-data_toggle = @library_link_active ? nil : 'tooltip'
+          -#-title =       @library_link_active ? nil : "You must be an employee to unlock the Library"
+          -#%a.btn.btn-default.ml05.mr05{href: href, class: btn_classes, title: title, data_toggle: data_toggle}
+          -#  Library
+          -#  -if @library_link_active && @library_badge_count > 0
+          -#    %span.badge= @library_badge_count
+
+      -team_profile_class = ''
+      -team_profile_left_class = ''
+      -team_profile_right_box = false
+      -team_message_class = ''
+      -if current_user.not_applicant
+        -team_profile_class = 'medium-8'
+        -team_message_class = 'medium-4'
+        -team_profile_left_class= 'small-12 medium-6'
+        -team_profile_right_box = true
+      -else
+        -team_profile_class = 'medium-5'
+        -team_message_class = 'medium-7'
+        -team_profile_left_class= 'small-12'
+      %span.anchor#me
+      .row
+        .column.small-12.pt1.pb1{class: team_profile_class}
+          .rounded.border-shadow.staff-profile-top-middel
+            .dark-green.pt1.pb1
+              %h3.text-center.white-text My Profile
+            .field.pb1{style: 'background-image: linear-gradient(#a3d39c 0%, #f5f5f5 50%, #a3d39c 100%);'}
+              .row
+                .column{class: team_profile_left_class}
+                  = render partial: 'me'
+                -if team_profile_right_box
+                  .column.small-12.medium-6{style: 'font-size: 19px;'}
+                    -if !(@questionnaire.describe_yourself.nil?)
+                      %p.text-center.mt2
+                        ="#{@questionnaire.describe_yourself.split(' ')[0]}#{@questionnaire.describe_yourself.split(' ')[1] ? ' • '+@questionnaire.describe_yourself.split(' ')[1] : ''}#{@questionnaire.describe_yourself.split(' ')[2] ?' • '+@questionnaire.describe_yourself.split(' ')[2] : ''}"
+                        <br>
+                        ="#{@questionnaire.describe_yourself.split(' ')[3] ? @questionnaire.describe_yourself.split(' ')[3] : ''}#{@questionnaire.describe_yourself.split(' ')[4] ? ' • '+@questionnaire.describe_yourself.split(' ')[4] : ''}"
+                    %p.mt2.text-center.skills-and-intrests-profile <b>Industry Interests:</b>
+                    %p.mt1.text-center.staff-skills-list
+                      -if @questionnaire.has_sport_and_outdoor && @questionnaire.has_sport_and_outdoor != 'NONE'
+                        Sports & Outdoor<br>
+                      -if @questionnaire.has_bar_and_hospitality && @questionnaire.has_bar_and_hospitality != 'NONE'
+                        Bar & Hospitality<br>
+                      -if @questionnaire.has_festivals_and_concerts && @questionnaire.has_festivals_and_concerts != 'NONE'
+                        Festivals & Concerts<br>
+                      -if @questionnaire.has_merchandise_and_retail && @questionnaire.has_merchandise_and_retail != 'NONE'
+                        Merchandise & Retail<br>
+                      -if @questionnaire.has_promotional_and_street_marketing && @questionnaire.has_promotional_and_street_marketing != 'NONE'
+                        Promotion & Street Marketing<br>
+                      -if @questionnaire.has_reception_and_office_admin && @questionnaire.has_reception_and_office_admin != 'NONE'
+                        Reception & Admin<br>
+                    %p.mt1.text-center.fl-performance__block__heading
+                      A Flair Member Since #{@prospect.created_at.strftime('%d/%m/%Y')}
+                    %p.text-center.fl-performance__block__heading{style: 'margin: -18px;'}
+                      Contacts Worked = #{@prospect.gigs_count}
+        .column.small-12.flex.flex--vert.pt1.pb1{class: team_message_class}
+          .rounded.flex.flex--vert.flex--fill-rest.field.border-shadow.staff-layout-background.staff-profile-top-middel
+            .dark-green.pt1.pb1
+              %h3#messages.text-center.white-text Message Box
+            .pb1
+              = render partial: 'messages'
+      -if @show_interview
+        %span.anchor#interview
+        .row.pt1.pb1
+          .column.small-12
+            .rounded.staff-layout-background.border-shadow
+              .dark-green
+                %h3.text-center.white-text.pt1.pb1 Interview
+              = render partial: 'interviews'
+      -if @employee
+        %span.anchor#contracts
+        .row.pt1.pb1
+          .column.small-12.mt1
+            .rounded.staff-layout-background.border-shadow
+              .dark-green
+                %h3.text-center.white-text.pt1.pb1 My Contracts
+              = render partial: 'contracts'
+              .text-center.mt3
+                .yellow-button-staff{style: 'display: inline-block;'}
+                  %a.pop-up-request-quote.mt0{href: '/staff/events', style: 'width: 100%; margin-top: 0px;'}
+                    %p.bottom-button.covid-box-btn.interview-button-text-color{style: 'font-size: 18px;'}
+                      Search Jobs
+              .text-center.mb2
+                %small.fl-performance__block__heading
+                  Total Jobs Opening: #{@events.size}
+      -if @show_profile
+        %span.anchor#profile
+        .row.pt1.pb1
+          .column.small-12
+            .rounded.border-shadow
+              .dark-green.pt1.pb1
+                %h3.text-center.white-text My Profile
+                -#-if @prospect.applicant? && @profile_complete
+                -#  %p.text-center.white-text Tax, Bank, and ID information are optional until hired
+              .dark-green
+                = render partial: 'profile'
+      -if @show_interview
+        %span.anchor#contracts
+        .row.pt1.pb1
+          .column.small-12.mt1
+            .rounded.staff-layout-background.border-shadow
+              .dark-green
+                %h3.text-center.white-text.pt1.pb1 My Contracts
+              = render partial: 'contracts'
+              .text-center.mt3
+                .yellow-button-staff{style: 'display: inline-block;'}
+                  %a.pop-up-request-quote.mt0{href: '/staff/events', style: 'width: 100%; margin-top: 0px;'}
+                    %p.bottom-button.covid-box-btn.interview-button-text-color{style: 'font-size: 18px;'}
+                      Search Jobs
+              .text-center.mb2
+                %small.fl-performance__block__heading
+                  Total Jobs Opening: #{@events.size}
+      -if @show_training
+        %span.anchor#training
+        .row.pt1.pb1
+          .column.small-12
+            .rounded.border-shadow
+              .dark-green
+                %h3#training.text-center.white-text.pt1.pb1 Test Of Knowledge
+                = render partial: 'training'
+      -if @show_news
+        %span.anchor#news
+        .row.pt1.pb1
+          %div.column.small-12
+            .rounded
+              .dark-green.pt1.pb1
+                %h3#news.text-center.white-text What's New with Flair?
+              .field
+                = render partial: 'news'
+      -if @show_library
+        %span.anchor#news
+        .row.pt1.pb1
+          .column.small-12
+            .rounded
+              .dark-green.pt1.pb1
+                %h3#library.text-center.white-text Library
+              .field.pb1
+                =render partial: 'library'
+
+      .row.pt2.pb2
+        .column.small-4.align-middle
+          .yellow-button-staff.float-left{style: 'width: 165px;'}
+            %a.pop-up-request-quote.deactivate{href: "javascript:void $('.deactivate-popup').show()", style: 'width:100%;'}
+              %p.bottom-button.covid-box-btn
+                %b{style: 'color: #005949'} Deactivate account
+        .column.small-8.text-right
+          .yellow-button-staff.float-right
+            %a.pop-up-request-quote{href: "#", style: 'width: 100%;'}
+              %p.bottom-button.covid-box-btn
+                %b{style: 'color: #005949'} Back to top
+  .content-after
+  = render partial: 'footer'
+
+  .deactivate-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body.dark-green
+      .fl-flash__message
+        If it's time to move on in your career, and you are no longer able to work with Flair, just let us know! After deactivating your account, any upcoming work engagements will be cancelled and you will not be contacted about any upcoming events.
+        %br
+        %br
+        If you have never worked any contracts with Flair Events your details will be deleted in full and should you seek temporary event work in the future you will need to create a brand new account. If you have worked and received payment from Flair Events your account will be hibernated. However, we will continue to store and process only personal data where we have a legal obligation to do so.
+      %a.fl-flash__close-btn{onclick: "$('.deactivate-popup').hide()"}
+      .column.small-12.text-right.pt1
+        = form_tag '/staff/deactivate_account' do
+          = submit_tag 'Deactivate', class: 'btn btn-default'
+
+  #login-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body.dark-green
+      .fl-flash__message
+        %p Your Login has expired. Please enter your username and password to log back in.
+        %p.mt1#wrong-credentials{style: 'display:none'}
+      .column.small-12.mt1
+        = form_tag '/staff/relogin', remote: true do
+          .mb1
+            .input-group
+              .input-group__icon
+                %svg
+                  <use xlink:href="#fl-icon-email" />
+              %input.form-control.error{"aria-describedby" => "basic-addon1", :placeholder => "Email", :type => "email", :id => "login_email", :name => "login_email", :required => "", value: @login_email}
+          .mb1
+            .input-group
+              .input-group__icon
+                %svg
+                  <use xlink:href="#fl-icon-lock" />
+              %input.form-control.error{"aria-describedby" => "basic-addon2", :placeholder => "Password", :type => "password", :id => "login_password", :name => "login_password", :required => ""}
+          .text-right.pt1
+            = submit_tag 'Login', class: 'btn btn-default'

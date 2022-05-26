@@ -1,0 +1,168 @@
+- content_for :head do
+  %title Hire experienced UK staff for Sports Events
+  %meta{ name: "description", content: "Come to Flair first whenever you neeed amazing flexible workers to help out with sports events of all kinds. Our large database of reliable workers means we can deliver a wide variety of skill sets and can make everything from wristbanding to ushering run like clockwork."}
+.public.industry.sports
+  = render :partial => 'v2/shared/nav'
+  .content
+    .content-inner
+      .container-fluid.position-relative.px-0.d-flex
+        .industry-header-bg
+        .v2-industry-header.d-flex.align-items-center
+          .container.px-0
+            .v2-industry-header-top.d-flex.position-relative
+              %h1 Sports
+              %h1.position-relative.ml1
+                %span Staffing
+                .staffing-dot
+            %p Event crew need to be cool, calm and focused, concentrating on the task at hand, not the fun going on around them. Flair delivers doers, not dodgers.
+            .orange-btn.d-flex.align-items-center.justify-content-center.mt-30
+              %a{ href: "/contact"}
+                %button Request Info
+            .industry-image
+      .container-fluid.position-relative.px-0
+        .v2-industry-section-1.d-flex.align-items-center
+          .container.px-0.d-flex.flex-column
+            %h1 Great staff for your next big crowd-puller
+            %p.mt1 Flair can deliver experienced teams of great workers for sporting events of all sizes, and we’ll put in all the prep to ensure that everyone is firing on all cylinders. Finding skilled stewards and marshals for sports events has been one of our core areas of business for almost 20 years. Our teams cover Triathlons, Duathlons, Trailblazers, Colour Runs, Marathons and more.
+            %p.mt2 What makes us different is our people. Many of them come from sports backgrounds and have been with us through storms, snow and heatwaves in city centres to mountainsides for years. We know how to seamlessly integrate our people with your own, and can assist with everything from training to logistics, scheduling and deployment.
+      .v2-industry-section-2.d-flex.justify-content-center.align-items-center
+        .container.px-0.d-flex.align-items-center.justify-content-center
+          %ul.d-flex.moving-boxes-container
+            %li.d-flex.justify-content-center
+              .type-image
+              .light-overlay
+              .circular
+              .flat-overlay
+              %a.d-flex.align-items-center.justify-content-center Community to Corporate
+              .type-desc.d-flex.flex-column
+                %span From egg & spoon races to
+                %span business suits and medals,
+                %span Flair's people fit right in.
+            %li.d-flex.justify-content-center
+              .type-image
+              .light-overlay
+              .circular
+              .flat-overlay
+              %a.d-flex.align-items-center.justify-content-center Mass Participation
+              .type-desc.d-flex.flex-column
+                %span One amazing team with a clear
+                %span vision and goal who can cover
+                %span your whole event.
+            %li.d-flex.justify-content-center
+              .type-image
+              .light-overlay
+              .circular
+              .flat-overlay
+              %a.d-flex.align-items-center.justify-content-center World Events
+              .type-desc.d-flex.flex-column
+                %span For those prestigious events
+                %span when the world is watching,
+                %span our staff won't let you down.
+            %li.d-flex.justify-content-center
+              .type-image
+              .light-overlay
+              .circular
+              .flat-overlay
+              %a.d-flex.align-items-center.justify-content-center National Events
+              .type-desc.d-flex.flex-column
+                %span Flair has a UK-wide database
+                %span of capable sports enthusiasts.
+                %span We're the supplier you need!
+      .v2-industry-section-3.d-flex
+        .container.px-0.d-flex.align-items-center
+          .bg-industry-worker
+          .industry-worker-content.d-flex.flex-column
+            .d-flex.flex-inline.align-items-center
+              .border-line
+              .d-flex.flex-column.ml2
+                %h1.d-flex.flex-inline
+                  Workers
+                  %span.ml1 who
+                %h1
+                  %span give a little extra
+            %p.mt1 Flair has built some amazing relationships over the years with the people on our database. Mutual respect and understanding promotes loyalty and reliability among our workers and enables us to successfully deliver brilliant teams again and again.
+      .container-fluid.px-0.v2-industry-section-4.d-flex
+        .box.d-flex.flex-column.justify-content-center.align-items-center
+          %h1 No stress
+          %span.mt-30 Our staff come fully-vetted
+          %span and ready to work.
+        .box.d-flex.flex-column.justify-content-center.align-items-center
+          %h1 No fuss
+          %span.mt-30 Pre and post-contract admin
+          %span and payroll handled by us.
+        .box.d-flex.flex-column.justify-content-center.align-items-center
+          %h1 No surprises
+          %span.mt-30 A cost-effective, bespoke staffing
+          %span solution that works for you.
+      .v2-industry-section-5.d-flex.justify-content-center.align-items-center
+        .container.px-0.d-flex.justify-content-around
+          .industry-about.d-flex.flex-column.mr1
+            %h1.d-flex.flex-column
+              Sports at
+              %span Flair means.....
+            %p.mt1 Early risers, cross-country planners, medal pinners, all-weather wonders, crowd controllers, waypoint guardians, outdoor stewards, baggage handlers, activity runners and all-round sports enthusiasts to keep your event on track.
+            %h3.mt1 Real people, real skills, real simple
+            .d-flex.flex-inline.mt-05
+              .orange-btn.d-flex.align-items-center.justify-content-center.mr1
+                %a{ href: "/events?category=Sports"}
+                  %button View Jobs
+              .orange-btn.d-flex.align-items-center.justify-content-center
+                %a{ href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                  %button Hire Staff
+          .industry-about-bg.d-flex
+      .v2-industry-section-6.d-flex.align-items-center
+        .bg-overlay
+        .container.px-0
+          %h1 What our clients say:
+          .testimonial.d-flex.flex-inline
+            .quote
+            %p
+              It is always a pleasure to work with the team at Flair. They go above and beyond to not only recruit generally excellent staff and confirm that all the necessary logistics are in place on site, but they also respond quickly and effectively to our ever-changing requirements and sometimes last-minute needs. We have partnered with Flair Events for many years and always look forward to working on new projects with them big or small.
+              %span.reversed
+          .testimonial-owner.d-flex.flex-inline.justify-content-end
+            %h2 Vicky Tuner,
+            %span.ml1 Logistics Manager, Limelight Sport
+      .v2-industry-section-7.d-flex.align-items-start
+        .container.px-0
+          %h1 Companies who choose Flair
+          .company-logos.d-flex.flex-inline.justify-content-around
+            - ["colorobstaclerush.png", "humanrace.png", "ll.png", "londonmarathonevents.png", "massive.png", "virginsport.png", "ratracebrand.png", "toughmudder.png", "skylineevents.png"].each do |file|
+              = image_tag "v2/industry/sports/#{file}"
+      .v2-industry-section-8.d-flex
+        .container.px-0.d-flex.align-items-center
+          .cs-image-content
+            .d-flex.flex-column
+              .cs-image
+              .d-flex.flex-inline
+                .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center
+                  %h1 51
+                  %h3 Job Roles
+                .cs-event-box.cs-staff-counter.d-flex.flex-column.align-items-center.justify-content-center
+                  %h1 494
+                  %h3 Staff
+          .cs-content.d-flex.flex-column
+            %h6 Case Study
+            .d-flex.flex-inline.align-items-center
+              .border-line
+              .d-flex.flex-column.ml1
+                %h5 ROYAL PARKS HALF MARATHON
+                %h3 Fully staffed at 6am with Flair.
+            %p.mt1 Control was key when we were asked to deliver 494 people in 51 job roles, positioned in nine different locations along a 13.1 mile course – and all by 6am on a cold autumn morning. Our secret weapon was not only our large database of experienced sports marshals, but our bespoke operating system designed to handle large volume staffing requirements with ease.
+            %p.mt2 It’s all about partnerships and working in sync with our clients as operations progress. Each and every worker was handpicked to be a part of this winning team, and arrived informed and ready for the day ahead.
+            %a.mt1{href: v2_case_industry_path(industry: "sports"), "data-turbolinks":"false"} READ MORE
+      .container-fluid.v2-industry-section-9.d-flex
+        .container.px-0.d-flex.align-items-start.position-relative
+          .d-flex.flex-column.mt6
+            .sport-page-gradient
+            %h1 Flair provides a complete
+            %h1.d-flex.flex-inline
+              %span.mr1 sporting
+              staff service.
+            %br
+            %h1.mt2 So, how can we help?
+            .orange-btn.mt1.d-flex.align-items-center.justify-content-center
+              %a{ href: '/contact'}
+                %button Let's chat today
+      .v2-home-bottom
+
+  = render :partial => 'v2/application/footer'

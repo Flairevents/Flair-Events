@@ -1,0 +1,34 @@
+.staff_zone.unsubscribe
+  = render :partial => 'v2/shared/nav'
+  .content
+    .content-spacer
+    .content-inner
+      .v2-profile-applications-content-layer-1{style: 'top:0;'}
+      .v2-profile-applications-content-layer-2{style: 'top:0;'}
+      .v2-profile-applications-content-layer-3{style: 'top:0;'}
+      .v2-profile-applications-content-layer-4{style: 'top:0;'}
+      %br/
+      %br/
+      .unsubscribe-title 
+        Unsubscribe
+      .row.expanded--restricted.align-center
+        .column.small-12.medium-8.text-justify.v2-bank-details-container
+          = form_tag "/staff/unsubscribe" do
+            #unsubscribe-inputs{style:'color:white;'}
+              %p Please choose one of the following options:
+              .v2-profile-radio.mt-5
+                =radio_button_tag(:desired_action, 'all_email', @account.user.send_marketing_email, required: true)
+                =label_tag(:desired_action_all_email, "I would like to continue as an employee of Flair Event Staffing and receive all work-related emails.")
+              .v2-profile-radio.mt-10
+                =radio_button_tag(:desired_action, 'no_marketing', !@account.user.send_marketing_email, required: true)
+                =label_tag(:desired_action_no_marketing, "I would like to continue as an employee of Flair Event Staffing, but do not want to receive unsolicited e-mails regarding upcoming job opportunities. I will still receive e-mails related to events that I have specifically selected to work.")
+              .v2-profile-radio.mt-5
+                =radio_button_tag(:desired_action, 'deactivate', false, required: true)
+                =label_tag(:desired_action_deactivate, "I no longer wish to be an employee of Flair Event Staffing and would like to close my account.")
+              %br/
+              %p.text-center
+                = hidden_field_tag 'token', @account.unsubscribe_token
+                = submit_tag 'Submit', class: 'v2-bank-details-submit'
+    .content-spacer
+  .content-after
+  = render partial: 'v2/application/footer'

@@ -1,0 +1,95 @@
+.public.contact
+  = render :partial => 'shared/nav'
+  .content
+    .content-spacer
+    .content-inner
+      .row.expanded--restricted.title.background.background--tall.background-desk
+        .column.small-12.flex--middle.flex--center
+          %h4.white-text.h3.text-center.shadow-text
+            Looking for staffing inspiration or just general information?
+      .band-heading.row.expanded--restricted
+        %h3 Contact Details
+      .row.expanded--restricted.padding-top-bottom
+        .column.small-12.medium-4.text-center
+          .flair-svg-icon
+            %svg
+              <use xlink:href="#fl-icon-address" />
+          %h6.h6
+            Company Address
+          %p
+            Suit 15,<br/>
+             The Adelphi Mill,   <br/>
+             Bollington, <br/>
+            SK10 5JB,
+        .column.small-12.medium-4.text-center
+          .flair-svg-icon
+            %svg
+              <use xlink:href="#fl-icon-q-and-a" />
+          %h6.h6
+            Email
+          %p <a href="mailto:work@flairevents.co.uk">work@flairevents.co.uk</a>
+          %h6.h6
+            Telephone
+          %p
+            = @tel
+          %h6.h6
+            Mobiles
+          %p
+            = @mobile
+        .column.small-12.medium-4.text-center
+          .flair-svg-icon
+            %svg
+              <use xlink:href="#fl-icon-search-staff" />
+          %h6.h6
+            Need a Staff Quote?
+          %p <a href="mailto:clients@flairevents.co.uk">clients@flairevents.co.uk</a> <br/>
+          <strong>Direct Client Line</strong>
+          %p 0161 241 2442
+      .band-heading.row.expanded--restricted
+        %h3 get in touch
+      .row.expanded--restricted.padding-top-bottom.dark-green.background.background-tent.align-center
+        .column.small-12.large-8.contact-form-container.p1.field.shadow.contant-page-form
+          - if @errors.present?
+            .error-messages
+              - @errors.each do |key, errors|
+                - errors.each do |error|
+                  %p= error
+          = form_tag "/contact", class: 'mt4' do
+            .mb1.contact-us-field-parent-complete
+              .input-group.name-field
+                .input-group__icon
+                  %svg
+                    <use xlink:href="#fl-icon-human" />
+                %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon1", :placeholder => "Name", :type => "text", :id => "name", :name => "name", :required => "", value: @name, style:'border-radius: 10px;'}
+            .mb1.contact-us-field-parent-complete
+              .input-group.email-field
+                .input-group__icon
+                  %svg
+                    <use xlink:href="#fl-icon-email" />
+                %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon2", :placeholder => "Email", :type => "email", :id => "email", :name => "email", :required => "", value: @email, style:'border-radius: 10px;'}
+            .mb1.contact-us-field-parent-complete
+              .input-group.contact-field
+                .input-group__icon
+                  %svg
+                    <use xlink:href="#fl-icon-phone" />
+                %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon3", :placeholder => "Phone Number", :type => "tel", :id => "contact", :name => "contact", style:'border-radius: 10px;'}
+            .mb1.contact-us-field-parent-complete
+              .input-group.subject-field
+                .input-group__icon
+                  %svg
+                    <use xlink:href="#fl-icon-pencil" />
+                %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon4", :placeholder => "Subject", :type => "text", :id => "subject", :name => "subject", :required => "", style:'border-radius: 10px;'}
+            .mb1.contact-us-field-parent-complete
+              .input-group.message-field
+                .input-group__icon
+                  %svg
+                    <use xlink:href="#fl-icon-info" />
+                %textarea.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon5", :placeholder => "Message", :type => "text", :id => "message", :name => "message", :required => "", style:'border-radius: 10px;'}
+            .row.mt2
+              .column.small-6
+                =image_tag('logo-rec-member.jpg', class: 'image--tiny inline')
+                =image_tag('logo-noea.svg', class: 'image--tiny ml1 inline')
+              .column.small-6.text-right
+                %input.yellow-button-home.home-page-btn-text-color{:type => 'submit', :value => 'Send!'}
+  .content-after
+  = render :partial => 'footer'

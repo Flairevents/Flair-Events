@@ -1,0 +1,86 @@
+<div class="tax-code">
+  <%= form_tag '../staff/update_tax_choice' do |f| %>
+    <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+    <div class="v2-profile-applications-tax-starter-checklist">Starter Checklist: Instructions for Employees</div>
+
+    <div class="v2-profile-applications-tax-paragraph" style='margin-bottom: 21px;'>
+      As a new employee your employer needs the below information before your first payday to tell HMRC about you and help them use the correct tax code. It's important that you choose the correct statement or you may pay too much or too little tax.
+    </div>
+    <div class="v2-profile-applications-tax-paragraph" style='margin-bottom: 21px;'>
+      All earnings will be processed within your indicated brackets on a W1M1 basis, as legally required, until such time as we receive a P9 Tax Code Notice direct from HMRC.
+    </div>
+    <div class="v2-profile-applications-tax-paragraph" style='margin-bottom: 50px;'>
+      Flair payroll is processed each Wednesday to ensure employee bank payments are received each Friday. Each Friday HMRC receives our payroll report (RTI) to record all payments, and only then can they process and send P9 Tax Code Notices if applicable.
+    </div>
+
+    <div class="v2-profile-applications-tax-employee-statement">Employee Statement</div>
+    <div class="v2-profile-applications-tax-employee-statement-content">
+      <div class="v2-profile-applications-tax-employee-statement-instruction">
+        Choose the statement that applies to you, either A, B or C
+      </div>
+      <div class="form-check v2-application-checkbox v2-profile-applications-tax-employee-statement-checkbox" style='margin-bottom:29px;'>
+        <%= check_box_tag(:tax_choice_A, 'A', @prospect.tax_choice == 'A', class: 'form-check-input') %>
+        <%= label_tag(:tax_choice_A, "This is my first job since last 6 April and I have not been receiving taxable Jobseeker’s Allowance. Employment and Support Allowance, taxable Incapacity Benefit, State or Occupational pension.", class: 'form-check-label') %>
+      </div>
+      <div class="form-check v2-application-checkbox v2-profile-applications-tax-employee-statement-checkbox" style='margin-bottom:29px;'>
+        <%= check_box_tag(:tax_choice_B, 'B', @prospect.tax_choice == 'B', class: 'form-check-input') %>
+        <%= label_tag(:tax_choice_B, "This is now my only job but since last 6 April I have had another job or received taxable Jobseeker’s Allowance, Employment and Support Allowance or taxable Incapacity Benefit. I do not receive a State or Occupational Pension.", class: 'form-check-label') %>
+      </div>
+      <div class="form-check v2-application-checkbox v2-profile-applications-tax-employee-statement-checkbox" style='margin-bottom:44px;'>
+        <%= check_box_tag(:tax_choice_C, 'C', @prospect.tax_choice == 'C', class: 'form-check-input') %>
+        <%= label_tag(:tax_choice_C, "As well as my new job, I have another job or receive a State or Occupational Pension.", class: 'form-check-label') %>
+      </div>
+    </div>
+
+    <div class="v2-profile-applications-tax-student-loan">Student Loan Statement</div>
+    <div class="v2-profile-applications-tax-student-loan-content" style='margin-bottom:13px;'>
+      Do you have a student loan which is not fully repaid? Your first RTI upload to HMRC will generate a T9 tax notification to instruct our payroll software which student loan repayment scheme to allocate, should you go over the weekly threshold with Flair.
+    </div>
+    <div class="d-flex flex-row bd-highlight">
+      <div class="form-check v2-application-checkbox v2-profile-applications-tax-employee-statement-checkbox">
+        <%= check_box_tag(:student_loan_true, true, @prospect.student_loan, class: 'form-check-input') %>
+        <%= label_tag(:student_loan_true, 'Yes', class: 'form-check-label') %>
+      </div>
+      <div class="form-check v2-application-checkbox v2-profile-applications-tax-employee-statement-checkbox" style='margin-left:27px;'>
+        <%= check_box_tag(:student_loan_false, false, !@prospect.student_loan, class: 'form-check-input') %>
+        <%= label_tag(:student_loan_false, 'No', class: 'form-check-label') %>
+      </div>
+    </div>
+    <center>
+      <%= submit_tag (@prospect.has_tax_choice? ? 'UPDATE' : 'SUBMIT'), class: 'v2-profile-applications-tax-submit' %>
+    </center>
+  <% end %>
+</div>
+
+
+<% content_for_once :js do %>
+  <script>
+    $('#tax_choice_A').on('click', function(){
+      $('#tax_choice_A').prop('checked', true);
+      $('#tax_choice_B').prop('checked', false);
+      $('#tax_choice_C').prop('checked', false);
+    })
+
+    $('#tax_choice_B').on('click', function(){
+      $('#tax_choice_A').prop('checked', false);
+      $('#tax_choice_B').prop('checked', true);
+      $('#tax_choice_C').prop('checked', false);
+    })
+
+    $('#tax_choice_C').on('click', function(){
+      $('#tax_choice_A').prop('checked', false);
+      $('#tax_choice_B').prop('checked', false);
+      $('#tax_choice_C').prop('checked', true);
+    })
+
+    $('#student_loan_true').on('click', function(){
+      $('#student_loan_true').prop('checked', true);
+      $('#student_loan_false').prop('checked', false);
+    })
+
+    $('#student_loan_false').on('click', function(){
+      $('#student_loan_true').prop('checked', false);
+      $('#student_loan_false').prop('checked', true);
+    })
+  </script>
+<% end %>

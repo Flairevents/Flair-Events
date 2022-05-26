@@ -1,0 +1,57 @@
+.ui-card-slider {
+  position: relative;
+  width: 320px;
+  height: 230px;
+  overflow: hidden; }
+  .ui-card-slider .slide {
+    display: block;
+    -webkit-user-select: none;
+    position: absolute;
+    transition-duration: 0.4s;
+    -webkit-transition-duration: 0.4s;
+    transition-timing-function: ease-in-out;
+    -webkit-transition-timing-function: ease-in-out;
+    transition-property: all;
+    -webkit-transition-property: all;
+    overflow: hidden; }
+    .ui-card-slider .slide img {
+      width: 100%;
+      height: 100%; }
+  .ui-card-slider .center-slide {
+    -webkit-user-select: none;
+    z-index: 30;
+    bottom: 12px;
+    bottom: 0;
+    left: 75px;
+    width: 170px;
+    height: 212px; }
+  .ui-card-slider .left-slide {
+    -webkit-user-select: none;
+    z-index: 20;
+    bottom: 30px;
+    left: -30px;
+    width: 140px;
+    height: 175px; }
+  .ui-card-slider .right-slide {
+    -webkit-user-select: none;
+    z-index: 20;
+    bottom: 30px;
+    left: 210px;
+    width: 140px;
+    height: 175px; }
+  .ui-card-slider .left-hidden-slide {
+    z-index: 10;
+    bottom: 30px;
+    left: -160px;
+    left: -265px;
+    width: 120px;
+    height: 130px; }
+  .ui-card-slider .right-hidden-slide {
+    z-index: 10;
+    bottom: 30px;
+    left: 360px;
+    width: 120px;
+    height: 130px; }
+  .ui-card-slider .hidden-slide {
+    visibility: hidden;
+    display: none !important; }

@@ -1,0 +1,136 @@
+.filter-bar-container
+  .filter-bar
+    %table{style: 'float:left'}
+      %tr
+        %th Type:
+        %th Total Remaining:
+      %tr
+        %td= _select :type, options_for_select([['All',''], ['UK & ROI ','id_approval'], ['Share Codes','share_code'], ['Change Requests','change'], ['DBS','dbs_approval'], ['Qualifications','qualifications'], ['Friends','friends']]), class: 'form-control', id: 'filter-type'
+        %td.remaining-todo-count
+
+    %a.refresh-data-todo.refresh-data{style: 'float:right', href: 'javascript:void(0)'} Refresh
+    %div{style: 'clear:both'}
+%hr
+
+.scrollable-area
+  .left-side{style: 'float:left'}
+    .btn-group.choices-top-row
+    %p.todo-description
+    .btn-group.choices
+  .right-side.prospect-profile{style: 'float:left; margin-left: 25px; padding: 10px; border: 1px solid #ccc'}
+    %table
+      %tr
+        %th Prospect ID:
+        %td.prospect_id
+        %th Start Date:
+        %td.prospect_date_start
+        %th Status:
+        %td.prospect_status
+      %tr
+        %th First Name:
+        %td.prospect_first_name
+        %th DOB:
+        %td.prospect_date_of_birth
+        %th.photo-area{colspan: 2, rowspan: 6}
+          %img.prospect_photo{height: '145'}
+      %tr
+        %th Last Name:
+        %td.prospect_last_name
+        %th Gender:
+        %td.prospect_gender
+      %tr
+        %th &nbsp;
+      %tr
+        %th Address:
+        %td.prospect_address
+        %th Mobile:
+        %td.prospect_mobile_no
+      %tr
+        %th
+        %td.prospect_address2
+        %th Home:
+        %td.prospect_home_no
+      %tr
+        %th City:
+        %td.prospect_city
+        %th Emergency #:
+        %td.prospect_emergency_no
+      %tr
+        %th Post Code:
+        %td.prospect_post_code
+        %th Emerg. Name:
+        %td.prospect_emergency_name
+      %tr
+        %th
+        %th
+        %th Email:
+        %td.prospect_email
+        %th Agreed to Terms:
+        %td.prospect_agreed_terms
+    %hr
+    %table
+      %tr
+        %th Tax Choice:
+        %td.prospect_tax_choice
+        %th ID Evidence:
+        %td.prospect_id_type
+      %tr
+        %th Student Loan?
+        %td.prospect_student_loan
+        %th ID Number:
+        %td.prospect_id_number
+      %tr
+        %th NI Number:
+        %td.prospect_ni_number
+        %th Visa Number:
+        %td.prospect_visa_number
+      %tr
+        %th Sort Code:
+        %td.prospect_bank_sort_code
+        %th Visa Expiry Date:
+        %td.prospect_visa_expiry
+      %tr
+        %th Account No:
+        %td.prospect_bank_account_no
+        %th ID Approved?
+        %td.prospect_id_approved
+      %tr
+        %th Account Name:
+        %td.prospect_bank_account_name
+      %tr
+        %th Nationality:
+        %td.prospect_nationality
+        %th Country:
+        %td.country
+    %hr
+    %table
+      %tr
+        %th Bar Experience:
+        %td.prospect_bar_experience
+        %th Sport?
+        %td.prospect_good_sport
+      %tr
+        %th Bar License:
+        %td.prospect_bar_license_type,
+        %th Bar?
+        %td.prospect_good_bar
+      %tr
+        %th - Number:
+        %td.prospect_bar_license_no,
+        %th Promo?
+        %td.prospect_good_promo
+      %tr
+        %th - Expiry Date:
+        %td.prospect_bar_license_expiry,
+        %th Hospitality?
+        %td.prospect_good_hospitality
+      %tr
+        %th - Training Log:
+        %td.prospect_training_type,
+        %th Management?
+        %td.prospect_good_management
+    %hr
+    %table
+      %tr
+        %th{style: 'vertical-align:top'} Notes
+        %td.prospect_notes

@@ -1,0 +1,12 @@
+-if @interview_calendar_inperson.empty?
+  .text-center
+    .h4 Coming Soon
+-else
+  -unless @interview
+    .text-center
+      %p Coming Soon
+  .pt2.pb2
+    .slider--generic.flexslider-container
+      %ul.slides.interview-calendar
+        - @interview_calendar_inperson.each do |week_start, values|
+          = render partial: 'interview_calendar_week', locals: {week_start: week_start, values: values}

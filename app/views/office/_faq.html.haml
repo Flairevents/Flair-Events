@@ -1,0 +1,19 @@
+.command-bar
+  .btn-group
+    %button.btn.btn-default.command-link.command-new{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+= slideover_form 'record-new',  partial: 'faq_form', locals: { faq_entry: FaqEntry.new, prefix: 'new'}
+= slideover_form 'record-edit', partial: 'faq_form', locals: { faq_entry: FaqEntry.new, prefix: 'edit'}

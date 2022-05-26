@@ -1,0 +1,90 @@
+= form_for bulkInterview, url: '#', html: {id: form_id, class: 'record-details-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  %table
+    %tr
+      %td
+        %span{class: 'mandatory'} Bulk Interview Name:
+      %td{colspan: 3}= f.text_field :name, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory'} Venue (Staff):
+      %td{colspan: 3}= f.text_field :venue, class: 'form-control'
+    %tr
+      %td Positions Available:
+      %td{colspan: 3}= f.text_field :positions, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory'} Week Of:
+      %td= text_field_tag :bulk_interview_week, '', class: 'form-control', id: form_id + '_bulk_interview_week', name: 'bulk_interview_week'
+      %td From
+      %td= f.text_field :date_start, class: 'form-control', readonly: true
+      %td To
+      %td= f.text_field :date_end, class: 'form-control', readonly: true
+    %tr
+      %td Region:
+      %td
+        = f.select :target_region_id, ('<option value="" selected="selected">All</option>'+options_from_collection_for_select(Region.all.sort_by(&:name), :id, :name)).html_safe, {}, class: 'form-control'
+    %tr
+      %td Events:
+      %td{colspan: 5}
+        %select.form-control{multiple: true, name: 'bulk_interview_events[]'}
+    %tr
+      %td
+        %span{class: 'mandatory'} Type:
+      %td
+        = f.select :interview_type, [['In Person', 'IN_PERSON'],['Telephone/Online','ONLINE']], {include_blank: true}, class: 'form-control'
+    %tr
+      %td Status:
+      %td
+        = f.select :status, [], {}, class: 'form-control'
+  %hr
+  %table
+    %tr
+      %td Map Address:
+      %td= f.text_field :address, class: 'form-control'
+    %tr
+      %td City:
+      %td= f.text_field :city, class: 'form-control'
+    %tr
+      %td Post Code:
+      %td= f.text_field :post_code, class: 'form-control'
+    %tr
+      %td{style: 'vertical-align:top'} Directions:
+      %td= f.text_area :directions, rows: 6, cols: 80, spellcheck: true, class: 'form-control'
+    %tr
+      %td{style: 'vertical-align:top'} Note for applicants:
+      %td= f.text_area :note_for_applicant, class: 'tinymce', id: "#{prefix}-note-for-applicants-editor", :"data-prop" => 'note_for_applicant'
+  %hr
+  %table
+    %tr
+      %td{style: 'vertical-align:top'} Photo:
+      %td
+        %img.bulk_interview_photo{alt: 'Photo'}
+  %input.hidden{name: 'bulk_interview[id]'}
+
+- content_for_once :js do
+  :javascript
+    $dateField = $('input[name="bulk_interview_week"]');
+    setUpDatepicker($dateField);
+
+    $('input[name="bulk_interview_week"]').change(function (e) {
+      //We are going to snap both dates to Start: Monday, End: Sunday, of that week.
+      //Only run if date is valid.
+      var val = $(e.target).val();
+      if (val !== '') {
+        var date = stringToDate(val, "dd/MM/yyyy","/");
+        var dayOfWeek = date.getDay(); //0-6. 0 is Sunday, 1 is Monday, 6 is Saturday
+        if (dayOfWeek === 0) { dayOfWeek = 7; } // Make Sunday 7
+        var startDate = addDays(date, (dayOfWeek-1)*-1); // Get Monday of the week
+        var endDate = addDays(startDate, 6) // Get Sunday of the week
+        //Update start/end dates based on 'week of'. trigger keyup events so that it will save these fields
+        var $dateStart = $('input[name="bulk_interview[date_start]"]')
+        $dateStart.val(printDate(startDate));
+        $dateStart.trigger('keyup');
+        var $dateEnd = $('input[name="bulk_interview[date_end]"]')
+        $dateEnd.val(printDate(endDate));
+        $dateEnd.trigger('keyup');
+      }
+    });
+
+    $dateField.watermark('DD/MM/YYYY', {className: 'watermark'});
+    $('select[name="bulk_interview_events[]"]').select2();

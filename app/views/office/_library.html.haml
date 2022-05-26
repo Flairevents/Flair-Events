@@ -1,0 +1,46 @@
+.command-bar
+  .btn-group
+    %button.btn.btn-default.command-link.command-new{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+    %button.btn.btn-default.command-link.command-open.disabled{:"data-command" => 'openFile'} Open
+
+  .upload-notification{style: 'float:right'}
+    .progress{style: 'display: none'}
+      .progress-bar.progress-bar-success.progress-bar-striped.active{role: 'progressbar', style: 'width:0%'}
+  %div{style: 'clear:both'}
+
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    = form_tag '/office/update_library_item', class: 'record-details-form' do
+      %table
+        %tr
+          %th Name
+          %td= _text_field :"library_item[name]", class: 'form-control'
+
+.slideover.record-new{style: 'display:none; left:100%'}
+  %a.close X
+  .slideover-content
+    = form_tag '/office/create_library_item', class: 'record-details-form' do
+      %table
+        %tr
+          %th Name
+          %td= _text_field :"library_item[name]"
+        %tr
+          %td
+            %input{id: 'library-upload', type: 'file', name: 'file_upload'}

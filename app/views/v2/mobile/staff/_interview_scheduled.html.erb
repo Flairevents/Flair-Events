@@ -1,0 +1,77 @@
+<% if @interview.type == 'ONLINE' %>
+  <% #%p <center><strong>Your Telephone Interview is Booked</strong></center> %>
+  <ul></ul>
+<% end %>
+<% if @interview.photo_url.present? %>
+  <% interview_details_classes = ['medium-6'] %>
+<% end %>
+<div class="v2-interview-title v2-interview-title-booked " style='margin-bottom: 24px;'>Introduction booked.</div>
+
+<div class="v2-interview-dates-content v2-interview-dates-content-booked-interview-mobile" style='margin-bottom: 23px;'>
+  <div class="v2-interview-sched-date" style='margin-bottom: 13px;'><%= @interview.date.strftime('%B %e, %Y') %></div>
+  <div class="v2-interview-sched-time">
+    <div>Preferred Call Time</div>
+    <%= "#{@interview.time_type} #{@interview.time_type == "MORNING" ? "10:00AM - 1:00PM" : @interview.time_type == "AFTERNOON" ? "12:30PM - 4:00PM" : "4:00PM - 7:00PM"}" %>
+  </div>
+
+
+<% if @interview.type == 'ONLINE' %>
+  <div class="v2-inteview-sched-content" style='margin-bottom: 27px;'>
+    Expect a call from the Flair team during the above time. <br /> Or if more convenient to fit with your day, jump the que and call us direct.
+  </div>
+  <div class="v2-inteview-sched-content">
+    Manchester: <a href="tel:0161-241-2441">0161 241 2441</a>  <br>
+    London : <a href="tel:0204-542-6441">0204 542 6441</a>
+  </div>
+<% end %>
+
+<div style='width: fit-content;margin:auto;margin-top: 49px;'>
+  <div id='v2-interview-sched-resched-button' class="v2-interview-sched-resched-button text-transform-none" ib_id="<%= @interview.interview_block.date.strftime('%A-%e-%b') %>-<%= @interview.time_type %>">Reschedule</div>
+
+  <a data-method='post' href="../staff/cancel_interview">
+    <div class="v2-interview-sched-cancel-button text-transform-none" style='margin-top: 16px;'>Cancel</div>
+  </a>
+</div>
+</div>
+<div class="v2-interview-sched-work text-center">
+  Search. Apply. <span>Work</span>
+</div>
+<center>
+  <a href="/events" class="v2-interview-sched-resched-button text-transform-none" style="padding: 12px 62px">Request work now!</a>
+</center>
+
+<% content_for_once :js do %>
+  <script>
+
+    $('.reschedule-interview').on('click', function() {
+      $('#tab-interview-scheduled').hide();
+      $('#tab-interview-signup').show();
+      $('.staff-interview-tab').html('<div class="fl-icon fl-icon--small fl-icon--checkmark-unchecked staff-top-bar-check-mark staff-interview-tab-icon" style="margin-right: 10px;"></div><div class="text-left">Book Interview</div>')
+    })
+
+    $('body').on('click', '#v2-interview-sched-resched-button', function(){
+      $('.v2-flash-bg-book-intro').hide();
+
+      $('#v2-interview-sign-up').css('display', 'block');
+      $('#v2-interview-scheduled').css('display', 'none');
+      $('#v2-interview-cancel-resched').css('display', 'block');
+
+      // select interview block of the user
+      ib_id = $(this).attr('ib_id')
+      $(`#${ib_id}`).removeClass('v2-interview-dates-time-unavailable')
+      $(`#${ib_id}`).addClass('v2-interview-dates-time-available')
+      $(`#${ib_id}`).find('input').prop('checked', true);
+      $(`#${ib_id}`).addClass('v2-interview-dates-time-available-active');
+
+      v2_profile_bg_size('#v2-book-interview-form')
+    })
+
+    $('body').on('click', '#v2-interview-cancel-resched', function(){
+      $('#v2-interview-sign-up').css('display', 'none');
+      $('#v2-interview-scheduled').css('display', 'block');
+      $('#v2-interview-cancel-resched').css('display', 'none');
+    })
+
+
+  </script>
+<% end %>

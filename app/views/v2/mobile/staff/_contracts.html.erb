@@ -1,0 +1,173 @@
+<div class="v2-explore-jobs-container">
+    <%# HEADER BUTTONS %>
+    <div class="d-flex justify-content-center" style='margin-bottom: 36px;'>
+        <div class="v2-jobs-hired-button v2-jobs-button-active" id='v2-jobs-hired-button'>
+          <span>Hired</span>
+        </div>
+        <div class="v2-jobs-applied-button" id='v2-jobs-applied-button'>Applied</div>
+        <div class="v2-jobs-completed-button" id='v2-jobs-completed-button'>Completed</div>
+    </div>
+
+    <%# CONTENT %>
+    <div class="v2-explore-jobs-hired-content" id='v2-explore-jobs-hired-content'>
+        <% if @confirmed_events.length > 0 %>
+          <%= render partial: 'v2/mobile/shared/event_list', locals: {events: @confirmed_events, new_events: nil, hired: true} %>
+        <% else %>
+          <div class="v2-explore-jobs-hired-default-image"></div>
+<!--          <div class="v2-explore-jobs-default-content">-->
+<!--              Let's get you through the interview first! <br>-->
+<!--              Once apart of the Flair team you can apply and <br>-->
+<!--              work as little or as often as you want.-->
+<!--          </div>-->
+
+          <a href="../staff/events">
+            <div class="v2-explore-jobs-button">Explore Jobs</div>
+          </a>
+        <% end %>
+    </div>
+
+    <div id="prospect-status" style="display: none;"><%= @prospect.status %></div>
+
+    <div class="v2-explore-jobs-applied-content" id='v2-explore-jobs-applied-content'>
+        <% if @pending_events.length > 0 || @prospect.reject_events.where(has_seen: false).count > 0 %>
+          <%= render partial: 'v2/mobile/shared/event_list', locals: {events: @pending_events, new_events: nil, hired: false} %>
+        <% else %>
+          <div class="v2-explore-jobs-applied-default-image"></div>
+          <div class="v2-explore-jobs-default-content">
+              You have not applied to any job yet. <br>
+              Search and apply for a job you want to start earning.
+          </div>
+
+          <a href="../staff/events">
+            <div class="v2-explore-jobs-button">Explore Jobs</div>
+          </a>
+        <% end %>
+    </div>
+
+    <div class="v2-explore-jobs-completed-content" id='v2-explore-jobs-completed-content'>
+        <% if !@past_gigs.empty? %>
+          <%= render partial: 'v2/mobile/staff/contracts_my_event_history' %>
+        <% else %>
+          <div class="v2-explore-jobs-completed-default-image"></div>
+          <div class="v2-explore-jobs-default-content">
+            <div>
+              You have not completed any jobs yet.
+            </div>
+            <div>
+              Jobs you completed are gonna be displayed here.
+            </div>
+          </div>
+
+          <a href="../staff/events">
+            <div class="v2-explore-jobs-button">Explore Jobs</div>
+          </a>
+        <% end %>
+    </div>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $('#v2-jobs-hired-button').on('click', function(){
+        if($(this).hasClass('v2-jobs-button-active') != true){
+            $(this).addClass('v2-jobs-button-active')
+            $('#v2-jobs-applied-button').removeClass('v2-jobs-button-active');
+            $('#v2-jobs-completed-button').removeClass('v2-jobs-button-active');
+
+            $('#v2-explore-jobs-hired-content').css('display', 'block');
+            $('#v2-explore-jobs-applied-content').css('display', 'none');
+            $('#v2-explore-jobs-completed-content').css('display', 'none');
+        }
+
+        v2_profile_bg_size('.v2-explore-jobs-container')
+    });
+
+    $('#v2-jobs-applied-button').on('click', function(){
+        prospect_status = $('#prospect-status').text();
+
+        if(prospect_status == "APPLICANT"){
+          $('.rejected_events').each(function(){
+            rji = $(this).attr('rejected_event_id')
+            $.ajax({
+              url: '/staff/seen_rejected_event',
+              type: 'POST',
+              data: {
+                rejected_event_id: rji
+              },
+              success: function(data) {
+              }
+            })
+          })
+        }
+
+        if($(this).hasClass('v2-jobs-button-active') != true){
+            $(this).addClass('v2-jobs-button-active')
+            $('#v2-jobs-hired-button').removeClass('v2-jobs-button-active');
+            $('#v2-jobs-completed-button').removeClass('v2-jobs-button-active');
+
+            $('#v2-explore-jobs-hired-content').css('display', 'none');
+            $('#v2-explore-jobs-applied-content').css('display', 'block');
+            $('#v2-explore-jobs-completed-content').css('display', 'none');
+        }
+
+        v2_profile_bg_size('.v2-explore-jobs-container')
+    });
+
+    $('#v2-jobs-completed-button').on('click', function(){
+        if($(this).hasClass('v2-jobs-button-active') != true){
+            $(this).addClass('v2-jobs-button-active')
+            $('#v2-jobs-hired-button').removeClass('v2-jobs-button-active');
+            $('#v2-jobs-applied-button').removeClass('v2-jobs-button-active');
+
+            $('#v2-explore-jobs-hired-content').css('display', 'none');
+            $('#v2-explore-jobs-applied-content').css('display', 'none');
+            $('#v2-explore-jobs-completed-content').css('display', 'block');
+        }
+
+        v2_profile_bg_size('.v2-explore-jobs-container')
+    });
+
+    $('.v2-explore-jobs-event-container').on('click', function(){
+      content = $(this).parent().find('.v2-explore-jobs-list-event-content')
+
+      if($(content).css('display') == 'none'){
+        $('.v2-explore-jobs-event-container').each(function(){
+          content_close = $(this).parent().find('.v2-explore-jobs-list-event-content')
+
+          $(content_close).css('display', 'none');
+        })
+
+        $(content).css('display', 'block');
+      }else{
+        $(content).css('display', 'none');
+      }
+
+      v2_profile_bg_size('.v2-explore-jobs-container')
+    })
+
+    $('body').on('click', '#v2-my-jobs-cancel-application', function(){
+      job_name = $(this).attr("job_name")
+      event_id = $(this).attr("event_id")
+      event_name = $(this).attr("event_name")
+
+      $('body').append(`
+        <div class="v2-flash-bg" onclick= "$(".v2-flash-bg").fadeOut();">
+          <div class="v2-flash-body-job-board">
+            <h2 class="v2-flash-title">Cancel Job Application</h2>
+
+            <div class="v2-flash-message">Are you sure you want to cancel your Job Application? <br> "<b>${job_name}</b>" position at ${event_name}</div>
+
+            <center>
+              <div style="display: inline-flex;">
+                <a href="/staff/deselect_event/${event_id}?redirect=/staff#jobs" data-method="post" rel="nofollow">
+                  <div class="v2-flash-button" style="width: 130px;">Confirm</div>
+                </a>
+                <div class="v2-flash-button-no" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">No</div>
+              </div>
+            </center>
+          </div>
+        </div>
+      `)
+      return false
+    })
+  </script>
+<% end %>

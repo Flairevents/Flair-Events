@@ -1,0 +1,104 @@
+<div class="v2-profile-identification-uk" style='margin-top: 45px;'>Biometric Residency Permit</div>
+
+<div class="d-flex flex-row bd-highlight">
+  <div class="v2-profile-identification-passport-inputs d-flex flex-row bd-highlight">
+    <div class="v2-upload-file-button" id='v2-identification-upload-brp-front'>Upload File</div>
+    <div class="v2-upload-file-content" id='v2-identification-upload-brp-front-content'>Front of Card</div>
+  </div>
+  <%= file_field_tag :brp_front, required: true, class: "form-control v2-profile-identification-passport-inputs", accept: @accepted_images, style: 'display: block; position: absolute;left: 0;opacity: 0;z-index: -1;' %>
+
+  <a class="v2-help" style= 'margin-left:7px; margin-top:18px' onclick="$('.non-eu-id-front-popup').show()">
+    <i class="glyphicon glyphicon-question-sign"></i>
+  </a>
+
+  <div class="v2-profile-identification-passport-inputs d-flex flex-row bd-highlight" style='margin-left:12px;'>
+    <div class="v2-upload-file-button" id='v2-identification-upload-brp-back'>Upload File</div>
+    <div class="v2-upload-file-content" id='v2-identification-upload-brp-back-content'>Back of Card</div>
+  </div>
+  <%= file_field_tag :brp_back, required: true, class: "form-control v2-profile-identification-passport-inputs", accept: @accepted_images, style: 'display: block; position: absolute; opacity: 0;z-index: -1; right: 0; width: fit-content;' %>
+
+  <a class="v2-help" style= 'margin-left:14px; margin-top:18px' onclick="$('.non-eu-id-back-popup').show()">
+    <i class="glyphicon glyphicon-question-sign"></i>
+  </a>
+</div>
+
+<div class="d-flex justify-content-between" style='margin-top: 15px;'>
+  <div class="v2-profile-identification-issued-date" style='width: 122px;'>Issued Date</div>
+
+  <div class="d-flex flex-row bd-highlight v2-id-login-date-input-group" style='margin-left:11px;'>
+    <%= select_date @prospect.visa_issue_date, {prefix: 'visa_issue_date', start_year: Date.today.year-10, end_year: Date.today.year, order: [:day, :month, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, use_short_month: true}, {required: true, class: "form-control v2-profile-identification-date-select v2-inputs"} %>
+  </div>
+
+  <%= text_field_tag :visa_no, nil, required: true, class: "form-control v2-profile-identification-passport-text-inputs v2-inputs", style: 'margin-left:39px;', placeholder: 'Permit Number', autocomplete: "off" %>
+
+  <a class="v2-help" style= 'margin-left:14px; margin-top:18px' onclick="$('.non-eu-id-number-popup').show()">
+    <i class="glyphicon glyphicon-question-sign"></i>
+  </a>
+</div>
+
+<div class="d-flex flex-row bd-highlight" style='margin-top: 15px;'>
+  <div class="v2-profile-identification-brp-expiry-date">Expiry Date</div>
+
+  <div class="d-flex flex-row bd-highlight v2-id-login-date-input-group" style='margin-left: 22px;'>
+    <%= select_date @prospect.visa_expiry, {prefix: 'visa_expiry', start_year: Date.today.year, end_year: Date.today.year+10, order: [:day, :month, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, use_short_month: true}, {required: true, class: "form-control v2-profile-identification-date-select v2-inputs"} %>
+  </div>
+
+  <div class='v2-application-checkbox' style= 'margin-left:44px; margin-top:17px'>
+    <input id="visa-indefinite" name="visa_indefinite" type="checkbox" class='form-check-input v2-profile-identification-checkbox'>
+
+    <label for="visa-indefinite" class='form-check-label v2-profile-identification-checkbox-label' style='margin-left: 0;'>Indefinite Leave to Remain</label>
+  </div>
+
+  <a class="v2-help" style= 'margin-left:14px; margin-top:18px' onclick="$('.non-eu-id-indefinite-popup').show()">
+    <i class="glyphicon glyphicon-question-sign"></i>
+  </a>
+</div>
+
+<div class="non-eu-id-front-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-non-eu-brp-front.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="non-eu-id-back-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-non-eu-brp-back.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="non-eu-id-number-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-non-eu-brp-number.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="non-eu-id-issue-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-non-eu-brp-issue.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="non-eu-id-expiry-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-non-eu-brp-expiry.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="non-eu-id-indefinite-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-non-eu-brp-indefinite.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,1879 @@
+<%- total_steps = 18 %>
+<%- current_step = 0 %>
+
+<form class="fl-training">
+  <div class="fl-training__step">
+    <div class="article">
+      <h5><u>Definition:</u>  &ldquo;Customer service is the skills you demonstrate before, during and after customer interaction&rdquo;.</h5>
+      <div class="flexrow-r">
+        <div class="col-main">
+          <p class="text-justify">Ninety percent of job roles that Flair offers relate to front line customer interaction either through selling or information based positions. Events by their very nature create enjoyable social environments for everyone attending. By selecting to work an event you have taken on the responsibility of attending customers’ needs and assisting in creating an enjoyable experience.</p>
+        </div>
+        <!-- <div class="col-sidebar-left"><img src="assets/training-motivate-11.png" alt="Customer Service - Is an attitude, not a department" style="max-width: 100%"></div> -->
+        <div class="col-sidebar-left"><%= image_tag 'training-motivate-11.png', alt:'Customer Service - Is an attitude, not a department', style:'max-width: 100%' %></div>
+      </div>
+      <div class="flexrow-c" style="align-items:center">
+        <h5>Statics tell us that:</h5>
+        <p>A customer will tell <strong>3</strong> or <strong>4</strong> people about a good service.</p>
+        <p>A customer will tell <strong>9</strong> people about a bad service.</p>
+      </div>
+      <div class="flexrow-c" style="align-items:center">
+        <!-- <embed src="http://www.youtube.com/v/I3IxMQsazAM?hl=en_GB&amp;version=3" type="application/x-shockwave-flash" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed> -->
+        <iframe id="badservice" src="https://www.youtube.com/embed/I3IxMQsazAM?rel=0" frameborder="0"></iframe>
+        <!-- <embed src="http://www.youtube.com/v/I3IxMQsazAM?hl=en_GB&amp;version=3" width="560" height="315" allowscriptaccess="always" allowfullscreen="true"></embed> -->
+        <p>poor customer service comedy sketch!</p>
+      </div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>First Impressions</h3>
+      <p>We have all experienced approaching a bored, disinterested looking staff member, slouching against a counter. Events create open working environments where staff are on display at all times. How aware are you of your own
+        body language and presentation when working customer facing jobs?</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Tap the three pictures that would present a positive image to approaching customers</h5>
+      <div class="photo-strip h100">
+        <div class="fl-form__checkbox fl-form__checkbox--with-image">
+          <input type="checkbox" name="positive-image" value="1" id="positive-image-1">
+          <label for="positive-image-1"><%= image_tag 'training-adapt-grumpy.png' %></label>
+          <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+            <i class="glyphicon glyphicon-remove"></i>
+          </div>
+        </div>
+        <div class="fl-form__checkbox fl-form__checkbox--with-image">
+          <input type="checkbox" name="positive-image" value="2" id="positive-image-2">
+          <label for="positive-image-2"><%= image_tag 'training-arms-folded-q1.jpg' %></label>
+          <br>
+          <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+            <i class="glyphicon glyphicon-remove"></i>
+          </div>
+        </div>
+        <div class="fl-form__checkbox fl-form__checkbox--with-image">
+          <input type="checkbox" name="positive-image" value="3" id="positive-image-3">
+	  <label for="positive-image-3"><%= image_tag 'training-q1.jpg' %></label>
+          <br>
+          <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+            <i class="glyphicon glyphicon-ok"></i>
+          </div>
+        </div>
+        <div class="fl-form__checkbox fl-form__checkbox--with-image">
+          <input type="checkbox" name="positive-image" value="4" id="positive-image-4">
+          <label for="positive-image-4"><%= image_tag 'training-2-people.png' %></label>
+          <br>
+          <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+            <i class="glyphicon glyphicon-remove"></i>
+          </div>
+        </div>
+        <div class="fl-form__checkbox fl-form__checkbox--with-image">
+          <input type="checkbox" name="positive-image" value="5" id="positive-image-5">
+          <label for="positive-image-5"><%= image_tag 'training-iowq.jpg' %></label>
+          <br>
+          <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+            <i class="glyphicon glyphicon-ok"></i>
+          </div>
+        </div>
+        <div class="fl-form__checkbox fl-form__checkbox--with-image">
+          <input type="checkbox" name="positive-image" value="6" id="positive-image-6">
+          <label for="positive-image-6"><%= image_tag 'training-adapt-yes.png' %></label>
+          <br>
+          <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="true">
+            <i class="glyphicon glyphicon-ok"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesLess" data-flair-training-eval-arg="3" data-flair-training-condition="true">Please check 3 images.</div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesGreater" data-flair-training-eval-arg="3" data-flair-training-condition="true">You have selected more than 3 images.</div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Body Language</h3>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>The following are examples of positive body language. Indicate whether you agree (&nbsp;<i class="glyphicon glyphicon-thumbs-up fc-black"></i>&nbsp;) or disagree (&nbsp;<i class="glyphicon glyphicon-thumbs-down fc-black"></i>&nbsp;) with the following statements:</h5>
+    </div>
+    <div class="fl-training__table">
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Making eye contact with your customers</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="body-language" value="1" id="body-language-1">
+              <label for="body-language-1">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Standing up straight with your body facing a customer</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="body-language" value="2" id="body-language-2">
+              <label for="body-language-2">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Warm engaging facial expressions; smiling and approachable</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="body-language" value="3" id="body-language-3">
+              <label for="body-language-3">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Speaking loudly with an assertive tone</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="body-language" value="4" id="body-language-4">
+              <label for="body-language-4">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Closed body stance with arms folded or in pockets</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="body-language" value="5" id="body-language-5">
+              <label for="body-language-5">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Presentation</h3>
+      <p>A person’s presentation plays a big part in forming our first impression. Outdoor events require everyone to be prepared for all weathers. Therefore team members must dress accordingly, but remain presentable. </p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Which staff member looks more engaged in their job and approachable to a customer?</h5>
+    </div>
+    <div class="row pt2">
+      <div class="column text-center">
+        <p><%= image_tag 'training-hands-in-pocket.jpg', class:'image--medium' %></p>
+        <p class=""></p>
+        <div>
+          <div class="fl-form__radio inline-block mr2">
+            <input type="radio" required name="presentation" value="left" id="presentation-left">
+            <label for="presentation-left">Left</label>
+          </div>
+          <div class="fl-form__radio inline-block">
+            <input type="radio" required name="presentation" value="right" id="presentation-right">
+            <label for="presentation-right">Right</label>
+          </div>
+        </div>
+        <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--correct--red" data-flair-training-eval-function="radioValue" data-flair-training-condition="right">
+          <p>Incorrect.</p>
+          <p>The gentleman on the right is wearing sunglasses, which restricts eye contact. If however, he takes them off whilst speaking this is acceptable. He also has his hands in his pockets, which gives an impression that he
+            is disinterested and unapproachable.</p>
+          <p>Correct answer - Left.</p>
+          <p>The girl on the left is smiling and is engaged in the activity.</p>
+        </div>
+        <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-condition="left">
+          <p>Correct!</p>
+          <p>The gentleman on the right is wearing sunglasses, which restricts eye contact. If however, he takes them off whilst speaking this is acceptable. He also has his hands in his pockets, which gives an impression that he
+            is disinterested and unapproachable.</p>
+          <p>The girl on the left is smiling and is engaged in the activity.</p>
+        </div>
+      </div>
+    </div>
+
+
+
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Communication</h3>
+      <p>When you are speaking to a customer, speak in a clear voice, talk directly to them, consider the responses you give and be polite. </p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5 class="h5">Read each of the statements below. Put yourself in the position of the customer and ask yourself if they describe good communication skills. Indicate whether you agree (&nbsp;<i class="glyphicon glyphicon-thumbs-up fc-black"></i>&nbsp;) or disagree (&nbsp;<i class="glyphicon glyphicon-thumbs-down fc-black"></i>&nbsp;) with the following statements:</h5>
+    </div>
+    <div class="fl-training__table">
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Not speaking until the customer speaks first</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="communication" value="1" id="communication-1">
+              <label for="communication-1">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Greeting a customer with a simple "Hello, how can I help?"</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="communication" value="2" id="communication-2">
+              <label for="communication-2">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Listening and responding to each question clearly</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="communication" value="3" id="communication-3">
+              <label for="communication-3">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Talking whilst looking down or walking away while answering</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+            <div class="fl-form__toggle inline-block">
+              <div class="inline-block toggle-label">
+                <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+                  <i class="glyphicon glyphicon-remove"></i>
+                </div>
+                <i class="glyphicon glyphicon-thumbs-down"></i>
+              </div>
+              <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+                <input type="checkbox" name="communication" value="4" id="communication-4">
+                <label for="communication-4">&nbsp;</label>
+              </div>
+              <div class="inline-block toggle-label">
+                <i class="glyphicon glyphicon-thumbs-up"></i>
+                <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="false">
+                  <i class="glyphicon glyphicon-ok"></i>
+                </div>
+              </div>
+            </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Communication</h3>
+      <p>You are in a job role that focuses on communicating with individuals face to face, not via technology. Staff checking or speaking on mobile phones detracts attention, causes a loss of focus and more importantly blocks communication
+        with a real person. It makes a staff member seem unapproachable and not focused on the job or customer.</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>When do you think it is appropriate to use a mobile at work? Select two statements.</h5>
+    </div>
+    <div class="row">
+      <div class="column small-12 medium-4">
+        <%= image_tag 'training-customerservice-q5.jpg', class:'image--responsive' %>
+      </div>
+      <div class="column small-12 medium-8">
+    <table>
+      <tbody>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="a" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="mobile" value="a" id="mobile-a">
+              <label for="mobile-a">When taking that all important selfie</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="b" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="mobile" value="b" id="mobile-b">
+              <label for="mobile-b">To contact event support in an emergency</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="c" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="mobile" value="c" id="mobile-c">
+              <label for="mobile-c">To check social media</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="d" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="mobile" value="d" id="mobile-d">
+              <label for="mobile-d">To answer a work related query</label>
+            </div>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+      </div>
+    </div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesNot" data-flair-training-eval-arg="2" data-flair-training-condition="true">Please select 2 statements</div>
+    <div class="fl-training__notice fl-training__notice--wrong">Mobile phones have their place, and can be appropriate for communication in certain situations. If you are working a sporting event and in a rural location and there is an accident you may need to call for onsite medical support, or if you have a work related query and no one is around to assist you may need to contact your staffing manager.</div>
+    <div class="fl-training__notice fl-training__notice--correct">Correct!<br><br>Mobile phones have their place, and can be appropriate for communication in certain situations. If you are working a sporting event and in a rural location and there is an accident you may need to call for onsite medical support,
+      or if you have a work related query and no one is around to assist you may need to contact your staffing manager.</div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Communication</h3>
+      <p>Temporary working contracts throw workers into unfamiliar environments. Yet, it is our duty to absorb as much information about the job role as we can in order to assist our customers. All employees become a source of information
+        to a customer. You could be asked all kinds of questions about; lost property, medical issues, timetables, for directions etc. </p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Indicate whether you agree (&nbsp;<i class="glyphicon glyphicon-thumbs-up fc-black"></i>&nbsp;) or disagree (&nbsp;<i class="glyphicon glyphicon-thumbs-down fc-black"></i>&nbsp;) if the following are good sources of information about events you are working:</h5>
+    </div>
+    <div class="fl-training__table">
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Event Websites</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge" value="1" id="knowledge-1">
+              <label for="knowledge-1">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i>Full of information for everyone
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Flair Pre-event emails</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge" value="2" id="knowledge-2">
+              <label for="knowledge-2">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i> Full of job related information
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Team Briefing, Menus and Handbooks</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge" value="3" id="knowledge-3">
+              <label for="knowledge-3">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i> On the day job specifics – ask questions<br>
+        <i class="glyphicon glyphicon-ok"></i> Public information documents
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Maps, posters and venue signage</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge" value="4" id="knowledge-4">
+              <label for="knowledge-4">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i> Site layout to understand locations<br>
+        <i class="glyphicon glyphicon-ok"></i> Look around you, public notices would be all around
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Ticket/Registration Desks and Information Points</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge" value="6" id="knowledge-6">
+              <label for="knowledge-6">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i> Ticket/Registration Desks often supply handouts<br>
+        <i class="glyphicon glyphicon-ok"></i> Information points are especially designed just for giving detailed information
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Supervisors/Managers</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge" value="7" id="knowledge-7">
+              <label for="knowledge-7">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i>Source of job location information
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Other Customers or other workers</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="10" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="knowledge-10" value="10" id="knowledge-10">
+              <label for="knowledge-10">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="10" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct fl-training__notice--bare" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="10" data-flair-training-condition="true">
+        <i class="glyphicon glyphicon-ok"></i>Other Customers are excellent source, encourage group discussions<br>
+        <i class="glyphicon glyphicon-ok"></i>Other workers can give you venue training
+      </div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Make people feel valued</h3>
+      <p>Making your customers feel valued is the foundation of the service industry. Be engaged in your job and seek to make a person’s day by adding that little extra touch to the service you provide. After all you have a job because
+        they are speaking to you.</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>When considering your personal approach to customer service, would you agree (&nbsp;<i class="glyphicon glyphicon-thumbs-up fc-black"></i>&nbsp;) or disagree (&nbsp;<i class="glyphicon glyphicon-thumbs-down fc-black"></i>&nbsp;) with the statements below?</h5>
+    </div>
+    <div class="fl-training__table">
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Acknowledge a customer on their approach</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="valued" value="1" id="valued-1">
+              <label for="valued-1">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Listen to them, appear interested</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="valued" value="2" id="valued-2">
+              <label for="valued-2">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Probe via conversation, how else can you help them</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="valued" value="3" id="valued-3">
+              <label for="valued-3">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Present people with a solution, give them your time</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="valued" value="4" id="valued-4">
+              <label for="valued-4">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Finish with a thank you or genuine goodbye</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="valued" value="5" id="valued-5">
+              <label for="valued-5">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Make people feel valued</h3>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>IF YOU WERE THE CUSTOMER, would you consider the following scenarios as good (&nbsp;<i class="glyphicon glyphicon-thumbs-up fc-black"></i>&nbsp;) or bad (&nbsp;<i class="glyphicon glyphicon-thumbs-down fc-black"></i>&nbsp;) examples of customer service?</h5>
+    </div>
+    <div class="fl-training__table">
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>You approach some chatting staff, they keep chatting</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="1" id="goodservice-1">
+              <label for="goodservice-1">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Staff look at you and smile as you approach</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="2" id="goodservice-2">
+              <label for="goodservice-2">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>A steward asks how they can assist you after saying hello</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="3" id="goodservice-3">
+              <label for="goodservice-3">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Your question is met with a blank look</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="4" id="goodservice-4">
+              <label for="goodservice-4">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Your question is met with a mumbled answer</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="5" id="goodservice-5">
+              <label for="goodservice-5">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Your question is met with a 'sorry' then no further advice</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="6" id="goodservice-6">
+              <label for="goodservice-6">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Your problem creates a discussion with answers</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="7" id="goodservice-7">
+              <label for="goodservice-7">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>You are asked if you require any additional assistance</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="8" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="8" id="goodservice-8">
+              <label for="goodservice-8">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="8" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>The stewards start talking to another customer</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="9" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="9" id="goodservice-9">
+              <label for="goodservice-9">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="9" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>You receive a ‘goodbye’ and ‘enjoy your day’ on departing</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="10" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="goodservice" value="10" id="goodservice-10">
+              <label for="goodservice-10">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="10" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Going the extra mile...</h3>
+    <ul class="photo-strip mt2 h100">
+      <li>
+        <%= image_tag 'training-silver-blk-q9.png' %>
+      </li>
+      <li>
+        <%= image_tag 'training-q9-1.jpg' %>
+      </li>
+      <li>
+        <%= image_tag 'training-q9-3.jpg' %>
+      </li>
+      <li>
+        <%= image_tag 'training-love-q9.png' %>
+      </li>
+      <li>
+        <%= image_tag 'training-q9-2.jpg' %>
+      </li>
+      <li>
+        <%= image_tag 'training-q9-4.png' %>
+      </li>
+    </ul>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Tick the two boxes against the statements that you think are correct:</h5>
+      <table>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="extra-mile" value="1" id="extra-mile-1">
+              <label for="extra-mile-1">Going the extra mile means to make more effort than is expected of you</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="extra-mile" value="2" id="extra-mile-2">
+              <label for="extra-mile-2">Going the extra mile means to travel a bit further to work than normal </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="extra-mile" value="3" id="extra-mile-3">
+              <label for="extra-mile-3">Going the extra mile means to work much harder than everyone else </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="extra-mile" value="4" id="extra-mile-4">
+              <label for="extra-mile-4">Going the extra mile means to work a long shift with no breaks </label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="extra-mile" value="5" id="extra-mile-5">
+              <label for="extra-mile-5">Going the extra mile is all of the above </label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesNot" data-flair-training-eval-arg="2" data-flair-training-condition="true">Hint: 2 statements are correct</div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Problem Solving</h3>
+      <p>Customer service is about attending to or solving a person’s issues. From general needs and wants, to problems relating to your work area or in the wider scope of the event. Even if you’re unable to resolve an issue it’s
+        the efforts you go to that will make a lasting impression of the service you provide. </p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>What should you do if you really don’t know the answer? Select 2 options</h5>
+      <table>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="problem-solving" value="1" id="problem-solving-1">
+              <label for="problem-solving-1">Shrug your shoulders and look vague, they might leave</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="problem-solving" value="2" id="problem-solving-2">
+              <label for="problem-solving-2">Look to other workers to answer</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="problem-solving" value="3" id="problem-solving-3">
+              <label for="problem-solving-3">Politely say you don't know</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="problem-solving" value="4" id="problem-solving-4">
+              <label for="problem-solving-4">Politely suggest you are unsure but you will ask a manager</label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesNot" data-flair-training-eval-arg="2" data-flair-training-condition="true">Hmm... some answers are incorrect</div>
+  </div>
+  <!--
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Problem Solving</h3>
+      <p>Before offering any solutions you would need to understand the problem, demonstrate good communication skills, product awareness and a willingness to assist before presenting the customer with a suitable solution.</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Can you put these steps into a logical problem solving action plan?</h5>
+    </div>
+    <div class="fl-match fl-match--with-hints">
+      <ul class="fl-match__targets">
+        <li class="fl-match__target fl-match__target--short">
+          <div class="fl-match__target__title fl-match__target__title--short" data-flair-training-match="1">1</div>
+          <ul class="fl-match__target__container">
+            <li class="fl-match__source" data-flair-training-match="1">Listen and learn the problem</li>
+          </ul>
+        </li>
+        <li class="fl-match__target fl-match__target--short">
+          <div class="fl-match__target__title fl-match__target__title--short" data-flair-training-match="2">2</div>
+          <ul class="fl-match__target__container">
+            <li class="fl-match__source" data-flair-training-match="5">Pitch the solution to the customer</li>
+          </ul>
+        </li>
+        <li class="fl-match__target fl-match__target--short">
+          <div class="fl-match__target__title fl-match__target__title--short" data-flair-training-match="3">3</div>
+          <ul class="fl-match__target__container">
+            <li class="fl-match__source" data-flair-training-match="3">Generate possible solutions</li>
+          </ul>
+        </li>
+        <li class="fl-match__target fl-match__target--short">
+          <div class="fl-match__target__title fl-match__target__title--short" data-flair-training-match="4">4</div>
+          <ul class="fl-match__target__container">
+            <li class="fl-match__source" data-flair-training-match="4">Consider management direction?</li>
+          </ul>
+        </li>
+        <li class="fl-match__target fl-match__target--short">
+          <div class="fl-match__target__title fl-match__target__title--short" data-flair-training-match="5">5</div>
+          <ul class="fl-match__target__container">
+            <li class="fl-match__source" data-flair-training-match="6">Implement and analyze</li>
+          </ul>
+        </li>
+        <li class="fl-match__target fl-match__target--short">
+          <div class="fl-match__target__title fl-match__target__title--short" data-flair-training-match="6">6</div>
+          <ul class="fl-match__target__container">
+            <li class="fl-match__source" data-flair-training-match="2">How does it impact the customer</li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="checkMismatch" data-flair-training-condition="true">Hmmm... some answers seem to be off.
+    </div>
+    <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="checkMismatch" data-flair-training-condition="false">All correct!
+    </div>
+  </div>
+  -->
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Complaint Handling</h3>
+      <p>Dealing with complaints is part of being a front line customer service worker. The challenge is to handle the situation in a way that leaves the customer thinking you’re great. Remember to listen carefully and ask questions
+        to ensure you understand the whole picture. Try not to become defensive. You may need to report an issue to your line manager or, if it’s within the scope of your role, offer a solution.</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Indicate which of the below attributes are required (&nbsp;<i class="glyphicon glyphicon-thumbs-up fc-black"></i>&nbsp;) or not required (&nbsp;<i class="glyphicon glyphicon-thumbs-down fc-black"></i>&nbsp;) to handle complaints?</h5>
+    </div>
+    <div class="fl-training__table">
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Listening and discussing the points raised</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="1" id="complaint-1">
+              <label for="complaint-1">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Remaining calm and composed</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="2" id="complaint-2">
+              <label for="complaint-2">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Keeping focused on the issue at hand</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="3" id="complaint-3">
+              <label for="complaint-3">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Engaging co-workers to all add their views</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="4" id="complaint-4">
+              <label for="complaint-4">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Being attentive and supportive</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="5" id="complaint-5">
+              <label for="complaint-5">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Empathising without blaming</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="6" id="complaint-6">
+              <label for="complaint-6">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>A willingness to resolve the complaint</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="7" id="complaint-7">
+              <label for="complaint-7">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="fl-training__tr">
+        <div class="fl-training__td grow-1">
+          <p>Discussing the conflict with any worker willing to gossip</p>
+        </div>
+        <div class="fl-training__td shrink-2">
+          <div class="fl-form__toggle inline-block">
+            <div class="inline-block toggle-label">
+              <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="8" data-flair-training-condition="true">
+                <i class="glyphicon glyphicon-remove"></i>
+              </div>
+              <i class="glyphicon glyphicon-thumbs-down"></i>
+            </div>
+            <div class="fl-form__checkbox fl-form__checkbox--switch inline-block">
+              <input type="checkbox" name="complaint" value="8" id="complaint-8">
+              <label for="complaint-8">&nbsp;</label>
+            </div>
+            <div class="inline-block toggle-label">
+              <i class="glyphicon glyphicon-thumbs-up"></i>
+              <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon fl-icon-w1 inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="8" data-flair-training-condition="false">
+                <i class="glyphicon glyphicon-ok"></i>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Complaint Handling</h3>
+      <p>Complaining does create a conflict situation that could escalate and a customer could become angry or aggressive.</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>Select the methods below you feel would be a positive course of action when dealing with conflict?</h5>
+      <table>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="1" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="1" id="aggression-1">
+              <label for="aggression-1">Remain calm</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="2" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="2" id="aggression-2">
+              <label for="aggression-2">Listen carefully</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="3" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="3" id="aggression-3">
+              <label for="aggression-3">Promise anything to get them away from you</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="4" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="4" id="aggression-4">
+              <label for="aggression-4">Establish how the customer would like the complaint resolved</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="5" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="5" id="aggression-5">
+              <label for="aggression-5">Raise your voice</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="6" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="6" id="aggression-6">
+              <label for="aggression-6">Seek assistance from your line manager if you feel threatened</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--correct fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="7" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-ok pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="7" id="aggression-7">
+              <label for="aggression-7">Control body language and remain professional</label>
+            </div>
+          </td>
+        </tr>
+        <tr>
+          <td class="vertical-align-top">
+            <div class="fl-training__notice fl-training__notice--wrong fl-training__notice--icon inline-block" data-flair-training-eval-function="checkboxChecked" data-flair-training-eval-arg="8" data-flair-training-condition="true">
+              <i class="glyphicon glyphicon-remove pr1"></i>
+            </div>
+          </td>
+          <td>
+            <div class="fl-form__checkbox">
+              <input type="checkbox" name="aggression" value="8" id="aggression-8">
+              <label for="aggression-8">Tell the customer they're rude and you are not helping them unless they speak nicely</label>
+            </div>
+          </td>
+        </tr>
+      </table>
+    </div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesLess" data-flair-training-eval-arg="5" data-flair-training-condition="true">Hmm... there are 5 correct answers. Try to select all 5.</div>
+    <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="numberOfSelectedCheckboxesGreater" data-flair-training-eval-arg="5" data-flair-training-condition="true">Hmm... you have selected some answers that are incorrect. Only 5 answers are correct.</div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Complaint Handling</h3>
+      <p>Some potential scenarios that you could face when working in events...</p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5><em>Scenario 1</em>: A person feels the drink they received is warm and flat. Do you?</h5>
+      <ul class="list-unstyled">
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="drink" value="a" id="drink-a">
+            <label for="drink-a">Suggest all pre-poured festival drinks are the same</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="drink" value="b" id="drink-b">
+            <label for="drink-b">Thank him for pointing this out and replace with a freshly poured drink. Report it to your manager</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="drink" value="c" id="drink-c">
+            <label for="drink-c">Sample the drink and suggest there’s nothing wrong with it</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="drink" value="d" id="drink-d">
+            <label for="drink-d">Exchange his drink and pour the old one away</label>
+          </div>
+        </li>
+      </ul>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="drink" data-flair-training-condition="a">Incorrect</div>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="drink" data-flair-training-condition="b">Correct</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="drink" data-flair-training-condition="c">Incorrect</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="drink" data-flair-training-condition="d">Incorrect</div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Complaint Handling</h3>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5><em>Scenario 2</em>: Out on course a runner has gone the wrong way, complaining about lack of signage. Do you?</h5>
+      <ul class="list-unstyled">
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="signage" value="a" id="signage-a">
+            <label for="signage-a">Listen to them, repeat back and suggest you will report to management, suggest they finish the race then also report it to immediately</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="signage" value="b" id="signage-b">
+            <label for="signage-b">Listen to them then suggested the extra mile was good for their fitness and they will deserve the medal</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="signage" value="c" id="signage-c">
+            <label for="signage-c">Keep saying sorry and explain that’s not your section of the race</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="signage" value="d" id="signage-d">
+            <label for="signage-d">Listen but explain they are the only one so far so maybe they went wrong</label>
+          </div>
+        </li>
+      </ul>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="signage" data-flair-training-condition="a">Correct</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="signage" data-flair-training-condition="b">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="signage" data-flair-training-condition="c">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="signage" data-flair-training-condition="d">Incorrect, please try again...</div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Complaint Handling</h3>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5><em>Scenario 3</em>: A customer is accusing you of short changing them, they have consumed several drinks and are becoming angry. Do you?</h5>
+      <ul class="list-unstyled">
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="short-changing" value="a" id="short-changing-a">
+            <label for="short-changing-a">Listen, then tell the customer they are wrong then ignore them hoping they will go away</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="short-changing" value="b" id="short-changing-b">
+            <label for="short-changing-b">Walk away and go on a break</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="short-changing" value="c" id="short-changing-c">
+            <label for="short-changing-c">After initial discussion where you calmly stated the change was correct, ask how they would like the situation resolved</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="short-changing" value="d" id="short-changing-d">
+            <label for="short-changing-d">Report to your line manager for assistance if you feel the situation is escalating</label>
+          </div>
+        </li>
+      </ul>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="short-changing" data-flair-training-condition="a">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="short-changing" data-flair-training-condition="b">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="short-changing" data-flair-training-condition="c">Correct</div>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="short-changing" data-flair-training-condition="d">Correct</div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Equality – Treating People Equally</h3>
+      <h5>All customers and colleagues should be treated equally and with respect.   Do you agree with this simple statement?</h5>
+      <div class="mb2">
+        <div class="fl-form__radio inline-block mr2">
+          <input type="radio" required name="equality" value="yes" id="equality-yes">
+          <label for="equality-yes">Yes</label>
+        </div>
+        <div class="fl-form__radio inline-block">
+          <input type="radio" required name="equality" value="no" id="equality-no">
+          <label for="equality-no">No</label>
+        </div>
+      </div>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="equality" data-flair-training-condition="no">This is your own point of view and not connected to the below question.</div>
+      <div class="mb4">&nbsp;</div>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>If you were aware that a colleague was treating a customer or another colleague with disrespect, what could you do?</h5>
+      <ul class="list-unstyled">
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="equality-voice" value="a" id="equality-voice-a">
+            <label for="equality-voice-a">Advise them their behaviour is inappropriate or unfair</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="equality-voice" value="b" id="equality-voice-b">
+            <label for="equality-voice-b">Inform a supervisor about their behaviour</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="equality-voice" value="c" id="equality-voice-c">
+            <label for="equality-voice-c">Join in on the conversation</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="equality-voice" value="d" id="equality-voice-d">
+            <label for="equality-voice-d">Do nothing and walk away to work somewhere else, it’s not your issue</label>
+          </div>
+        </li>
+      </ul>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="equality-voice" data-flair-training-condition="a">Correct</div>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="equality-voice" data-flair-training-condition="b">Correct</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="equality-voice" data-flair-training-condition="c">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-eval-arg="equality-voice" data-flair-training-condition="d">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--correct">As a temporary worker you will work with new people and you may feel apprehensive about approaching a person directly. In this situation, always inform your staffing manager.</div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <div class="article">
+      <h3>Professional Image</h3>
+      <p>
+        Everyone has ‘off days’ but a job within customer service requires you to treat the first and last person you see in the same professional manner.
+      </p>
+      <div class="fl-counter fl-counter--pull-left">
+        <div class="fl-counter__current"><%= current_step += 1 %></div>
+        <div class="fl-counter__total">of <%= total_steps %></div>
+      </div>
+      <h5>You are working at a festival for three days. You had a long shift the day before and the people camping near you were really loud and kept you up all night. Today the last thing you want to do is go and work with music blaring all around you.  Do you?</h5>
+      <ul class="list-unstyled">
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="professional-image" value="a" id="professional-image-a">
+            <label for="professional-image-a">Not show up to work at all, as it would be better for you and the customer</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="professional-image" value="b" id="professional-image-b">
+            <label for="professional-image-b">Stand on the bar and moan all day until your bar manager asks you to leave</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="professional-image" value="c" id="professional-image-c">
+            <label for="professional-image-c">Work with a smile on your face, and keep your problems to yourself. It’s all about presenting a professional image</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="professional-image" value="d" id="professional-image-d">
+            <label for="professional-image-d">Start off with the intention to provide each customer equally excellent service, but towards the end of the day start to not care as you’re getting tired. You think everyone is drunk, so won’t remember or care if
+              they’re treated well anyway</label>
+          </div>
+        </li>
+        <li>
+          <div class="fl-form__radio">
+            <input type="radio" required name="professional-image" value="e" id="professional-image-e">
+            <label for="professional-image-e">You serve customers and proceed to tell them the whole story about how you have not slept, and expect the customer to be empathetic, “oh, bless you must be so tired”</label>
+          </div>
+        </li>
+      </ul>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-condition="a">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-condition="b">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--correct" data-flair-training-eval-function="radioValue" data-flair-training-condition="c">Correct</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-condition="d">Incorrect, please try again...</div>
+      <div class="fl-training__notice fl-training__notice--wrong" data-flair-training-eval-function="radioValue" data-flair-training-condition="e">Incorrect, please try again...</div>
+    </div>
+  </div>
+  <div class="fl-training__step">
+    <h3>Summary</h3>
+    <p>The aim of this training log was to recap some important elements of customer service. We hope you have gained some knowledge and understanding that you will be able to demonstrate when working for and with your customers.
+      Enjoy your work, enjoy interacting with people and strive to make yourself proud of the service you deliver.</p>
+    <div class="row">
+      <div class="column small-12 medium-4 text-center"><%= image_tag 'treat-others-the-way.jpg', alt:'Treat others the way you wish to be treated', class:'shadow image--medium' %></div>
+      <div class="column small-12 medium-8">
+        <ul class="list-unstyled centered">
+          <li><span class="fl-acrostic">S</span>ay hello</li>
+          <li><span class="fl-acrostic">E</span>stablish a connection</li>
+          <li><span class="fl-acrostic">R</span>esearch the requirements, needs and wants</li>
+          <li><span class="fl-acrostic">V</span>erify the facts</li>
+          <li><span class="fl-acrostic">I</span>nitiate service</li>
+          <li><span class="fl-acrostic">C</span>ommit to action</li>
+          <li><span class="fl-acrostic">E</span>nd transaction</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</form>

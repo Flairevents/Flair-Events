@@ -1,0 +1,4 @@
+%h4= @header
+
+%div{style:"text-align:center"}
+  #duplicate-assignments-calendar{style:"display:inline-block"}

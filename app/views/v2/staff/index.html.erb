@@ -1,0 +1,423 @@
+<% content_for :head do %>
+  <title>Find Flexible Work that Suit Your Schedule</title>
+  <meta name="description" content="Looking for flexible work? Flair is one of the UK's top staffing companies with interesting and rewarding opportunities suiting multiple skillsetsand availabilities. Join us today!" />
+<% end %>
+<div class="staff_zone me">
+<%= render partial: 'v2/shared/nav' %>
+<div class="content">
+  <div class="content-spacer"></div>
+  <div class="content-inner">
+    <div class="v2-profile-header-container"></div>
+    <center>
+      <div class="v2-profile-header d-flex justify-content-center mobile-hide">
+        <div style='position:relative;'>
+          <% if @prospect.photo.present? %>
+            <img class="v2-profile-image v2-profile-image__present" src="<%= @prospect.photo_url %>"/>
+          <% else %>
+            <%= image_tag 'no-prospect-photo.png' , class: 'v2-profile-image v2-profile-image__no-present' %>
+          <% end %>
+          <a data-target="#edit-uploaded-photo" data-toggle="modal" id="edit-photo-link">
+            <img class="v2-profile-camera" id='v2-profile-camera' src="<%= asset_path 'v2/Group 401.png' %>"/>
+          </a>
+          <%= render partial: 'me_upload_photo' %>
+        </div>
+        <div style='text-align: left; margin-left: 16px; margin-top: 34px;'>
+          <div class="v2-profile-name">
+            <%= current_user.first_name %> <%= current_user.last_name %>
+            <% if @prospect.has_personal_details? && @prospect.v2_applications_done? %>
+              <%= image_tag 'v2/Group 400.png' %>
+            <% end %>
+          </div>
+
+          <% if @prospect.status != 'APPLICANT' %>
+            <div class="v2-profile-stars d-flex flex-row bd-highlight">
+              <% (1..5).each do |i| %>
+                <% if i <=  @average_rating.to_f.round %>
+                  <% #%span{class:"glyphicon yellow-star"} %>
+                  <%= image_tag 'v2/Path 3065.png' %>
+                <% else %>
+                  <% #%span{class:"glyphicon glyphicon-star-empty"} %>
+                  <%= image_tag 'v2/Path 3069.png' %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="v2-profile-stars-label"><%= @average_rating %> <span>(<%= @number_of_ratings %>)</span></div>
+          <% end %>
+        </div>
+      </div>
+      <div class="v2-profile-header web-hide">
+        <div style='position:relative;width:fit-content;'>
+          <% if @prospect.photo.present? %>
+            <img class="v2-profile-image" src="<%= @prospect.photo_url %>"/>
+          <% else %>
+            <%= image_tag 'no-prospect-photo.png' , class: 'v2-profile-image' %>
+          <% end %>
+          <a data-target="#edit-uploaded-photo" data-toggle="modal" id="edit-photo-link">
+            <img class="v2-profile-camera" id='v2-profile-camera' src="<%= asset_path 'v2/Group 401.png' %>"/>
+          </a>
+          <%= render partial: 'me_upload_photo' %>
+        </div>
+        <div style='text-align: left; margin-left: 16px; margin-top: 10px;'>
+          <div class="v2-profile-name">
+            <%= current_user.first_name %> <%= current_user.last_name %>
+            <% if @prospect.has_personal_details? && @prospect.v2_applications_done? %>
+              <%= image_tag 'v2/Group 400.png', style: "width: 16px; height: 16px;" %>
+            <% end %>
+          </div>
+
+          <% if @prospect.status != 'APPLICANT' %>
+            <div class="v2-profile-stars d-flex flex-row bd-highlight">
+              <% (1..5).each do |i| %>
+                <% if i <=  @average_rating.to_f.round %>
+                  <% #%span{class:"glyphicon yellow-star"} %>
+                  <%= image_tag 'v2/Path 3065.png' %>
+                <% else %>
+                  <% #%span{class:"glyphicon glyphicon-star-empty"} %>
+                  <%= image_tag 'v2/Path 3069.png' %>
+                <% end %>
+              <% end %>
+            </div>
+
+            <div class="v2-profile-stars-label"><%= @average_rating %> <span>(<%= @number_of_ratings %>)</span></div>
+          <% end %>
+        </div>
+      </div>
+      <% if GigRequest.find_by(prospect_id: @prospect.id).present? %>
+        <p id='applied_true' style="display: none">present</p>
+        <div id="prospect-status" style="display: none;"><%= @prospect.status %></div>
+
+
+        <div class="v2-profile-header-menu-container d-flex justify-content-center">
+          <a href='#profile' class="v2-profile-header-menu" style="margin-right: 62px;" id='v2-profile-my-profile'>
+            Profile
+          </a>
+          <% if @prospect.has_personal_details? %>
+            <a href='#application' class="v2-profile-header-menu" style="margin-right: 62px;" id='v2-profile-applications'>
+              Applications
+            </a>
+          <% else %>
+            <div class="v2-profile-header-menu-disabled" style="margin-right: 62px;">
+              Applications
+            </div>
+          <% end %>
+
+          <% if @prospect.status == 'APPLICANT' %>
+            <% if @prospect.has_personal_details? && @prospect.v2_applications_done? %>
+              <a href='#interview' class="v2-profile-header-menu" style="margin-right: 62px;" id='v2-profile-book-interview'>
+                <span class="mobile-hide">Intro</span> Chat
+              </a>
+            <% else %>
+              <div class="v2-profile-header-menu-disabled" style="margin-right: 62px;">
+                <span class="mobile-hide">Intro</span> Chat
+              </div>
+            <% end %>
+          <% end %>
+
+          <% if @prospect.has_personal_details? && @prospect.v2_applications_done? %>
+            <a href='#jobs' class="v2-profile-header-menu" id='v2-profile-explore-jobs'>
+              My Jobs
+              <div class="v2-profile-header-menu-active"></div>
+            </a>
+          <% else %>
+            <div class="v2-profile-header-menu-disabled">
+              My Jobs
+            </div>
+          <% end %>
+        </div>
+      <% else %>
+        <div class="v2-profile-header-menu-container d-flex justify-content-center">
+          <a href='#profile' class="v2-profile-header-menu" style="margin-right: 62px;" id='v2-profile-my-profile'>
+            Profile
+            <div class="v2-profile-header-menu-active"></div>
+          </a>
+
+          <% if @prospect.has_personal_details? %>
+            <a href='#application' class="v2-profile-header-menu" style="margin-right: 62px;" id='v2-profile-applications'>
+              Application
+            </a>
+          <% else %>
+            <div class="v2-profile-header-menu-disabled" style="margin-right: 62px;">
+              Application
+            </div>
+          <% end %>
+
+          <% if @prospect.status == 'APPLICANT' %>
+            <% if @prospect.has_personal_details? && @prospect.v2_applications_done? %>
+              <a href='#interview' class="v2-profile-header-menu" style="margin-right: 62px;" id='v2-profile-book-interview'>
+                 Intro chat
+              </a>
+            <% else %>
+              <div class="v2-profile-header-menu-disabled" style="margin-right: 62px;">
+                 Intro chat
+              </div>
+            <% end %>
+          <% end %>
+
+          <% if @prospect.has_personal_details? && @prospect.v2_applications_done? %>
+            <a href='#jobs' class="v2-profile-header-menu" id='v2-profile-explore-jobs'>
+              My Jobs
+            </a>
+          <% else %>
+            <div class="v2-profile-header-menu-disabled">
+              My Jobs
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+    </center>
+    <div class=" container staff-container">
+      <%= render partial: 'profile' %>
+    </div>
+  </div>
+</div>
+<%= render :partial => "v2/application/footer" %>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $(document).on("dblclick", '.cr-overlay', function(e){
+      e.preventDefault();
+      $('#photo-input').click();
+    })
+
+    $('#edit-photo-link').on('click', function() {
+      $('#photo-upload').show();
+    })
+
+    $('#upload-photo').on('click', function(e){
+      e.preventDefault();
+      $('#photo-input').click();
+      })
+
+    $('#upload-photo-close').on('click', function(e){
+      e.preventDefault();
+        $('.v2-upload-photo-caption-desk').css('display', '')
+        $('.v2-upload-photo-caption-mobile').css('display', '')
+        $('.v2-upload-photo-caption-drag').css('display', 'none')
+        $('.v2-profile-photo-show-container').show();
+
+        $('#upload-photo').css('display', '');
+      $('#submit-photo').css('display', 'none');
+      $('.croppie-photo-overlay').css('display', 'none');
+      $('.croppie-photo-preview').css('display', 'none');
+      $('#photo-input').val('');
+    })
+    $('.v2-profile-photo-show-container').on('click', function (e){
+        e.preventDefault();
+       $('#upload-photo').trigger('click')
+    })
+
+    // $('#v2-photo-input').on('change', function(){
+    //   $('#v2-photo-form').submit()
+    // })
+
+    // // HEADERS
+    // if ($('#applied_true').text() == "present"){
+    //     $('#v2-profile-my-profile-content').css('display', 'block');
+    //     $('#v2-profile-landing-content').css('display', 'none');
+    //     $('#v2-profile-applications-content').css('display', 'none');
+    //     $('#v2-profile-book-interview-content').css('display', 'none');
+    //     $('#v2-profile-explore-jobs-content').css('display', 'none');
+    //     if($('#v2-profile-explore-jobs').find('.v2-profile-header-menu-active').length == 0){
+    //
+    //         $('#v2-profile-explore-jobs').append('<div class="v2-profile-header-menu-active"></div>');
+    //     }
+    //
+    //     $('#v2-profile-my-profile div').remove();
+    //
+    //     $('#v2-profile-applications div').remove();
+    //
+    //     $('#v2-profile-book-interview div').remove();
+    // }
+
+    $('body').on('click', '#v2-profile-my-profile', function(){
+      $('#v2-profile-my-profile-content').css('display', 'block');
+      $('#v2-profile-landing-content').css('display', 'none');
+      $('#v2-profile-applications-content').css('display', 'none');
+      $('#v2-profile-book-interview-content').css('display', 'none');
+      $('#v2-profile-explore-jobs-content').css('display', 'none');
+
+      if($('#v2-profile-my-profile').find('.v2-profile-header-menu-active').length == 0){
+        $('#v2-profile-my-profile').append('<div class="v2-profile-header-menu-active"></div>');
+      }
+      $('.staff-container.container').removeClass('interview-container')
+
+      $('#v2-profile-kid').css('display', 'none');
+      $('#v2-profile-terms').css('display', 'none');
+      $('#v2-profile-personal-details').css('display', 'block');
+
+      $('#v2-profile-applications div').remove();
+
+      $('#v2-profile-book-interview div').remove();
+
+      $('#v2-profile-explore-jobs div').remove();
+
+      v2_profile_bg_size('#v2-profile-personal-details')
+
+      $([document.documentElement, document.body]).animate({
+        scrollTop: 0
+      }, 500);
+    })
+
+    $('body').on('click', '#v2-profile-applications', function(){
+      $('#v2-profile-my-profile-content').css('display', 'none');
+      $('#v2-profile-landing-content').css('display', 'none');
+      $('#v2-profile-applications-content').css('display', 'block');
+      $('#v2-profile-book-interview-content').css('display', 'none');
+      $('#v2-profile-explore-jobs-content').css('display', 'none');
+
+      if($('#v2-profile-applications').find('.v2-profile-header-menu-active').length == 0){
+        $('#v2-profile-applications').append('<div class="v2-profile-header-menu-active"></div>');
+      }
+
+      $('.staff-container.container').removeClass('interview-container')
+      $('#v2-profile-applications-application-container').css('display', 'none');
+      $('#v2-profile-applications-tax-content-container').css('display', 'none');
+      $('#v2-profile-applications-bank-container').css('display', 'none');
+      $('#v2-profile-applications-identification-container').css('display', 'none');
+      $('#v2-profile-applications-skill-container').css('display', 'block');
+
+      $('#v2-profile-application-header-skills .v2-profile-application-header-container').find('img').each(function(){
+          $(this).css('display', 'none')
+      })
+      $('#v2-profile-application-header-skills .v2-profile-application-header-container #selected').css('display', 'block')
+      $('#v2-profile-application-header-skills .v2-profile-application-header-container #done').css('display', 'none')
+
+      click_category('tax')
+      click_category('bank')
+      click_category('identification')
+      click_category('application')
+
+      v2_profile_bg_size('#v2-profile-applications-skill-container')
+
+      $([document.documentElement, document.body]).animate({
+        scrollTop: 0
+      }, 500);
+    })
+
+    $('body').on('click', '#v2-profile-book-interview', function(){
+      $('#v2-profile-my-profile-content').css('display', 'none');
+      $('#v2-profile-landing-content').css('display', 'none');
+      $('#v2-profile-applications-content').css('display', 'none');
+      $('#v2-profile-book-interview-content').css('display', 'block');
+      $('#v2-profile-explore-jobs-content').css('display', 'none');
+
+      if($('#v2-profile-book-interview').find('.v2-profile-header-menu-active').length == 0){
+        $('#v2-profile-book-interview').append('<div class="v2-profile-header-menu-active"></div>');
+      }
+      $('.staff-container.container').addClass('interview-container')
+      $('#v2-profile-my-profile div').remove();
+
+      $('#v2-profile-applications div').remove();
+
+      $('#v2-profile-explore-jobs div').remove();
+
+      v2_profile_bg_size('#v2-book-interview')
+
+      $([document.documentElement, document.body]).animate({
+        scrollTop: 0
+      }, 500);
+    })
+
+    $('body').on('click', '#v2-profile-explore-jobs', function(){
+      $('#v2-profile-my-profile-content').css('display', 'none');
+      $('#v2-profile-landing-content').css('display', 'none');
+      $('#v2-profile-applications-content').css('display', 'none');
+      $('#v2-profile-book-interview-content').css('display', 'none');
+      $('#v2-profile-explore-jobs-content').css('display', 'block');
+
+      if($('#v2-profile-explore-jobs').find('.v2-profile-header-menu-active').length == 0){
+        $('#v2-profile-explore-jobs').append('<div class="v2-profile-header-menu-active"></div>');
+      }
+      $('.staff-container.container').removeClass('interview-container')
+
+      $('#v2-profile-my-profile div').remove();
+
+      $('#v2-profile-applications div').remove();
+
+      $('#v2-profile-book-interview div').remove();
+
+      v2_profile_bg_size('.v2-explore-jobs-container')
+
+      $([document.documentElement, document.body]).animate({
+        scrollTop: 0
+      }, 500);
+    })
+
+
+    $('body').on('click', '#v2-identification-upload-birth-cert', function(){
+      $('#birth_certificate').click();
+    })
+
+    $('body').on('change', '#birth_certificate', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-birth-cert-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-ni-doc', function(){
+      $('#ni_document').click();
+    })
+
+    $('body').on('change', '#ni_document', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-ni-doc-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-photo-id', function(){
+      $('#photo_id').click();
+    })
+
+    $('body').on('change', '#photo_id', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-photo-id-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-picture-page', function(){
+      $('#picture_page').click();
+    })
+
+    $('body').on('change', '#picture_page', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-picture-page-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-front-cover', function(){
+      $('#front_cover').click();
+    })
+
+    $('body').on('change', '#front_cover', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-front-cover-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-working-visa', function(){
+      $('#working_visa').click();
+    })
+
+    $('body').on('change', '#working_visa', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-working-visa-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-brp-front', function(){
+      $('#brp_front').click();
+    })
+
+    $('body').on('change', '#brp_front', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-brp-front-content').text(filename);
+    })
+
+    $('body').on('click', '#v2-identification-upload-brp-back', function(){
+      $('#brp_back').click();
+    })
+
+    $('body').on('change', '#brp_back', function(){
+      filename = $(this).val().replace(/C:\\fakepath\\/i, '');
+      $('#v2-identification-upload-brp-back-content').text(filename);
+    })
+
+  </script>
+<% end %>

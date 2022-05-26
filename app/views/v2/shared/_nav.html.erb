@@ -1,0 +1,428 @@
+<%= render :partial => "v2/application/header" %>
+<div class="sticky-top desktop-hide">
+  <nav class="row z-top navbar v2-p-m-0" style="height: 70px;">
+    <div class="col-3">
+      <a href="/">
+        <%= image_tag 'v2/Group 40.png', class: 'v2-site-logo' %>
+      </a>
+    </div>
+    <div class="col flex flex-horiz-right">
+      <div class="nav-bar-mobile-menu-btn" id="nav-bar-mobile-menu-btn">
+        <%= image_tag 'v2/mobile/Group 1097.png' %>
+      </div>
+      <div class="nav-bar-menu-bg-1"></div>
+      <div class="nav-bar-menu-bg-2"></div>
+      <div class="nav-bar-menu-bg-3"></div>
+      <div class="nav-bar-menu-bg-4"></div>
+      <div class="nav-bar-menu" id="nav-bar-menu">
+        <ul class="nav-login  navbar-collapse col-lg-10 col-md-10 col-sm-10 v2-nav-login">
+          <li class="v2-navbar">
+            <a href="/workers" data-turbolinks="false">
+              Workers
+            </a>
+            <% if current_page?('/workers') %>
+              <div class='d-flex justify-content-center v2-nav-active-1'>
+                <div class="v2-circle"></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+              </div>
+            <% end %>
+          </li>
+
+          <% if current_user %>
+            <li class="v2-navbar" style="margin-left: 45px;">
+              <a href="/staff/events">
+                Job Board
+              </a>
+              <% if current_page?('/staff/events') %>
+                <div class='d-flex justify-content-center v2-nav-active-2'>
+                  <div class="v2-circle"></div>
+                  <div class="v2-circle" style='margin-left: 6px;'></div>
+                  <div class="v2-circle" style='margin-left: 6px;'></div>
+                </div>
+              <% end %>
+            </li>
+          <% else %>
+            <li class="v2-navbar" style="margin-left: 45px;">
+              <a href="/events">
+                Job Board
+              </a>
+              <% if current_page?('/events') %>
+                <div class='d-flex justify-content-center v2-nav-active-2'>
+                  <div class="v2-circle"></div>
+                  <div class="v2-circle" style='margin-left: 6px;'></div>
+                  <div class="v2-circle" style='margin-left: 6px;'></div>
+                </div>
+              <% end %>
+            </li>
+          <% end %>
+
+          <li class="v2-navbar" style="margin-left: 45px;">
+            <a href="/client">
+              Clients
+            </a>
+            <% if current_page?('/client') %>
+              <div class='d-flex justify-content-center v2-nav-active-3'>
+                <div class="v2-circle"></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+              </div>
+            <% end %>
+          </li>
+
+          <li class="v2-navbar" style="margin-left: 40px; height: 100%">
+            <div class="v2-navbar-dropdown-title d-flex flex-row bd-highlight align-items-center" id="v2-navbar-dropdown-industries" style=" margin-top: 2px;height: 100%">
+              Industries
+              <div class="v2-navbar-arrow" id='v2-navbar-arrow-industries'>
+                <%= image_tag 'v2/Path 1357.png' %>
+              </div>
+            </div>
+            <div class="v2-navbar-dropdown-content v2-display-none d-flex flex-column bd-highlight" id="v2-navbar-dropdown-industries-content">
+              <a href="/industries/sports" class="v2-navbar-dropdown-content-link">
+               <%= image_tag 'v2/home/sports.png', class: 'v2-navbar-dropdown-content-img' %>
+                Sports
+              </a>
+              <hr>
+              <a href="/industries/events" class="v2-navbar-dropdown-content-link">
+                <%= image_tag 'v2/home/events.png', class: 'v2-navbar-dropdown-content-img' %>
+                Events & Festival
+              </a>
+              <hr>
+              <a href="/industries/promo" class="v2-navbar-dropdown-content-link">
+                <%= image_tag 'v2/home/promotional.png', class: 'v2-navbar-dropdown-content-img' %>
+                Promotional
+              </a>
+              <hr>
+              <a href="/industries/hospitality" class="v2-navbar-dropdown-content-link">
+                <%= image_tag 'v2/home/hospitality.png', class: 'v2-navbar-dropdown-content-img' %>
+                Hospitality
+              </a>
+              <hr>
+              <a href="/industries/logistics" class="v2-navbar-dropdown-content-link">
+                <%= image_tag 'v2/home/logistics.png', class: 'v2-navbar-dropdown-content-img' %>
+                Logistics
+              </a>
+              <hr>
+              <a href="/industries/commercial" class="v2-navbar-dropdown-content-link">
+                <%= image_tag 'v2/home/commercial.png', class: 'v2-navbar-dropdown-content-img' %>
+                Commercial
+              </a>
+            </div>
+            <% if current_page?('/industries') %>
+              <div class='d-flex justify-content-center v2-nav-active-4'>
+                <div class="v2-circle"></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+              </div>
+            <% end %>
+          </li>
+          <li class="v2-navbar" style="margin-left: 32px;">
+            <a href="/about">
+              Meet Flair
+            </a>
+            <% if current_page?('/about') %>
+              <div class='d-flex justify-content-center v2-nav-active-5'>
+                <div class="v2-circle"></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+                <div class="v2-circle" style='margin-left: 6px;'></div>
+              </div>
+            <% end %>
+          </li>
+          <% unless current_user && current_user.is_a?(Prospect) %>
+              <li class="v2-navbar" style="margin-left: 63px; padding-top: 5px">
+                <a href="/login" title="Login">
+                  <div class="v2-login-button">
+                    Login
+                    <%= image_tag 'v2/home/lock.svg', class: "v2-login-button-img" %>
+                  </div>
+                </a>
+              </li>
+              <li class="v2-navbar" style="margin-left: 24px;">
+                <a href="/register" title="Login">
+                  <div class="v2-register-button">Join Flair</div>
+                </a>
+              </li>
+          <% else %>
+              <li class="v2-navbar" style="margin-left: 50px;">
+                <a href="/staff" data-turbolinks="false">
+                  <% if current_user.photo? && current_user.photo_url %>
+                    <img class="flair-nav-menu__profile-photo" src="<%= current_user.photo_url %>"/>
+                  <% else %>
+                    <%= image_tag 'no-prospect-photo.png', class: 'flair-nav-menu__profile-photo', style: 'width:36px; height:36px;' %>
+                  <% end %>
+                  <%= current_user.first_name %>
+                </a>
+              </li>
+
+              <li class="v2-navbar" style="margin-left: 25px;">
+                <a href="<%= Flair::Application.config.base_https_url %>/staff/logout">
+                  <%= image_tag 'v2/Logout Button.png', class: "v2-login-button-w" %>
+                </a>
+              </li>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<div class="sticky-top ipad-hide">
+  <nav class="row z-top navbar v2-p-m-0" style="height: 70px;">
+    <div class="col-3">
+      <a href="/">
+        <%= image_tag 'v2/Group 40.png', class: 'v2-site-logo' %>
+      </a>
+    </div>
+    <div class="col flex flex-horiz-right">
+      <a href="/staff">
+        <% if current_user && !current_user.is_a?(Officer) %>
+          <% if current_user.photo? && current_user.photo_url %>
+            <img class="flair-nav-menu__profile-photo" src="<%= current_user.photo_url %>" style = 'width:30px; height:30px;margin-right:15px;'/>
+          <% else %>
+            <%= image_tag 'no-prospect-photo.png', class: 'flair-nav-menu__profile-photo', style: 'width:30px; height:30px;margin-right:15px;' %>
+          <% end %>
+        <% end %>
+      </a>
+      <div class="nav-bar-mobile-menu-btn" id="nav-bar-mobile-menu-btn">
+        <%= image_tag 'v2/mobile/Group 1097.png' %>
+      </div>
+      <div class="nav-bar-menu-bg nav-bar-menu-bg-1"></div>
+      <div class="nav-bar-menu-bg nav-bar-menu-bg-2"></div>
+      <div class="nav-bar-menu-bg nav-bar-menu-bg-3"></div>
+      <div class="nav-bar-menu-bg nav-bar-menu-bg-4"></div>
+      <div class="nav-bar-menu" id="nav-bar-menu-ipad">
+        <%= image_tag (asset_path 'v2/Group 636.png'), class: "navbar-logo" %>
+        <ul class="nav-login navbar-collapse col-lg-10 col-md-10 col-sm-10 v2-nav-login">
+
+          <li class="d-flex justify-content-end">
+            <div class="nav-bar-close-btn">
+              <%= image_tag 'v2/mobile/Path 3205.png' %>
+            </div>
+          </li>
+
+          <% unless current_user && current_user.is_a?(Prospect) %>
+              <li class="v2-navbar v2-navbar-buttons-container d-flex justify-content-center">
+                <a href="/login" title="Login">
+                  <div class="v2-login-button">
+                    Login
+                    <%= image_tag 'v2/home/lock.svg', class: "v2-login-button-img" %>
+                  </div>
+                </a>
+                <a href="/register" title="Login">
+                  <button class="mobile-logout-button">Join Flair</button>
+                </a>
+              </li>
+          <% else %>
+              <li class="v2-navbar v2-navbar-buttons-container d-flex justify-content-center">
+                <a href="/staff">
+                  <div class="mobile-user-photo-container">
+                    <div style="width: fit-content;margin:auto;margin-top:6px;">
+                      <% if current_user.photo? && current_user.photo_url %>
+                        <img class="flair-nav-menu__profile-photo" src="<%= current_user.photo_url %>"/>
+                      <% else %>
+                        <%= image_tag 'no-prospect-photo.png', class: 'flair-nav-menu__profile-photo', style: 'width:36px; height:36px;' %>
+                      <% end %>
+                      <%= current_user.first_name %>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="<%= Flair::Application.config.base_https_url %>/staff/logout">
+                  <button class="mobile-logout-button">LOG OUT</button>
+                </a>
+              </li>
+          <% end %>
+
+          <% if current_user %>
+            <li class="v2-navbar">
+              <a href="/staff/events" class="nav-bar-mobile-links">
+                Job Board
+              </a>
+            </li>
+          <% else %>
+            <li class="v2-navbar">
+              <a href="/events" class="nav-bar-mobile-links">
+                Job Board
+              </a>
+            </li>
+          <% end %>
+
+          <li class="v2-navbar">
+            <a href="/hire" class="nav-bar-mobile-links">
+              Hire Staff
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/client" class="nav-bar-mobile-links">
+              Clients
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/workers" data-turbolinks="false" class="nav-bar-mobile-links">
+              Workers
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/about" class="nav-bar-mobile-links">
+              Meet Flair
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <div class="nav-bar-mobile-links" style="margin:auto;">
+              <div class="v2-navbar-dropdown-title d-flex flex-row bd-highlight" id="v2-navbar-dropdown-industries-ipad" style="margin:auto;">
+                Industries
+                <div class="v2-navbar-arrow" id='v2-navbar-arrow-industries'>
+                  <%= image_tag 'v2/mobile/Green arrow side menu.png' %>
+                </div>
+              </div>
+              <div class="v2-display-none v2-navbar-dropdown-industries-content" id="v2-navbar-dropdown-industries-content-ipad">
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/sports">Sports</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/events">Festivals & Events</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/hospitality">Hospitality</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/promo">Promotional</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/logistics">Logistics</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/commercial">Commercial</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/case_studies" class="nav-bar-mobile-links">
+              Case Studies
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <div class="v2-contact-flair-container">
+              <a href="/contact">
+                <button class="v2-contact-flair">Contact Flair</button>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $(document).scroll(function () {
+      if ($(this).scrollTop() > 32){
+        $('nav').addClass('nav-scrolled');
+      }else{
+        $('nav').removeClass('nav-scrolled');
+      }
+    });
+
+    $('#v2-navbar-dropdown-industries').hover(function(){
+      if ($('#v2-navbar-dropdown-industries-content').css('display') == 'none'){
+        $('#v2-navbar-arrow-industries').addClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-industries').removeClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content').removeClass('v2-display-none');
+      }else{
+        $('#v2-navbar-arrow-industries').removeClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-industries').addClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content').addClass('v2-display-none');
+      }
+
+      $('#v2-navbar-arrow-about').removeClass('v2-navbar-arrow-active')
+      $('#v2-navbar-arrow-about').addClass('v2-navbar-arrow')
+      $('#v2-navbar-dropdown-about-content').addClass('v2-display-none');
+    })
+
+    $('#v2-navbar-dropdown-industries-content').hover(function(){
+      if ($('#v2-navbar-dropdown-industries-content').css('display') == 'none'){
+        $('#v2-navbar-arrow-industries').addClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-industries').removeClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content').removeClass('v2-display-none');
+      }else{
+        $('#v2-navbar-arrow-industries').removeClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-industries').addClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content').addClass('v2-display-none');
+      }
+
+      $('#v2-navbar-arrow-about').removeClass('v2-navbar-arrow-active')
+      $('#v2-navbar-arrow-about').addClass('v2-navbar-arrow')
+      $('#v2-navbar-dropdown-about-content').addClass('v2-display-none');
+    })
+
+    $('#v2-navbar-dropdown-about').hover(function(){
+      if ($('#v2-navbar-dropdown-about-content').css('display') == 'none'){
+        $('#v2-navbar-arrow-about').addClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-about').removeClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-about-content').removeClass('v2-display-none');
+      }else{
+        $('#v2-navbar-arrow-about').removeClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-about').addClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-about-content').addClass('v2-display-none');
+      }
+
+      $('#v2-navbar-arrow-industries').removeClass('v2-navbar-arrow-active')
+      $('#v2-navbar-arrow-industries').addClass('v2-navbar-arrow')
+      $('#v2-navbar-dropdown-industries-content').addClass('v2-display-none');
+    })
+
+    $('#v2-navbar-dropdown-about-content').hover(function(){
+      if ($('#v2-navbar-dropdown-about-content').css('display') == 'none'){
+        $('#v2-navbar-arrow-about').addClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-about').removeClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-about-content').removeClass('v2-display-none');
+      }else{
+        $('#v2-navbar-arrow-about').removeClass('v2-navbar-arrow-active')
+        $('#v2-navbar-arrow-about').addClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-about-content').addClass('v2-display-none');
+      }
+
+      $('#v2-navbar-arrow-industries').removeClass('v2-navbar-arrow-active')
+      $('#v2-navbar-arrow-industries').addClass('v2-navbar-arrow')
+      $('#v2-navbar-dropdown-industries-content').addClass('v2-display-none');
+    })
+
+    $('#v2-navbar-dropdown-industries-ipad').on('click', function(){
+      if ($('#v2-navbar-dropdown-industries-content-ipad').css('display') == 'none'){
+        $(this).addClass('v2-navbar-arrow-active')
+        $(this).removeClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content-ipad').removeClass('v2-display-none');
+        $(this).addClass('v2-navbar-dropdown-title-active')
+      }else{
+        $(this).removeClass('v2-navbar-arrow-active')
+        $(this).addClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content-ipad').addClass('v2-display-none');
+        $(this).removeClass('v2-navbar-dropdown-title-active')
+      }
+    })
+
+    $('body').on('click', '#nav-bar-mobile-menu-btn', function(){
+      navbar_click('block');
+    })
+
+    $('body').on('click', '.nav-bar-close-btn', function(){
+      navbar_click('none');
+    })
+
+    function navbar_click(param) {
+      $('#nav-bar-menu').css('display', param);
+      $('#nav-bar-menu-ipad').css('display', param);
+      $('.nav-bar-menu-bg-1').css('display', param);
+      $('.nav-bar-menu-bg-2').css('display', param);
+      $('.nav-bar-menu-bg-3').css('display', param);
+      $('.nav-bar-menu-bg-4').css('display', param);
+    }
+  </script>
+<% end %>

@@ -1,0 +1,266 @@
+- content_for :head do
+  %title Find Flexible Work That Suits Your Schedule
+  %meta{ name: "description", content: "Looking for flexible work? Flair is one of the UK's top staffing companies with interesting and rewarding opportunities suiting multiple skillsets and availabilities. Join us today!"}
+= javascript_include_tag "card-slider-min"
+= javascript_include_tag "v2-workers"
+.public.workers
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .content-inner#workers_page{"data-role" => "page"}
+      .v2-worker-white-bg
+      .v2-worker-overlay
+      .v2-worker-bg
+      .v2-worker-bg-bottom
+      .v2-worker-top-box-logo
+      .v2-worker-box-1
+        %h1 Make great jobs work for you.
+        %p Whether you’re signed up with one agency or a dozen, we think you’ll check in with us first because we have the best jobs, the coolest clients.
+        .join-button
+          %a{ href: "/register" }
+
+      .v2-worker-box-2.d-flex.flex-column.align-items-center
+        %h1 Find rewarding, flexible work right here.
+        %p Once you're part of the Flair team, we come to you with the right opportunities. From national sporting events to regular casual work near you - all you have to do is say yes to the work that suits your lifestyle. It's that simple! Our flexible working solutions fit perfectly around your other commitments.
+
+      .how-it-works-nav
+        .step-box.first.d-flex.flex-column.align-items-center
+          .row
+            .col.v2-p-m-0.box-title Join
+            .col-4.v2-p-m-0.step-number-mobile 01
+          .box-content.w-75 Complete your online application and book a friendly Interview.
+        .step-box.second
+          .row
+            .col.v2-p-m-0.box-title Apply
+            .col-4.v2-p-m-0.step-number-mobile 02
+          .box-content
+            You register for jobs and shifts that fit your schedule. Flair's App will help you stay organized.
+        .step-box.third
+          .row
+            .col.v2-p-m-0.box-title Work
+            .col-4.v2-p-m-0.step-number-mobile 03
+          .box-content
+            From ‘local’ to ‘worth travelling to’, our variety of work will broaden your horizons and skill base.
+        .step-box.fourth
+          .row
+            .col.v2-p-m-0.box-title Paid
+            .col-4.v2-p-m-0.step-number-mobile 04
+          .box-content
+            We pay weekly at competitive rates with holiday and pensions direct to your bank accounts.
+      .v2-worker-box-3
+        .d-flex.justify-content-center.images-container
+          .col1
+            .box-image.first
+            .box-image.second
+            .box-image.third
+          .col2
+            .box-image
+
+        %h2.worker-box-title
+          Variety that fuels
+          .violet motivation
+        %p Turn downtime into extra cash and a wealth of rewarding experiences.
+        .orange-btns.register-now.d-flex.align-items-center.justify-content-center.mt2
+          %a{href: "/register"}
+            %button.register-now Join Us
+        .v2-hanging-logo
+      .v2-worker-box-4-mobile#v2-worker-box-4-mobile
+        %h2 Featured jobs
+        .feature-jobs-con{style: "display: none !important;"}
+          %ul.slides
+            - @featured_events.each_with_index do |event, i|
+              %li
+                .job-container.slide.d-flex.flex-column.justify-content-center.align-items-center
+                  .job-loc.d-flex.justify-content-center.align-items-center
+                    %i.fas.fa-map-marker-alt
+                    %label="#{event.location}, #{event.post_code.split(' ').first}" if event.post_code.present? && event.location.present?
+                  .job-title.d-flex.justify-content-center.align-items-center
+                    - if event.photo_url == "/assets/no-event-photo.jpg"
+                      = image_tag (asset_path 'no-prospect-photo.png'), class: "job-image"
+                    - else
+                      = image_tag event.photo_url, class: "job-image"
+                  .job-date.d-flex.justify-content-center.align-items-center.mt1
+                    %i.fas.fa-calendar-alt
+                    %label="#{event.public_date_start.strftime("%e %b %Y")} / #{event.duration_for_show}"
+                  .job-event.d-flex.flex-column.justify-content-center.align-items-center
+                    .job-event-name=(event.display_name.upcase || '')
+                    .job-description.label-green=(event.jobs_description || '')
+
+                  - pay_25_high = event.jobs.where(include_in_description: true).pluck(:pay_25_and_over).max
+                  - pay_21_high = event.jobs.where(include_in_description: true).pluck(:pay_21_and_over).max
+                  - pay_18_high = event.jobs.where(include_in_description: true).pluck(:pay_18_and_over).max
+                  - if @prospect
+                    - highest_pay = @prospect.age >= 23 ? pay_25_high : @prospect.age >= 21 ? pay_21_high : pay_18_high
+                  -else
+                    - highest_pay = [pay_18_high, pay_21_high, pay_25_high].max
+
+                  .job-rate.d-flex.justify-content-center.align-items-center
+                    %i.fa.fa-money-bill
+                    %label="up to £#{ highest_pay ? '%.2f' % highest_pay : ''} p/h"
+                  .job-button{onclick: "window.location.href = '#{@prospect ? "/staff" : "/"}events?view_event=#{event.id}'"}
+                    %a{href: "#{@prospect ? "/staff" : "/"}events?view_event=#{event.id}", style: "color: white;"} View Job
+                  -# .job-overlay
+        .slider-con.d-flex.align-items-center.justify-content-center
+          .v2-jobs-slider.align-items-center.justify-content-center.ui-card-slider
+            - @featured_events.each do |event|
+              .job-container.slide.d-flex.flex-column.justify-content-center.align-items-center
+                .job-inner-container
+                  .job-loc.d-flex.justify-content-center.align-items-center
+                    %i.fas.fa-map-marker-alt
+                    %label="#{event.location}, #{event.post_code.split(' ').first}" if event.post_code.present? && event.location.present?
+                  .job-title.d-flex.justify-content-center.align-items-center
+                    - if event.photo_url == "/assets/no-event-photo.jpg"
+                      = image_tag (asset_path 'no-prospect-photo.png'), class: "job-image"
+                    - else
+                      = image_tag event.photo_url, class: "job-image"
+                  .job-date.d-flex.justify-content-center.align-items-center.mt1
+                    %i.fas.fa-calendar-alt
+                    %label="#{event.public_date_start.strftime("%a %e %b")} / #{event.duration_for_show}"
+                  .job-event.d-flex.flex-column.justify-content-center.align-items-center
+                    .job-event-name=(event.display_name.upcase || '')
+                    .job-description.label-green=(event.jobs_description || '')
+
+                  - pay_25_high = event.jobs.where(include_in_description: true).pluck(:pay_25_and_over).max
+                  - pay_21_high = event.jobs.where(include_in_description: true).pluck(:pay_21_and_over).max
+                  - pay_18_high = event.jobs.where(include_in_description: true).pluck(:pay_18_and_over).max
+                  - if @prospect
+                    - highest_pay = @prospect.age >= 23 ? pay_25_high : @prospect.age >= 21 ? pay_21_high : pay_18_high
+                  -else
+                    - highest_pay = [pay_18_high, pay_21_high, pay_25_high].max
+
+                  .job-rate.d-flex.justify-content-center.align-items-center
+                    %i.fa.fa-money-bill
+                    %label="up to £#{ highest_pay ? '%.2f' % highest_pay : ''} p/h"
+                .job-button{onclick: "window.location.href='#{@prospect ? "/staff" : "/"}events?view_event=#{event.id}'"}
+                  %a{href: "#{@prospect ? "/staff" : "/"}events?view_event=#{event.id}", style: "color: white;"} View Job
+                -# .job-overlay
+        .d-flex.justify-content-center
+          %ul.featured-jobs-dots.d-flex.flex-inline.align-items-center
+            - @featured_events.each_with_index do |event, ii|
+              %li.d-flex.dots{class: ii == 0 ? 'dots-active' : ''}
+      .v2-worker-box-5
+        .box-5-content
+          %h1 Have a job in mind?
+          %h3 We might just have it!
+          = form_with url: v2_events_path, method: :get, local: true do |f|
+            %input.form-control.job-search{placeholder: "Job/Skills/Keywords", name: "keyword", autocomplete: "off"}
+              .orange-btns.find-job.d-flex.align-items-center.justify-content-center
+                %a{href: "#"}
+                  %button.find-job Search
+      .v2-worker-box-6
+        %h2.worker-box-title
+          Explore our industries
+        %p
+          From wrist banding to table serving.
+          %br/
+          Christmas elves to reindeer keeping.
+          %br/
+          Greeting guests to pulling pints. Working with Flair is diverse, flexible and well-supported.
+        .orange-btns.join-us.d-flex.align-items-center.justify-content-center
+          %a{href: "/register"}
+            %button.join-us Join Us Today
+      .box-category
+        %ul.slides
+          %li#workers-events.workers-category
+            .d-flex.justify-content-center
+              .events.icon
+              %h2 EVENTS
+            .content Everything from large music festivals, annual fixtures to bespoke community and corporate activities, from the bold to the beautiful, we supply to the full range, catering to every interest nation wide.
+          %li#workers-sports.workers-category{style: 'display: none;'}
+            .d-flex.justify-content-center
+              .sports.icon
+              %h2 SPORTS
+            .content This is the place if you enjoy the outdoors and love the roar and atmosphere of a thrilling live competition. From a 5k community run to a famous world championship we offer active jobs for all.
+          %li#workers-promotional.workers-category{style: 'display: none;'}
+            .d-flex.justify-content-center
+              .promotional.icon
+              %h2 PROMOTIONAL
+            .content Enjoy the buzz of public interaction and being the face of a brand. Flair offers a range of jobs under the promotional umbrella from touring sampling gigs, trade shows, street marketing to impressive pop-up activations.
+          %li#workers-logistics.workers-category{style: 'display: none;'}
+            .d-flex.justify-content-center
+              .logistics.icon
+              %h2 LOGISTICS
+            .content Warehouse jobs, event labour to light industry we seek process-driven people from thinkers to doers. Enjoy finding the clear pathway to a process whilst multitasking - then this industry is for you.
+          %li#workers-hospitality.workers-category{style: 'display: none;'}
+            .d-flex.justify-content-center
+              .hospitality.icon
+              %h2 HOSPITALITY
+            .content Is elite customer service your vibe? ‘Serving guests at the highest industry level takes a special skill-set., quality that gets noticed. Flair offers jobs at corporate functions, branding events and at many regular venues.
+          %li#workers-commercial.workers-category{style: 'display: none;'}
+            .d-flex.justify-content-center
+              .commercial.icon
+              %h2 COMMERCIAL
+            .content Offering all kinds of retail and merchandise job alongside a full range of administration roles. Flair opens up opportunities that can demonstrate your personality and organisational skills.
+      .v2-worker-box-8
+        %h2.d-flex.flex-inline.align-items-baseline.justify-content-center
+          What can we offer
+        %ul.offer-nav.d-flex.flex-wrap
+          %li
+            .icon.job-industry
+            %h3.mt1 WIDE VARIETY OF JOBS & INDUSTRIES
+          %li
+            .icon.wages
+            %h3.mt1 WEEKLY WAGES, HOLIDAYS & PENSIONS
+          %li
+            .icon.skills
+            %h3.mt1 USE & GAIN TRANSFERABLE SKILLS
+          %li
+            .icon.growth
+            %h3.mt1 ENJOYABLE, INTERESTING & DIFFERENT
+          %li
+            .icon.calendar
+            %h3.mt1 JOBS FROM ONE DAY TO SEVERAL MONTHS
+          %li
+            .icon.map
+            %h3.mt1 WORK NATIONWIDE & LOCAL
+      .v2-worker-box-7
+        .stadium-bg
+        .big-person
+        .content
+          %h2
+            Our
+            %span.label-green people
+            %br/
+            our focus
+          %p Flair is an industry leader because we value each and every person that makes up our nationwide, flexible workforce. We deliver clear expectations, prompt payment, leadership development opportunities and a positive team environment. But most of all, we listen to what you tell us.
+          %h3
+            We are
+            %span.different different
+            %br/
+            because of
+            %span.label-green you
+      .v2-worker-box-9
+        .content
+          %h2
+            Life at Flair
+          %p We’ve helped literally thousands of people to find interesting and enjoyable work over the past two decades – here’s some words from just a few of them. Join us today and you, too, could soon be looking forward to fun, rewarding work that fits in with your lifestyle.
+        .testimonial-slider-containers
+          %ul.slides
+            - testimonials = [["1. The people. Every event I have worked I have worked with cool and interesting people. 2. The events! Flair has a solid portfolio of clients which means they can provide staff to some interesting events. 3. The Flair team extremely helpful and always on hand to support the team. Finally, The Simplicity. Their easy to work with.", "Ben", "Leicester", "Since 2019", "client-ben"], ["The guys at Flair made my first event, amazing. The communication before, during and after the event was second to none leaving nothing to chance. If anybody is considering event stewarding, I genuinely don’t think any other company can do it better! I found them to be totally professional, yet very friendly & supportive, great organisation on the days and best of all payment within a week.", "Melanie", "Milton Keynes", "Since 2020", "client-mel"], ["Being a student, I need flexibility, however, seeking flexibility can often come with compromises and trade-offs with fair treatment. This is not the case with Flair, they stand out from the crowd to give me flexible work, with guaranteed breaks and competitive pay. I can always be assured that the partner organisations we work with are fair and treat us well as event staff.", "Nathan", "London", "Since 2018", "client-nathan"], ["Excellent company. They are fair and always keep you posted. Plenty of jobs and you can view them on your profile throughout the year. Looking forward to working with them more. Never had problem with Flair.", "Kiran", "Wolverhampton", "Since 2016", "client-kiran"],["I have a great time working with Flair - fun events, amazing staff, always paid on time. I highly recommend this company for anyone interested in working events and for clients looking for staff. Flair is the best!", "Arianne", "London", "Since 2018", "client-arianne"], ["I work with Flair alongside my full-time job and couldn’t recommend them enough, superbly run and organised. The option to progress allowed me to gain management skills and leadership skills, obtain my Personal Licence to now leading event teams. If you are interested in either flexible employment or additional work, then look no further!", "Stuart", "Sale", "Since 2012", "client-stuart"], ["Working at flair has been a great experience. Being able to choose events you can work based on your availability with wages paid weekly basis, great communication per job, they keep you up to date. A lot of job variety, no two days are ever the same.", "Lorretta", "London", "Since 2002", "client-loretta"], ["I've worked with Flair doing a variety of seasonal shifts from festival bar work to sports marshalling. Fantastic company to work for. I'm always paid on time with prearranged pay rates and shift times. I've recommended Flair to loads of my family and friends over the years who have had positive experiences as a result", "Paul", "Scotland", "Since 2014", "client-paul"]]
+            - testimonials.each do |d|
+              %li.testimonial-slider.d-flex.flex-wrap
+                .testimonial-box
+                  .circle-quote
+                  %p.d-flex=d[0]
+                  .client-box.d-flex.flex-inline.mt1
+                    .client-image.mr1{class: "#{d[4]}"}
+                    .d-flex.flex-column
+                      .client-name.d-flex.flex-inline
+                        =d[1] + ","
+                        .label-orange.ml05=d[2]
+                      .client-been=d[3]
+          .fa.fa-chevron-right.arrows.ml1.flex-next
+      .v2-worker-box-10
+        %h2
+          Join the company
+          %br/
+          that works for you
+        .orange-btns.register-now.d-flex.align-items-center.justify-content-center{style: 'position:relative; z-index:9;'}
+          %a{href: "/register"}
+            %button.register-now Register Today
+        .v2-home-bottom
+
+  = render :partial => 'v2/mobile/application/footer'
+
+- content_for :worker_js do
+  %script(src="http://code.jquery.com/jquery-1.11.1.min.js")
+  %script(src="http://code.jquery.com/mobile/1.4.5/jquery.mobile-1.4.5.min.js")

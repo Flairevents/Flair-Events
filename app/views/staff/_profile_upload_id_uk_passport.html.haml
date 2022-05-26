@@ -1,0 +1,29 @@
+%h5 UK Passport
+%p UK or European Economic Area/Swiss passport holder
+= form_tag '/staff/upload_uk_passport_images', multipart: true, id: 'upload_uk_passport', class: 'fl-form' do
+  =render partial: 'profile_upload_id_passport'
+  .row
+    .column.small-12
+      .pt1.pb1.text-right
+        = submit_tag (@prospect.has_id? ? 'Update' : 'Submit'), class: 'btn btn-default'
+
+.passport-pic-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-uk-passport-picture.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.passport-front-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-uk-passport-front.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.passport-expiry-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-uk-passport-expiry.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.passport-number-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-uk-passport-number.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close

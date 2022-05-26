@@ -1,0 +1,73 @@
+.public.events
+  = render :partial => 'shared/nav'
+  .content
+    .content-inner
+      .row.expanded.row--collapse.full-screen
+        .column.small-12.large-6.hidden-xs.hidden-sm.flex.flex--vert
+          -#.map-title.dark-green
+          -#  Check out events near you:
+          .region-map.field.flex--fill-rest.flex.tab-content
+            = render partial: 'shared/region_map'
+        .column.small-12.large-6.flex.flex--vert
+          .events-list.field-light.flex--fill-rest{style: 'background-color: #a3d39c;'}
+            -#%ul.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll.staff-nav{:role => "tablist", style: 'height: 55px;'}
+            -#  %li.active{:role => "tablist"}
+            -#    %a{"aria-controls" => "tab-all", "data-toggle" => "tab", role: "tab", category: 'All'} All
+            -#  %li{:role => "tablist"}
+            -#    %a{"aria-controls" => "tab-sports", "data-toggle" => "tab", role: "tab", category: 'Sport'} Sports
+            -#  %li{:role => "tablist"}
+            -#    %a{"aria-controls" => "tab-music", "data-toggle" => "tab", role: "tab", category: 'Music'} Music
+            -#  %li{:role => "tablist"}
+            -#    %a{"aria-controls" => "tab-promo", "data-toggle" => "tab", role: "tab", category: 'Promo'} Promo
+            -#  %li{:role => "tablist"}
+            -#    %a{"aria-controls" => "tab-hospitality", "data-toggle" => "tab", role: "tab", category: 'Hospitality'} Hospitality
+              -#%li{:role => "tablist"}
+                -#%a{"aria-controls" => "tab-ongoing", "data-toggle" => "tab", role: "tab", category: 'Ongoing'} Ongoing
+            -##region-filter.visible-sm.visible-xs
+            -#  %label
+            -#    Filter By Region &nbsp;
+            -#  %select.region-filter-dropdown
+            -#    %option.form-control{:value => "All_UK"} All UK
+            -#    %option.form-control{:value => "Wales"} Wales
+            -#    %option.form-control{:value => "Ireland"} Ireland
+            -#    %option.form-control{:value => "Scotland"} Scotland
+            -#    %option.form-control{:value => "East_Midlands"} East Midlands
+            -#    %option.form-control{:value => "London"} London
+            -#    %option.form-control{:value => "Southwest"} Southwest
+            -#    %option.form-control{:value => "Yorkshire"} Yorkshire Humberside
+            -#    %option.form-control{:value => "Northeast"} Northeast
+            -#    %option.form-control{:value => "Northwest"} Northwest
+            -#    %option.form-control{:value => "Midlands"} Midlands
+            -#    %option.form-control{:value => "Southeast"} Southeast
+            -#    %option.form-control{:value => "Eastern"} East Anglia
+            -#.tab-content{:style => "height: calc(100vh - 160px); overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 90%;"}
+            -#  #tab-all.tab-pane.active{:role => "tabpanel"}
+            #event-category{category: 'All'}
+            #event-region{region: 'All'}
+            .event-list-all#event-list-all
+              = render partial: 'shared/event_list', locals: {new_events: @new_events, events: @events, job_groups: @job_groups}
+              -#.temporary-block{style: 'padding: 30px; width: 90%;'}
+              -#  %h2.job-board-top-heading A Temporary Measure
+              -#  %h4.diversity-flair-people{style: 'margin-top: 0px;'} We are removing 2020 event job posts.
+              -#  %p.job-board-paragraph-text Once further clarification and worker safety reassurances are provided, event job openings will be re-advertised. If you are already a part of the Flair team, all your existing work bookings remain on your profile and you will be updated directly.
+              -#
+              -#  %h2.mt2.job-board-top-heading{style:'margin-bottom: 10px;'} Diversity of Flair's People
+              -#  -if current_user && current_user.is_a?(Prospect)
+              -#    %p.job-board-paragraph-text As industries slowly reopen, we are reaching out to different sectors of the job market to then contact you direct by matching job categories of interest.
+              -#  -else
+              -#    %p.job-board-paragraph-text As industries slowly reopen, we are reaching out to different sectors of the job market. Events have always attached workers from many backgrounds, offering a vibrant array of skills and experiences. Our database is no exception to this rule, so if you're seeking flexible work opportunities, register today.
+              -#    .mt3
+              -#    .yellow-button{style: 'margin: 0px; border-radius: 18px;'}
+              -#      %a.pop-up-request-quote{href: '/register'}
+              -#        %p.bottom-button
+              -#          %b{style: 'color: #005949'} Join Us
+              -#  - unless current_user && current_user.is_a?(Prospect)
+              -#    .mt3
+              -#      %p.job-board-paragraph-text Flair Team login to check out your new application form. Advance your profile by selecting job categories of interest to receive all the latest job notifications.
+              -#    .mt1
+              -#    .yellow-button{style: 'margin: 0px; border-radius: 18px;'}
+              -#      %a.pop-up-request-quote{href: '/login'}
+              -#        %p.bottom-button
+              -#          %b{style: 'color: #005949'} Login
+
+  .content-after

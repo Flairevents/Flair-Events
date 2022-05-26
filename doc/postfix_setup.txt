@@ -1,0 +1,117 @@
+=== Setup Logging of Postfix ===
+Edit the server's logging configuration.
+
+sudo vim /etc/rsyslog.d/50-default.conf:
+
+mail.info                       -/var/log/mail.info
+mail.warn                       -/var/log/mail.warn
+mail.err                        /var/log/mail.err
+
+(uncomment mail.info and mail.warn lines)
+
+=== Reload rsyslog for changes to stick ===
+
+sudo /etc/init.d/rsyslogd force-reload
+
+
+=== Add a transport called "unsubscribe" to /etc/postfix/master.cf ===
+Add the following line to the end of the master.cf file:
+
+unsubscribe unix -    n    n    -    50    pipe
+    flags=R user=mail argv=/home/deploy/.rvm/bin/rvm in /var/www/flair/current do ruby lib/unsubscribe.rb
+
+This line points to the script and the binary that interprets it.
+
+
+=== Tell postfix to set up a virtual mailbox domain for unsubscribe ===
+Modify /etc/postfix/main.cf and add:
+
+# Virtual domain for unsubscribe mails
+virtual_mailbox_domains = unsubscribe.eventstaffing.co.uk
+virtual_mailbox_maps = regexp:/etc/postfix/virtual.regex
+
+Line above tell postfix what file to look for to map virtual domains to
+mailboxes.
+
+=== Create a virtual alias map file ===
+Create a file called virtual.regex. (Technically it can be any name)
+
+sudo vim /etc/postfix/virtual.regex
+
+Add this line:
+
+/^unsubscribe[^@]*@unsubscribe.eventstaffing.co.uk/     root
+
+The regex tells postfix to catch all mail with
+unsubscribe_____@unsubscribe.eventstaffing.co.uk and map those mails to the root
+mailbox.
+
+Virtual mailboxes allow us to create many fake mailboxes that point to some real
+mailbox. Since the fiel is meant to be a regex, you have to compile it first
+with postmap. (next step)
+
+
+=== Generate postmap of new virtual file ===
+
+sudo postmap /etc/postfix/virtual.regex
+
+
+=== Tell postfix what transport to use when processing unsubscribe mail ===
+Add the following to main.cf:
+
+# Enables a transport map to pipe unsubscribe mail through Ruby script
+# Uses a regexto catch the right mail messages
+transport_maps = regexp:/etc/postfix/redirect.regex
+
+
+This informs postfix to check what transport to use by looking into the
+referenced file.
+
+
+=== Create the file that maps unsubscribe mail to the transport ===
+Create a file called redirect.regex. Add this line:
+
+/^unsubscribe[^@]*@unsubscribe.eventstaffing.co.uk/   unsubscribe:
+
+
+This file says: Use the unsubscribe transport when you catch mail addressed to:
+unsubscribe_____@unsubscribe.eventstaffing.co.uk
+
+The unsubscribe transport was created way at the top in the master.cf file.
+
+
+=== Generate postmap of new redirect file ===
+
+sudo postmap /etc/postfix/redirect.regex
+
+
+You have to compile the regex file into a db so that postfix can search it
+quickly.
+
+
+=== Restart postfix ===
+sudo postfix check
+sudo postfix reload
+
+=== Setup postgres user mapping so user 'mail' can login to postgres as 'deploy'
+Add the following to /etc/postgresql/9.5/main/pg_hba.conf:
+
+# TYPE  DATABASE        USER            ADDRESS                 METHOD
+local   all             deploy                                  peer map=flai
+
+Add the following to /etc/postgresql/9.5/main/pg_ident.conf:
+
+# MAPNAME       SYSTEM-USERNAME         PG-USERNAME
+flair           mail                    deploy
+flair           deploy                  deploy
+
+=== Restart Postgres ===
+sudo /etc/init.d/postgresql restart
+
+=== Watch mail.info file for mail delivery ===
+tail -f /var/log/mail.info
+
+
+=== Try sending a mail message to unsubscribe-______ ====
+
+Mail should be handled in log.

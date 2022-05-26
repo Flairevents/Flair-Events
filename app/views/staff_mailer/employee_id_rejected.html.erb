@@ -1,0 +1,9 @@
+<p>Dear <%= @name %>,</p>
+
+<p>We have had to reject your ID due to the reason below:</p>
+
+<p><%= @reason %></p>
+
+<p>Sorry for the inconvenience, these documents are a legal requirement. View the photos or scan’s before uploading to ensure the quality and image is suitable. ALL typed texts must be visible with nothing missing. Please avoid using a flash, have the document flat and make sure your photo angle is looking straight down directly over the whole form ID.</p>
+
+<%= render partial: 'staff_mailer/signature' %>

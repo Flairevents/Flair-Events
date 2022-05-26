@@ -1,0 +1,14 @@
+.v2-contact-bg
+  = render partial: 'v2/mobile/shared/nav'
+  .content
+    .content-spacer
+    .content-inner
+      .row.d-flex.justify-content-center
+        .v2-holding-content
+          %label.d-flex.justify-content-center
+            Thanks
+            %span{style: 'margin-left: 20px;'}= @name + ","
+          %label.d-flex.justify-content-center We will get back to you swiftly
+          %label.d-flex.justify-content-center by email or with a call.
+  .content-after
+  = render partial: 'v2/mobile/application/footer'

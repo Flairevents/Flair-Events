@@ -1,0 +1,418 @@
+= form_for @prospect, url: '#', html: {class: 'record-details-form', autocomplete: 'off'} do |f|
+  %h4.character-screening Character Screening
+  -unless @prospect.headquarter.nil?
+    %p.headquarter-heading HQ:
+  -if @prospect.headquarter.nil?
+    %p.headquarter-heading
+  %u.screening-value
+    = @prospect.headquarter
+  %p.date-heading Date:
+  %u.screening-value
+    = @prospect.updated_at.to_date
+  %br
+  %table.profile-screening-table
+    %tr
+      %th
+        %b Flair
+      %th
+        %b Experience
+      %th
+        %b Engaging
+      %th
+        %b Confident
+      %th
+        %b Language
+      %th
+        %b Big Teams
+      %th
+        %b Majority
+      %th
+        %b Bespoke
+    %tr
+      %td
+        =f.select :flair_image, [['',''], ['High',1.0], ['Middle',0.5], ['Starter',0.0]], {}, tabindex: 2, selected: @prospect.flair_image, class: 'form-control dropdown'
+      %td
+        =f.select :experienced, [['',''], ['High',1.0], ['Middle',0.5], ['Starter',0.0]], {}, tabindex: 2, selected: @prospect.experienced, class: 'form-control dropdown'
+      %td
+        =f.select :chatty, [['',''], ['High',1.0], ['Middle',0.5], ['Starter',0.0]], {}, tabindex: 2, selected: @prospect.chatty, class: 'form-control dropdown'
+      %td
+        =f.select :confident, [['',''], ['High',1.0], ['Middle',0.5], ['Starter',0.0]], {}, tabindex: 2, selected: @prospect.confident, class: 'form-control dropdown'
+      %td
+        =f.select :language, [['',''], ['High',1.0], ['Middle',0.5], ['Starter',0.0]], {}, tabindex: 2, selected: @prospect.language, class: 'form-control dropdown'
+      %td.char-column
+        =f.check_box :big_teams, {}, 'Yes', 'No'
+      %td.char-column
+        =f.check_box :all_teams, {}, 'Yes', 'No'
+      %td.char-column
+        =f.check_box :bespoke, {}, 'Yes', 'No'
+
+
+  %h4 Performance Notes
+  %table
+    %tr
+      %td
+        = f.text_area :performance_notes, rows: 2, cols: 120, tabindex: 1, class: 'form-control'
+    %tr
+      %td
+        Rating
+        .div{style: 'width: 40px'}
+          =   f.select :rating, [['',''], [1,1.0], [1.5,1.5], [2,2.0], [2.5,2.5], [3,3.0], [3.5,3.5], [4,4.0], [4.5,4.5], [5,5.0]], {}, tabindex: 2, selected: @prospect.rating, class: 'form-control'
+
+  -# %h4 Contact Preferences
+  -# %table
+  -#   %tbody
+  -#     %tr
+  -#     - if @prospect.prefers_in_person
+  -#       %td.question In Person:
+  -#       %td Yes
+  -#     - if @prospect.prefers_phone
+  -#       %td.question Phone:
+  -#       %td= @prospect.preferred_phone
+  -#     - if @prospect.prefers_skype
+  -#       %td.question Skype:
+  -#       %td= @prospect.preferred_skype
+  -#     - if @prospect.prefers_facetime
+  -#       %td.question Facetime:
+  -#       %td= @prospect.preferred_facetime
+  -#     -if @preferred_contact_time.length > 0
+  -#       %td.question Preferred Contact Time:
+  -#       %td= @preferred_contact_time.join(', ')
+
+  - if q = @prospect.questionnaire
+    %h4{style: 'margin-top: 5px;'} Skills & Interests
+    %table.profile-skills-table
+      %tr
+        %th
+          %b Bar
+        %th
+          %b Hosp
+        %th
+          %b Sport
+        %th
+          %b Promo
+        %th
+          %b Retail
+        %th
+          %b Office
+        %th
+          %b Festivals
+        %th
+          %b Logistics
+        %th
+          %b Bar Manager
+        %th
+          %b Staff Leader
+        %th
+          %b Festival & Event Bar Management
+        %th
+          %b Event Production
+      %tr
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_bar ? q.has_bar : @prospect.bar_skill), name: 'prospect[questionnaire[has_bar]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_bar_and_hospitality), name: 'prospect[questionnaire[has_bar_and_hospitality]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_sport_and_outdoor), name: 'prospect[questionnaire[has_sport_and_outdoor]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_promotional_and_street_marketing), name: 'prospect[questionnaire[has_promotional_and_street_marketing]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_merchandise_and_retail), name: 'prospect[questionnaire[has_merchandise_and_retail]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_reception_and_office_admin), name: 'prospect[questionnaire[has_reception_and_office_admin]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_festivals_and_concerts), name: 'prospect[questionnaire[has_festivals_and_concerts]]', class: 'form-control'
+        %td
+          =select_tag "", options_for_select([['',nil], ['High','HIGH'], ['Medium','MEDIUM'], ['Some','SOME'], ['Starter','NONE']], q.has_logistics ?  q.has_logistics : @prospect.warehouse_skill), name: 'prospect[questionnaire[has_logistics]]', class: 'form-control'
+        %td
+          =check_box_tag 'prospect[questionnaire[bar_management_experience]]', {}, q.bar_management_experience == true
+        %td
+          =check_box_tag 'prospect[questionnaire[staff_leadership_experience]]', {}, q.staff_leadership_experience == true
+        %td
+          =check_box_tag 'prospect[questionnaire[festival_event_bar_management_experience]]', {}, q.festival_event_bar_management_experience == true
+        %td
+          =check_box_tag 'prospect[questionnaire[event_production_experience]]', {}, q.event_production_experience == true
+    %br
+    %h4{style: 'margin-top: -5px;'} Marketing
+    %table.profile-skills-table
+      %tr
+        %th
+          %b Bar
+        %th
+          %b Hosp
+        %th
+          %b Sport
+        %th
+          %b Promo
+        %th
+          %b Retail
+        %th
+          %b Office
+        %th
+          %b Festivals
+        %th
+          %b Logistics
+        %th
+          %b Bar Manager
+        %th
+          %b Staff Leader
+        %th
+          %b Festival & Event Bar Management
+        %th
+          %b Event Production
+      %tr
+        %td
+          =f.check_box :has_bar_and_hospitality
+        %td
+          =f.check_box :has_hospitality_marketing
+        %td
+          =f.check_box :has_sport_and_outdoor
+        %td
+          =f.check_box :has_promotional_and_street_marketing
+        %td
+          =f.check_box :has_merchandise_and_retail
+        %td
+          =f.check_box :has_reception_and_office_admin
+        %td
+          =f.check_box :has_festivals_and_concerts
+        %td
+          =f.check_box :has_warehouse_marketing
+        %td
+          =f.check_box :has_bar_management_experience
+        %td
+          =f.check_box :has_staff_leadership_experience
+        %td
+          =f.check_box :has_festival_event_bar_management_experience
+        %td
+          =f.check_box :has_event_production_experience
+
+
+
+    %table.questions
+      %tbody
+        %tr
+          %td
+            %h4{colspan:2} Work Experience
+        %tr
+          %td{style: 'width: 30%; padding: 10px;'}
+            %table.questions
+              %tbody
+                %tr
+                  %td.question Position:
+                  %td.answer= q.job1_position
+                %tr
+                  %td.question Company:
+                  %td.answer= q.job1_company
+                %tr
+                  %td.question Start:
+                  %td.answer= q.job1_date_start
+                %tr
+                  %td.question Finish:
+                  %td.answer= q.job1_date_finish
+                %tr
+                  %td.question Type:
+                  %td.answer= q.job1_type
+          %td{style: 'padding: 16px; padding-right: 10%; display: block;'}
+            %table
+              %tbody
+                %tr
+                  %td.question{style: 'float:left; margin-top: 0px;'} Duties & Responsibilities:
+                %tr
+                  %td.answer= q.job1_description
+    .line-break
+
+
+    -if q.job2_type
+      %table.questions
+        %tbody
+          %tr
+            %td{style: 'width: 30%; padding: 10px;'}
+              %table.questions
+                %tbody
+                  %tr
+                    %td.question Position:
+                    %td.answer= q.job2_position
+                  %tr
+                    %td.question Company:
+                    %td.answer= q.job2_company
+                  %tr
+                    %td.question Start:
+                    %td.answer= q.job2_date_start
+                  %tr
+                    %td.question Finish:
+                    %td.answer= q.job2_date_finish
+                  %tr
+                    %td.question Type:
+                    %td.answer= q.job2_type
+
+            %td{style: 'padding: 16px; padding-right: 10%; display: block;'}
+              %table
+                %tbody
+                  %tr
+                    %td.question{style: 'float:left; margin-top: 0px;'} Duties & Responsibilities:
+                  %tr
+                    %td.answer= q.job2_description
+      .line-break
+
+
+
+    -if q.referee_name || q.referee_position || q.referee_company || q.referee_phone || q.referee_email
+      %table.questions
+        %tbody
+          %tr
+            %td{colspan: 2}
+              %h4 Referee
+          %tr
+            %table.questions
+              %tbody
+                %tr
+                  %td{style: 'width:30%'}
+                    .question{style: 'float: left;'} Name:
+                    .answer{style: 'float: left;'}= q.referee_name
+
+                  %td{style: 'width:30%'}
+                    .question{style: 'float: left;'} Position:
+                    .answer{style: 'float: left;'}= q.referee_position
+
+                  %td{style: 'width:30%'}
+                    .question{style: 'float: left;'} Company:
+                    .answer{style: 'float: left;'}= q.referee_company
+                %tr
+                  %td{style: 'width:30%'}
+                    .question{style: 'float: left;'} Phone:
+                    .answer{style: 'float: left;'}= q.referee_phone
+
+                  %td{style: 'width:30%'}
+                    .question{style: 'float: left;'} Email:
+                    .answer{style: 'float: left;'}= q.referee_email
+          %tr
+            .line-break
+
+    %table.questions
+      %tbody
+        %tr
+          %td{colspan: 2}
+            %h4 Application
+        %tr
+          %td.question Particular job or event:
+          %td.answer= q.particular_role
+        %tr
+          %td.question Why Interested:
+          %td.answer= q.customer_service_why_interested
+        %tr
+          %td.question Favourite Film:
+          %td.answer= q.favorite_film
+        %tr
+          %td.question Best Place:
+          %td.answer= q.best_place
+        %tr
+          %td.question Five Words:
+          %td.answer= q.describe_yourself
+        %tr
+          %td.question Criminal Conviction:
+          %td.answer= if q.has_criminal_convictions == true; 'Yes' elsif q.has_criminal_convictions == false; 'No' else '' end
+        - if q.has_criminal_convictions == true
+          %tr
+            %td.question Criminal Description:
+            %td.answer= q.criminal_conviction_details
+    -#.line-break
+
+
+    %table.questions
+      %tbody
+        %tr
+          %td{colspan: 2}
+            %h4 Fact Finders
+        %tr
+          %td{style: 'width: 70%'}
+            .question{style: 'float: left'} Bar Management:
+            .answer{style: 'float: left'}= if q.bar_management_experience == true; 'Yes' elsif q.bar_management_experience == false; 'No' else '' end
+          %td{style: 'width: 40%'}
+            .question{style: 'float: left'} Car Access:
+            .answer{style: 'float: left'}= if q.access_to_car == true; 'Yes' elsif q.access_to_car == false; 'No' else '' end
+        %tr
+          %td{style: 'width: 60%'}
+            .question{style: 'float: left'} Staff Leadership:
+            .answer{style: 'float: left'}= if q.staff_leadership_experience == true; 'Yes' elsif q.staff_leadership_experience == false; 'No' else '' end
+          %td{style: 'width: 40%'}
+            .question{style: 'float: left'} Hear about Flair:
+            .answer{style: 'float: left'}= q.heard_about_flair
+        %tr
+          %td{style: 'width: 50%'}
+            .question{style: 'float: left'} Festival & Event Bar Management:
+            .answer{style: 'float: left'}= if q.festival_event_bar_management_experience == true; 'Yes' elsif q.festival_event_bar_management_experience == false; 'No' else '' end
+          %td{style: 'width: 50%'}
+            .question{style: 'float: left'} Event Production:
+            .answer{style: 'float: left'}= if q.event_production_experience == true; 'Yes' elsif q.event_production_experience == false; 'No' else '' end
+        %tr
+          %td{style: 'width: 60%'}
+            .question{style: 'float: left'} General Qualifications:
+            .answer{style: 'float: left'}= q.qualifications_general
+        %tr
+          %td{style: 'width: 60%'}
+            .question{style: 'float: left'} Market research:
+            .answer{style: 'float: left'}= q.market_research
+        %tr
+          %td{style: 'width: 40%'}
+            .question{style: 'float: left'} Industry Qualifications:
+            .answer{style: 'float: left'}= q.qualifications_industry
+        %tr
+          %td{style: 'width: 40%'}
+            .question{style: 'float: left'} Friends Recommendation:
+            .answer{style: 'float: left'}= q.friends_connection
+        %tr
+          %td{style: 'width: 40%'}
+            .question{style: 'float: left'} Recommended You:
+            .answer{style: 'float: left'}= q.recommended_you
+        %tr
+          .line-break
+        -#%tr
+        -#  %td{colspan: 2}
+        -#    %h4 Customer Service Experience
+        -#%tr
+        -#  %td.question Customer Service Experience:
+        -#  %td.answer= q.customer_service_experience
+
+
+
+    -#- if q.enjoy_working_on_team || q.interested_in_bar || q.interested_in_marshal || q.retail_experience || q.team_leader_experience || q.promotions_experience
+    -#  %h4 Abilities
+    -#  %ul
+    -#  - if q.enjoy_working_on_team
+    -#    %li Enjoys working as part of a team
+    -#  - if q.interested_in_bar
+    -#    %li Interested in bar positions
+    -#  - if q.interested_in_marshal
+    -#    %li Interested in marshal and race crew
+    -#  - if q.retail_experience
+    -#    %li Has retail experience
+    -#  - if q.team_leader_experience
+    -#    %li Has team leader/management experience
+    -#  - if q.promotions_experience
+    -#    %li Worked in promotions before
+
+    %table.questions
+      %tbody
+        %tr{colspan: 2}
+          %td
+            %h4 Old Questions
+        %tr
+          %td.question Service Definition:
+          %td.answer= q.customer_service_meaning
+        %tr
+          %td.question Working Definition:
+          %td.answer= q.ethics_meaning
+        %tr
+          %td.question Attributes:
+          %td.answer= q.other_attributes
+        %tr
+          %td.question Last read:
+          %td.answer= q.last_magazine
+        %tr
+          %td.question Past Employer Description:
+          %td.answer= q.past_employer_description
+        %tr
+          %td.question Abilities:
+        .line-break
+
+  - if !@prospect.questionnaire
+    %p This person has not filled out a questionnaire

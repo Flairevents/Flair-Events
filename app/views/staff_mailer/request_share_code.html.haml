@@ -1,0 +1,42 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; line-height: 35px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 15px 0px; line-height: 30px;" }
+  %tr
+    %td{ style: "line-height: 17px;" }
+      %p The UK has now gone digital when it comes to proving your ‘right to work’.
+      %p This happens by providing your employer with a ‘SHARE CODE’.  For all work in the future with Flair, we are going to need that share code, please!
+  %tr
+    %td We still have your visa evidence on file, for all events from the 1st April 2022
+  %tr
+    %td{ style: "line-height: 17px;" }
+      %p Jump onto your Flair staff profile and head to the Application form section to enter your share code: 
+      %a{ href: "#{Flair::Application.config.base_https_url}/staff"} https://eventstaffing.co.uk/login
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; margin-top: 20px; line-height: 30px;" }
+  %tr
+    %td Need a Share code?
+  %tr
+    %td{ style: "line-height: 17px;" }
+      %p Head to the UK government website: 
+      %a{ href: "https://www.gov.uk/prove-right-to-work"} https://www.gov.uk/prove-right-to-work
+      %p A share code is valid for 30 days and is made up of 9 alphanumeric characters. For example, 9WY-6GY-2S2
+
+%table{ style: "padding: 0px 0px 15px; font-family: 'Lato', sans-serif; font-size: 14px; line-height: 35px;" }
+  %tr
+    %td
+      Remember we have hidden your ID page in our current design…..Much easier to find using a laptop!
+  %tr
+    %td
+      %img{ src: "#{Flair::Application.config.base_https_url}/flair-identification.png" }
+  %tr
+    %td
+      We look forward to seeing you again this year!
+  %tr
+    %td
+      The flair team
+= render partial: 'staff_mailer/signature'

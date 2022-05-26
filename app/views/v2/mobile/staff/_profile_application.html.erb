@@ -1,0 +1,216 @@
+<div class="v2-profile-applications-headers d-flex justify-content-center">
+  <a href="#application-skills" id="v2-profile-application-header-skills" class="v2-profile-application-header-skill">
+    <div class="done" style='display: none;' done="<%= @prospect.v2_skills_done? ? 'true' : 'false' %>"></div>
+    <div class="v2-profile-application-header-container">
+      <%= image_tag 'v2/Group 1258.png', style: 'margin-top: 17px; display: none;', id: 'selected' %>
+      <% if @prospect.v2_skills_done? %>
+        <%= image_tag 'v2/Group 1250.png', style: 'margin-top: 17px; display: none;', id: 'not_done' %>
+        <%= image_tag 'v2/Group 1342.png', style: 'margin-top: 17px;', id: 'done' %>
+      <% else %>
+        <%= image_tag 'v2/Group 1250.png', style: 'margin-top: 17px;', id: 'not_done' %>
+        <%= image_tag 'v2/Group 1342.png', style: 'margin-top: 17px; display: none;', id: 'done' %>
+      <% end %>
+    </div>
+  </a>
+  <% if @prospect.v2_skills_done? %>
+    <a href="#application-form" id="v2-profile-application-header-application" class="v2-profile-application-header-form">
+      <div class="done" style='display: none;' done="<%= @prospect.v2_applications_done? ? 'true' : 'false' %>"></div>
+      <div class="v2-profile-application-header-container">
+        <%= image_tag 'v2/Group 1259.png', style: 'margin-top: 17px;', id: 'selected' %>
+        <%= image_tag 'v2/Group 1249.png', style: 'margin-top: 17px; display: none;', id: 'not_done' %>
+        <%= image_tag 'v2/Group 1341.png', style: 'margin-top: 17px; display: none;', id: 'done' %>
+      </div>
+    </a>
+    <% else %>
+    <div class="v2-profile-application-header-skill">
+      <div class="v2-profile-application-header-container">
+        <%= image_tag 'v2/Group 1249.png', style: 'margin-top: 17px;' %>
+      </div>
+      <span class="mobile-hide">
+                Forms
+            </span>
+    </div>
+    <% end %>
+    <% if @prospect.v2_applications_done? && @prospect.v2_skills_done? %>
+
+
+        <a href="#application-tax" id="v2-profile-application-header-tax" class="v2-profile-application-header-tax">
+            <div class="done" style='display: none;' done="<%= @prospect.v2_tax_done? ? 'true' : 'false' %>"></div>
+            <div class="v2-profile-application-header-container">
+                <%= image_tag 'v2/Group 1257-mobile.png', style: 'margin-top: 17px;margin-left: 4px; display: none;', id: 'selected' %>
+                <% if @prospect.v2_tax_done? %>
+                    <%= image_tag 'v2/Group 1252-mobile.png', style: 'margin-top: 17px;margin-left: 4px; display: none;', id: 'not_done' %>
+                    <%= image_tag 'v2/Group 1343-mobile.png', style: 'margin-top: 17px;margin-left: 4px;', id: 'done' %>
+                <% else %>
+                    <%= image_tag 'v2/Group 1252-mobile.png', style: 'margin-top: 17px;margin-left: 4px;', id: 'not_done' %>
+                    <%= image_tag 'v2/Group 1343-mobile.png', style: 'margin-top: 17px;margin-left: 4px; display: none;', id: 'done' %>
+                <% end %>
+            </div>
+        </a>
+        <a href="#application-bank" id="v2-profile-application-header-bank" class="v2-profile-application-header-bank">
+            <div class="done" style='display: none;' done="<%= @prospect.v2_bank_done? ? 'true' : 'false' %>"></div>
+            <div class="v2-profile-application-header-container">
+                <%= image_tag 'v2/Group 1255-mobile.png', style: 'margin-top: 17px;margin-left: 3px; display: none;', id: 'selected' %>
+                <% if @prospect.v2_bank_done? %>
+                    <%= image_tag 'v2/Group 1253-mobile.png', style: 'margin-top: 17px;margin-left: 3px; display: none;', id: 'not_done' %>
+                    <%= image_tag 'v2/Group 1344-mobile.png', style: 'margin-top: 17px;margin-left: 3px;', id: 'done' %>
+                <% else %>
+                    <%= image_tag 'v2/Group 1253-mobile.png', style: 'margin-top: 17px;margin-left: 3px;', id: 'not_done' %>
+                    <%= image_tag 'v2/Group 1344-mobile.png', style: 'margin-top: 17px;margin-left: 3px; display: none;', id: 'done' %>
+                <% end %>
+            </div>
+        </a>
+        <a href="#application-identification" id="v2-profile-application-header-identification">
+            <div class="done" style='display: none;' done="<%= @prospect.v2_id_done? ? 'true' : 'false' %>"></div>
+            <div class="v2-profile-application-header-container">
+                <%= image_tag 'v2/Group 1256-mobile.png', style: 'margin-top: 17px; display: none;', id: 'selected' %>
+                <% if @prospect.v2_id_done? %>
+                    <%= image_tag 'v2/Group 1254-mobile.png', style: 'margin-top: 17px; display: none;', id: 'not_done' %>
+                    <%= image_tag 'v2/Group 1345-mobile.png', style: 'margin-top: 17px;', id: 'done' %>
+                <% else %>
+                    <%= image_tag 'v2/Group 1254-mobile.png', style: 'margin-top: 17px;', id: 'not_done' %>
+                    <%= image_tag 'v2/Group 1345-mobile.png', style: 'margin-top: 17px; display: none;', id: 'done' %>
+                <% end %>
+            </div>
+        </a>
+    <% else %>
+        <div class="v2-profile-application-header-tax">
+            <div class="v2-profile-application-header-container">
+                <%= image_tag 'v2/Group 1252-mobile.png', style: 'margin-top: 16px;margin-left: 4px;' %>
+            </div>
+        </div>
+        <div class="v2-profile-application-header-bank">
+            <div class="v2-profile-application-header-container">
+                <%= image_tag 'v2/Group 1253-mobile.png', style: 'margin-top: 15px;margin-left: 3px;' %>
+            </div>
+        </div>
+        <div>
+            <div class="v2-profile-application-header-container">
+                <%= image_tag 'v2/Group 1254-mobile.png', style: 'margin-top: 17px;' %>
+            </div>
+        </div>
+    <% end %>
+</div>
+<div class="v2-profile-applications-application-container" id='v2-profile-applications-application-container'>
+    <%= render partial: 'v2/mobile/staff/profile_questions' %>
+</div>
+<div class="v2-profile-applications-tax-content-container" id='v2-profile-applications-tax-content-container'>
+    <%= render partial: 'v2/mobile/staff/profile_tax_choice' %>
+</div>
+<div class="v2-profile-applications-bank-container" id='v2-profile-applications-bank-container'>
+    <center>
+        <%= render partial: 'v2/mobile/staff/profile_bank_details' %>
+    </center>
+</div>
+<div class="v2-profile-applications-identification-container" id='v2-profile-applications-identification-container'>
+    <%= render partial: 'v2/mobile/staff/profile_upload_id' %>
+</div>
+<div class="v2-profile-applications-skill-container" id='v2-profile-applications-skill-container'>
+    <%= render partial: 'v2/mobile/staff/profile_skills' %>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+        // Application headers
+        $('#v2-profile-application-header-application').on('click', function(){
+            $('#v2-profile-applications-application-container').css('display', 'block');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-application .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-application .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('tax')
+            click_category('bank')
+            click_category('identification')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-application-container')
+        })
+
+        $('#v2-profile-application-header-tax').on('click', function(){
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'block');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-tax .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-tax .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('application')
+            click_category('bank')
+            click_category('identification')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-tax-content-container')
+        })
+
+        $('#v2-profile-application-header-bank').on('click', function(){
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'block');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-bank .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-bank .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('application')
+            click_category('tax')
+            click_category('identification')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-bank-container')
+        })
+
+        $('#v2-profile-application-header-identification').on('click', function(){
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'block');
+            $('#v2-profile-applications-skill-container').css('display', 'none');
+
+            $('#v2-profile-application-header-identification .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-identification .v2-profile-application-header-container #selected').css('display', '')
+
+            click_category('application')
+            click_category('tax')
+            click_category('bank')
+            click_category('skills')
+
+            v2_profile_bg_size('#v2-profile-applications-identification-container')
+        })
+
+        $('#v2-profile-application-header-skills').on('click', function(){
+            $('#v2-profile-applications-application-container').css('display', 'none');
+            $('#v2-profile-applications-tax-content-container').css('display', 'none');
+            $('#v2-profile-applications-bank-container').css('display', 'none');
+            $('#v2-profile-applications-identification-container').css('display', 'none');
+            $('#v2-profile-applications-skill-container').css('display', 'block');
+
+            $('#v2-profile-application-header-skills .v2-profile-application-header-container').find('img').each(function(){
+                $(this).css('display', 'none')
+            })
+            $('#v2-profile-application-header-skills .v2-profile-application-header-container #selected').css('display', 'block')
+
+            click_category('tax')
+            click_category('bank')
+            click_category('identification')
+            click_category('application')
+
+            v2_profile_bg_size('#v2-profile-applications-skill-container')
+        })
+
+  </script>
+<% end %>

@@ -1,0 +1,23 @@
+.public.login
+  = render :partial => "v2/shared/nav"
+  .band-heading.row.expanded
+    %h3 Welcome
+  .content
+    .content-spacer
+    .content-inner
+      .row.padding-top-bottom.align-center
+        .column.small-12.medium-12.large-8.text-center
+          .article
+            %h5 Click the Link
+            %p We have sent you an email. Simply click the link to redirect yourself back to your Flair staff profile and complete your online application.
+            %h5.pt2 Interviews
+            %p Select a suitable interview time, allowing 10-15 minutes to discuss your skills and work experience.  We screen everyone we place in our database. Seeking people with strong working ethics, with customer focus, and who can bring that twist of enthusiasm!
+            %h5.pt2 Our promise to you
+            %p At Flair HQ we strive to offer you, our team, the same level of service we expect to see from you at work. You get clear, accurate pre-event information, jobs correctly matched to your talents, a wide variety of opportunities, friendly advice throughout, and weekly pay!
+            %p You have found the company that works for YOU!
+            =image_tag 'photo-yes.jpg', class: 'image--medium'
+            %p Reach out anytime if you have questions:
+            %p Tel: 0161 241 2441
+            %p Email: work@flairevents.co.uk
+  .content-after
+  = render :partial => "v2/application/footer"

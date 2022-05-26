@@ -1,0 +1,321 @@
+.job-list.mb-40{style: "width: 1012px;"}
+  -# application will only show specific rate if user is present
+  #prospect_check{style: 'display: none;', prospect: @prospect ? "true" : "false"}
+  - if @prospect
+    -# main rate and holiday_rate
+    - if @prospect.age >= 23
+      #prospect_age{style: 'display: none;', age: '23'}
+    - elsif @prospect.age >= 21
+      #prospect_age{style: 'display: none;', age: '21'}
+    - else
+      #prospect_age{style: 'display: none;', age: '18'}
+  - previous_date = nil
+  - new_events ||= @new_events ||= []
+  - events ||= @events ||= []
+  - featured_events ||= @featured_events ||= []
+  -# - [[featured_events, :featured], [new_events, :new], [events, nil]].each do |events, type|
+  - [[events, nil]].each do |events, type|
+    -if events.length > 0
+      -if type == :featured && !events.empty?
+        .v2-event-month-separator
+          ="FEATURED EVENTS"
+      - for n in 0..(events.length-1)
+        - event = events[n]
+        - unless type
+          -# - date = [event.next_active_date, Date.today].max
+          -# - date = [event.public_date_start, Date.today].max
+          - date = event.public_date_start
+          - if n == 0
+            - if @featured_events[event.id]
+              .v2-event-month-separator
+                ="FEATURED EVENTS"
+            - else
+              - previous_date = date
+              .v2-event-month-separator
+                ="#{date.strftime("%B %Y")}"
+          - else
+            - if (previous_date ? date.month != previous_date.month : true) && !@featured_events[event.id]
+              - previous_date = date
+              .v2-event-month-separator
+                ="#{date.strftime("%B %Y")}"
+        - pay_25_high = event.jobs.where(include_in_description: true).pluck(:pay_25_and_over).max
+        - pay_21_high = event.jobs.where(include_in_description: true).pluck(:pay_21_and_over).max
+        - pay_18_high = event.jobs.where(include_in_description: true).pluck(:pay_18_and_over).max
+        - if @prospect
+          - highest_pay = @prospect.age >= 23 ? pay_25_high : @prospect.age >= 21 ? pay_21_high : pay_18_high
+        -else
+          - highest_pay = [pay_18_high, pay_21_high, pay_25_high].max
+
+        .job-accordion{class: "#{n >= 1 ? 'mt-10' : ''} job-category-#{EventCategory.find(event.category_id).name}", "data-info": event.to_json, id: "#{event.id}-header"}
+          - if event.photo_url == "/assets/no-event-photo.jpg"
+            =image_tag (asset_path 'no-prospect-photo.png'), class: 'align-top'
+          - else
+            =image_tag event.photo_url, class: 'align-top'
+          .mh-108px.mw-370px.d-inline-block.align-top
+            .event-title=(event.display_name || '') + " | " + (event.jobs_description || '')
+            .event-info=event.blurb_subtitle
+            .separator.separator-orange
+            .event-location
+              ="#{event.location}, #{event&.post_code&.split(' ')&.first}"
+              - unless event.show_in_ongoing
+                |
+                =event.duration_for_show
+              |
+              =raw(event.date_range_for_show)
+              -# tags
+              -# %span{style: "#{@prospect ? (@prospect.gigs.where(event_id: event.id).first || @prospect.gig_requests.where(event_id: event.id).first ? 'display: none;' : '') : ''}"}
+              %span{id: "event-#{event.id}-tags"}
+                -if @prospect # && @allow_sign_up
+                  -gig_request = @prospect.gig_requests.where(event_id: event.id).first
+                  -if (gig_request ? gig_request.spare == true ? true : false : false)
+                    .badge.badge--event-status.badge--orange.contract-btn Reserve
+                  -elsif @status[event.id] == 'Pending'
+                    .badge.badge--event-status.badge--orange.contract-btn Pending
+                  -elsif @status[event.id] == 'Signed Up'
+                    .badge.badge--event-status.badge--green.contract-btn Active
+                  -elsif @status[event.id] == 'In Progress'
+                    .badge.badge--event-status.badge--green.contract-btn In Progress
+                  -elsif @status[event.id] == 'Confirmed'
+                    .badge.badge--event-status.badge--green.contract-btn Confirmed
+                  -elsif @status[event.id] == 'Confirmation Required'
+                    .badge.badge--event-status.badge--red.badge--flash.contract-btn Requires Confirmation!
+                  -else
+                    -if @event_is_new[event.id]
+                      .badge.badge--event-status.badge--blue.badge--flash.contract-btn New
+                    -if event.fullness == 'FULL'
+                      .badge.badge--event-status.badge--black.contract-btn Full
+                    -elsif event.fullness == 'NEARLY'
+                      .badge.badge--event-status.badge--black.contract-btn Few Places Left
+                    -elsif event.fullness == 'REGISTER_INTEREST'
+                      .badge.badge--event-status.badge--black.contract-btn Register Interest
+                - else
+                  -if event.fullness == 'FULL'
+                    .badge.badge--event-status.badge--black Full
+                  -elsif event.fullness == 'NEARLY'
+                    .badge.badge--event-status.badge--black Few Places Left
+                  -elsif event.fullness == 'REGISTER_INTEREST'
+                    .badge.badge--event-status.badge--black Register Interest
+          %div{style: 'float: right;'}
+            .rate-range.mr-15.d-inline-block{style: 'width: 120px;'}
+              %img.d-block.job-type{src: asset_path("v2/job_type/job-#{EventCategory.find(event.category_id).name != "Concert" ? EventCategory.find(event.category_id).name.downcase : 'hospitality'}.png")}
+              %center
+                %span.job-rate.mt-10= "up to £#{ highest_pay ? '%.2f' % highest_pay : ''}ph"
+
+            - if event.fullness != 'FULL'
+              .accordion-buttons.d-inline-block{id: "event-#{event.id}-btns"}
+                - if @show_event
+                  - if event.id == @show_event.to_i
+                    %button.view-details.mb-5.less-details LESS DETAILS
+                  - else
+                    %button.view-details.mb-5 VIEW DETAILS
+                - else
+                  %button.view-details.mb-5 VIEW DETAILS
+                - if @prospect
+                  - gig = @prospect.gigs.where(event_id: event.id).first
+                  - gig_request = @prospect.gig_requests.where(event_id: event.id).first
+                  - if gig # GIGS || HIRED
+                    - if (event.date_callback_due && Date.today > event.date_callback_due) || (event.date_callback_due == nil && (gig.assignments.map{|asgn| asgn.shift.date >= Date.today ? asgn : []}.flatten.count > 0)) || @status[event.id] == 'Confirmed'
+                      %a{href: "/staff/deselect_event/#{event.id}"}
+                        %button.cancel-job CANCEL
+                    - else
+                      - job = @prospect.gigs.where(event_id: event.id).first.job
+                      %a{href: "#", id:"v2-staff-cancel-application", event_id: event.id, event_name: event.display_name, job_name: job ? job.display_name : ''}
+                        %button.cancel-job CANCEL APPLICATION
+                  - elsif gig_request # GIG REQUESTS || APPLIED
+                    - if gig_request.spare == true
+                      - job = gig_request.job
+                      %a{href: "#", id:"v2-staff-cancel-application", event_id: event.id, event_name: event.display_name, job_name: job ? job.display_name : ''}
+                        %button.cancel-job CANCEL APPLICATION
+                    - else
+                      %a{href: "/staff/deselect_event/#{event.id}"}
+                        %button.cancel-job CANCEL REQUEST
+                  - else
+                    %button.apply-job{event_id: event.id, default_job_id: event.default_job_id} APPLY
+                - else
+                  %button.apply-job{event_id: event.id, default_job_id: event.default_job_id} APPLY
+            - else
+              - if @prospect
+                - gig = @prospect.gigs.where(event_id: event.id).first
+                - gig_request = @prospect.gig_requests.where(event_id: event.id).first
+                .accordion-buttons.d-inline-block{style: "#{gig == nil && gig_request == nil ? "vertical-align:top;margin-top: 25px;" : ''}"}
+                  - if @show_event
+                    - if event.id == @show_event.to_i
+                      %button.view-details.mb-5.less-details LESS DETAILS
+                    - else
+                      %button.view-details.mb-5 VIEW DETAILS
+                  - else
+                    %button.view-details.mb-5 VIEW DETAILS
+                  - if gig # GIGS || HIRED
+                    - if (event.date_callback_due && Date.today > event.date_callback_due) || (event.date_callback_due == nil && (gig.assignments.map{|asgn| asgn.shift.date >= Date.today ? asgn : []}.flatten.count > 0)) || @status[event.id] == 'Confirmed'
+                      %a{href: "/staff/deselect_event/#{event.id}"}
+                        %button.cancel-job CANCEL
+                    - else
+                      - job = @prospect.gigs.where(event_id: event.id).first.job
+                      %a{href: "#", id:"v2-staff-cancel-application", event_id: event.id, event_name: event.display_name, job_name: job ? job.display_name : ''}
+                        %button.cancel-job CANCEL APPLICATION
+                  - elsif gig_request # GIG REQUESTS || APPLIED
+                    - if gig_request.spare == true
+                      - job = gig_request.job
+                      %a{href: "#", id:"v2-staff-cancel-application", event_id: event.id, event_name: event.display_name, job_name: job ? job.display_name : ''}
+                        %button.cancel-job CANCEL APPLICATION
+                    - else
+                      %a{href: "/staff/deselect_event/#{event.id}"}
+                        %button.cancel-job CANCEL REQUEST
+              - else
+                .accordion-buttons.d-inline-block{style: "vertical-align:top;margin-top: 25px;"}
+                  - if @show_event
+                    - if event.id == @show_event.to_i
+                      %button.view-details.mb-5.less-details LESS DETAILS
+                    - else
+                      %button.view-details.mb-5 VIEW DETAILS
+                  - else
+                    %button.view-details.mb-5 VIEW DETAILS
+        .job-accordion-panel.mb-10{"data-job-groups": @job_groups[event.id], class: "job-category-#{EventCategory.find(event.category_id).name}", style: "#{event.id == @show_event.to_i ? "display: block;" : "display: none;"}"}
+          .panel-contents
+            .d-flex
+              .column.medium-5.panel-border
+                .d-flex.flex-column.pull-right.align-items-end.mr-5.mb-10
+                  - if @prospect
+                    - if @prospect.gigs.where(event_id: event.id).first
+                      - first_job = @prospect.gigs.where(event_id: event.id).first.job
+                      - featured_job = nil
+                      - job2 = first_job
+                    - elsif @prospect.gig_requests.where(event_id: event.id).first == nil
+                      - featured_job = event.jobs.where(include_in_description: true, id: event.featured_job).first
+                      - first_job = event.jobs.where(include_in_description: true).sort().first
+                      - job2 = featured_job || first_job
+                    - else
+                      - first_job = @prospect.gig_requests.where(event_id: event.id).first.job
+                      - featured_job = nil
+                      - job2 = first_job
+                  - else
+                    - featured_job = event.jobs.where(include_in_description: true, id: event.featured_job).first
+                    - first_job = event.jobs.where(include_in_description: true).sort().first
+                    - job2 = featured_job || first_job
+
+                  - job = featured_job || first_job
+                  - initial_description = job ? job.new_description : nil
+                  - initial_description2 = job2 ? job2.new_description : nil
+                  - initial_job_description = job ? job.description : nil
+                  - initial_uniform = job ? job.uniform_information : nil
+                  - initial_shift_info = job ? job.shift_information : nil
+                  - initial_number_of_jobs = job ? job.number_of_positions : nil
+                  %div{id: "event-#{event.id}-jobs-container"}
+                    - if @prospect && (@prospect.gig_requests.where(event_id: event.id).first || @prospect.gigs.where(event_id: event.id).first)
+                      %label.normal-bold-text{style: 'text-align:right;width:100%;'} Applied Position
+                      .v2-explore-jobs-list-event-job-title{style: 'width: 305px;margin-bottom: 0;'}= job ? (job.public_name != "" && job.public_name != nil) ? job.public_name : job.name : ''
+                    - else
+                      = form_with url: "#", method: :post, id: "event-#{event.id}", class: 'd-flex flex-column' do |f|
+                        = hidden_field_tag :event_id, event.id
+                        - if featured_job
+                          %button.job-desc.job-selected{description: featured_job.new_description, job_description: featured_job.description, uniform_info: featured_job.uniform_information, event_id: event.id, id: featured_job.id, class: "job-button-#{event.id}", number_of_jobs: featured_job.number_of_positions, shift_info: featured_job.shift_information, pay_18: featured_job.pay_18_and_over, pay_21: featured_job.pay_21_and_over, pay_25: featured_job.pay_25_and_over, hp_18: featured_job.holiday_pay(:pay_18_and_over), hp_21: featured_job.holiday_pay(:pay_21_and_over), hp_25: featured_job.holiday_pay(:pay_25_and_over)}= featured_job.public_name || featured_job.name
+
+                          = radio_button_tag :job, featured_job.id, true, {description: featured_job.new_description, job_description: featured_job.description, uniform_info: featured_job.uniform_information, event_id: event.id, id: "radio-#{featured_job.id}", style: 'display: none;'}
+
+                          - for job in event.jobs.where(include_in_description: true).where.not(id: featured_job.id).sort()
+                            %button.job-desc{description: job.new_description, job_description: job.description, uniform_info: job.uniform_information, event_id: event.id, id: job.id, class: "job-button-#{event.id}", number_of_jobs: job.number_of_positions, shift_info: job.shift_information, pay_18: job.pay_18_and_over, pay_21: job.pay_21_and_over, pay_25: job.pay_25_and_over, hp_18: job.holiday_pay(:pay_18_and_over), hp_21: job.holiday_pay(:pay_21_and_over), hp_25: job.holiday_pay(:pay_25_and_over)}= job.display_name
+
+                            = radio_button_tag :job, job.id, false, {id: "radio-#{job.id}", style: 'display: none;'}
+                        - else
+                          - for job in event.jobs.where(include_in_description: true).sort()
+                            - if job.id == event.jobs.where(include_in_description: true).sort().first.id
+                              %button.job-desc.job-selected{description: job.new_description, job_description: job.description, uniform_info: job.uniform_information, event_id: event.id, id: job.id, class: "job-button-#{event.id}", number_of_jobs: job.number_of_positions, shift_info: job.shift_information, pay_18: job.pay_18_and_over, pay_21: job.pay_21_and_over, pay_25: job.pay_25_and_over, hp_18: job.holiday_pay(:pay_18_and_over), hp_21: job.holiday_pay(:pay_21_and_over), hp_25: job.holiday_pay(:pay_25_and_over)}= job.display_name
+
+                              = radio_button_tag :job, job.id, true, {description: job.new_description, job_description: job.description, uniform_info: job.uniform_information, event_id: event.id, id: "radio-#{job.id}", style: 'display: none;'}
+                            - else
+                              %button.job-desc{description: job.new_description, job_description: job.description, uniform_info: job.uniform_information, event_id: event.id, id: job.id, class: "job-button-#{event.id}", number_of_jobs: job.number_of_positions, shift_info: job.shift_information, pay_18: job.pay_18_and_over, pay_21: job.pay_21_and_over, pay_25: job.pay_25_and_over, hp_18: job.holiday_pay(:pay_18_and_over), hp_21: job.holiday_pay(:pay_21_and_over), hp_25: job.holiday_pay(:pay_25_and_over)}= job.display_name
+
+                              = radio_button_tag :job, job.id, false, {id: "radio-#{job.id}", style: 'display: none;'}
+
+                  - if job
+                    %label.normal-bold-text.mt-15 Rates and Holiday Pay
+
+                    -# initial pay rates
+                    - job = featured_job || first_job
+                    - pay_18 = job ? job.pay_18_and_over.to_f : nil
+                    - hp_18 = job ? job.holiday_pay(:pay_18_and_over).to_f : nil
+                    - pay_21 = job ? job.pay_21_and_over.to_f : nil
+                    - hp_21 = job ? job.holiday_pay(:pay_21_and_over).to_f : nil
+                    - pay_25 = job ? job.pay_25_and_over.to_f : nil
+                    - hp_25 = job ? job.holiday_pay(:pay_25_and_over).to_f : nil
+
+
+                    - if @prospect
+                      -# main rate and holiday_rate
+                      - if @prospect.age >= 23
+                        - main_rate = pay_25
+                        - hp_rate = hp_25
+                      - elsif @prospect.age >= 21
+                        - main_rate = pay_21
+                        - hp_rate = pay_21 == pay_25 ? hp_25 : hp_21
+                      - else
+                        - main_rate = pay_18
+                        - hp_rate = pay_21 == pay_18 ? hp_21 : hp_18
+
+                      %h1.mt-10{id: "main-rate-#{event.id}"}= "£#{ main_rate ? '%.2f' % main_rate : nil}"
+                      %label.normal-text.mt-15{id: "rate-#{@prospect.age >= 23 ? "23" : @prospect.age >= 21 ? "21" : "18" }-#{event.id}"}= main_rate ? "£#{'%.2f' % (main_rate)}(£#{'%.2f' % (main_rate - hp_rate)} + £#{'%.2f' % (hp_rate)}) " : ''
+                    - else
+                      - if current_user.present?
+                        %h1.mt-10{id: "main-rate-#{event.id}"}= "£#{job ? '%.2f' % job.pay_25_and_over : nil}"
+
+                      - rates = [pay_18, pay_21, pay_25].uniq
+                      - if rates.count < 2
+                        %label.normal-text.mt-15{id: "rate-23-#{event.id}"}= pay_25 ? "£#{'%.2f' % (pay_25)}(£#{'%.2f' % (pay_25 - hp_25)} + £#{'%.2f' % (hp_25)}) " : ''
+                        %label.normal-text{id: "rate-21-#{event.id}", style: 'display: none'} 21-22 years: £10.09 (£9.00 + £1.09)
+                        %label.normal-text{id: "rate-18-#{event.id}", style: 'display: none'} 18-20 years: £10.09 (£9.00 + £1.09)
+                      - else
+                        - if pay_25 == pay_21
+                          %label.normal-text.mt-15{id: "rate-23-#{event.id}"}= pay_25 ? "23+ years: £#{'%.2f' % (pay_25)})(£#{'%.2f' % (pay_25 - hp_25)} + £#{'%.2f' % (hp_25)}) " : ''
+                          %label.normal-text{id: "rate-21-#{event.id}"}= pay_25 ? "21-22 years: £#{'%.2f' % (pay_25)}(£#{'%.2f' % (pay_25 - hp_25)} + £#{'%.2f' % (hp_25)}) " : ''
+                          %label.normal-text{id: "rate-18-#{event.id}"}= pay_18 ? "18-20 years: £#{'%.2f' % (pay_18)}(£#{'%.2f' % (pay_18 - hp_18)} + £#{'%.2f' % (hp_18)}) " : ''
+                        - elsif pay_21 == pay_18
+                          %label.normal-text.mt-15{id: "rate-23-#{event.id}"}= pay_25 ? "23+ years: £#{'%.2f' % (pay_25)}(£#{'%.2f' % (pay_25 - hp_25)} + £#{'%.2f' % (hp_25)}) " : ''
+                          %label.normal-text{id: "rate-21-#{event.id}"}= pay_21 ? "21-22 years: £#{'%.2f' % (pay_21)}(£#{'%.2f' % (pay_21 - hp_21)} + £#{'%.2f' % (hp_21)}) " : ''
+                          %label.normal-text{id: "rate-18-#{event.id}"}= pay_21 ? "18-20 years: £#{'%.2f' % (pay_21)}(£#{'%.2f' % (pay_21 - hp_21)} + £#{'%.2f' % (hp_21)}) " : ''
+                        - else
+                          %label.normal-text.mt-15{id: "rate-23-#{event.id}"}= pay_25 ? "23+ years: £#{'%.2f' % (pay_25)}(£#{'%.2f' % (pay_25 - hp_25)} + £#{'%.2f' % (hp_25)}) " : ''
+                          %label.normal-text{id: "rate-21-#{event.id}"}= pay_21 ? "21-22 years: £#{'%.2f' % (pay_21)}(£#{'%.2f' % (pay_21 - hp_21)} + £#{'%.2f' % (hp_21)}) " : ''
+                          %label.normal-text{id: "rate-18-#{event.id}"}= pay_18 ? "18-20 years: £#{'%.2f' % (pay_18)}(£#{'%.2f' % (pay_18 - hp_18)} + £#{'%.2f' % (hp_18)}) " : ''
+
+                  %label.normal-bold-text.mt-10 Shifts
+                  %label.normal-green-text.job-shift-schedule{id: "shift-#{event.id}"}= initial_shift_info
+                  %label.normal-green-text.job-total-shifts= "#{event.event_dates.count} shifts"
+                  %label.normal-bold-text.mt-10 Dates
+                  %label.normal-green-text.job-shift-date= event.public_date_start ==  event.public_date_end ? "#{event.public_date_start.strftime("%e %b %Y")}" : "#{event.public_date_start.strftime("%e %b %Y")} - #{event.public_date_end.strftime("%e %b %Y")}"
+                  - if initial_number_of_jobs
+                    %label.normal-bold-text.mt-10 Number of Jobs
+                    %label.normal-green-text.job-offers{id: "number-of-jobs-#{event.id}"}= initial_number_of_jobs
+              .column.medium-6
+                .d-flex.flex-column.pull-left.ml-5
+                  - job2 = Job.where(event_id: job.event_id).first if job.present?
+                  - if job2&.new_description.present?
+                    - initial_description2 = job2.new_description
+                  - if initial_job_description
+                    %label.normal-bold-text.text-left.mt-10 Job Role:
+                    %label.normal-green-text.text-left{id: "job-description-#{event.id}"}= initial_job_description
+                  - if initial_description2
+                    %label.normal-bold-text.text-left Description
+                    %label.normal-green-text.text-left{id: "description-#{event.id}"}= initial_description2
+                  - if initial_uniform
+                    %label.normal-bold-text.text-left.mt-10 Uniform & Appearance
+                    %label.normal-green-text.text-left{id: "uniform-#{event.id}"}= initial_uniform
+                  - if event.other_info != nil && event.other_info!= ''
+                    %label.normal-bold-text.text-left.mt-10 Other Info
+                    %label.normal-green-text.text-left= event.other_info
+                  - if event.blurb_transport != nil && event.blurb_transport!= ''
+                    %label.normal-bold-text.text-left.mt-10 Transport
+                    %label.normal-green-text.text-left= event.blurb_transport
+                  - if (event.location != nil && event.location!= '') || (event.post_code != nil && event.post_code!= '')
+                    %label.normal-bold-text.text-left.mt-10 Location
+                    %label.normal-green-text.text-left= "#{event.location},#{event.post_code}"
+                  - if event.blurb_wage_additional !=nil && event.blurb_wage_additional != ""
+                    %label.normal-bold-text.text-left.mt-10 Additional Wage
+                    %label.normal-green-text.text-left= event.blurb_wage_additional
+                  - if event.blurb_closing !=nil && event.blurb_closing != ""
+                    %label.normal-bold-text.text-left.mt-10 Closing Words
+                    %label.normal-green-text.text-left= event.blurb_closing
+  %br/
+  = paginate @events
+
+  - if events.length == 0
+    .v2-interview-dates-content{style: 'padding-bottom: 20px;'} No specific contract is being attached to this search, try a single job or click an industry, we get a lot of crossovers.

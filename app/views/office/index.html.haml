@@ -1,0 +1,142 @@
+.office
+  #loading
+    %span
+      %img{src: image_path('spinner.gif'), alt: 'Loading'}
+      Loading...
+
+  .flash-backing{style: 'display:none'}
+    .flash
+
+  #title-bar
+    %span{style: 'visibility: hidden;', class: 'officer_id'}
+      ="#{current_user.id}"
+    %span#logged-in{style: 'float:right'}
+      %a{href: '#', :"data-toggle" => 'tooltip'}
+        = "#{current_user.last_name}, #{current_user.first_name}"
+      |
+      %a{href: '/office/logout'} Logout
+
+  #view-tabs
+    %ul.nav.nav-tabs
+      %li
+        %a{href: '#home'} Home
+      %li
+        %a{href: '#events'} Contracts
+      %li
+        %a{href: '#gigs'} Events
+      %li
+        %a{href: '#team'} Team
+      %li
+        %a{href: '#applicants'} Applicants
+      %li
+        %a{href: '#planner'} Planner
+      %li
+        %a{href: '#todos'} To-Do
+      %li
+        %a{href: '#payroll'} Payroll
+      %li
+        %a{href: '#bulkInterviews'} Interviews
+      %li
+        %a{href: '#clients'} Clients
+      - if current_user.manager?
+        %li
+          %a{href: '#invoices'} Invoices
+        %li
+          %a{href: '#content'} Content
+        %li
+          %a{href: '#faq'} FAQ
+        %li
+          %a{href: '#library'} Library
+        %li
+          %a{href: '#officers'} Officers
+    %img.saving-changes{src: image_path('spinner.gif'), style: 'display:none', alt: 'Saving...'}
+    %div{style: 'clear:both'}
+
+  #main-viewport.tab-content
+    .tab-pane#home
+    .tab-pane#events{tabindex: 0, style: 'outline:none'}=     render partial: 'events'
+    .tab-pane#gigs{tabindex: 0, style: 'outline:none'}=       render partial: 'gigs'
+    .tab-pane#team{tabindex: 0, style: 'outline:none'}=  render partial: 'team'
+    .tab-pane#applicants{tabindex: 0, style: 'outline:none'}= render partial: 'applicants'
+    .tab-pane#planner{tabindex: 0, style: 'outline:none'}=     render partial: 'planner'
+    .tab-pane#todos=   render partial: 'todos'
+    .tab-pane#payroll{tabindex: 0, style: 'outline:none'}=    render partial: 'payroll'
+    .tab-pane#bulkInterviews{tabindex: 0, style: 'outline:none'}= render partial: 'bulk_interviews'
+    .tab-pane#clients{tabindex: 0, style: 'outline:none'}=    render partial: 'clients'
+    - if current_user.manager?
+      .tab-pane#invoices{tabindex: 0, style: 'outline:none'}=   render partial: 'invoices'
+      .tab-pane#content{tabindex: 0, style: 'outline:none'}=  render partial: 'content'
+      .tab-pane#faq{tabindex: 0, style: 'outline:none'}=      render partial: 'faq'
+      .tab-pane#library{tabindex: 0, style: 'outline:none'}=  render partial: 'library'
+      .tab-pane#officers{tabindex: 0, style: 'outline:none'}=   render partial: 'officers'
+
+- content_for :js do
+  :javascript
+    $('#view-tabs a').click(function(e) { e.preventDefault(); });
+    window.db = new DbProxy('/office/data', $('#loading'));
+    // This table will keep track of what is selected in each view. It is independent of the database
+    window.office_selected = {}
+    // The 'regions' table in our database is expected to never change
+    // So rather than pulling region records from server using DbProxy, we will just
+    //   cache the list here
+    window.Regions = [#{rs = Region.all; raw(0.upto(rs.map(&:id).max).map { |i| r = rs.find { |r| r.id == i }; (r && "\"#{r.name}\"") || 'null'}.join(','))}]
+    // Likewise for event categories
+    window.EventCategories = [#{es = EventCategory.all; raw(0.upto(es.map(&:id).max).map { |i| e = es.find { |e| e.id == i }; (e && "\"#{e.name}\"") || 'null'}.join(','))}]
+    window.EventSizes = [#{es = EventSize.all; raw(0.upto(es.map(&:id).max).map { |i| e = es.find { |e| e.id == i }; (e && "\"#{e.name}\"") || 'null'}.join(','))}]
+    // And also for countries
+    window.Countries = [#{cs = Country.all; raw(0.upto(cs.map(&:id).max).map { |i| c = cs.find { |c| c.id == i }; (c && "\"#{c.name}\"") || 'null'}.join(','))}]
+
+  %script{src: "https://maps.googleapis.com/maps/api/js?key=AIzaSyAHFXJHh9a29MUUGdIj8AtvoVu4JIMyJgM"}
+
+  :javascript
+    $(document).ready(function() {
+      window.onerror = function(errorMsg, url, lineNumber) {
+        // alert("A JavaScript error occurred. Please cut-and-paste the following diagnostic information into an e-mail to error@appybara.com, along with a detailed description of what you were doing when the error occurred:\n" + errorMsg + "\n" + url + "\n" + lineNumber)
+      }
+
+      tinyMCE.init({cache_suffix: '?v='+tinyMCE.majorVersion+'.'+tinyMCE.minorVersion});
+
+      window.currentOfficerEmail = #{raw current_user.email.inspect};
+      window.currentOfficerRole  = #{raw current_user.role.inspect};
+      window.currentOfficerId = #{raw current_user.id.inspect};
+
+      $('#view-tabs a').click(function(e) {
+        e.preventDefault();
+
+        var viewName = $(this).attr('href').slice(1);
+        viewManager.select(viewName, $(this));
+      });
+
+      views = {
+        home:       new HomeView([#{Prospect.last_months_applicants}], [#{Prospect.current_month_applicants}], [#{Prospect.active_people_last_year}], db, $('#home')),
+        planner:    new PlannerView(db, $('#planner')),
+        events:     new EventsView(db, $('#events')),
+        gigs:       new GigsView(db, $('#gigs')),
+        team:       new TeamView(db, $('#team')),
+        applicants: new ApplicantsView(db, $('#applicants')),
+        todos:      new TodoView(db, $('#todos')),
+        payroll:    new PayrollView(db, $('#payroll')),
+        bulkInterviews: new BulkInterviewsView(db, $('#bulkInterviews')),
+        clients:    new ClientsView(db, $('#clients'))
+      }
+      if ($('#invoices').length > 0) { views['invoices'] = new InvoicesView(db, $('#invoices')) }
+      if ($('#officers').length > 0) { views['officers'] = new OfficersView(db, $('#officers')) }
+      if ($('#content').length > 0)  { views['content']  = new ContentView(db, $('#content')) }
+      if ($('#faq').length > 0)      { views['faq']      = new FaqView(db, $('#faq')) }
+      if ($('#library').length > 0)  { views['library']  = new LibraryView(db, $('#library')) }
+      window.viewManager = new ViewManager(views);
+
+      // Adjust number of table rows when window is resized
+      $(document).ready(function(e) {
+        window.resizeTimer;
+      });
+
+      $(window).resize(function(e) {
+        clearTimeout(window.resizeTimer);
+        window.resizeTimer = setTimeout(onResize, 1000);
+      });
+
+      window.onResize()
+
+      viewManager.select('home', $('#view-tabs a:first'));
+    });

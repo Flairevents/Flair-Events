@@ -1,0 +1,18 @@
+<p>Hi <%= @name %>,</p>
+<p>Welcome to Flair Event Staffing, the success of your interview means you now part of our team of talented workers.</p>
+<p>Via your staff profile you can select job contracts, keep your profile up to date and receive relevant information about your working shifts. Remember we offer temporary to regular work opportunities at national events, stadiums and venues around the UK.</p>
+<p>Keep an eye on your emails as every event contract will involve shift selection and confirming your attendance.  Before you can work please ensure your profile includes the following:</p>
+
+<p><ul>
+  <li>Professional profile photo</li>
+  <li>Upload picture or scanned images of your Right to Work IDENTIFICATION (ID)</li>
+  <li>Bank account details</li>
+  <li>Up to date Tax code via a Starter Tax Declaration </li>
+  <li>Agree to our Terms of Engagement</li>
+</ul></p>
+
+<p>You can <a href="<%= Flair::Application.config.base_https_url%>/login">log in to our Staff Zone</a> at any time and we continually load in new jobs. </p>
+
+<p>Feel free to <a href="<%= Flair::Application.config.base_http_url %>/contact">contact us</a> with any questions or comments!</p>
+
+<%= render partial: 'signature' %>

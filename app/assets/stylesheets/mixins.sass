@@ -1,0 +1,11 @@
+@mixin centered($width, $height)
+  width: $width
+  height: $height
+  margin-top: -($height / 2)
+  margin-left: -($width / 2)
+
+  position: fixed
+  top: 50%
+  left: 50%
+
+  z-index: 1000

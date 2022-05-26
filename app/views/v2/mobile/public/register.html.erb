@@ -1,0 +1,20 @@
+<%= content_for :head do %>
+  <title>Register here to Work with Flair</title>
+  <meta name="description" content="Time and again we tell our clients that we're only as good as the amazing people who make up our workforce. If you have spare time, enjoy new challenges and like getting stuck in, join us today!" />
+<% end %>
+<div class="public login">
+  <%= render :partial => "v2/mobile/shared/nav" %>
+  <div class="v2-register-background"></div>
+
+  <div class="mobile-content">
+    <center>
+      <div class="v2-register-with">Register with</div>
+      <%= image_tag 'v2/mobile/Group 697.png', class: 'v2-register-flair' %>
+      <div class="v2-register-lets-work-together">let's work together</div>
+    </center>
+    <div class="v2-registration-form-container"></div>
+    <%= render :partial => 'v2/mobile/public/registration_form' %>
+  </div>
+  <div class="content-after"></div>
+  <%= render :partial => "v2/mobile/application/footer" %>
+</div>

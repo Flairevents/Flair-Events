@@ -1,0 +1,14 @@
+<p><%= @salutation %></p>
+<p>Please visit our <a href="<%= @unsubscribe_url %>">unsubscribe</a> page to finalize your unsubscribe options.</p>
+<p>If you no longer wish to be an employee of Flair Event staffing, you may also deactivate your account at our  <a href="<%= @unsubscribe_url %>">unsubscribe</a> page.
+<p>If you can't use the above link, you can cut-and-paste the following address into your browser's address bar:</p>
+<p><%= @unsubscribe_url %></p>
+<p>Feel free to <a href="<%= @base_url %>/contact_us">contact us</a> with any questions or comments!</p>
+Cheers,<br/>
+The Flair Team<br/>
+<small>Flair Event Staffing</small><br/>
+<small>Suit 15, The Adelphi Mill, Bollington, SK10 5JB</small><br/>
+<img src="<%= @base_url %>/flair-logo.png"/><br/>
+<a href="https://www.facebook.com/flaireventstaffinglimited"><img src="<%= @base_url %>/facebook-icon.png"/></a>
+<a href="https://twitter.com/flaireventstaff"><img src="<%= @base_url %>/twitter-icon.png"/></a><br/>
+<%= render partial: 'staff_mailer/signature' %>

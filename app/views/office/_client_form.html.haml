@@ -1,0 +1,66 @@
+= form_for client, url: '#', html: {id: form_id, class: 'record-details-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  - tabindex = 0
+  %table
+    %tr
+      %td.label-name Name:
+      %td= f.text_field :name, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Company Type:
+      %td= f.select :company_type, options_for_select([''].concat(Client::COMPANY_TYPES), ''), taxindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Address:
+      %td= f.text_field :address, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Phone:
+      %td= f.text_field :phone_no, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Email:
+      %td= f.text_field :email, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Accountant Email:
+      %td= f.text_field :accountant_email, tabindex: tabindex+=1, class: 'form-control'
+  %hr
+  %table
+    %tr
+      %td.label-name Flair Contact:
+      %td= f.text_field :flair_contact, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Primary Contact:
+      %td= f.select :primary_client_contact_id, [], tabindex: 7, class: 'form-control'
+  %hr
+  %table
+    %tr
+      %td
+      %td Date Sent
+      %td Date Received
+      %td Sent To
+    %tr
+      %td.label-name Terms & Conditions
+      %td.date-field= f.text_field :terms_date_sent, tabindex: tabindex+=1, class: 'form-control client-datepicker', id: form_id+'_terms_date_sent'
+      %td.date-field= f.text_field :terms_date_received, tabindex: tabindex+=1, class: 'form-control client-datepicker', id: form_id+'_terms_date_received'
+      %td= f.select :terms_client_contact_id, [], tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Health & Safety
+      %td.date-field= f.text_field :safety_date_sent, tabindex: tabindex+=1, class: 'form-control client-datepicker', id: form_id+'_safety_date_sent'
+      %td.date-field= f.text_field :safety_date_received, tabindex: tabindex+=1, class: 'form-control client-datepicker', id: form_id+'_safety_date_received'
+      %td= f.select :safety_client_contact_id, [], tabindex: tabindex+=1, class: 'form-control'
+  %hr
+  %table
+    %tr
+      %td.label-name Notes
+      %td= f.text_area :notes, rows: 1, cols: 100, style: 'width:522px', tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.label-name Invoice Notes
+      %td= f.text_area :invoice_notes, rows: 1, cols: 100, style: 'width:522px', tabindex: tabindex+=1, class: 'form-control'
+  %hr
+  %table
+    %tr
+      %td.label-name Active:
+      %td= f.check_box :active, tabindex: tabindex+=1
+
+
+- content_for_once :js do
+  :javascript
+    $dateFields = $('.client-datepicker');
+    setUpDatepicker($dateFields);
+    $dateFields.watermark('DD/MM/YYYY', {className: 'watermark'});

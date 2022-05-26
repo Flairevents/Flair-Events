@@ -1,0 +1,9 @@
+<p>Dear <%= @name %>,</p>
+
+<p>Sorry, but your current Flair photo has been rejected as we can’t see who you are. A basic selfie photo is so important for future contract ID passes and also for our office team to get to know you.</p>
+
+<p>Please retake a clear head-and-shoulders photo in front of a light coloured, plain background. Please remove hats or sun glasses, limit your smile to a simple neutral expression. The photo must be front facing. Please avoid attaching landscape shots, photos with friends, cut down party photos or photos with art work across them.</p>
+
+<p>Please <a href="<%= Flair::Application.config.base_https_url%>/login">log in to your Staff Zone</a>, to re-upload your photo..</p>
+
+<%= render partial: 'staff_mailer/signature' %>

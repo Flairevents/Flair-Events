@@ -1,0 +1,71 @@
+<p>Hi <%= @name %>,</p>
+
+<% unless @rejected.empty? %>
+
+<p>Thank you for your application to work at the <%= @rejected.one? ? 'event' : 'events' %> below:</p>
+<p><ul>
+  <% @rejected.each do |event| %>
+    <li><%= event.display_name_with_location %></li>
+  <% end %>
+</ul></p>
+
+<p>Unfortunately, we won't be hiring you at
+<%= @rejected.size > 1 ? 'those events' : 'that event' %>
+<% if @rejected_reasons.size > 1 %>
+  , for the following reasons:</p>
+  <p><ul>
+    <% @rejected_reasons.each do |reason| %>
+      <li><%= reason %></li>
+    <% end %>
+  </ul></p>
+<% elsif @rejected_reasons.one? %>
+  , for the following reason: <%= @rejected_reasons[0] %></p>
+<% else %>.</p><% end %>
+
+<% if @accepted.empty? %>
+  <p>Please keep an eye on our website as we are constantly adding new events. Feel free to apply for events and jobs you feel suit your skill base. Please always consider your travel options when selecting our events as they are dotted throughout the UK. Google Maps is a reliable source of information when making travel plans. We always post events via our Facebook so make sure you are in that loop.</p>
+<% end %>
+
+<% end %>
+
+<% unless @accepted.empty? %>
+
+<p><% if @rejected.empty? %>You <% else %>However, you <% end %>
+have been accepted to work at the following <%= @accepted.one? ? 'event' : 'events' %>:</p>
+<p><ul>
+  <% @accepted.each do |event| %>
+    <li><%= event.display_name_with_location %> <%= event.date_range_as_phrase %></li>
+  <% end %>
+</ul></p>
+
+<p>Please keep an eye out for your contract specific emails that we start sending closer to each event. These will be jam packed with information on how to confirm your interest, select shifts and job roles. Your final email will contain maps and all the organisational event day details you will need.</p>
+<p>We will seek your 100% shift confirmation either via email or telephone the week of every event contract. Please be advised we operate a default system to control commitment levels for everyone involved.  Failure to show or cancelling without suitable notice could mean you are removed from future contracts or deactivated from our team of amazing workers.</p>
+
+<% end %>
+
+<% unless @removed.empty? %>
+
+<p><% if @rejected.empty? && @accepted.empty? %>You <% else %>Also, you <% end %>
+are no longer scheduled to work at the following <%= @removed.one? ? 'event' : 'events' %>:</p>
+<p><ul>
+  <% @removed.each do |event| %>
+    <li><%= event.display_name_with_location %> <%= event.date_range_as_phrase %></li>
+  <% end %>
+</ul></p>
+
+<% if @removed_reasons.size > 1 %>
+  <p>For the following reasons:</p>
+  <p><ul>
+    <% @removed_reasons.each do |reason| %>
+      <li><%= reason %></li>
+    <% end %>
+  </ul></p>
+<% elsif @removed_reasons.one? %>
+  <p>For the following reason: <%= @removed_reasons[0] %></p>
+<% end %>
+
+<% end %>
+
+<p>Feel free to <a href="<%= Flair::Application.config.base_http_url %>/contact">contact us</a> at any time. You may also <a href="<%= Flair::Application.config.base_https_url %>/staff">log into your staff profile page</a> to see events you're working.</p>
+
+<%= render partial: 'staff_mailer/signature' %>

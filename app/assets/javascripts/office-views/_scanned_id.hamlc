@@ -1,0 +1,238 @@
+%p
+  %table
+    %tr
+      %td{colspan: 2}
+        %p IDs uploaded by 
+          %span{style: 'font-size: 20px;'}= "#{escapeHTML(@name)}"
+      %td.pl10.text-center
+        %button.btn.btn-default{ id: 'export_scanned_id_pdf' } Export
+    %tr
+      %td
+        %b Nationality:
+      %td
+        %select.form-control{id: "nationality#{@prospect_id}"}
+          - for name,index in window.Countries
+            %option{value: index, selected: @nationality == index}= name
+      %td.pl10{rowspan: 8}
+        %img{src: "/prospect_photo/#{@prospect_id}", id: "prospect_photo", height: 145}
+    %tr
+      %td
+        %b ID Number:
+      %td
+        %input.form-control{id: "idnumber#{@prospect_id}", value: @id_number}
+    %tr
+      %td
+        %b ID Expiry:
+      %td
+        %input.form-control{id: "idexpiry#{@prospect_id}", value: @id_expiry}
+    %tr
+      %td
+        %b NI Number:
+      %td
+        %input.form-control{id: "ninumber#{@prospect_id}", value: @ni_number}
+    %tr
+      %td
+        %b Date of Birth:
+      %td
+        %input.form-control{id: "dateofbirth#{@prospect_id}", value: @date_of_birth, style: 'font-size: 18px;'}
+    %tr
+      %td
+        %b ID Approved Date:
+      %td
+        %input.form-control{id: "idsighted#{@prospect_id}", value: @id_sighted, disabled: true}
+    - if @id_type == 'Work/Residency Visa' || @id_type == 'Pass Visa' 
+      %tr
+        %td
+          %b Share Code:
+        %td
+          %input.form-control{id: "sharecode#{@prospect_id}", value: @share_code}
+      %tr
+        %td
+          %b Visa Number:
+        %td
+          %input.form-control{id: "visanumber#{@prospect_id}", value: @visa_number}
+      %tr
+        %td
+          %b Visa Expiry:
+        %td
+          %input.form-control{id: "visaexpiry#{@prospect_id}", value: @visa_expiry, style: 'font-size: 18px;'}
+      %tr
+        %td
+          %b Indefinite Visa:
+        %td
+          %input{id: "visaindefinite#{@prospect_id}", type: 'checkbox', checked: @visa_indefinite}
+    %tr
+      %td
+        %b Condition:
+      %td
+        %select.form-control{id: "condition#{@prospect_id}"}
+          %option{value: 'None', selected: @condition == 'None'}= 'None'
+          %option{value: 'Holidays', selected: @condition == 'Holidays'}= 'Holidays'
+          %option{value: 'Under 20Hrs', selected: @condition == 'Under 20Hrs'}= 'Under 20Hrs'
+          %option{value: 'Specific', selected: @condition == 'Specific'}= 'Specific'
+
+- for scanned_id in @scanned_ids
+  // TODO: Why the rand_id?
+  - rand_id = Math.floor(Math.random() * 1000000)
+  - if scanned_id.extension == '.pdf'
+    %iframe{ id: "img#{rand_id}", src: "/office/scanned_id_image/#{scanned_id.id}", width: "600", height:"400", style:"border: none;" }
+  - else
+    %a{href: "/office/scanned_id_image/#{scanned_id.id}?large=true", class: 'zoomimg'}
+      %img{src: "/office/scanned_id_image/#{scanned_id.id}", id: "img#{rand_id}", width: 400, height: 400, data-rotation: 0}
+    %button.btn.btn-default{data-image-id: "#img#{rand_id}", data-scanned-id: scanned_id.id, data-id-approval-rotatable: ''} Rotate
+
+- if @has_share_code_file
+  %h3{id: 'share_code_iframe_title', style: 'margin-top: 18px;'}
+    Share Code File
+  %p
+    %iframe{ id: 'share_code_iframe', src: "/office/share_code_file/#{@prospect_id}", width: "600", height:"780", style:"border: none;" }
+- else
+  %h3{id: 'share_code_iframe_title', style: 'display: none; margin-top: 18px;'}
+    Share Code File
+  %p
+    %iframe{ id: 'share_code_iframe', src: "/office/share_code_file/#{@prospect_id}", width: "600", height:"780", style:"border: none; display: none" }
+
+%script
+  $('[data-id-approval-rotatable]').click(function() {
+    var scanned_id = $(this).data('scanned-id');
+    var image = $($(this).data('image-id'));
+    var angle = parseInt(image.attr('angle') || 0, 10);
+    angle = (angle+90)%360;
+    image.data('rotation', angle);
+    image.attr('angle', angle);
+    image[0].className = 'rotate'+angle;
+    ServerProxy.saveChanges("/office/rotate_scanned_id/"+scanned_id, {}, null, window.db);
+    // We might need to reinitialize ZoomIt
+    //@viewport.find('a.zoomimg').jqZoomItDispose() # currently displayed to-do might contain a zoomed image
+    //@viewport.find('.todo-description').html(@buildTodoHtml(todo))
+    //@viewport.find('a.zoomimg').jqZoomIt()
+  });
+
+  $('#export_scanned_id_pdf').click(function() {
+    window.open("/office/download_scanned_ids_data/#{@prospect_id}", '_blank');
+  });
+
+  $('#idnumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_number]" : newNumber}, null, window.db);
+  });
+
+  $('#idnumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_number]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#idexpiry#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_expiry]" : newNumber}, null, window.db);
+  });
+  $('#idexpiry#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_expiry]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#nationality#{@prospect_id}').change(function() {
+    var newNationality = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[nationality_id]" : newNationality}, null, window.db);
+  })
+
+  $('#condition#{@prospect_id}').change(function() {
+    var newCondition = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[condition]" : newCondition}, null, window.db);
+  })
+
+  $('#ninumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[ni_number]" : newNumber}, null, window.db);
+  });
+  $('#ninumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[ni_number]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#sharecode#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[share_code]" : newNumber}, null, window.db);
+  });
+  $('#sharecode#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[share_code]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#dateofbirth#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[date_of_birth]" : newNumber}, null, window.db);
+  });
+  $('#dateofbirth#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[date_of_birth]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#visanumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_number]" : newNumber}, null, window.db);
+  });
+  $('#visanumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_number]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#visaissuedate#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_issue_date]" : newNumber}, null, window.db);
+  });
+  $('#visaissuedate#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_issue_date]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#visaexpiry#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_expiry]" : newNumber}, null, window.db);
+  });
+  $('#visaexpiry#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_expiry]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#idsighted#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_sighted]" : newNumber}, null, window.db);
+  });
+  $('#idsighted#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_sighted]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#visaindefinite#{@prospect_id}').change(function() {
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_indefinite]" : this.checked}, null, window.db);
+  });
+
+  $('#sharecode#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[share_code]" : newNumber}, null, window.db);
+  });
+  $('#sharecode#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[share_code]" : newNumber}, null, window.db);
+    }
+  })

@@ -1,0 +1,40 @@
+%ul.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll.staff-nav.mt1{:role => "tablist", style: 'background-color: unset;'}
+  -active='active'
+
+  %li{:role => "events", class: active}
+    %span.anchor#anchor-interview-scheduled
+    %a.staff-interview-tab{"aria-controls" => "tab-interview-scheduled", "data-toggle" => "tab", :href => "#tab-interview-scheduled", :role => "tab"}
+      -if @prospect.interview.present?
+        .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.staff-interview-tab-icon{style: 'margin-right: 10px;'}
+      -else
+        .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-top-bar-check-mark.staff-interview-tab-icon{style: 'margin-right: 10px;'}
+      .text-left
+        -if @prospect.interview.present?
+          Booked
+        -else
+          Book Interview
+  -#  -active = nil
+  -#-if @show_interview_online_signup
+  -#  %li{:role => "events", class: active}
+  -#    %span.anchor#anchor-interview-signup
+  -#    %a.staff-interview-tab#staff-new-interview{"aria-controls" => "tab-interview-signup", "data-toggle" => "tab", :href => "#tab-interview-signup", :role => "tab"}
+  -#      .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-top-bar-check-mark.staff-interview-tab-icon{style: 'margin-right: 10px;'}
+  -#      .text-left Book Interview
+  -#-if @show_interview_inperson_signup
+  -#  %li{:role => "tablist"}
+  -#    %span.anchor#anchor-interview-inperson-signup
+  -#    %a{"aria-controls" => "tab-interview-inperson-signup", "data-toggle" => "tab", :href => "#tab-interview-inperson-signup", :role => "tab"} In Person Sign-Up
+.tab-content.p2.field{style: 'background-color: unset;'}
+  -active='active'
+  -if @show_interview_scheduled
+    #tab-interview-scheduled.tab-pane{:role => "tabpanel", class: active}
+      =render partial: 'interview_scheduled'
+    -active = nil
+  -if @show_interview_online_signup
+    #tab-interview-signup.tab-pane{:role => "tabpanel", class: active}
+      =render partial: 'interview_online_signup'
+    #tab-interview-signup_dummy{style: 'display:none'}
+      =render partial: 'interview_online_signup'
+  -#-if @show_interview_inperson_signup
+  -#  #tab-interview-inperson-signup.tab-pane{:role => "tabpanel"}
+  -#    =render partial: 'interview_inperson_signup'

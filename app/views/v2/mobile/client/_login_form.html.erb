@@ -1,0 +1,126 @@
+<%= javascript_include_tag "v2-hire" %>
+<%= form_tag "#{Flair::Application.config.base_https_url}/quote_request", autocomplete: "off", id: "client-form", method: 'post'  do %>
+    <div class="v2-client-login-form">
+        <input type="hidden" name="redirect" value="<%= @target %>">
+        <div class="v2-client-login-title">Your details:</div>
+
+        <input type="text" autocomplete="off" class="form-control v2-client-login-inputs required" id="name" name="name" placeholder="Name" style='margin-bottom: 10px;'>
+        <input type="text" autocomplete="off" class="form-control v2-client-login-inputs required" id="company_name" name="company_name" placeholder="Company Name" style='margin-bottom: 10px;'>
+        <input type="number" autocomplete="off" class="form-control v2-client-login-inputs required" id="telephone" name="telephone" placeholder="Contact Number" style='margin-bottom: 10px;'>
+        <input type="email" autocomplete="off"  class="form-control v2-client-login-inputs required" id="email" name="email" placeholder="Email Address" style='margin-bottom: 35px;'>
+
+        <div class="v2-client-login-title">Staffing requirements:</div>
+        
+        <input type="text" autocomplete="off" class="form-control v2-client-login-inputs required" id="job_position" name="job_position" placeholder="Job Positions" style='margin-bottom: 10px;'>
+        <input type="text" autocomplete="off" class="form-control v2-client-login-inputs required" id="location" name="location" placeholder="Location / Town / Post Code" style='margin-bottom: 10px;'>
+    
+        <div class="v2-client-login-date-label" style=''>Start Date</div>
+        <div class="d-flex flex-row bd-highlight v2-client-login-date-input-group" style='margin-bottom: 10px;'>
+            <%= select_date nil, {prefix: 'start_date', start_year: Date.today.year, end_year: Date.today.year+5, order: [:day, :month, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, use_short_month: true}, {class: "form-control v2-client-login-date required"} %>
+        </div>
+        <div class="v2-client-login-date-label end-date">End Date if known</div>
+        <div class="d-flex flex-row bd-highlight v2-client-login-date-input-group" style='margin-bottom: 35px;'>
+            <%= select_date nil, {prefix: 'finish_date', start_year: Date.today.year, end_year: Date.today.year+10, order: [:day, :month, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, use_short_month: true}, {class: "form-control v2-client-login-date"} %>
+        </div>
+
+        <div class="v2-client-login-industry-container">
+            <div class="v2-client-login-title" style='margin-bottom: 15px;'>Industry</div>
+            <div class="d-flex justify-content-around v2-client-login-industry-headers text-center" style='margin-bottom: 15px;'>
+                <div class="industry-select" radio_id="commercial">
+                    <%= image_tag 'v2/job_type/commercial.png', class: 'v2-client-login-industry-header-image unselected' %>
+                    <%= image_tag 'v2/job_type/commercial-selected.png', class: 'v2-client-login-industry-header-image selected hide' %>
+                    <input type="radio" name="job_category" id="commercial" value="commercial" class="hide">
+                    <span>COMMERCIAL</span>
+                </div>
+                <div class="industry-select" radio_id="events">
+                    <%= image_tag 'v2/job_type/events.png', class: 'v2-client-login-industry-header-image unselected' %>
+                    <%= image_tag 'v2/job_type/events-selected.png', class: 'v2-client-login-industry-header-image selected hide' %>
+                    <input type="radio" name="job_category" id="events" value="events" class="hide">
+                    <span>EVENTS</span>
+                </div>
+                <div class="industry-select" radio_id="sports">
+                    <%= image_tag 'v2/job_type/sports.png', class: 'v2-client-login-industry-header-image unselected' %>
+                    <%= image_tag 'v2/job_type/sports-selected.png', class: 'v2-client-login-industry-header-image selected hide' %>
+                    <input type="radio" name="job_category" id="sports" value="sports" class="hide">
+                    <span>SPORTS</span>
+                </div>
+            </div>
+            <div class="d-flex justify-content-around v2-client-login-industry-headers text-center">
+                <div class="industry-select" radio_id="logistics">
+                    <%= image_tag 'v2/job_type/Group 3958.png', class: 'v2-client-login-industry-header-image unselected' %>
+                    <%= image_tag 'v2/job_type/Group 3959.png', class: 'v2-client-login-industry-header-image selected hide' %>
+                    <input type="radio" name="job_category" id="logistics" value="logistics" class="hide">
+                    <span>LOGISTICS</span>
+                </div>
+                <div class="industry-select" radio_id="promotional">
+                    <%= image_tag 'v2/job_type/promotional.png', class: 'v2-client-login-industry-header-image unselected' %>
+                    <%= image_tag 'v2/job_type/promotional-selected.png', class: 'v2-client-login-industry-header-image selected hide' %>
+                    <input type="radio" name="job_category" id="promotional" value="promotional" class="hide">
+                    <span>PROMOTIONAL</span>
+                </div>
+                <div class="industry-select" radio_id="hospitality">
+                    <%= image_tag 'v2/job_type/hospitality.png', class: 'v2-client-login-industry-header-image unselected' %>
+                    <%= image_tag 'v2/job_type/hospitality-selected.png', class: 'v2-client-login-industry-header-image selected hide' %>
+                    <input type="radio" name="job_category" id="hospitality" value="hospitality" class="hide">
+                    <span>HOSPITALITY</span>
+                </div>
+            </div>
+        </div>
+
+        <textarea name="other_facts" id="other_facts" cols="30" rows="10" class='v2-client-login-text-area' placeholder='Additional Information'></textarea>
+    </div>
+    
+    <center>
+        <%= submit_tag 'SUBMIT', class: 'v2-client-login-submit' %>
+    </center>
+    <div class="v2-client-login-call_us">
+      Or just give us a call if you prefer! <a href="tel:0161-241-2441">0161 241 2441</a>
+    </div>
+<% end %>
+
+
+<% content_for_once :js do %>
+  <script>
+    $('#client-form').on('submit', function(){
+        check = 0;
+        scroll_input = "";
+
+        inputs = $(this).find('.required');
+
+        inputs.each(function(){
+            if($(this).val() == ""){
+                check = 1
+                if(scroll_input == ""){
+                    scroll_input = $(this).attr('id')
+                }
+                $(this).css('border', '2px solid red');
+            }else{
+                $(this).css('border', 'none');
+            }
+        })
+
+        if(check == 0){
+            return true;
+        }else{
+            $([document.documentElement, document.body]).animate({
+            scrollTop: $(`#${scroll_input}`).offset().top - 100
+            }, 500);
+            $('body').append(`
+                <div class="v2-flash-bg">
+                    <div class="v2-flash-body">
+                    <i class="icon--notice-flag"></i>
+                    <div class="v2-flash-message">
+                        Please fill up all details.
+                    </div>
+                    <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                        <span>Close</span>
+                    </a>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            `)
+            return false;
+        }
+    })
+  </script>
+<% end %>

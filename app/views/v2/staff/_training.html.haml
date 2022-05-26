@@ -1,0 +1,77 @@
+%div#audioslot
+.row
+  .column.small-12{style: 'background-image: linear-gradient(#a3d39c 0%, #f5f5f5 50%, #a3d39c 100%); border-radius: 10px;'}
+    %ul#tabs-training.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll.staff-nav{:role => "tablist", style: 'background:unset'}
+      %li.active{:role => "tablist"}
+        %a#tab_training_intro{"aria-controls" => "tab-training-intro", "data-toggle" => "tab", :href => "#tab-training-intro", :role => "tab"}
+          .fl-icon.fl-icon--small.fl-icon--checkmark.first-staff-bottom-check-mark{style:'margin-bottom: -3px; margin-right:0px;'}
+      %li{:role => "tablist"}
+        %span.anchor#anchor-training-customer-service
+        %a#tab_training_customer_service.test-of-knowledge{"aria-controls" => "tab-training-customer-service", "data-toggle" => "tab", "data-module" => "customer_service", "data-status" => "#{@training_customer_service_completed ? 'completed' : ''}", :href => "#tab-training-customer-service", :role => "tab"}
+          -if !@training_customer_service_completed
+            .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-bottom-check-mark
+          -else
+            .fl-icon.fl-icon--small.fl-icon--checkmark.staff-bottom-check-mark
+          %p.staff-bottom-buttons-labels Customer Service
+      %li{:role => "tablist"}
+        %span.anchor#anchor-training-ethics
+        %a#tab_training_ethics.test-of-knowledge{"aria-controls" => "tab-training-ethics", "data-toggle" => "tab", "data-module" => "ethics", :href => "#tab-training-ethics", :role => "tab"}
+          -if !@training_ethics_completed
+            .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-bottom-check-mark
+          -else
+            .fl-icon.fl-icon--small.fl-icon--checkmark.staff-bottom-check-mark
+          %p.staff-bottom-buttons-labels Working Ethics
+      %li{:role => "tablist"}
+        %span.anchor#anchor-training-sports
+        %a#tab_training_sports.test-of-knowledge{"aria-controls" => "tab-training-sports", "data-toggle" => "tab", "data-module" => "sports", :href => "#tab-training-sports", :role => "tab"}
+          -if !@training_sports_completed
+            .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-bottom-check-mark
+          -else
+            .fl-icon.fl-icon--small.fl-icon--checkmark.staff-bottom-check-mark
+          %p.staff-bottom-buttons-labels Sports
+      %li{:role => "tablist"}
+        %span.anchor#anchor-training-bar-hospitality
+        %a#tab_training_bar_hospitality.test-of-knowledge{"aria-controls" => "tab-training-bar-hospitality", "data-toggle" => "tab", "data-module" => "bar_hospitality", :href => "#tab-training-bar-hospitality", :role => "tab"}
+          -if !@training_bar_hospitality_completed
+            .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-bottom-check-mark
+          -else
+            .fl-icon.fl-icon--small.fl-icon--checkmark.staff-bottom-check-mark
+          %p.staff-bottom-buttons-labels Bar & Hospitality
+      -#%li{:role => "tablist"}
+      -#  %span.anchor#anchor-training-health-safety
+      -#  %a#tab_training_health_safety.test-of-knowledge{"aria-controls" => "tab-training-health-safety", "data-toggle" => "tab", "data-module" => "health_safety", :href => "#tab-training-health-safety", :role => "tab"}
+      -#    -if !@training_health_safety_completed
+      -#      .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked.staff-bottom-check-mark
+      -#    -else
+      -#      .fl-icon.fl-icon--small.fl-icon--checkmark.staff-bottom-check-mark
+      -#    Health & Safety
+    .tab-content.p2.field{style: 'background:unset'}
+      #tab-training-intro.tab-pane.active{:role => "tabpanel"}
+        .article.text-center.restrict
+          -#%h5.hidden-xs.hidden-sm Wikipedia:
+          -#%p.text-justify.hidden-xs.hidden-sm <strong>Training</strong> is teaching, or developing in oneself or others, any skills and knowledge, training has specific goals of improving one’s capability, productivity and performance.
+          .column.small-12.text-center.mt2
+            .h5.staff-text-with-underline Employment Tips:
+          .column.small-12.text-center.mt2
+            %p
+              Within today's competitive job market take each and every opportunity an employer offers to continue training beyond initial qualifications
+              <br/><br/> Maintain, upgrade, and update skills throughout your working life. <br/><br/>
+          -#.column.small-12.text-center.mb3
+
+          %hr
+          %div.row
+            .column.small-12.text-center.mb3
+              =image_tag 'knowledge-is-the-key.jpg', class: 'staff-page-bottom-image'
+              //%img.img-responsive.centered{src: 'assets/training-knowledge.jpg'}
+          //%img.img-responsive{src: 'assets/training-einstein-quote.jpg'}
+          //=image_tag 'training-einstein-quote.jpg', class: 'img-responsive'
+      #tab-training-customer-service.tab-pane{:role => "tabpanel"}
+        =image_tag 'staff-spinner.gif'
+      #tab-training-health-safety.tab-pane{:role => "tabpanel"}
+        =image_tag 'staff-spinner.gif'
+      #tab-training-ethics.tab-pane{:role => "tabpanel"}
+        =image_tag 'staff-spinner.gif'
+      #tab-training-sports.tab-pane{:role => "tabpanel"}
+        =image_tag 'staff-spinner.gif'
+      #tab-training-bar-hospitality.tab-pane{:role => "tabpanel"}
+        =image_tag 'staff-spinner.gif'

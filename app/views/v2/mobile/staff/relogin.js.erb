@@ -1,0 +1,17 @@
+<% if @logged_in == true %>
+  $('#wrong-credentials').hide();
+  $('#login-popup').hide();
+  refreshStaffZone();
+<% else %>
+  <% if @logged_in == :no_such_account %>
+    $('#wrong-credentials').text("Hmmm... We don't recognize that email. Did you use the correct one?");
+  <% elsif @logged_in == :wrong_password %>
+    $('#wrong-credentials').text("Oops! The password you entered was not correct. Please try again.");
+  <% else %>
+    $('#wrong-credentials').text("Your username or password seems to be incorrect. Please try again.");
+  <% end %>
+  $('#wrong-credentials').show();
+  $('#login-popup').show();
+<% end %>
+
+$('#upload-spinner').hide();

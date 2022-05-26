@@ -1,0 +1,69 @@
+- content_for :head do
+  %title Delivery in 30hrs with flexible staffing solutions
+  %meta{ name: "description", content: "Reacting quickly to help open several London COVID test centres. Recruits needed to be competent, reliable to cover 12-hr shifts seven days a week. Once 200 staff in place our focus turned to daily workforce management, as a 'four-on, four-off' rotation settled in and permanent teams established."}
+.public.case-study.logistics
+  = render :partial => 'v2/shared/nav'
+  .content
+    .container-fluid.px-0.d-flex
+      .case-header-bg
+      .v2-case-industry-1.d-flex.align-items-center
+        .container.px-0
+          .case-study Case Studies
+          %h3 LOGISTICS
+    .v2-case-industry-2.d-flex.align-items-center
+      .container.px-0.d-flex
+        .d-flex.flex-inline
+          .border-line
+          .d-flex.flex-column.ml-05
+            %h5 COVID-19 TEST CENTRES
+            %h3 Delivering teams in 30 hours.
+    .v2-case-industry-3.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column.mr1
+          %h2 Key Challenge:
+          %p.mt2 Just before Christmas, our client urgently needed to start opening local authority test centres to assist in the struggle against the spread of Covid-19. We were given 30hrs notice to start delivering teams of competent and committed people who could work 12-hour shifts covering seven days a week. Everyone had to have DBS checks and needed to complete six NHS training modules before attending.
+        .cs-image.d-flex.logistics
+    .v2-case-industry-4.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .cs-image.d-flex.logistics.mr1
+        .d-flex.flex-column
+          %h2 How we helped:
+          %p.mt2 The importance of helping our client to open the test sites is hard to overestimate. We didn’t quite cancel Christmas, but we immediately set about recruiting the first group of 72 people we needed. Our London database didn’t disappoint, and we found many candidates willing to offer their skills and commitment. We quickly grew our pool of candidates to an impressive 200 people able to cover the initial weeks.
+          %p.mt1 To add more spice to the brief, all staff had to have valid DBS checks, to work 12-hour shifts in strict cohort bubbles and they each needed to pass six NHS training modules before their first shift. The quick turnaround meant that the client’s requirements were evolving even as teams were on the ground working. Our reaction time – enhanced by Flair's scheduling app – meant information was relayed quickly, and our client’s requirements were constantly met.
+          %p.mt1 The initial request turned from weeks into months, and our flexible on-demand staffing teams shifted to full-time temping jobs. We reacted once more, turning to our database and actively seeking new people to supply a seamless daily service.
+    .v2-case-industry-5.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column
+          %h2 The Results
+          %p.mt2 The Results Flair's impressive reaction time enabled our client to start opening up urgently needed test centres in east London, fully staffed with competent workers.
+          .d-flex.flex-inline.align-items-center.mt1
+            .checkbox
+            %h5.ml-05 Supplied 72 staff within 30 hours.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Seamlessly switched from flexible to full time workforce management.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Instant shift notification via Flair scheduling app kept teams fully staffed.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Maintained transparent communication channels.
+        .d-flex.flex-column.mr5
+          %h2.mb1 Case Studies
+          - ["Festivals & Events", "Hospitality", "Logistics", "Promotional", "Sports", "Commercial"].each do |f|
+            %a{ href: v2_case_industry_path(industry: f == "Festivals & Events" ? "events" : f.downcase) }
+              .d-flex.flex-inline.align-items-center
+                %i.fa.fa-caret-right
+                %h3.ml-05{ class: f.downcase == "logistics" ? 'active-study' : '' }=f
+    .v2-case-industry-6.d-flex.align-items-start.logistics
+      .container.px-0.d-flex.mt5
+        .d-flex.flex-column
+          %h1 Our job is to make our client's job easier.
+          %h1 Workforce solutions delivered with event expertise.
+          %h1 Tell us how can we help?
+          .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt1
+            %a{href: "/contact"}
+              %button.v2-home-staff-req-btn.join-team Chat with us today
+
+    .v2-home-bottom
+  = render :partial => 'v2/application/footer'

@@ -1,0 +1,38 @@
+-if @pending_bank_details_approval
+  .row.change-requests
+    %p.mb1= "The following change requests will be applied to your profile when approved by office staff:"
+    .column.small-12.medium-6
+      - if @cr.bank_account_name
+        .row.change-request
+          .key.column.small-4.text-right
+            Bank Account Name
+          .value.column.small-8.align-middle
+            =@cr.bank_account_name
+      - if @cr.bank_account_no
+        .row.change-request
+          .key.column.small-4.text-right
+            Bank Account Number
+          .value.column.small-8
+            =@cr.bank_account_no
+      - if @cr.bank_sort_code
+        .row.change-request
+          .key.column.small-4.text-right
+            Bank Sort Code
+          .value.column.small-8
+            =@cr.bank_sort_code
+
+.bank-details
+  = form_for @prospect, method: :post, url: '/staff/update_bank_details' do |f|
+    .row.fields.pt1.align-center
+      .column.small-12.medium-4.pt1
+        Account Holder Name<br/>
+        = f.text_field :bank_account_name, class: 'form-control uppercase', required: true, pattern: '[A-Za-z0-9&.\/ -]*', title: 'Letters, numbers, spaces, or any of the following characters: & . / -'
+      .column.small-12.medium-4.pt1
+        Bank Sort Code<br/>
+        = f.text_field :bank_sort_code, class: 'form-control', required: true, pattern: '(\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*)|(^\*.*)', title: '6 numbers long', placeholder: 'xx-xx-xx', :maxlength => 6
+      .column.small-12.medium-4.pt1
+        Bank Account Number<br/>
+        = f.text_field :bank_account_no, class: 'form-control', required: true, pattern: '(\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*)|(^\*.*)', title: '8 numbers long', placeholder: 'xxxx-xxxx', :maxlength => 8
+    .row.pt1
+      .column.small-12.text-right
+        = submit_tag (@prospect.has_bank_details? ? 'Update' : 'Submit'), class: 'btn btn-default'

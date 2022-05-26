@@ -1,0 +1,291 @@
+SETTING UP SERVER
+
+This setup done on Ubuntu 16
+
+1. add 'deploy' user with password --------
+> useradd deploy
+> passwd --------
+> mkdir /home/deploy
+> chown deploy /home/deploy
+> chgrp deploy /home/deploy
+> chsh -s /bin/bash deploy
+
+2. add 'deploy' to sudoers
+> usermod -aG sudo deploy
+
+edit /etc/sudoers:
+Defaults        !requiretty
+deploy ALL=(ALL) ALL
+
+3. set up SSH authentication for 'deploy'
+> su deploy
+> cd ~
+> mkdir .ssh
+> touch .ssh/authorized_keys
+(copied my public key over with FileZilla)
+> cat id_rsa.pub >> .ssh/authorized_keys
+> rm id_rsa.pub
+> exit
+> exit
+
+3b. Make SSH more secure
+In /etc/ssh/sshd_config
+> Only allow user deploy to login:
+AllowUsers deploy
+> Disable root login:
+PermitRootLogin no
+
+3c. Setup Universal Firewall
+
+Setup firewall
+Allow OpenSSH Applications:
+> sudo ufw allow OpenSSH
+Enable
+> sudo ufw enable
+Verify that OpenSSH is allowed
+> sudo ufw status
+
+Open up firewall to http, https, smtp traffic
+> sudo ufw allow 80
+> sudo ufw allow 443
+> sudo ufw allow 25
+> sudo ufw disable
+> sudo ufw enable
+
+4. Install gcc + make
+> sudo apt-get install gcc
+> sudo apt-get install make
+
+5. Install git
+> sudo apt-get install git-core
+
+6. Install RVM and up-to-date Ruby
+> sudo \curl -L https://get.rvm.io | bash -s stable --ruby
+
+7. Install Ruby. Need to configure RVM. First exit and log in again so changes RVM has made to .bashrc will be loaded into shell
+> rvm install 2.5.5
+
+> ruby -v
+(Ruby is OK now)
+
+8. Install bundler
+> rvm use 2.5.5
+> gem install bundler
+
+9. Install Postgres
+> sudo apt-get install postgresql-9.5
+> sudo apt-get install postgresql-server-dev-9.5
+
+10. Set up git repo for project code
+> cd ~
+> mkdir flair.git
+> cd flair.git
+> git init --bare --shared
+(back on my laptop, go to project directory, "git remote add origin deploy@IP_ADDRESS:flair.git", push code to the new remote, then back on the server, check that the code has been stored in ~/flair.git repo)
+
+11. Install Nginx
+> sudo apt-get install nginx
+> sudo service nginx start
+> sudo chown deploy /etc/nginx/nginx.conf
+> sudo chgrp deploy /etc/nginx/nginx.conf
+> sudo apt-get install nginx-extras
+
+Set nginx to start after booting:
+> sudo systemctl enable nginx
+
+12. Set up deploy script on my dev machine which I will use to deploy new versions of the application to the server. I used the script to create the "/var/www/flair" directory which the currently running version of the app will be deployed to. But before I could actually deploy code, I had to add "Defaults !requiretty" to the sudoers file on the server, and "chown" and "chgrp" the new "/var/www/flair" directory to the "deploy" user.
+
+> cd /var/www
+> sudo mkdir flair
+> sudo chown deploy flair
+> sudo chgrp deploy flair
+> mkdir /var/www/flair/releases
+
+> cd /var/www
+> sudo mkdir flair_staging
+> sudo chown deploy flair_staging
+> sudo chgrp deploy flair_staging
+> mkdir /var/www/flair_staging/releases
+
+13. Use deploy script to copy application files into app directory (but it won't run yet)
+On Dev Machine
+> Set correct ip address for server in /config/deploy/production.rb
+> cap production deploy
+> cap staging deploy
+(Must deploy both for nginx to work)
+
+On dev machine (to copy config file)
+> cap production deploy:update_nginx_conf 
+
+On server (to start nginx)
+> sudo /etc/init.d/nginx start
+
+14. Create postgres user
+$ sudo -u postgres createuser -P --interactive deploy
+Enter password for new role:
+Enter it again:
+Shall the new role be a superuser? (y/n) n
+Shall the new role be allowed to create databases? (y/n) y
+Shall the new role be allowed to create more new roles? (y/n) n
+
+16. Make 'deploy' user DB superuser. This is convenient if we drop and re-create the DB.
+> sudo su postgres
+> psql
+> alter user deploy with superuser;
+> \q
+> exit
+
+17. Create db (and import backup)
+> createdb flair_production
+> psql -d flair_production < database_name_to_import
+
+18. Put secret key into environment variable into the .bashrc (make sure the .bash_profile loads the .bashrc):
+export SECRET_KEY_BASE='-----------'
+
+19. Install Javascript runtime & Yarn
+> sudo apt-get install nodejs
+> sudo apt-get install yarn
+
+20. Go to app directory. 'rake db:create RAILS_ENV=production'. It fails because there is no Javascript runtime installed (and one of the Ruby libraries we are using needs one).
+
+21. Install Ruby Bundler and gems:
+> cd /var/www/flair/current
+> gem install bundler
+
+Install gems:
+> bundle install
+
+Install npm pacakges:
+> yarn install
+
+22. Now use deploy script to run app on the new server (along with all the needed Ruby libraries), running on a cluster of instances of Thin equal to the number of cpus on the server. One Ruby library which uses a native extension written in C++ wouldn't compile without the "g++" C++ compiler, so I had to "sudo apt-get install g++". 
+
+Deploy both 
+
+23. Install image processing:
+> sudo apt-get install imagemagick
+> sudo apt-get install pngquant
+
+24. Improve Security:
+http://www.codelitt.com/blog/my-first-10-minutes-on-a-server-primer-for-securing-ubuntu/
+
+Setup Uninstalled-Upgrades to automatically install security updates (only)
+
+> apt-get install unattended-upgrades
+
+> vim /etc/apt/apt.conf.d/10periodic
+
+APT::Periodic::Update-Package-Lists "1";
+APT::Periodic::Download-Upgradeable-Packages "1";
+APT::Periodic::AutocleanInterval "7";
+APT::Periodic::Unattended-Upgrade "1";
+
+> vim /etc/apt/apt.conf.d/50unattended-upgrades
+
+Unattended-Upgrade::Allowed-Origins {
+    "Ubuntu lucid-security";
+    //"Ubuntu lucid-updates";
+};
+
+# Prevent filling up inodes due to older linux kernels
+Unattended-Upgrade::Remove-Unused-Dependencies "true";
+
+25. Update logrotate configuration
+On local machine: 
+> cap production deploy:update_logrotate_conf
+
+26. Configure sendmail
+> sudo apt-get install sendmail
+> sudo sendmailconfig
+Answer Y to everything
+
+27. Configure SPF
+Setup the following TXT record for the domain name (change the IP to
+match the server's IP:
+
+TXT @ "v=spf1 ip4:xxx.xxx.xxx.xxx include: spf.protection.outlook.com -all"
+
+Check your SPF record using:
+https://www.kitterman.com/spf/validate.html?
+http://spf.myisp.ch/
+
+28. Configure DKIM with Sendmail (outgoing only)
+https://philio.me/setting-up-dkim-with-sendmail-on-ubuntu-14-04/
+https://gist.github.com/artmouse/632b7ea16af967a78d5b
+
+Install opendkim
+> sudo apt-get install opendkim opendkim-tools
+
+Create keys
+> sudo mkdir -p /etc/opendkim/keys
+> cd /etc/opendkim/keys/eventstaffing.co.uk
+> sudo opendkim-genkey -d eventstaffing.co.uk -s default
+> sudo opendkim:opendkim default.private
+
+Point to keys in configuration
+> vim /etc/opendkim.conf
+Domain                  eventstaffing.co.uk
+KeyFile                 /etc/opendkim/keys/eventstaffing.co.uk/default.private
+Selector                default
+
+Setup port
+> vi /etc/default/opendkim
+Ubuntu uses a socket by default, but Sendmail complains that this is insecure so it's
+necessary to use a port instead, the following can be appended to the end of the file:
+SOCKET="inet:8891@localhost"
+Also comment out any other lines
+
+Restart opendkim
+> sudo service opendkim restart
+
+Update sendmail to use dkim
+> vi /etc/mail/sendmail.mc
+INPUT_MAIL_FILTER(`opendkim', `S=inet:8891@localhost')
+> su
+> m4 /etc/mail/sendmail.mc > /etc/mail/sendmail.cf
+> exit
+
+Restart sendmail
+> sudo service sendmail restart
+
+29. Configure postfix (see postfix_setup.txt)
+
+30. Setup cron to write to it's own log file:
+> sudo vi /etc/rsyslog.d/50-default.con
+Uncomment the following line:
+#cron.* /var/log/cron.log
+Restart rsyslog: 
+> sudo service rsyslog restart
+
+31. Install LetsEncrypt SSL certificate for staging site:
+(Check LetsEncrypt Site for latest instructions
+
+$ sudo apt-get update
+$ sudo apt-get install software-properties-common
+$ sudo add-apt-repository ppa:certbot/certbot
+$ sudo apt-get update
+$ sudo apt-get install python-certbot-nginx 
+
+sudo certbot --nginx certonly
+
+# Change ownership for backup:
+sudo chown -R deploy:deploy /etc/letsencrypt
+
+IMPORTANT NOTES:
+ - Congratulations! Your certificate and chain have been saved at:
+   /etc/letsencrypt/live/staging.eventstaffing.co.uk/fullchain.pem
+   Your key file has been saved at:
+   /etc/letsencrypt/live/staging.eventstaffing.co.uk/privkey.pem
+   Your cert will expire on 2018-07-19. To obtain a new or tweaked
+   version of this certificate in the future, simply run certbot
+   again. To non-interactively renew *all* of your certificates, run
+   "certbot renew"
+ - Your account credentials have been saved in your Certbot
+   configuration directory at /etc/letsencrypt. You should make a
+   secure backup of this folder now. This configuration directory will
+   also contain certificates and private keys obtained by Certbot so
+   making regular backups of this folder is ideal.
+ - If you like Certbot, please consider supporting our work by:
+
+   Donating to ISRG / Let's Encrypt:   https://letsencrypt.org/donate
+   Donating to EFF:                    https://eff.org/donate-le

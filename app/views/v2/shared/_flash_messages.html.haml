@@ -1,0 +1,80 @@
+- if flash[:error].present? || flash[:alert].present? || flash[:notice].present? || flash[:job_board].present? ||flash[:landing_page].present?
+  - if !flash[:error].present? && flash[:job_board].present?
+    .v2-flash-bg{:class => ('fl-flash--big' if flash[:big].present?)}
+      .v2-flash-body-job-board
+        - if flash[:job_board_title].present?
+          %h2.v2-flash-title
+            = flash[:job_board_title]
+        .v2-flash-message
+          = flash[:job_board]
+        - if flash[:job_board_1].present?
+          .v2-flash-message{style: "margin-top: 15px;"}
+            = flash[:job_board_1]
+        - if flash[:button_title].present?
+          - if flash[:redirect].present?
+            %a{href: flash[:redirect]}
+              .v2-flash-button{onclick: '$(".v2-flash-bg").fadeOut()'}
+                = flash[:button_title]
+          -else
+            .v2-flash-button{onclick: '$(".v2-flash-bg").fadeOut()'}
+              = flash[:button_title]
+        -flash[:job_board] = nil
+  - elsif flash[:landing_page].present? && request.url.split('/').last == "staff"
+    .v2-flash-bg{:class => ('fl-flash--big' if flash[:big].present?)}
+      .v2-flash-body-job-board
+        - if flash[:title].present?
+          %h2.v2-flash-title
+            = flash[:title]
+        .v2-flash-message
+          = flash[:job_board]
+        - if flash[:landing_page].present?
+          .v2-flash-message{style: "margin-top: 15px;"}
+            = flash[:landing_page]
+        - if flash[:second_line].present?
+          .v2-flash-message
+            = flash[:second_line]
+        - if flash[:button].present?
+          - if flash[:redirect].present?
+            %a{href: flash[:redirect]}
+              .v2-flash-button{onclick: '$(".v2-flash-bg").fadeOut()'}
+                = flash[:button_title]
+          -else
+            - if flash[:returning] == "true"
+              .v2-flash-button{onclick: "$('.v2-flash-bg').fadeOut(); new_employee_true();"}
+                = flash[:button]
+            - else
+              .v2-flash-button{onclick: "$('.v2-flash-bg').fadeOut();"}
+                = flash[:button]
+        -flash[:job_board] = nil
+        -flash[:landing_page] = nil
+  -elsif request.url.split('/').last != "login"
+    .v2-flash-bg{:class => ('fl-flash--big' if flash[:big].present?)}
+      .v2-flash-body
+        - if flash[:error].present?
+          %i.icon--error-flag
+        - else
+          %i.icon--notice-flag
+        - if flash[:title].present?
+          %h2.v2-flash-title
+            = flash[:title]
+        .v2-flash-message
+          = flash[:error] || flash[:notice] || flash[:alert]
+          - if flash[:second_line].present?
+            .v2-flash-message
+              = flash[:second_line]
+        - if flash[:button_title].present?
+          .v2-flash-button{onclick: '$(".v2-flash-bg").fadeOut()'}
+            = flash[:button_title]
+        %a.fl-flash__close-btn{onclick: '$(".v2-flash-bg").fadeOut()'}
+          %span Close
+        .clear
+  - flash[:error] = nil
+  - flash[:alert] = nil
+  - flash[:notice] = nil
+  - content_for :js do
+    :javascript
+      $(document).ready(function() {
+          $('.flash-backing').fadeIn();
+          $('.flash-backing').click(function() { $('.flash-backing').fadeOut(); })
+          $('.flash form').click(function(event) { event.stopPropagation(); })
+      });

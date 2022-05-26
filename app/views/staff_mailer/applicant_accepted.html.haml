@@ -1,0 +1,23 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; font-weight: 700;" }
+  %tr
+    %td Welcome to the team #{@name}, now let’s get you working. 
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td Log in to your staff profile at any time to select job opportunities and remember to keep your employee profile up to date with skills and work preferences.
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td Before you can start work, please make sure all your employment HR requirements are filled in and uploaded. Via your staff profile, we need your bank details, ‘right to work’ ID evidence, share code number possible, NI number and identification. Oh and remember that valuable Tax starter declaration form.
+  %tr
+    %td= link_to 'Log In to your Flair Account', "#{Flair::Application.config.base_https_url}/staff"
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td If you have any questions, we are always here to help.
+  %tr
+    %td Get Social.
+  %tr
+    %td Check out our social media pages and discover our world!
+= render partial: 'staff_mailer/signature'

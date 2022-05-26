@@ -1,0 +1,84 @@
+-if @interview.type == 'ONLINE'
+  -#%p <center><strong>Your Telephone Interview is Booked</strong></center>
+  %ul
+-if @interview.photo_url.present?
+  -interview_details_classes = ['medium-6']
+.row
+  .column.small-12.text-center{class: interview_details_classes}
+    .row
+      .column.small-12.text-center
+        %p
+          =image_tag 'flair-person.png', class: 'booked-interview-info-image'
+          <strong>Date:</strong>
+          =@interview.date.to_print
+    .row
+      .column.small-12
+        %p
+          =image_tag 'flair-person.png', class: 'booked-interview-info-image'
+          <strong>Time:</strong>
+          ="#{@interview.time_start.strftime('%H:%M')}".html_safe
+    .row
+      .column.small-12
+        %p
+          =image_tag 'flair-person.png', class: 'booked-interview-info-image'
+          <strong>Method:</strong>
+          - if @interview.telephone_call_interview == true && @interview.video_call_interview == true
+            Telephone or Video Call
+          - elsif @interview.telephone_call_interview == true
+            Telephone Call
+          - elsif @interview.video_call_interview == true
+            Video Call
+          - else
+            Undefined
+  -#- if @interview.photo_url.present?
+  -#  .column.medium-6.small-12.align-middle
+  -#    .row.align-center
+  -#      =image_tag @interview.photo_url
+-if @interview.type == 'ONLINE'
+  %p.text-center.mt3
+    Expect a call from us within 30 minutes of your chosen time,
+    <br>
+    or if you prefer, you can call us on the day between the hours of 10am - 5pm
+  .row.text-center
+    .column.small-12
+      %p
+        Office - <b>0161 241 2441</b>
+  .row.text-center
+    .column.small-12
+      %p
+        Mobile - <b>07961 988 644</b>
+.row
+  .column.small-12.text-center.mt2
+    %p <b>We look forward to speaking to you!</b>
+  .column.small-12.text-center.mt2
+    .yellow-button-staff{style: 'display: inline-block;'}
+      %a.pop-up-request-quote.mt0{'data-method': 'post', href: '/staff/cancel_interview', style: 'width: 100%; margin-top: 0px;'}
+        %p.bottom-button.covid-box-btn.interview-button-text-color{style: 'font-size: 18px; margin-top: 8px;'}
+          Cancel
+    - if !@interview_calendar.empty?
+      .yellow-button-staff.ml2.mr2{style: 'display: inline-block;'}
+        %a.pop-up-request-quote.mt0.reschedule-interview{href: '#interview', style: 'width: 100%; margin-top: 0px;'}
+          %p.bottom-button.covid-box-btn.interview-button-text-color{style: 'font-size: 18px; margin-top: 8px;'}
+            Reschedule
+    .yellow-button-staff{style: 'display: inline-block;'}
+      %a.pop-up-request-quote.mt0{href: '/staff/events', style: 'width: 100%; margin-top: 0px;'}
+        %p.bottom-button.covid-box-btn.interview-button-text-color{style: 'font-size: 18px; margin-top: 8px;'}
+          Search Jobs
+
+- content_for_once :js do
+  :javascript
+      $('.reschedule-interview').on('click', function() {
+        $('#tab-interview-scheduled').hide();
+        $('#tab-interview-signup').show();
+        $('.staff-interview-tab').html('<div class="fl-icon fl-icon--small fl-icon--checkmark-unchecked staff-top-bar-check-mark staff-interview-tab-icon" style="margin-right: 10px;"></div><div class="text-left">Book Interview</div>')
+      })
+      $('.reschedule-interview').on('click', function() {
+        $('#tab-interview-scheduled').hide()
+        $('#tab-interview-signup').show();
+        $('.staff-interview-tab').html('<div class="fl-icon fl-icon--small fl-icon--checkmark-unchecked staff-top-bar-check-mark staff-interview-tab-icon" style="margin-right: 10px;"></div><div class="text-left">Book Interview</div>')
+      })
+    $('.reschedule-interview').on('click', function() {
+      $('#tab-interview-scheduled').hide()
+      $('#tab-interview-signup').show()
+      $('.staff-interview-tab').html('<div class="fl-icon fl-icon--small fl-icon--checkmark-unchecked staff-top-bar-check-mark staff-interview-tab-icon" style="margin-right: 10px;"></div><div class="text-left">Book Interview</div>')
+    })

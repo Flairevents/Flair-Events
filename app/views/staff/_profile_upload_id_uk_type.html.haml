@@ -1,0 +1,16 @@
+%h4 UK
+%p All scans or photos MUST:
+%ul
+  %li be in full colour
+  %li include ALL text. Please do not miss any part of the ID
+  %li be flat and looking directly onto the document
+  %li avoid using flash to avoid shine or glare
+%h5 ID Type
+.form-control
+  =radio_button_tag 'uk_id_type', 'UK Passport', (@prospect.id_type != 'BC+NI'), {onchange: "uk_id_type_changed();"}
+  =label_tag :passport, 'Passport'
+  &nbsp;
+  =radio_button_tag 'uk_id_type', 'BC+NI', (@prospect.id_type == 'BC+NI'), {onchange: "uk_id_type_changed();"}
+  =label_tag :birth_certificate, 'Full Birth Certificate, NI Evidence, and Photo Evidence'
+.uk_id_upload_form
+  = render partial: (@prospect.id_type == 'BC+NI' ? 'profile_upload_id_uk_birth_certificate' : 'profile_upload_id_uk_passport')

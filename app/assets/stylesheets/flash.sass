@@ -1,0 +1,50 @@
+// styles for the popups which we use to display "flash messages",
+// i.e. notification messages when the user is sent to a new page
+
+@import "mixins"
+
+// transparent background which can be clicked on to make the
+//   notification message disappear
+.flash-backing
+  width: 99%
+  height: 99%
+  position: absolute
+  top: 0px
+  left: 0px
+  z-index: 1200
+
+// actual notification area
+.flash
+  @include centered(320px, 160px)
+
+  background-color: #207f5f
+  border: 7px solid #d4db95
+  color: #d4db95
+
+  padding: 16px 34px
+  z-index: 1500
+
+.flash.big
+  @include centered(420px, 280px)
+
+.flash h2
+  margin: 6px 0 0
+  padding-left: 3px
+  font-size: 22px
+  height: 25px
+  font-weight: bold
+  color: #d4db95
+
+.flash p
+  margin: 6px 0 0
+  padding-left: 3px
+  font-size: 15px
+
+.flash a
+  color: lighten(#207f5f, 15%)
+
+.flash .event-close-link
+  position: absolute
+  bottom: 10px
+  right: 10px
+  cursor: pointer

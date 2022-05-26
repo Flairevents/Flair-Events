@@ -1,0 +1,89 @@
+%p
+  %table
+    %tbody
+      %tr
+        %td{colspan: 2}= "Scanned DBS for #{escapeHTML(@name)}"
+        %td.pl10{rowspan: 4}
+          %img{src: "/prospect_photo/#{@prospect_id}", id: "prospect_photo", height: 145}
+      %tr
+        %td
+          %b Certificate Number: 
+        %td
+          %input.form-control{id: "dbscertificatenumber#{@prospect_id}", value: @dbs_certificate_number}
+      %tr
+        %td
+          %b Issue Date: 
+        %td
+          %input.form-control{id: "dbsissuedate#{@prospect_id}", value: @dbs_issue_date}
+      %tr
+        %td
+          %b Type: 
+        %td
+          %select.form-control{id: "qbsqualificationtype#{@prospect_id}"}
+            %option{value: '', selected: @dbs_qualification_type == ''}= ''
+            %option{value: 'Basic', selected: @dbs_qualification_type == 'Basic'}= 'Basic'
+            %option{value: 'Enhanced', selected: @dbs_qualification_type == 'Enhanced'}= 'Enhanced'
+            %option{value: 'Enhanced Barred List', selected: @dbs_qualification_type == 'Enhanced Barred List'}= 'Enhanced Barred'
+      %tr
+        %td{style: 'height: 65px;'} &nbsp
+
+- for scanned_dbs in @scanned_dbses
+  // TODO: Why the rand_id?
+  - rand_id = Math.floor(Math.random() * 1000000)
+  - if scanned_dbs.extension == '.pdf'
+    %iframe{ id: "img#{rand_id}", src: "/office/scanned_dbs_image/#{scanned_dbs.id}", width: "600", height:"400", style:"border: none; margin-right: 10px;" }
+  - else
+    %a{href: "/office/scanned_dbs_image/#{scanned_dbs.id}?large=true", class: 'zoomimg'}
+      %img{src: "/office/scanned_dbs_image/#{scanned_dbs.id}", id: "img#{rand_id}", width: 400, height: 400, data-rotation: 0}
+    %button.btn.btn-default{data-image-id: "#img#{rand_id}", data-scanned-id: scanned_dbs.id, data-id-approval-rotatable: ''} Rotate
+
+%script
+  $('[data-id-dbs-rotatable]').click(function() {
+    var scanned_id = $(this).data('scanned-dbs');
+    var image = $($(this).data('image-id'));
+    var angle = parseInt(image.attr('angle') || 0, 10);
+    angle = (angle+90)%360;
+    image.data('rotation', angle);
+    image.attr('angle', angle);
+    image[0].className = 'rotate'+angle;
+    ServerProxy.saveChanges("/office/rotate_scanned_dbs/"+scanned_id, {}, null, window.db);
+    // We might need to reinitialize ZoomIt
+    //@viewport.find('a.zoomimg').jqZoomItDispose() # currently displayed to-do might contain a zoomed image
+    //@viewport.find('.todo-description').html(@buildTodoHtml(todo))
+    //@viewport.find('a.zoomimg').jqZoomIt()
+  });
+
+  $('#dbscertificatenumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[dbs_certificate_number]" : newNumber}, null, window.db);
+  });
+  $('#dbscertificatenumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[dbs_certificate_number]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#dbsissuedate#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[dbs_issue_date]" : newNumber}, null, window.db);
+  });
+
+  $('#dbsissuedate#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[dbs_issue_date]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#qbsqualificationtype#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[dbs_qualification_type]" : newNumber}, null, window.db);
+  });
+
+  $('#qbsqualificationtype#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[dbs_qualification_type]" : newNumber}, null, window.db);
+    }
+  })

@@ -1,0 +1,214 @@
+- content_for :head do
+  %title Flexible Workforce solutions for all events UK wide.
+  %meta{ name: "description", content: "Want the best staff - right now? We connect businesses with flexible workers throughout the UK. Temporary, steady supply, high-volume, events, festivals & more. Join or hire today: 0160 241 2441"}
+= javascript_include_tag "v2-home"
+.public.home
+  = render :partial => 'v2/shared/nav'
+  = render :partial => 'v2/shared/sidenav'
+  .content{style: "overflow-x:hidden;"}
+    .content-inner
+      .v2-home-top-bg
+      .container-fluid.position-relative
+        .container.formidable-section.px-0
+          .v2-home-top-box
+            .v2-uk-most THE
+            .v2-content-animate.content.top-bold-text
+              .content__container
+                %span{ class: "txt-rotate", "data-period" => "2000", "data-rotate" => ['RESOURCEFUL', 'DEPENDABLE', 'FLEXIBLE'] }
+            .v2-staffing.top-bold-text STAFFING
+            .v2-agency.top-bold-text
+              %span AGENC
+              %span{ style: "margin-left: -20px;"} Y
+            .v2-small-desc.top-normal-text.mt3 Flair has been placing great people wherever they have been needed since 2000. Whether you need 500 bar staff, 5 event organisers or a temporary logistics team, come to us first!
+            .v2-home-btns.d-flex.align-items-center.justify-content-center.mt3
+              %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                %button.v2-home-hire-btn.hire Hire People
+            .v2-join-flair
+              %a{href: "/register"}
+      .container-fluid.px-0.position-relative
+        .v2-home-bottom-bg
+        .v2-home-box-2.d-flex
+          .container.px-0.v2-home-box-2-sub-1.container-fluid-large-screen.d-flex.flex-column.justify-content-end
+            .labels.v2-box2-label-1 Our job is to
+            .labels.v2-box2-label-2.label-green.d-flex.flex-inline
+              make your job
+              .violet.mr05 easier
+            .v2-box2-label-3 Some businesses need great, flexible staff at the drop of a hat. Others need a brilliant team to help with strategically-planned upcoming events.  Whatever your staffing needs, we’ve got you covered.
+        .v2-home-big-logo
+      .container-fluid.px-0
+        .v2-home-box-3
+          .container.container-fluid-large-screen.justify-content-between-at-lg.d-flex.position-relative{style: "z-index: 3;"}
+            .v2-knowledge-img
+            .v2-knowledge-content.align-items-top
+              .content-title.d-flex.flex-inline.align-items-center
+                .separator-line
+                .content-title.label-title
+                  Our
+                  .label-white Knowledge
+              .content-body.knowledge-content For the past 20 years, we have been evolving with the trends and demands unique to each of the industries we work in. Our diverse pool of talent is made up of multi-skilled people from all over the UK who have been attracted to Flair by the breadth of our events, brands and opportunities. By working with and nurturing these brilliant people, we are able to seamlessly deliver capable, enthusiastic teams across multiple sectors.
+            .v2-skills-nav
+              .d-flex.justify-content-center
+                %ul.v2-skills-category-nav.d-flex
+                  %li.skills-item{ "data-index" => 1 }
+                    %a.d-flex.flex-column.justify-content-center.align-items-center{ href: "/industries/events"}
+                      .skill-image.events
+                      %h3 EVENTS
+                  %li.skills-item{ "data-index" => 2 }
+                    %a.d-flex.flex-column.justify-content-center.align-items-center{ href: "/industries/sports"}
+                      .skill-image.sports
+                      %h3 SPORTS
+                  %li.skills-item{ "data-index" => 3 }
+                    %a.d-flex.flex-column.justify-content-center.align-items-center{ href: "/industries/logistics"}
+                      .skill-image.logistics
+                      %h3 LOGISTICS
+                  %li.skills-item{ "data-index" => 4 }
+                    %a.d-flex.flex-column.justify-content-center.align-items-center{ href: "/industries/hospitality"}
+                      .skill-image.hospitality
+                      %h3 HOSPITALITY
+                  %li.skills-item{ "data-index" => 5 }
+                    %a.d-flex.flex-column.justify-content-center.align-items-center{ href: "/industries/promo"}
+                      .skill-image.promotional
+                      %h3 PROMOTIONAL
+                  %li.skills-item{ "data-index" => 6 }
+                    %a.d-flex.flex-column.justify-content-center.align-items-center{ href: "/industries/commercial"}
+                      .skill-image.commercial
+                      %h3 COMMERCIAL
+      .row
+        .v2-home-box-4
+          .container.container-fluid-large-screen.px-0
+            .labels.violet.mt10.label-50.text-center It's a people thing
+            .help-content.labels.label-18-proxima.text-center
+              Our business is people – all the way from finding and briefing staff to paying them and providing support, whatever they have been asked to do. We also work with your own people to understand exactly what you need. When you partner with Flair, you can be sure
+              %span we’ve done our homework – and that we’ll deliver a motivated workforce that we’re proud to stand behind.
+            .labels.violet.mt4.label-35.text-center.mb-20 Here's how we do it
+            .v2-steps-nav
+              .d-flex.justify-content-center
+                %ul.v2-steps-box-nav.d-flex
+                  %li.step-box.first
+                    .step-number 01
+                    .d-flex.mt06
+                      .box-title Partner
+                    .d-flex.w-full
+                      .box-content We listen, we learn and get to know your business so we can understand your requirements.
+                  %li.step-box.second
+                    .step-number 02
+                    .d-flex.mt06
+                      .box-title Create
+                    .d-flex.w-full
+                      .box-content We diligently build every team to your specific needs, no matter how complex the request.
+                  %li.step-box.third
+                    .step-number 03
+                    .d-flex.mt06
+                      .box-title Deliver
+                    .d-flex.w-full
+                      .box-content Our commitment to you is a well-prepared workforce that you can depend on.
+      .row
+        .v2-home-box-5
+          .container.formidable-section.px-0.d-flex
+            .flex-column
+              .label-green.v2-need-people.d-flex.flex-inline
+                Need
+                .label-white.people.ml1 people?
+              .label-white.v2-need-people-desc.mt2
+                We employ and retain motivated workers. We then hand-pick the best ones for your needs.
+                We add value and help your business to achieve more – often for the same cost as a self-service app.
+              .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt2
+                %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                  %button.v2-home-staff-req-btn.staff-request Staff Request
+            .d-flex.align-items-center.v2-people-images
+              - ["Sundown2017_BethCrockatt_0039", "GreaterFreedomLaunch_BethCrockatt_-222", "ColourRush"].each do |img|
+                %img.people-image{src: asset_path("v2/home/#{img}.png")}
+      .container-fluid.px-0
+        .v2-home-box-6
+          .container-fluid.px-0
+            .d-flex.justify-content-around.align-items-center{ style: "padding-top: 65px;"}
+              .d-flex.align-items-center
+                .world-img
+              .d-flex.flex-column.align-items-start.ml3.v2-home-support-title
+                .d-flex.world-content
+                  .labels.line-1.d-flex.flex-inline
+                    We work
+                    .label-green.flex-inline.mr1.ml1 nationally
+                    to
+                .d-flex.world-content
+                  .labels.line-2.d-flex.flex-inline.ml7
+                    support you
+                    .label-green.flex-inline.ml1 locally
+                .d-flex.world-content.mt3
+                  .labels.line-3.d-flex.violet No job is too big, too small or too remote. When building your flexible workforce, we target our marketing to create a team as locally as we possibly can. Having operated on a national scale for more than 20 years, we have established a vast network of talented workers in every region. This provides us with a reliable talent base year after year – which is especially useful when it comes to repeat contracts.
+      .row
+        .v2-home-box-7
+          .container.container-fluid-large-screen.v2-home-box-7-2-1.px-0
+            .v2-home-box-7-1.d-flex.justify-content-end.position-relative.align-items-center
+              .d-flex.v2-img-carousel.slanted-slide
+                .container-general
+                  .gallery-wrap
+                    - (0..3).each_with_index do |name, index|
+                      .slanted-container{ class: "#{index == 3 ? 'slanted-active' : ''}"}
+                        .slanted-item
+              .d-flex.flex-column
+                .work-content
+                  .label-green.line-1.d-flex.flex-inline
+                    Need
+                    .label-white.flex-inline.ml1 work?
+                .work-content
+                  .label-white.line-2.mt2 We understand that the quality of our service depends on the talented people who make up our brilliant, flexible workforce. Join our team today – and enjoy the support of a friendly, well-established staffing agency with access to some of the UK’s best and most varied job opportunities.
+                .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt2
+                  %a{href: "/register"}
+                    %button.v2-home-staff-req-btn.join-team Join our Team
+      .row
+        .v2-home-box-8
+          .container.container-fluid-large-screen.px-0{ style: "height: inherit;" }
+            .d-flex.justify-content-evenly.align-items-center{ style: "height: inherit;" }
+              .fa.fa-chevron-left.arrows.mt2.flex-prev
+              .d-flex.flex-column.align-items-start
+                .d-flex.testimonials.client-says-title.mt2 What our clients say:
+                .slideshow-container.mt3
+                  %ul.slides
+                    - [["The refreshing thing is you always know where you stand. If Flair cannot support in an area, they will be 100% up front and tell you, in advance. Support, service, communication, and commitment is 100%. We have great respect and loyalty towards Flair.", "Steve Hobbs", "Operations Director", "LHG"], ["We received excellent customer service again this year from the team at Flair Events – there was always someone on hand to deal with our requests, and the general quality of staff provided was excellent. We would not hesitate in using them again for upcoming events and projects.", "Nick Thompson", "Senior Commercial Events Manager", "Kew Gardens"], ["Flair have played a big part in the smooth running of our bar events by providing excellent staff consistently and high-level management service. We would be happy to recommend every day of the week!", "James Manning", "Director", "Shack Events"], ["The core Flair team are accommodating to last minute changes and helpful with our multiple questions. The staff we receive on the day are hard-working, friendly, and capable and were always fully staffed whatever venue we throw at them!", "Sarah King", "Staffing & Logistics", "Limelight Sports"], ["We have worked with Flair for several years, and they have always delivered. The whole team are flexible and willing to work with the demanding changes in the events industry whilst always providing a second-to-none service throughout all our events up and down the whole of the UK.", "Bobby Nanua", "", "Derby Bars Ltd"]].each do |section|
+                      %li.testimonial-container.flex-column.d-flex
+                        .testimonials.client-says.d-flex.flex-inline.justify-content-center
+                          .quote
+                          %p.quote-content
+                            #{section[0].html_safe}
+                            %span.reversed
+                        .testimonials.client-name.d-flex.flex-inline.justify-content-center.mt2
+                          ="#{section[1]},"
+                          .job-position.ml1= section[2].present? ? "#{section[2]}, #{section[3]}" : "#{section[3]}"
+                / .d-flex.flex-inline.testimonials-pagination.justify-content-evenly.align-items-center
+                /   - (0..4).each do |page|
+                /     - if page == 0
+                /       %span.dot.testimonial-active{ "data-page" => page}
+                /     - else
+                /       %span.dot{ "data-page" => page}
+                / .custom-pagination
+              .fa.fa-chevron-right.arrows.mt2.flex-next
+      .row
+        .v2-home-box-9
+          .container.container-fluid-large-screen.px-0
+            .d-flex.align-items-start.justify-content-center
+              .d-flex.flex-column.align-items-center.mt5
+                .d-flex.flex-inline.justify-content-center.business-title.label-50.violet.desktop
+                  Companies who choose
+                  .flair-text.label-green.ml1 Flair
+                .d-flex.flex-inline.justify-content-center.business-title.label-50.violet.d-none.tablet
+                  Businesses who choose
+                  .flair-text.label-green.ml1 Flair
+                .d-flex.flex-wrap.align-items-center.justify-content-between.business-logos.mt5
+                  - ["limelight", "thebar", "ironman", "kew", "shack", "ebay", "britishheartfoundation", "eventbrite", "virginsport", "imperialcollegelondon"].each_with_index do |img, index|
+                    %img.b-logo{src: asset_path("v2/home/logos/#{img}.png"), class: "#{index != 9 ? 'mr3' : ''}"}
+                .d-flex.v2-box-9-bg
+                .d-flex.flex-column.v2-partner.mt15.ml20
+                  .labels.title-1 Partner
+                  .labels.title-2.label-50.mt2.ml17 with
+                  .labels.title-1.mt05.ml26 Flair
+                  .d-flex.flex-inline.mt5.ml2.v2-bottom-buttons
+                    .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center
+                      %a{href: "/register"}
+                        %button.v2-home-staff-req-btn.join-team Join our Team
+                    .v2-home-btns.bottom-hire.d-flex.align-items-center.justify-content-center.ml3
+                      %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                        %button.v2-home-bottom-hire-btn.bottom-hire Hire Staff Now
+      .v2-home-bottom
+    .content-after
+  = render :partial => 'v2/application/footer'

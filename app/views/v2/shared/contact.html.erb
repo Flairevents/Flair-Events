@@ -1,0 +1,126 @@
+<% content_for :head do %>
+  <title>Contact Flair - lets chat today</title>
+  <meta name="description" content="Need more information, a quote or simply want to get in touch? Drop us a line!" />
+<% end %>
+<%= render :partial => 'v2/shared/nav' %>
+<div class="v2-contact-bg"></div>
+<div class="content">
+  <div class="content-spacer"></div>
+  <div class="content-inner">
+    <div class="d-flex flex-row-reverse bd-highlight justify-content-center">
+      <div class="d-flex col-lg col-md">
+        <div class="v2-contact-form-container">
+        </div>
+        <div class="v2-contact-form">
+          <div class="v2-lets-talk">Let's talk, but you first</div>
+          <% if @errors.present? %>
+            <div class="error-messages">
+              <% @errors.each do |key, errors| %>
+                <% errors.each do |error| %>
+                  <p>
+                    <%= error %>
+                  </p>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+
+          <%= form_tag "/contact", id: 'contact-form' do %>
+            <input aria-describedby="basic-addon1" class="form-control v2-contact-name required" id="name" name="name" placeholder="Full Name" style="border-radius: 10px;" type="text" autocomplete="off">
+
+            <div class="d-flex justify-content-center">
+              <input aria-describedby="basic-addon2" class="form-control v2-contact-email required" id="email" name="email" placeholder="Email Address" style="border-radius: 10px;margin-right:10px;" type="email" autocomplete="off">
+
+              <input aria-describedby="basic-addon1" class="form-control v2-contact-email required" id="contact" name="contact" placeholder="Contact Number" style="border-radius: 10px;" type="tel" autocomplete="off" title="0 + 10 or 9 digits">
+            </div>
+
+            <select class="form-select v2-contact-dropdown required" name="subject" aria-label="Default select example">
+              <option value="" disabled selected class="v2-contact-dropdown-label">I am...</option>
+              <option value="1">hiring</option>
+              <option value="2">have a general question</option>
+              <option value="3">looking for payroll</option>
+              <option value="4">looking for accounts</option>
+              <option value="5">legend</option>
+            </select>
+
+            <textarea aria-describedby="basic-addon5" class="form-control v2-contact-message required" id="message" name="message" placeholder="Message" style="border-radius: 10px;" type="text" autocomplete="off"></textarea>
+
+            <center>
+              <input class="v2-contact-submit d-flex justify-content-center" type="submit" value="SEND MESSAGE">
+            </center>
+          <% end %>
+        </div>
+      </div>
+      <div class="d-flex col-lg col-md align-items-end justify-content-center">
+        <div class="d-flex flex-row-reverse" style="margin-bottom: 34px;">
+          <div class="v2-contact-london-container">
+            <div class="v2-contact-london">
+              <div class="d-flex flex-row bd-highlight">
+                <div class="v2-big-ben"></div>
+                <div style="margin-left: 14px">
+                  <div class="v2-contact-london-label">London</div>
+                  <div class="v2-contact-london-number">0204 542 6441</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="v2-contact-manchester-container">
+          <div class="v2-contact-manchester">
+            <div class="d-flex flex-row bd-highlight">
+              <div class="v2-contact-manchester-image">
+                <%= image_tag asset_path("v2/Path 3263.png") %>
+              </div>
+              <div style="margin-left: 14px">
+                <div class="v2-contact-manchester-label">Manchester</div>
+                <div class="v2-contact-manchester-number">01612412441</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</div>
+<div class="content-after"></div>
+<%= render :partial => 'v2/application/footer' %>
+
+<% content_for_once :js do %>
+  <script>
+    $('#contact-form').on('submit', function(){
+        check = 0;
+
+        inputs = $(this).find('.required');
+
+        inputs.each(function(){
+            if($(this).val() == "" || $(this).val() == null){
+                check = 1
+                $(this).css('border', '2px solid red');
+            }else{
+                $(this).css('border', 'none');
+            }
+        })
+
+        if(check == 0){
+            return true;
+        }else{
+            $('body').append(`
+                <div class="v2-flash-bg">
+                    <div class="v2-flash-body">
+                    <i class="icon--notice-flag"></i>
+                    <div class="v2-flash-message">
+                        Please fill up all details.
+                    </div>
+                    <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                        <span>Close</span>
+                    </a>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            `)
+            return false;
+        }
+    })
+  </script>
+<% end %>

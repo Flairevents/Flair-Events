@@ -1,0 +1,89 @@
+.command-bar
+  .btn-toolbar.list-view-only
+    .btn-group
+      %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+      %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+      %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+      %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+      %button.btn.btn-default.command-link{:"data-command" => 'clearFilters'} Clear Filters
+      - if current_user.manager?
+        .btn-group
+          %button.btn.btn-default.dropdown-toggle.command-link.command-report{:"data-toggle" => 'dropdown'}
+            Report
+            %span.caret
+          %ul.dropdown-menu.report-dropdown
+            - Report.where(table: 'clients').sort_by(&:print_name).each do |report|
+              %li
+                %a{href: '#', :"data-report-name" => report.name}= report.print_name
+  %div{style: 'clear:both'}
+
+%hr
+.filter-bar-container
+  %form.filters.filter-bar{style: 'float:left'}
+    %table
+      %tr
+        %th Active?
+        %th Company Name
+        %th Flair Contact
+      %tr
+        %td= _select :active, options_for_select([['',''], ['Y','true'], ['N','false']], 'true'), class: 'form-control'
+        %td= _text_field :search, class: 'form-control'
+        %td= _text_field :search_flair_contact, class: 'form-control'
+
+%div{style: 'clear:both'}
+
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+  .report-download-dialog.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Download Report
+    .modal-body
+      %a.download-xlsx{download: true}>
+        %img{src: image_path('xlsx-icon.png'), width: 128, height: 128, alt: 'Excel'}>
+      %a.download-csv{download: true}>
+        %img{src: image_path('csv-icon.png'), width: 128, height: 128, alt: 'CSV'}>
+      %a.download-pdf{download: true}>
+        %img{src: image_path('pdf-icon.png'), width: 128, height: 128, alt: 'PDF'}>
+    .modal-footer
+      %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel
+
+= slideover_form 'record-new', partial: 'client_form', locals: { form_id: 'new_client', client: Client.new }
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    .slideover-tabs
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#client-details', :"data-toggle" => 'tab'} Details
+        %li
+          %a.client-contacts-tab{href: '#client-contacts', :"data-toggle" => 'tab'} Contacts
+        %li
+          %a.client-events-tab{href: '#client-events', :"data-toggle" => 'tab'} Events
+        %li
+          %a.client-future-events-tab{href: '#client-future-events', :"data-toggle" => 'tab'} Future Events
+    .slideover-tab-panes.tab-content
+      .tab-pane.active#client-details
+        = render partial: 'client_form', locals: { form_id: 'edit_client', client: Client.new }
+      .tab-pane#client-contacts
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane#client-events
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane#client-future-events
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list

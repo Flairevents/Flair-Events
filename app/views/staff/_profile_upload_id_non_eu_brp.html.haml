@@ -1,0 +1,46 @@
+%h5 Biometric Residency Permit
+.row
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Front of Card
+        %a.help{onclick: '$(".non-eu-id-front-popup").show()'}
+          %i.glyphicon.glyphicon-question-sign
+      = file_field_tag :brp_front, required: true, class: "form-control", accept: @accepted_images
+  .column.small-12.medium-6
+    .upload-field
+      .field-label-above
+        Back of Card
+        %a.help{onclick: '$(".non-eu-id-back-popup").show()'}
+          %i.glyphicon.glyphicon-question-sign
+      = file_field_tag :brp_back, required: true, class: "form-control", accept: @accepted_images
+.non-eu-id-front-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-front.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-back-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-back.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-number-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-number.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-issue-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-issue.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-expiry-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-expiry.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close
+.non-eu-id-indefinite-popup.sample-popup.fl-flash{style: 'display:none'}
+  .fl-flash__body
+    =image_tag 'id-sample-non-eu-brp-indefinite.jpg'
+    %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+      %span Close

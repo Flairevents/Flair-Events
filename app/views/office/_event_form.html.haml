@@ -1,0 +1,595 @@
+= form_for event, url: '#', html: {id: form_id, class: 'record-details-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  %table
+    %tr
+      %td{class: 'label-column'}
+        %span{class: 'mandatory'} Internal Event Name:
+      %td{colspan: 3}= f.text_field :name, size: 40, class: 'form-control', id: 'edit_event_name'
+      %td Category:
+      %td{colspan: 3}= f.select :category_id, EventCategory.all.sort_by(&:name).map { |ec| [ec.name, ec.id]}, {}, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory'} Public Event Name:
+      %td{colspan: 3}= f.text_field :display_name, size: 40, class: 'form-control'
+      %td Status:
+      %td{colspan: 3}= f.select :status, [], {}, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory'} Start Date:
+      %td= f.text_field :date_start, size: 19, class: 'form-control event-datepicker', id: form_id + '_date_start'
+      %td
+        %span{class: 'mandatory'} End Date:
+      %td= f.text_field :date_end, size: 19, class: 'form-control event-datepicker', id: form_id + '_date_end'
+      %td Size:
+      %td{colspan: 3}= f.select :size_id, ['']+EventSize.all.sort_by(&:order).map { |ec| [ec.name, ec.id]}, {}, class: 'form-control'
+    %tr
+      %td Public Start:
+      %td= f.text_field :public_date_start, size: 19, class: 'form-control event-datepicker', id: form_id + '_public_date_start'
+      %td Public End:
+      %td= f.text_field :public_date_end, size: 19, class: 'form-control event-datepicker', id: form_id + '_public_date_end'
+      %td Fullness
+      %td{colspan: 3}= f.select :fullness, options_for_select([['Open','OPEN'],['Register Interest','REGISTER_INTEREST'],['Full', 'FULL'],['Nearly', 'NEARLY']]), {}, class: 'form-control'
+    %tr
+      %td Staff Needed:
+      %td= f.text_field :staff_needed, size: 11, class: 'form-control'
+      %td Callback Due:
+      %td= f.text_field :date_callback_due, size: 19, class: 'form-control event-datepicker', id: form_id + '_callback_due'
+      %td
+        = f.check_box :paid_breaks
+        = f.label :paid_breaks, "Paid Breaks"
+    %tr
+      %td Additional Staff:
+      %td= f.text_field :additional_staff, size: 11, class: 'form-control'
+      %td Hired:
+      %td
+        %p{style: "margin:0;", id: form_id + '_gigs_count'}
+      %td
+        = f.check_box :requires_booking
+        = f.label :requires_booking, "Requires Booking"
+    %tr
+      %td Event ID:
+      %td= text_field_tag :event_id, nil, disabled: true, class: 'form-control'
+    %tr
+      %td
+      %td
+      %td
+      %td
+      %td= f.button 'Remove Tasks', class: 'btn btn-primary clear-event-tasks', type: 'button', name: 'event[remove_task]'
+    %tr
+      %td
+      %td
+      %td
+      %td
+    %tr
+      %td.label-column Auto Emails:
+      %td.checkbox-group{colspan:3}
+        = f.check_box :send_scheduled_to_work_auto_email
+        = f.label :send_scheduled_to_work_auto_email, "Scheduled To Work"
+    %tr
+      %td.label-column Show In:
+      %td.checkbox-group{colspan:3}
+        = f.check_box :show_in_home
+        = f.label :show_in_home, "Home"
+        = f.check_box :show_in_planner
+        = f.label :show_in_planner, "Planner"
+        = f.check_box :show_in_payroll
+        = f.label :show_in_payroll, "Payroll"
+        = f.check_box :show_in_time_clocking_app
+        = f.label :show_in_time_clocking_app, "TC App"
+        = f.check_box :show_in_ongoing
+        = f.label :show_in_ongoing, "Ongoing"
+        = f.check_box :show_in_featured
+        = f.label :show_in_featured, "Featured"
+      %td.checkbox-group{colspan:2}
+        = f.check_box :show_in_public
+        = f.label :show_in_public, "Public"
+        = f.check_box :show_in_history
+        = f.label :show_in_history, "History"
+    %tr
+      %td
+      %td
+        = f.check_box :is_restricted
+        = f.label :is_restricted, "Restricted"
+    %tr
+      %td.label-column Categories:
+      %td.checkbox-group{colspan:3}
+        = f.check_box :has_bar
+        = f.label :has_bar, "Bar"
+        = f.check_box :has_festivals
+        = f.label :has_festivals, "Festivals"
+        = f.check_box :has_hospitality
+        = f.label :has_hospitality, "Hosp"
+        = f.check_box :has_office
+        = f.label :has_office, "Office"
+        = f.check_box :has_promotional
+        = f.label :has_promotional, "Promo"
+        = f.check_box :has_retail
+        = f.label :has_retail, "Retail"
+        = f.check_box :has_sport
+        = f.label :has_sport, "Sport"
+      %td.checkbox-group{colspan:2}
+        = f.check_box :has_warehouse
+        = f.label :has_warehouse, "Logistics"
+  %hr
+    %input{name: 'event_dates', type: 'hidden'}
+    %div{id: form_id + '_calendar'}
+  %hr
+  %table
+    %tr
+      %td{class: 'label-column'}
+        %span{class: 'mandatory'} Clients:
+      %td
+        // Send a blank value to indicate "no events" vs "parameter not set"
+        %input{name: 'event_clients[]', type: 'hidden', value: ''}
+        %select{multiple: true, name: 'event_clients[]', class: 'event'}
+    %tr
+      %td Site Manager:
+      %td{colspan:3}= f.text_field :site_manager, size: 60, class: 'form-control'
+      %td Required Training:
+    %tr
+      %td Staff HQ:
+      %td= f.select :office_manager_id, [], {}, class: 'form-control active-operational-managers-dropdown', style: 'width: 50%;'
+      %td Senior HQ:
+      %td= f.select :senior_manager_id, [], {}, class: 'form-control active-senior-managers-dropdown', style: 'min-width: 130px;'
+      %td
+        = f.check_box :require_training_ethics
+        Ethics
+    %tr
+      %td Map Address:
+      %td{colspan:3}= f.text_field :address, size: 60, class: 'form-control'
+      %td
+        = f.check_box :require_training_customer_service
+        Customer Service
+    %tr
+      %td Post Code:
+      %td{colspan:3}= f.text_field :post_code, size: 60, class: 'form-control'
+      %td
+        = f.check_box :require_training_sports
+        Sport
+    %tr
+      %td Location:
+      %td{colspan:3}= f.text_field :location, size: 60, class: 'form-control'
+      %td
+        = f.check_box :require_training_bar_hospitality
+        Bar & Hospitality
+    %tr
+      %td Website:
+      %td{colspan:3}= f.text_field :website, size: 60, class: 'form-control'
+      %td
+        = f.check_box :require_training_health_safety, disabled: true
+        Health & Safety
+  %hr
+  %div{style: 'display: flex;'}
+    %table
+      %tr.legacy-blurb{style: 'display:none'}
+        %td{class: 'label-column'} Blurb<br/>(for public<br/>web site):
+        %td{colspan: 4}= f.text_area :blurb_legacy, class: 'tinymce', :"data-prop" => 'blurb_legacy'
+      %tr.structured-blurb{style: 'display:none'}
+        %td{class: 'label-column', colspan: 4}
+          %b Event Blurb
+      %tr.structured-blurb{style: 'display:none'}
+        %td{class: 'label-column'} Jobs (for public site):
+        %td{colspan: 3}= f.text_field :jobs_description, size: 60, spellcheck: true, class: 'form-control'
+      %tr.structured-blurb{style: 'display:none'}
+        %td{class: 'label-column', style: 'display: none;'} Title:
+        %td{colspan: 3}= f.text_field :blurb_title, class: 'wide-text form-control', spellcheck: true, style: 'display: none;'
+      %tr.structured-blurb{style: 'display:none'}
+        %td Subtitle:
+        %td{colspan: 3}= f.text_area :blurb_subtitle, class: 'wide-text form-control', spellcheck: true, row: 3
+      %tr.structured-blurb{style: 'display:none'}
+        %td Additional Wage Info:
+        %td{colspan: 3}= f.text_area :blurb_wage_additional, rows: 1, class: 'wide-text form-control', spellcheck: true
+      %tr.structured-blurb{style: 'display:none'}
+        %td Transport Info:
+        %td{colspan: 3}= f.text_area :blurb_transport, rows: 2, class: 'wide-text form-control', spellcheck: true
+      %tr.structured-blurb{style: 'display:none'}
+        %td Other Info:
+        %td{colspan: 3}= f.text_area :other_info, rows: 2, class: 'wide-text form-control', spellcheck: true
+      %tr.structured-blurb{style: 'display:none'}
+        %td Closing Words:
+        %td{colspan: 3}= f.text_area :blurb_closing, rows: 1, class: 'wide-text form-control', spellcheck: true
+    %table#job-container{style: 'margin-left: 100px; margin-top: 25px;'}
+      %tr
+        %td{style: 'text-align: right;vertical-align: top;'} Job:
+        %td
+          = select_tag "job[id]", "<option value=''></option>", id: 'edit_event_job_select', class: 'form-control', style: 'width: 250px;margin-bottom: 15px;'
+          %div.btn.btn-primary.btn-sm#save_job_on_click{style: 'marign-left: 15px;'} Save Job
+          %div.btn.btn-primary.btn-sm#event-duplicate-job{style: 'marign-left: 15px;'} Duplicate
+          -# = link_to 'Duplicate', office_duplicate_job_info_path, method: :post, class: 'btn btn-primary btn-sm'
+      %tr
+        %td{style: 'text-align: right;vertical-align: top;'} Job Description:
+        %td= text_area_tag "job[description]", '', rows: 6, disabled: true, class: 'form-control', style: 'width: 500px;'
+
+      %tr
+        %td{style: 'text-align: right;vertical-align: top;'} Event Description:
+        %td= text_area_tag "job[new_description]", '', rows: 6, class: 'form-control', style: 'width: 500px;'
+        %td
+      %tr
+        %td{style: 'text-align: right;vertical-align: top;'} Uniform Info:
+        %td= text_area_tag "job[uniform_information]", '', rows: 4, class: 'form-control', style: 'width: 500px;'
+        %td
+      %tr
+        %td{style: 'text-align: right;vertical-align: top;'} Shift Info:
+        %td= text_area_tag "job[shift_information]", '', rows: 2, class: 'form-control', style: 'width: 500px;'
+        %td
+
+  %table{style: 'display:none;'}
+    %tr.legacy-blurb{style: 'display:none'}
+      %td{class: 'label-column'} Blurb<br/>(for public<br/>web site):
+      %td{colspan: 4}= f.text_area :blurb_legacy, class: 'tinymce', :"data-prop" => 'blurb_legacy'
+    %tr.structured-blurb
+      %td{colspan: 4}
+        %b APPLIED STAFF PANEL BOXES
+    %tr.structured-blurb
+      %td Requests:
+      %td{colspan: 3}= f.text_area :request_message, rows: 4, class: 'form-control', style: 'width: 500px;'
+    %tr.structured-blurb
+      %td Spares:
+      %td{colspan: 3}= f.text_area :spares_message, rows: 4, class: 'form-control', style: 'width: 500px;'
+    %tr.structured-blurb
+      %td Applicants:
+      %td{colspan: 3}= f.text_area :applicants_message, rows: 4, class: 'form-control', style: 'width: 500px;'
+    %tr.structured-blurb
+      %td Action:
+      %td{colspan: 3}= f.text_area :action_message, rows: 4, class: 'form-control', style: 'width: 500px;'
+  %hr
+  %table
+    %tr
+      %td{class: 'label-column'} Notes:
+      %td= f.text_area :notes, rows: 1, class: 'wide-text form-control'
+    %tr
+      %td{style: 'vertical-align:top', class: 'label-column'} Photo:
+      %td
+        %img.event_photo{alt: 'Photo'}
+    %tr.structured-blurb
+      %td{colspan: 4}
+        %b OLD INFO
+    %tr.structured-blurb
+      %td Opening Words:
+      %td{colspan: 3}= f.text_area :blurb_opening, rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr.structured-blurb
+      %td Job Info:
+      %td{colspan: 3}= f.text_area :blurb_job, rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr.structured-blurb
+      %td Shift Info:
+      %td{colspan: 3}= f.text_area :blurb_shift, rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr.structured-blurb
+      %td Uniform Info:
+      %td{colspan: 3}= f.text_area :blurb_uniform, rows: 1, class: 'wide-text form-control', spellcheck: true
+
+- content_for_once :js do
+  :javascript
+    $dateFields = $('input.event-datepicker');
+    setUpDatepicker($dateFields, 'D dd/mm/yy');
+    $dateFields.watermark('DD/MM/YYYY', {className: 'watermark'});
+    $('select[name="event_clients[]"]').select2();
+
+    // Jobs in contracts
+    $job_id = 0
+    $('body').on('change', '.v2_job_featured', function(){
+        if($(this).prop('checked') == false){
+
+          $(this).prop('checked', false)
+        }else{
+          $('.v2_job_featured').each(function(){
+            $(this).prop('checked', false)
+          })
+
+          $(this).prop('checked', true)
+        }
+
+        $event_id = this.parentElement.parentElement.firstElementChild.firstElementChild.value
+        $job_id = this.name.split('[')[2].split(']')[0]
+        $checked = this.checked
+
+        $.ajax({
+            url: '/office/update_feature_jobs',
+            type: 'POST',
+            data: {
+              event_id: $event_id,
+              job_id: $job_id,
+              checked: $checked
+            },
+            success: function(data) {
+              console.log("Success save")
+            }
+         })
+
+         a1 = new Date().getTime() - 60
+         a2 = parseInt(String(a1).substring(0, 10))
+         $.ajax({
+            url: '/office/data',
+            type: 'GET',
+            data: {
+              last: a1,
+              _: a2
+            },
+            success: function(data) {
+              console.log("Success save")
+            }
+         })
+        // $('.table-widget').click()
+        // $('#upload-spinner').fadeIn();
+
+
+    })
+    $('body').on('change', '.v2_job_public', function(){
+        // $('.table-widget').click()
+        // $('#upload-spinner').fadeIn();
+
+        $job_id = this.name.split('[')[2].split(']')[0]
+        $checked = this.checked
+
+        $.ajax({
+            url: '/office/update_public_jobs',
+            type: 'POST',
+            data: {
+              job_id: $job_id,
+              checked: $checked
+            },
+            success: function(data) {
+              console.log("Success save")
+            }
+         })
+         a1 = new Date().getTime() - 60
+         a2 = parseInt(String(a1).substring(0, 10))
+         $.ajax({
+            url: '/office/data',
+            type: 'GET',
+            data: {
+              last: a1,
+              _: a2
+            },
+            success: function(data) {
+              console.log("Success save")
+            }
+         })
+
+    })
+
+    $('body').on('click', '#save_job_on_click', function(){
+        select = $(this).parent().find('select')
+        $job_id = $(select).val()
+        parent_table = $(this).parent().parent().parent()
+        description = $(parent_table).find('#job_new_description')
+        uniform = $(parent_table).find('#job_uniform_information')
+        shift = $(parent_table).find('#job_shift_information')
+        // $job_id = $(this).val()
+
+        $.ajax({
+            url: '/office/save_job',
+            type: 'POST',
+            data: {
+              job_id: $job_id,
+              new_description: $(description).val(),
+              uniform_information: $(uniform).val(),
+              shift_information: $(shift).val()
+            },
+            success: function(data) {
+              console.log("Success save")
+            }
+        })
+        alert("Job Saved!");
+    });
+
+
+    $('body').on('change', '#edit_event_job_select', function(){
+    console.log('1')
+        parent_table = $(this).parent().parent().parent()
+        description = $(parent_table).find('#job_new_description')
+        job_description = $(parent_table).find('#job_description')
+        uniform = $(parent_table).find('#job_uniform_information')
+        shift = $(parent_table).find('#job_shift_information')
+      if($(description).prop('disabled') == true){
+
+        $job_id = 0
+      }
+
+      if($(this).val() != ""){
+
+        if($job_id != 0){
+        console.log('2')
+          // Save job
+          // $.ajax({
+          //   url: '/office/save_job',
+          //   type: 'POST',
+          //   data: {
+          //     job_id: $job_id,
+          //     new_description: $(description).val(),
+          //     uniform_information: $(uniform).val(),
+          //     shift_information: $(shift).val()
+          //   },
+          //   success: function(data) {
+          //     console.log("Success save")
+          //   }
+          // })
+        }
+        $job_id = $(this).val()
+
+        $(description).prop('disabled', false)
+        $(uniform).prop('disabled', false)
+        $(shift).prop('disabled', false)
+
+        $.ajax({
+          url: '/office/get_jobs',
+          type: 'GET',
+          data: {job_id: $(this).val()},
+          success: function(data) {
+            $(description).val(data.description)
+            $(job_description).val(data.main_description)
+            $(uniform).val(data.uniform)
+            $(shift).val(data.shift)
+          }
+        })
+      }else{
+        if($job_id != 0){
+        console.log('3')
+          // Save job
+          // $.ajax({
+          //   url: '/office/save_job',
+          //   type: 'POST',
+          //   data: {
+          //     job_id: $job_id,
+          //     new_description: $(description).val(),
+          //     uniform_information: $(uniform).val(),
+          //     shift_information: $(shift).val()
+          //   },
+          //   success: function(data) {
+          //     console.log("Success save")
+          //   }
+          // })
+        }
+        $job_id = 0
+        parent_table = $(this).parent().parent().parent()
+        description = $(parent_table).find('#job_new_description')
+        uniform = $(parent_table).find('#job_uniform_information')
+        shift = $(parent_table).find('#job_shift_information')
+
+        $(description).val('')
+        $(job_description).val('')
+        $(uniform).val('')
+        $(shift).val('')
+        $(description).prop('disabled', true)
+        $(uniform).prop('disabled', true)
+        $(shift).prop('disabled', true)
+      }
+    })
+
+    $('body').on('dblclick', '#event-duplicate-job', function(e){
+       alert("Double clicked");
+      e.preventDefault();
+      console.log('4')
+      var check = confirm("Are you sure you want to duplicate all information to the other jobs?");
+      if(check == true){
+      console.log('4.5')
+        // save job first
+        parent_table = $(this).parent().parent().parent()
+        job_description = $(parent_table).find('#job_description')
+        description = $(parent_table).find('#job_new_description')
+        uniform = $(parent_table).find('#job_uniform_information')
+        shift = $(parent_table).find('#job_shift_information')
+
+        select = $(this).parent().find('select')
+        $job_id = $(select).val()
+        if($(select).val() != ""){
+
+          if($job_id != 0){
+          console.log("5")
+
+            // Save job
+            $.ajax({
+              url: '/office/save_job',
+              type: 'POST',
+              data: {
+                job_id: $job_id,
+                new_description: $(description).val(),
+                uniform_information: $(uniform).val(),
+                shift_information: $(shift).val()
+              },
+              success: function(data) {
+                console.log("Success save")
+              }
+            })
+          }
+          $job_id = $(select).val()
+          parent_table = $(select).parent().parent().parent()
+          description = $(parent_table).find('#job_new_description')
+          uniform = $(parent_table).find('#job_uniform_information')
+          shift = $(parent_table).find('#job_shift_information')
+          job_description = $(parent_table).find('#job_description')
+
+          $(description).prop('disabled', false)
+          $(uniform).prop('disabled', false)
+          $(shift).prop('disabled', false)
+
+          $.ajax({
+            url: '/office/get_jobs',
+            type: 'GET',
+            data: {job_id: $(select).val()},
+            success: function(data) {
+              $(description).val(data.description)
+              $(job_description).val(data.main_description)
+              $(uniform).val(data.uniform)
+              $(shift).val(data.shift)
+            }
+          })
+        }else{
+        console.log("6")
+
+          if($job_id != 0){
+            // Save job
+            $.ajax({
+              url: '/office/save_job',
+              type: 'POST',
+              data: {
+                job_id: $job_id,
+                new_description: $(description).val(),
+                uniform_information: $(uniform).val(),
+                shift_information: $(shift).val()
+              },
+              success: function(data) {
+                console.log("Success save")
+              }
+            })
+          }
+          $job_id = 0
+          parent_table = $(select).parent().parent().parent()
+          description = $(parent_table).find('#job_new_description')
+          uniform = $(parent_table).find('#job_uniform_information')
+          shift = $(parent_table).find('#job_shift_information')
+
+          $(description).val('')
+          $(job_description).val('')
+          $(uniform).val('')
+          $(shift).val('')
+          $(description).prop('disabled', true)
+          $(uniform).prop('disabled', true)
+          $(shift).prop('disabled', true)
+        }
+        select = $(this).parent().find('select');
+
+        if($(select).val() != ""){
+        console.log("7")
+          $.ajax({
+            url: '/office/duplicate_job_info',
+            type: 'POST',
+            data: {
+              job_id: $(select).val(),
+              new_description: $(description).val(),
+              uniform_information: $(uniform).val(),
+              shift_information: $(shift).val()
+
+            },
+            success: function(data) {
+
+              console.log("Success Duplicate")
+            }
+          })
+
+          $job_id = $(select).val()
+          parent_table = $(select).parent().parent().parent()
+          description = $(parent_table).find('#job_new_description')
+          uniform = $(parent_table).find('#job_uniform_information')
+          shift = $(parent_table).find('#job_shift_information')
+          job_description = $(parent_table).find('#job_description')
+
+          $(description).prop('disabled', false)
+          $(uniform).prop('disabled', false)
+          $(shift).prop('disabled', false)
+          console.log("8")
+
+          $.ajax({
+            url: '/office/get_jobs',
+            type: 'GET',
+            data: {job_id: $(select).val()},
+            success: function(data) {
+              $(description).val(data.description)
+              $(job_description).val(data.main_description)
+              $(uniform).val(data.uniform)
+              $(shift).val(data.shift)
+            }
+          })
+          console.log("9")
+        }
+      }
+
+    })

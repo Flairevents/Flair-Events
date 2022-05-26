@@ -1,0 +1,196 @@
+<%= render :partial => "v2/application/header" %>
+<div class="sticky-top">
+  <nav class="row z-top navbar v2-p-m-0" style="height: 70px;">
+    <div class="col-3">
+      <a href="/">
+        <%= image_tag 'v2/Group 40.png', class: 'v2-site-logo' %>
+      </a>
+    </div>
+    <div class="col flex flex-horiz-right">
+      <a href="/staff">
+        <% if current_user && !current_user.is_a?(Officer) %>
+          <% if current_user.photo? && current_user.photo_url %>
+            <img class="flair-nav-menu__profile-photo" src="<%= current_user.photo_url %>" style = 'width:30px; height:30px;margin-right:15px;'/>
+          <% else %>
+            <%= image_tag 'no-prospect-photo.png', class: 'flair-nav-menu__profile-photo', style: 'width:30px; height:30px;margin-right:15px;' %>
+          <% end %>
+        <% end %>
+      </a>
+      <div class="nav-bar-mobile-menu-btn" id="nav-bar-mobile-menu-btn">
+        <%= image_tag 'v2/mobile/Group 1097.png' %>
+      </div>
+      <div class="nav-bar-menu-bg-1"></div>
+      <div class="nav-bar-menu-bg-2"></div>
+      <div class="nav-bar-menu-bg-3"></div>
+      <div class="nav-bar-menu-bg-4"></div>
+      <div class="nav-bar-menu" id="nav-bar-menu">
+        <%= image_tag (asset_path 'v2/Group 636.png'), class: "navbar-logo" %>
+        <ul class="nav-login navbar-collapse col-lg-10 col-md-10 col-sm-10 v2-nav-login">
+
+          <li class="d-flex justify-content-end">
+            <div class="nav-bar-close-btn">
+              <%= image_tag 'v2/mobile/Path 3205.png' %>
+            </div>
+          </li>
+
+          <% unless current_user && current_user.is_a?(Prospect) %>
+              <li class="v2-navbar v2-navbar-buttons-container d-flex justify-content-center">
+                <a href="/login" title="Login">
+                  <div class="v2-login-button">
+                    Login
+                    <%= image_tag 'v2/home/lock.svg', class: "v2-login-button-img" %>
+                  </div>
+                </a>
+                <a href="/register" title="Login">
+                  <button class="mobile-logout-button">Join Flair</button>
+                </a>
+              </li>
+          <% else %>
+              <li class="v2-navbar v2-navbar-buttons-container d-flex justify-content-center">
+                <a href="/staff">
+                  <div class="mobile-user-photo-container">
+                    <div style="width: fit-content;margin:auto;margin-top:6px;">
+                      <% if current_user.photo? && current_user.photo_url %>
+                        <img class="flair-nav-menu__profile-photo" src="<%= current_user.photo_url %>"/>
+                      <% else %>
+                        <%= image_tag 'no-prospect-photo.png', class: 'flair-nav-menu__profile-photo', style: 'width:36px; height:36px;' %>
+                      <% end %>
+                      <%= current_user.first_name %>
+                    </div>
+                  </div>
+                </a>
+
+                <a href="<%= Flair::Application.config.base_https_url %>/staff/logout">
+                  <button class="mobile-logout-button">LOG OUT</button>
+                </a>
+              </li>
+          <% end %>
+
+          <% if current_user %>
+            <li class="v2-navbar">
+              <a href="/staff/events" class="nav-bar-mobile-links">
+                Job Board
+              </a>
+            </li>
+          <% else %>
+            <li class="v2-navbar">
+              <a href="/events" class="nav-bar-mobile-links">
+                Job Board
+              </a>
+            </li>
+          <% end %>
+
+          <li class="v2-navbar">
+            <a href="/hire" class="nav-bar-mobile-links">
+              Hire Staff
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/client" class="nav-bar-mobile-links">
+              Clients
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/workers" data-turbolinks="false" class="nav-bar-mobile-links">
+              Workers
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/about" class="nav-bar-mobile-links">
+              Meet Flair
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <div class="nav-bar-mobile-links" style="margin:auto;">
+              <div class="v2-navbar-dropdown-title d-flex flex-row bd-highlight" id="v2-navbar-dropdown-industries">
+                Industries
+                <div class="v2-navbar-arrow" id='v2-navbar-arrow-industries'>
+                  <%= image_tag 'v2/mobile/Green arrow side menu.png' %>
+                </div>
+              </div>
+              <div class="v2-display-none v2-navbar-dropdown-industries-content" id="v2-navbar-dropdown-industries-content">
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/sports">Sports</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/events">Festivals & Events</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/hospitality">Hospitality</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/promo">Promotional</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/logistics">Logistics</a>
+                <br>
+                <%= image_tag 'v2/mobile/Green arrow side menu.png', style: "margin-right: 5px;" %>
+                <a href="/industries/commercial">Commercial</a>
+              </div>
+            </div>
+          </li>
+
+          <li class="v2-navbar">
+            <a href="/case_studies" class="nav-bar-mobile-links">
+              Case Studies
+            </a>
+          </li>
+
+          <li class="v2-navbar">
+            <div class="v2-contact-flair-container">
+              <a href="/contact" class="nav-bar-mobile-links">
+                <button class="v2-contact-flair">Contact Flair</button>
+              </a>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $(document).scroll(function () {
+      if ($(this).scrollTop() > 32){
+        $('nav').addClass('nav-scrolled');
+      }else{
+        $('nav').removeClass('nav-scrolled');
+      }
+    });
+
+    $('#v2-navbar-dropdown-industries').on('click', function(){
+      if ($('#v2-navbar-dropdown-industries-content').css('display') == 'none'){
+        $(this).addClass('v2-navbar-arrow-active')
+        $(this).removeClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content').removeClass('v2-display-none');
+        $(this).addClass('v2-navbar-dropdown-title-active')
+      }else{
+        $(this).removeClass('v2-navbar-arrow-active')
+        $(this).addClass('v2-navbar-arrow')
+        $('#v2-navbar-dropdown-industries-content').addClass('v2-display-none');
+        $(this).removeClass('v2-navbar-dropdown-title-active')
+      }
+    })
+
+    $('body').on('click', '#nav-bar-mobile-menu-btn', function(){
+      navbar_click('block');
+    })
+
+    $('body').on('click', '.nav-bar-close-btn', function(){
+      navbar_click('none');
+    })
+
+    function navbar_click(param) {
+      $('#nav-bar-menu').css('display', param);
+      $('.nav-bar-menu-bg-1').css('display', param);
+      $('.nav-bar-menu-bg-2').css('display', param);
+      $('.nav-bar-menu-bg-3').css('display', param);
+      $('.nav-bar-menu-bg-4').css('display', param);
+    }
+  </script>
+<% end %>

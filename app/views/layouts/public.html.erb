@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <% if false and Rails.env.production? %>
+  <!-- Global site tag (gtag.js) - Google Analytics -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-39WGW486K8"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-39WGW486K8');
+  </script>
+  <% end %>
+  <%# https://medium.com/la-revanche-des-sites/seo-ruby-on-rails-the-comprehensive-guide-2018-b4101cc51b78 %>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+<!--  <meta name="viewport" content="width=device-width, initial-scale=1">-->
+  <meta name="google-site-verification" content="YIrWrxQECKvrogq28TKkc0JWWBrBW_ReO5zOGrvtYEw">
+
+  <%#<meta name="google-site-verification" content="74UBx0gJvk6RGyXItHeRJqmS_qzi9BJPgJGISr9y70o">%>
+  <meta name="description" content="We connect talented people to jobs throughout the UK. Join Or Hire Our On-Demand Workforce Today. Our full service solutions cover your temporary, seasonal, high-volume and event staffing needs. Call 0161 2412441">
+  <title>Flexible staffing solutions delivered, every time</title>
+  <link href='https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic' rel='stylesheet' type='text/css'>
+  <%= stylesheet_link_tag    "public.css", media: "all" %>
+  <%= javascript_include_tag "public.js" %>
+
+  <%= csrf_meta_tags %>
+  <% if !Rails.env.production? %>
+    <%# don't allow Staging site to be indexed by search engines %>
+    <meta name="robots" content="noindex">
+  <% end %>
+  <% if controller.action_name == 'home' %>
+    <%# try to get the right URL to appear in Google search %>
+    <link rel="canonical" href="https://eventstaffing.co.uk" />
+  <% end %>
+  <!-- Facebook Pixel Code -->
+  <script>
+      !function(f,b,e,v,n,t,s)
+      {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+          n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+          if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+          n.queue=[];t=b.createElement(e);t.async=!0;
+          t.src=v;s=b.getElementsByTagName(e)[0];
+          s.parentNode.insertBefore(t,s)}(window, document,'script',
+          'https://connect.facebook.net/en_US/fbevents.js');
+      fbq('init', '245996220334264');
+      fbq('track', 'PageView');
+  </script>
+  <noscript><img height="1" width="1" style="display:none"
+                 src="https://www.facebook.com/tr?id=245996220334264&ev=PageView&noscript=1"
+    /></noscript>
+  <!-- End Facebook Pixel Code -->
+
+</head>
+<body class="container-fluid">
+
+<%= render partial: 'shared/flash_messages' %>
+
+<%= yield %>
+<%= yield :js %>
+<%= console if Rails.env.development? %>
+
+</body>
+</html>

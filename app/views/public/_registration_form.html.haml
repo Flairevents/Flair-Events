@@ -1,0 +1,80 @@
+= form_tag "#{Flair::Application.config.base_https_url}/register", class: 'registration_form' do
+  = hidden_field_tag 'register', '1'
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels First Name
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon1", :type => "text", :id => "first_name", :name => "first_name", :required => "", value: @first_name, style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels Last Name
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon2", :type => "text", :id => "last_name", :name => "last_name", :required => "", value: @last_name, style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels Email
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon3", :type => "email", :id => "email", :name => "email", :required => "", value: @email, style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels Password
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon5", :type => "password", :id => "password", :name => "password", :required => "", value: @password, style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels Confirm Password
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon5", :type => "password", :id => "password_confirm", :name => "password_confirm", :required => "", value: @password_confirm, style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels Mobile Number
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon6", :type => "tel", :id => "mobile", :name => "mobile", :required => "", value: @mobile, pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d?\D*', title: '0 + 10 or 9 digits', style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels City
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon6", :type => "text", :id => "city", :name => "city", :required => "", value: @city, style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %label.registration-form-labels Postal Code
+    .column.small-12.medium-8
+      .input-group
+        %input.form-control.error.registration-form-fields{"aria-describedby" => "basic-addon7", :type => "text", :id => "post_code", :name => "post_code", :required => "", value: @post_code, pattern: '[a-zA-Z][a-zA-Z0-9]{1,3}\s?\d[a-zA-Z]{2}', title: 'Valid UK Postal Code', style: 'border-radius: 10px;'}
+  .row.mb1
+    .column.small-12.medium-4.registration-form-field-label.text-right
+      %p.date-of-birth Date of Birth
+    .column.small-12.medium-8
+      .input-group
+        .date-input-group
+          = select_date @date_of_birth, { :prefix => 'date_of_birth', :start_year => Date.today.year-14, :end_year => Date.today.year-90, :order => [:day, :month, :year], use_short_month: true, include_blank: true, default: nil}, {:class => 'form-control registration-form-fields'}
+  .row.mb1
+    %span.fl-form__checkbox.column.medium-offset-2
+      = check_box_tag "agree_to_mail", "1", @agree_to_mail, {required: true}
+      %label{for: 'agree_to_mail'}
+        %p.ml1.mt0 I agree with the <span style="color: #005949;">Terms and Conditions</span>, & <span style="color: #005949;">cookies policy</span>.
+  .row.mb1
+    %span.fl-form__checkbox.column.medium-offset-2
+      = check_box_tag "agree_to_policy", "1", @agree_to_policy, {required: true}
+      %label{for: 'agree_to_policy'}
+        %p.ml1.mt0 I am happy to receive job offers and shift information from Flair via email, Text, calls, or via staff zone notification. Set your communication preferences in your profile and remember you can unsubscribe at any time.
+  .text-right
+    %input.yellow-button-home{:name => "commit", :type => "submit", :value => "Register", style: 'margin-top: 15px;'}
+    %div{style: 'clear:both'}
+    .p Already registered?  <a href="/login">Login</a>.
+
+- content_for :js do
+  :javascript
+      $(document).ready(function() {
+          $('#date_of_birth_day option:first-child').html('DD');
+          $('#date_of_birth_month option:first-child').html('MM');
+          $('#date_of_birth_year option:first-child').html('YYYY');
+          $(".reg_back").css("background-color", "#a3d39c");
+      });

@@ -1,0 +1,35 @@
+#assignment-details-panel
+  - for date in @dates
+    %h3{style: 'white-space:pre-wrap'}= printDate(date) + ' • ' + @total_stats[date]['confirmed'] + '✓ ' + @total_stats[date]['assigned'] + '/' + @total_stats[date]['needed']
+    %table.summary-table
+      %tr
+        %th Location
+        %th Shift
+        - for job in @jobs[date]
+          %th.stat-column= job.name
+      - n_row = 0
+      - for location in @locations[date]
+        - n_location = 0
+        - n_shifts = @shifts[date][location.id].length
+        - for shift in @shifts[date][location.id]
+          - row_class = if (n_row % 2 == 0) then 'tr-even' else 'tr-odd'
+          %tr{class: row_class}
+            - if n_location == 0
+              %td{rowspan: n_shifts, nowrap: true}= location.name
+            %td{nowrap: true} = printShift(shift)
+            - for job in @jobs[date]
+              - if @stats[date][location.id][shift.id][job.id]
+                - confirmed = @stats[date][location.id][shift.id][job.id]['confirmed']
+                - assigned = @stats[date][location.id][shift.id][job.id]['assigned']
+                - needed = @stats[date][location.id][shift.id][job.id]['needed']
+                - confirmed_class = if confirmed < needed then 'red-text--bold' else (if confirmed > needed then 'blue-text--bold' else '')
+                - assigned_class = if assigned < needed then 'red-text' else (if assigned > needed then 'blue-text' else '')
+                %td.stat-column<
+                  - unless confirmed == 0
+                    %span{class: confirmed_class}= confirmed+'✓ '
+                  %span{class: assigned_class}= assigned
+                  %span>= '/'+needed
+              - else
+                %td.stat-column
+            - n_row += 1
+          - n_location += 1

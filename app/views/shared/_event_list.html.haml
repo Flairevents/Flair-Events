@@ -1,0 +1,151 @@
+%ul.event-list.p2
+  - previous_date = nil
+  - extra_classes = []
+  - new_events ||= @new_events ||= []
+  - events ||= @events ||= []
+  - featured_events ||= @featured_events ||= []
+  - [[featured_events, :featured], [new_events, :new], [events, nil]].each do |events, type|
+    -if events.length > 0
+      -if type == :featured && !events.empty?
+        %li.event-month-separator
+          ="FEATURED EVENTS"
+      -if type == :new && !events.empty?
+        %li.event-month-separator
+          ="NEW EVENTS"
+      - for n in 0..(events.length-1)
+        - event = events[n]
+        - unless type
+          - date = [event.next_active_date, Date.today].max
+          - if n==0 or date.month != previous_date.month
+            - previous_date = date
+            %li.event-month-separator
+              ="#{date.strftime("%B %Y")}"
+        - classes = ['event-status-' + @status[event.id].downcase.sub(' ', '-')]
+        -if (n < (events.length - 2)) && (event.next_active_date.cweek != events[n+1].next_active_date.cweek) && (type || (event.next_active_date.month == events[n+1].next_active_date.month))
+          - classes << 'new_week'
+        %li.accordion-item.event-list__item{"id" => "event-listing#{event.id}", "data-event-region" => event.region.try(:name), 'class' => classes}
+          .header
+            .event-summary
+              .event-summary__info
+                .event-summary__info__title
+                  .row{style: 'width:100%;'}
+                    .column.small-5
+                      %span
+                        =event.display_name
+                      -#- if current_user && @distance
+                      -#  - if @distance[event.id] > 50
+                      -#    .event-distance
+                      -#      = "#{@distance[event.id].ceil} Miles Away"
+                      -#  - else
+                      -#    .event-distance
+                      -#      = "#{@distance[event.id].ceil} Miles Away"
+                    .column.small-5.p0
+                      -if current_user && @allow_sign_up
+                        -if @status[event.id] == 'Pending'
+                          .badge.badge--event-status.badge--orange.contract-btn Pending Approval
+                        -elsif @status[event.id] == 'Signed Up'
+                          .badge.badge--event-status.badge--green.contract-btn ✓ &nbsp; Signed Up
+                        -elsif @status[event.id] == 'In Progress'
+                          .badge.badge--event-status.badge--green.contract-btn In Progress
+                        -elsif @status[event.id] == 'Confirmed'
+                          .badge.badge--event-status.badge--green.contract-btn Confirmed & Working
+                        -elsif @status[event.id] == 'Confirmation Required'
+                          .badge.badge--event-status.badge--red.badge--flash.contract-btn Requires Confirmation!
+                        -else
+                          -if @event_is_new[event.id]
+                            .badge.badge--event-status.badge--blue.badge--flash.contract-btn New
+                          -if event.fullness == 'FULL'
+                            .badge.badge--event-status.badge--black.contract-btn Full
+                          -elsif event.fullness == 'NEARLY'
+                            .badge.badge--event-status.badge--black.contract-btn Few Places Left
+                          -elsif event.fullness == 'REGISTER_INTEREST'
+                            .badge.badge--event-status.badge--black.contract-btn Register Interest
+                        -if ['Pending', 'Signed Up'].include?(@status[event.id])
+                          =link_to '<i class="pl05 pr025 glyphicon glyphicon-ban-circle"></i><span class="pl025 pr05">Cancel</span>'.html_safe, {controller: 'staff', action: 'deselect_event', id: [event.id], redirect: @deselect_redirect}, method: :post, class: 'badge badge--event-status badge--button badge--button-pomegranate contract-cancel-button'
+                      - else
+                        -if event.fullness == 'FULL'
+                          .badge.badge--event-status.badge--black Full
+                        -elsif event.fullness == 'NEARLY'
+                          .badge.badge--event-status.badge--black Few Places Left
+                        -elsif event.fullness == 'REGISTER_INTEREST'
+                          .badge.badge--event-status.badge--black Register Interest
+                .event-summary__info__details
+                  .event-summary__info__details__block.location
+                    %i.glyphicon.glyphicon-map-marker{title: 'Where'}
+                    = event.location
+                  .event-summary__info__details__block.date-range
+                    %i.glyphicon.glyphicon-calendar{title: 'When'}
+                    = event.date_range_for_show_no_year
+                  .event-summary__info__details__block.job-description
+                    %i.glyphicon.glyphicon-user{title: 'Who'}
+                    = event.jobs_description
+              - if event.photo.present?
+                =image_tag event.photo_url, class: 'event-summary__image'
+              - else
+                .event-summary__image
+          .accordion-item__expanded
+            .event-details{id: "event-details#{event.id}"}
+              .event-details__address
+                %i.glyphicon.glyphicon-map-marker{title: 'Where'}
+                Address:
+                = event.address
+              %div{style: 'clear:both'}
+              - if event.blurb_legacy.present?
+                .event-blurb
+                  = event.blurb_legacy.html_safe
+              - else
+                .event-blurb
+                  -if event.blurb_title.present?
+                    =simple_format(event.blurb_title.chomp('.'), class: 'event-blurb-title')
+                  -if event.blurb_subtitle.present?
+                    =simple_format(event.blurb_subtitle.chomp('.'), class: 'event-blurb-subtitle')
+                  -if event.blurb_opening.present?
+                    =simple_format(event.blurb_opening.chomp('.'), class: 'event-blurb-opening')
+                  -if event.blurb_job.present?
+                    %p.event-blurb-heading Job Roles
+                    =simple_format(event.blurb_job.chomp('.'), class: 'event-blurb-job')
+                  -if event.blurb_shift.present?
+                    %p.event-blurb-heading Shifts
+                    =simple_format(event.blurb_shift.chomp('.'), class: 'event-blurb-shift')
+                  -if event.jobs.length > 0 || event.blurb_wage_additional.present?
+                    %p.event-blurb-heading Wages
+                    .event-blurb-wages
+                      - if event.blurb_wage_additional.present?
+                        =simple_format(event.blurb_wage_additional.chomp('.'), class: 'event-blurb-wage-additional')
+                      - @job_groups[event.id].each do |group_name, job_group|
+                        %p.event-blurb-job-name= job_group[:names].join(', ')
+                        .event-blurb-pay-rates
+                          - job_group[:pay_rates].each_with_index do |pay_rate, i|
+                            .event-blurb-pay-rate-group
+                              %p
+                                %span.event-blurb-wage-age= "#{pay_rate[:age].empty? ? '' : 'Age'} #{pay_rate[:age] == "21-24" ? '21-22' : pay_rate[:age] == "25+" ? '23+' : pay_rate[:age]}"
+                                %span.event-blurb-wage= "£#{sprintf("%.2f", pay_rate[:pay])}/hr"
+                              %p.event-blurb-wage-breakdown
+                                %span="£#{pay_rate[:base_pay]}+£#{pay_rate[:holiday_pay]} Holiday Pay"
+                            -if i < job_group[:pay_rates].length-1
+                              .event-blurb-wage-seperator='●'
+
+                  - if event.blurb_uniform.present?
+                    %p.event-blurb-heading Uniform
+                    =simple_format(event.blurb_uniform.chomp('.'), class: 'event-blurb-uniform')
+                  - if event.blurb_transport.present?
+                    %p.event-blurb-heading Transport
+                    =simple_format(event.blurb_transport.chomp('.'), class: 'event-blurb-transport')
+                  -if event.blurb_closing.present?
+                    =simple_format(event.blurb_closing.chomp('.'), class: 'event-blurb-closing')
+              .text-center
+                - if current_user
+                  -if @allow_sign_up
+                    - if @status[event.id] == 'Available'
+                      - unless event.fullness == 'FULL'
+                        =link_to "Apply Now", {controller: 'staff', action: 'select_event', id: event.id, method: :post}, class: 'btn btn-default spin'
+                    - else
+                      =link_to 'Cancel Request', {controller: 'staff', action: 'deselect_event', id: event.id, redirect: @deselect_redirect}, method: :post, class: 'yellow-button-staff spin', style: 'padding: 10px; text-decoration: none;'
+                  - else
+                    %a.btn.btn-default{href: '/staff'} Complete Profile to Apply
+                - else
+                  - unless event.fullness == 'FULL'
+                    %a.btn.btn-default.btn-bounce{href: '/login'} Login to Apply
+  - if @featured_events.blank? && @new_events.blank? && @events.blank? && @empty_message
+    %li.empty-message{valign: 'bottom'}
+      %p= @empty_message

@@ -1,0 +1,87 @@
+<footer style='position: relative;'>
+  <div class="row v2-footer">
+    <div class="col-6 v2-logo v2-p-m-0" style="margin-left: 27px; position:relative; z-index: 3;">
+      <%= image_tag 'v2/Group 312.png', class: 'v2-copyright-logo v2-logo v2-p-m-0' %>
+      <br>
+      <div class="v2-footer-caption v2-p-m-0">Supplying great staff for 20+ years.</div>
+
+      <div class="d-flex flex-row bd-highlight v2-menu">
+        <div class="">
+          <div class="v2-footer-contact-info">
+            Head Office : <a href="tel:0161-241-2441">0161 241 2441</a>
+            <br>
+            London Office : <a href="tel:0204-542-6441">0204 542 6441</a>
+            <br>
+            Email : <a href="mailto:hello@flairpeople.com">hello@flairpeople.com</a>
+          </div>
+        </div>
+        <div class="v2-footer-menu" style="margin-left: 0px;">
+          <div><a href="<%= Flair::Application.config.base_https_url %>/workers">Workers</a></div>
+          <% if current_user %>
+            <div>
+              <a href="<%= Flair::Application.config.base_https_url %>/staff/events">Job Board</a>
+            </div>
+          <% else %>
+            <div>
+              <a href="<%= Flair::Application.config.base_https_url %>/events">Job Board</a>
+            </div>
+          <% end %>
+          <div><a href="<%= Flair::Application.config.base_https_url %>/">Help Centre</a></div>
+          <div><a href="<%= Flair::Application.config.base_https_url %>/">Blog</a></div>
+          </ul>
+        </div>
+        <div class="v2-footer-menu" style="margin-left: 86px;">
+          <div><a href="<%= Flair::Application.config.base_https_url %>/client">Clients</a></div>
+          <div><a href="<%= Flair::Application.config.base_https_url %>/hire" id="hire-staff">Hire Staff</a></div>
+          <div><a href="<%= Flair::Application.config.base_https_url %>/about">Meet Flair</a></div>
+          <div><a href="<%= Flair::Application.config.base_https_url %>/case_studies">Case Studies</a></div>
+        </div>
+      </div>
+    </div>
+    <div class="col v2-footer-right v2-p-m-0">
+      <div class="v2-speak-to-us-today">Speak to us today</div>
+      <div class="v2-footer-text">
+        Staffing is our passion. You are our focus.
+        <br>
+        Let's connect and discover the best staffing solutions for your
+        <br>
+        business together. <a href="<%= Flair::Application.config.base_https_url %>/contact" class="v2-say-hello">Say hello!</a>
+      </div>
+      <div class="v2-footer-media">
+        <a href="https://www.instagram.com/flaireventstaffing/">
+          <%= image_tag 'v2/Group 517.png' %>
+        </a>
+        <a data-show-count="false" href="https://twitter.com/flaireventstaff">
+          <%= image_tag 'v2/Group 518.png' %>
+        </a>
+        <a class="fb-like" data-layout="button_count" data-send="false" data-show-faces="false" data-width="90" href="https://www.facebook.com/flaireventstaffinglimited">
+          <%= image_tag 'v2/Group 519.png' %>
+        </a>
+        <a href="https://www.linkedin.com/company/flair-event-staffing-ltd/">
+          <%= image_tag 'v2/Group 520.png' %>
+        </a>
+      </div>
+    </div>
+  </div>
+  <div class="v2-watermark-logo"></div>
+  <span class="d-flex flex-row v2-copyright-container">
+    <div class="v2-copyright">
+      &#169;2021 flairpeople &nbsp; &#9679; &nbsp; All rights reserved &nbsp; &#9679; &nbsp;
+      <a href='../privacy' class="v2-privacy-and-cookies">Privacy and cookies</a>
+    </div>
+  </span>
+</footer>
+<div class="svg-include hidden">
+  <%= render :partial => 'shared/flair_icons.svg' %>
+</div>
+
+
+<% content_for_once :js do %>
+  <script>
+    $('#hire-staff').on('click', function(){
+      url = window.location.href;
+      window.location.replace("<%= Flair::Application.config.base_https_url %>/hire?redirect=" + url)
+      return false;
+    })
+  </script>
+<% end %>

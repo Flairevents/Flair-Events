@@ -1,0 +1,14 @@
+Use these DNS settings for eventstaffing.co.uk (make sure they're up to date!):
+
+Type       Host Name     Value
+=============================
+A          @             82.165.37.10
+A          staging       82.165.37.10
+A          www           82.165.37.10
+MX         @             eventstaffing-co-uk.mail.protection.outlook.com
+SPF (TXT)  @             v=spf1 ip4:82.165.37.10 include:spf.protection.outlook.com -all
+TXT        @             v=DKIM1; k=rsa; p=MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQDIcoAzrysVKQ+5haE0L044Y5yPmhvbLDj+KB/ZlKnim4VB9VvFHDGaaBqNj8iHJYP8VEnATSMqfK0GFc8sZRyNNpk5i12NEtXlcB95k9DklBG76o1u6Pw1rkwIXwGgX93X3pTftaKq8KNfYIvnZHsuojgnhTQ68u8NK+gp3zCMAQIDAQAB
+CNAME      autodiscover  autodiscover.outlook.com
+AAAA       @             2001:8d8:9b0:e200::a5:d516
+AAAA       staging       2001:8d8:9b0:e200::a5:d516 
+AAAA       www           2001:8d8:9b0:e200::a5:d516 

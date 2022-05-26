@@ -1,0 +1,342 @@
+/-------- command bar
+.command-bar
+  .btn-group.list-view-only
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} Map
+    - if current_user.manager?
+      .btn-group
+        %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+          New
+          %span.caret
+        %ul.dropdown-menu
+          %li
+            %a.command-link{:"data-command" => 'newRecordBooking'} Booking
+          %li
+            %a.command-link{:"data-command" => 'newRecord'} Event
+    - else
+      %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+        Duplicate
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a.command-link{:"data-command" => 'duplicatePartial'} Partial
+        %li
+          %a.command-link{:"data-command" => 'duplicateFull'} Full
+    - if current_user.manager?
+      %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+    %button.btn.btn-default.command-link.command-upload.disabled{:"data-command" => 'uploadPhoto'} Upload Photo
+    %button.btn.btn-default.command-link{:"data-command" => 'clearFilters'} Clear Filters
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+        Admin
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a.command-link{:"data-command" => 'createSimpleTestEvent'} Create Simple Test Event for Time-Clocking App
+          %a.command-link{:"data-command" => 'createTestEvent'} Create Test Event for Time-Clocking App
+  .btn-group.map-view-only{style: 'display:none'}
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} List
+    %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+
+  .upload-notification.list-view-only{style: 'float:right'}
+    .progress{style: 'display: none'}
+      .progress-bar.progress-bar-success.progress-bar-striped.active{role: 'progressbar', style: 'width:0%'}
+
+  .map-view-only{style: 'float:right; display:none'}
+    Autozoom
+    %input.autozoom{type: 'checkbox'}
+  %div{style: 'clear:both'}
+
+/-------- filter bar
+%hr
+.filter-bar-container
+  %form.filters.filter-bar#events-filter-bar
+    %table{style: 'float:left'}
+      %tr
+        %th Name
+        %th Client
+        %th Staff HQ
+        %th Senior HQ
+        %th Category
+        %th Year
+        %th Month
+        %th Region
+        %th Status
+        %th featured
+      %tr
+        %td= text_field_tag :search, '', class: 'form-control'
+        %td= text_field_tag :search_client, '', class: 'form-control'
+        %td= select_tag :office_manager_id, [], class: 'form-control active-operational-managers-dropdown'
+        %td= select_tag :senior_manager_id, [], class: 'form-control active-senior-managers-dropdown'
+        %td= select_tag :category_id, ('<option value="" selected="selected">All</option><option value="Bar">Bar</option><option value="Retail">Retail</option><option value="Labour">Labour</option>'+options_from_collection_for_select(EventCategory.all.sort_by(&:name), :id, :name)).html_safe, class: 'form-control'
+        %td
+          %select{id: 'event-year', name: 'year', class: 'form-control'}
+            %option{:value => '', :selected => 'selected'} All
+            - (Date.today.year-10..Date.today.year+2).each do |y|
+              %option{:value => y}= y
+        %td
+          =select_month(0, {prompt: 'All'}, {id: 'event-month', name: 'month', class: 'form-control'})
+
+        %td= select_tag :region_name, ('<option value="" selected="selected">All</option>'+options_from_collection_for_select(Region.all.sort_by(&:name), :name, :name)).html_safe, class: 'form-control'
+        %td= select_tag :status, options_for_select([['Active','ACTIVE'],['All',''],['Booking','BOOKING'],['New','NEW'],['Open','OPEN'],['Cancelled','CANCELLED'],['Happening','HAPPENING'],['Finished', 'FINISHED'],['Closed','CLOSED']]), class: 'form-control'
+        %td= check_box_tag :show_in_featured
+    %table.summary-table{style: 'float:right'}
+      %tr
+        %th Contracts
+        %th Workers
+        %th Jobs
+      %tr
+        %td.no-of-events
+        %td.no-of-prospects
+        %td.no-of-jobs
+
+/-------- list view (with navigation bar)
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list#events-list{tabindex: '0'}
+
+/-------- map view (no navigation bar)
+.map-view{style: 'display:none'}
+  .map
+
+= slideover_form 'record-new',         partial: 'event_form',         locals: { event: Event.new, prefix: 'new', form_id: 'new_event' }
+= slideover_form 'record-new-booking', partial: 'event_booking_form', locals: { event: Event.new, prefix: 'new', form_id: 'new_event_booking_form'}
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save#events-save-button
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    .slideover-tabs
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#event-details'} Details
+        %li
+          %a{href: '#event-jobs'} Jobs
+        %li
+          %a{href: '#event-shifts'} Shifts
+        %li
+          %a{href: '#event-locations'} Work Area
+        %li
+          %a{href: '#event-assignments'} Assignments
+        %li
+          %a{href: '#event-tags'} Tags
+        %li
+          %a{href: '#event-leaders'} App Info
+        %li
+          %a{href: '#event-accomodation'} Accomodation
+        %li
+          %a{href: '#event-expenses'} Exp/notes
+        %li
+          %a{href: '#event-booking'} Booking
+        %li
+          %a{href: '#event-tasks'} Tasks
+    .slideover-tab-panes.tab-content
+      .tab-pane.active#event-details
+        = render partial: 'event_form', locals: { form_id: 'edit_event', event: Event.new, prefix: 'edit' }
+      .tab-pane#event-jobs
+        = form_for Event.new, url: '#', html: {id: 'event_job_form', class: 'job-form'} do |f|
+          %table
+            %tr
+              %td Default Job
+              %td= f.select :default_job_id, [], {}, class: 'form-control'
+        .record-list
+      .tab-pane#event-shifts
+        .filter-bar#shifts-filter-bar
+          %table
+            %tr
+              %th Week
+              %th Date
+            %tr
+              %td= select_tag :tax_week_id, '', class: 'tax-week-dropdown form-control', id: 'shifts-tax-week-dropdown'
+              %td= select_tag :date, '', class: 'form-control', id: 'shifts-date-dropdown'
+        .record-list
+      .tab-pane#event-locations
+        = form_for Event.new, url: '#', html: {id: 'event_location_form', class: 'location-form'} do |f|
+          %table
+            %tr
+              %td Default Location
+              %td= f.select :default_location_id, [], {}, class: 'form-control'
+        .record-list
+      .tab-pane#event-assignments
+        %table
+          %tr
+            %td
+              .filter-bar#assignments-filter-bar
+                %table
+                  %tr
+                    %th Week
+                    %th Date
+                    %th Job
+                    %th Shift
+                    %th Area
+                  %tr
+                    %td= select_tag :tax_week_id, '', class: 'tax-week-dropdown form-control', id: 'assignments-tax-week-dropdown'
+                    %td= select_tag :date, '', class: 'dates-dropdown form-control', id: 'assignments-date-dropdown'
+                    %td= select_tag :job_id, '', class: 'jobs-dropdown form-control', id: 'assignments-job-dropdown'
+                    %td= select_tag :shift_id, '', class: 'shifts-dropdown form-control', id: 'assignments-shift-dropdown'
+                    %td= select_tag :location_id, '', class: 'locations-dropdown form-control', id: 'assignments-location-dropdown'
+            %td
+              .btn-group
+                %button.btn.btn-default.command-link{onclick: "viewManager.send('events', 'duplicateAssignments')"} Duplicate...
+            %td.filter-bar-friend
+              = form_for Event.new, url: '#', html: {id: 'event_default_assignment_form', class: 'default-assignment-form'} do |f|
+                %table.filter-bar-friend
+                  %tr
+                    %th Default Assignment
+                  %tr
+                    %td= f.select :default_assignment_id, [], {}, class: 'form-control'
+            %td
+              %table.filter-bar-friend
+                %tr
+                  %th Needed
+                %tr
+                  %td#assignments-total-needed
+        .record-list
+      .tab-pane#event-tags
+        .record-list
+      .tab-pane#event-leaders
+        .record-list
+        %hr
+        = form_for Event.new, url: '#', html: {id: 'event-leaders-form', autocomplete: 'off'} do |f|
+          %table
+            %tr
+              %td{colspan: 4}
+                %b Team Leader Notes
+            %tr
+              %td{class: 'label-column'} Client Contact:
+              %td{colspan: 3}= f.select :leader_client_contact_id, [], {}, class: 'form-control', style: 'width: unset'
+            %tr
+              %td Flair Contact Phone:
+              %td{colspan: 3}= f.text_field :leader_flair_phone_no, rows: 1, class: 'wide-text form-control', style: "margin: 4px 0px;", spellcheck: true
+            %tr
+              %td General:
+              %td{colspan: 3}= f.text_area :leader_general, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Meeting Location:
+              %td{colspan: 3}= f.text_area :leader_meeting_location, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Meeting Location GPS Coords:
+              %td{colspan: 3}= f.text_area :leader_meeting_location_coords, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Job Role:
+              %td{colspan: 3}= f.text_area :leader_job_role, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Arrival Time:
+              %td{colspan: 3}= f.text_area :leader_arrival_time, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Staff Job Roles:
+              %td{colspan: 3}= f.text_area :leader_staff_job_roles, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Staff Arrival:
+              %td{colspan: 3}= f.text_area :leader_staff_arrival, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Shift Start Times:
+              %td{colspan: 3}= f.text_area :shift_start_time, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Presentation:
+              %td{colspan: 3}= f.text_area :leader_energy, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Uniform:
+              %td{colspan: 3}= f.text_area :leader_uniform, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Handbooks:
+              %td{colspan: 3}= f.text_area :leader_handbooks, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Welfare:
+              %td{colspan: 3}= f.text_area :leader_food, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Travel:
+              %td{colspan: 3}= f.text_area :leader_transport, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Accomodation:
+              %td{colspan: 3}= f.text_area :leader_accomodation, rows: 1, class: 'wide-text form-control', spellcheck: true
+      .tab-pane#event-accomodation
+        = form_for Event.new, url: '#', html: {id: 'event_accomodation_form', autocomplete: 'off'} do |f|
+          %table
+            %tr
+              %td Status:
+              %td= f.select :accom_status, [['None', 'NONE'],['Need', 'NEED'],['Booked', 'BOOKED'],['Cancelled','CANCELLED'],['Refund','REFUND']], {}, class: 'form-control'
+            %tr
+              %td Room Info:
+              %td= text_area_tag 'event[accom_room_info]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Hotel Name:
+              %td= text_area_tag 'event[accom_hotel_name]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Address:
+              %td= text_area_tag 'event[accom_address]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Distance From Venue:
+              %td= text_area_tag 'event[accom_distance]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Phone:
+              %td= text_area_tag 'event[accom_phone]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Booking Dates:
+              %td= text_area_tag 'event[accom_booking_dates]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Parking:
+              %td= text_area_tag 'event[accom_parking]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Wifi:
+              %td= text_area_tag 'event[accom_wifi]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Booking Ref:
+              %td= text_area_tag 'event[accom_booking_ref]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Booking Via:
+              %td= text_area_tag 'event[accom_booking_via]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Cancellation Policy:
+              %td= text_area_tag 'event[accom_cancellation_policy]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Total Cost:
+              %td= text_area_tag 'event[accom_total_cost]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Refund Date:
+              %td= text_field_tag 'event[accom_refund_date]', nil, rows: 1, class: 'wide-text form-control event-datepicker'
+            %tr
+              %td Payment Method:
+              %td= text_area_tag 'event[accom_payment_method]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Booked By:
+              %td= text_area_tag 'event[accom_booked_by]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+            %tr
+              %td Notes:
+              %td= text_area_tag 'event[accom_notes]', nil, rows: 1, class: 'wide-text form-control', spellcheck: true
+      .tab-pane#event-expenses
+        .record-list
+        = form_for Event.new, url: '#', html: {id: 'event_expenses_form', class: 'expenses-form', autocomplete: 'off'} do |f|
+          %table{style:'width: 100%'}
+            %tr
+              %td{style:"width:118px"} Expense Notes:
+              %td= text_area_tag 'event[expense_notes]', nil, rows: 1, class: 'form-control', spellcheck: true
+            %tr
+              %td{style:"width:118px"} Post Event Notes:
+              %td= text_area_tag 'event[post_notes]', nil, rows: 1, class: 'form-control', spellcheck: true
+          %div{style: 'float: right;'}*Remember to save notes once typed
+      .tab-pane#event-booking
+        = render partial: 'event_booking_form', locals: { event: Event.new, booking: Booking.new, form_id: 'edit_event_booking_form' }
+      .tab-pane#event-tasks
+        .record-list
+- content_for :js do
+  :javascript
+    $('#events .command-upload').popover({
+      content: #{raw form_tag('#', multipart: true) { _erbout << file_field_tag('file_upload') }.inspect},
+      html: true,
+      placement: 'bottom',
+      trigger: 'click'
+    });
+    setUpDatepicker($('input#event_accom_booking_date'), 'D dd/mm/yy');
+    $('input#event_accom_booking_date').watermark('DD/MM/YYYY', {className: 'watermark'});

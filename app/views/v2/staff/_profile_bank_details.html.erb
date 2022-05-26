@@ -1,0 +1,81 @@
+<% if @pending_bank_details_approval %>
+  <div class="v2-bank-details-container" style="height: auto;padding: 20px 0 20px 0;color:white;margin-bottom:10px;">
+    <p class="mb1">
+      <%= "The following change requests will be applied to your profile when approved by office staff:" %>
+    </p>
+    <div>
+      <% if @cr.bank_account_name %>
+        <div class="row change-request">
+          <div class="key column small-4 text-right">
+            Bank Account Name
+          </div>
+          <div class="value column small-8 align-middle">
+            <%= @cr.bank_account_name %>
+          </div>
+        </div>
+      <% end %>
+      <% if @cr.bank_account_no %>
+        <div class="row change-request">
+          <div class="key column small-4 text-right">
+            Bank Account Number
+          </div>
+          <div class="value column small-8">
+            <%= @cr.bank_account_no %>
+          </div>
+        </div>
+      <% end %>
+      <% if @cr.bank_sort_code %>
+        <div class="row change-request">
+          <div class="key column small-4 text-right">
+            Bank Sort Code
+          </div>
+          <div class="value column small-8">
+            <%= @cr.bank_sort_code %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% end %>
+<div class="v2-bank-details-container">
+  <div class="v2-bank-details">
+    <div class="v2-bank-details-title">Your Banking Information</div>
+    <%= form_for @prospect, method: :post, url: '../staff/update_bank_details' do |f| %>
+      <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+
+      <%= f.text_field :bank_account_name, placeholder: 'Account Holder Name', class: 'form-control v2-bank-details-inputs', pattern: '[A-Za-z0-9&.\/ -]*', title: 'Letters, numbers, spaces, or any of the following characters: & . / -', autocomplete: :off %>
+
+      <%= f.text_field :bank_account_no, placeholder: 'Account Number  XXXX-XXXX', class: 'form-control v2-bank-details-inputs', pattern: '(\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*)|(^\*.*)', title: '8 numbers long', :maxlength => 8, autocomplete: :off %>
+
+      <%= f.text_field :bank_sort_code, placeholder: 'Sort Code XX-XX-XX', class: 'form-control v2-bank-details-inputs', pattern: '(\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*)|(^\*.*)', title: '6 numbers long', :maxlength => 6, autocomplete: :off %>
+
+      <div class="v2-bank-details-content">Friday is your pay day! Please make sure bank details are correct and up to date.</div>
+
+      <center>
+        <%= submit_tag (@prospect.has_bank_details? ? 'UPDATE' : 'SUBMIT'), class: 'v2-bank-details-submit' %>
+      </center>
+    <% end %>
+  </div>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $('.v2-bank-details form').on('submit', function () {
+      check = 0;
+      $(this).find('input[type="text"]').each(function () {
+        if($(this).val()==''){
+          $(this).css('border', '2px solid red');
+          check = 1;
+        }else{
+          $(this).css('border', 'none');
+        }
+      })
+
+      if(check==1){
+        return false;
+      }else{
+        return true;
+      }
+    })
+  </script>
+<% end %>

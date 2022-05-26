@@ -1,0 +1,148 @@
+-if current_user.manager?
+  .command-bar.fl
+    %button.btn.btn-default.command-link.viewBookingEmail{:"data-command" => 'viewBookingEmailTemplate'} View Email Template ▼
+  .info.fl.small-badge.booking-message
+%hr.clear
+
+.email_template
+  = render partial: 'booking_email'
+
+= form_for event, url: '#', html: {id: form_id, class: 'record-details-form booking-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  %table
+    %tr
+      %td{class: 'label-column'}
+        %span{class: 'mandatory'} Clients:
+      %td
+        %select{multiple: true, name: 'event_clients[]', class: 'form-control'}
+    %tr
+      %td Current:
+      %td
+        %select{name: 'booking[client_id]', class: 'form-control'}
+  %hr
+  %table.booking-fields
+    %tr
+      %td{class: 'label-column'} Contact
+      %td= _select 'client_contact[id]', '', class: 'form-control'
+    %tr
+      %td{class: 'label-column'} First Name:
+      %td= _text_field 'client_contact[first_name]', readonly: 'readonly', class: 'form-control'
+      %td{class: 'label-column'} Last Name:
+      %td= _text_field 'client_contact[last_name]', readonly: 'readonly', class: 'form-control'
+    %tr
+      %td{class: 'label-column'} Contact Tel:
+      %td= _text_field 'client_contact[mobile_no]', readonly: 'readonly', class: 'form-control'
+      %td{class: 'label-column'} Contact Email:
+      %td= _text_field 'client_contact[email]', readonly: 'readonly', class: 'form-control'
+  %hr
+  %table.booking-fields
+    %tr
+      %td{class: 'label-column'} Date Sent:
+      %td= _text_field 'booking[date_sent]', class: 'form-control event-booking-datepicker', id: form_id + '_date_sent'
+    %tr
+      %td{class: 'label-column'} Date Received:
+      %td= _text_field 'booking[date_received]', class: 'form-control event-booking-datepicker', id: form_id + '_date_received'
+  %hr
+  %table.booking-update-email-fields
+    %tr.hidden
+      %td Status:
+      %td= f.select :status, []
+    %tr
+      %td{class: 'label-column'}
+        %span{class: 'mandatory'} Internal Event Name:
+      %td{colspan: 3}= _text_field 'event[name]', class: 'wide-text form-control'
+    %tr
+      %td{class: 'label-column'}
+        %span{class: 'mandatory'} Public Event Name:
+      %td{colspan: 3}= _text_field 'event[display_name]', class: 'wide-text form-control'
+    %tr
+      %td{class: 'label-column'} Map Address:
+      %td{colspan: 3}= _text_field 'event[address]', class: 'wide-text form-control'
+    %tr
+      %td
+        %span{class: 'mandatory'} Start Date:
+      %td= _text_field 'event[date_start]', size: 19, class: 'form-control event-booking-datepicker', id: form_id + '_event_date_start'
+      %td
+        %span{class: 'mandatory'} End Date:
+      %td= _text_field 'event[date_end]', size: 19, class: 'form-control event-booking-datepicker', id: form_id + '_event_date_end'
+  %hr
+  %table.booking-fields.booking-update-email-fields
+    %tr
+      %td{class: 'label-column'} Dates:
+      %td= _text_area 'booking[dates]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Timings:
+      %td= _text_area 'booking[timings]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Crew Required:
+      %td= _text_area 'booking[crew_required]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Job Description:
+      %td= _text_area 'booking[job_description]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Event Description:
+      %td= _text_area 'booking[event_description]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Selling Points:
+      %td= _text_area 'booking[selling_points]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Staff Qualities:
+      %td= _text_area 'booking[staff_qualities]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Uniform:
+      %td= _text_area 'booking[uniform]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Food:
+      %td= _text_area 'booking[food]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Breaks:
+      %td= _text_area 'booking[breaks]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Transport:
+      %td= _text_area 'booking[transport]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Meeting Location:
+      %td= _text_area 'booking[meeting_location]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    -if current_user.manager?
+      %tr
+        %td{class: 'label-column'} Rates:
+        %td= _text_area 'booking[rates]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Wages:
+      %td= _text_area 'booking[wages]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Payment Due Days:
+      %td= _select 'booking[terms]', options_for_select(['','7','14','21','30'], ''), class: 'form-control'
+    %tr
+      %td{class: 'label-column'} Invoicing:
+      %td= _text_area 'booking[invoicing]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Timesheets:
+      %td= _text_area 'booking[timesheets]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Min Hrs:
+      %td= _select 'booking[minimum_hours]', options_for_select(['','4','5','6','7','8','10','Set'], ''), class: 'form-control'
+    %tr
+      %td{class: 'label-column'} Health/Safety:
+      %td= _select 'booking[health_safety_template]', options_for_select(['','Indoor Corporate/Promotional','Indoor Music/Hospitality','Indoor Sport','Outdoor Music/Hospitality','Outdoor Sport/Promotional'], ''), class: 'form-control'
+    %tr
+      %td{class: 'label-column'}
+      %td= _text_area 'booking[health_safety]',  rows: 1, class: 'wide-text form-control', spellcheck: true
+    %tr
+      %td{class: 'label-column'} Any Other Information:
+      %td= _text_area 'booking[any_other_information]', rows: 1, class: 'wide-text form-control', spellcheck: true
+  %hr
+  %table.booking-fields
+    %tr
+      %td{class: 'label-column'} Office Notes:
+      %td= _text_area 'booking[office_notes]',  rows: 1, class: 'wide-text form-control'
+    %tr
+      %td{class: 'label-column'} Amendments:
+      %td= _text_area 'booking[amendments]',  rows: 1, class: 'wide-text form-control', readonly: 'readonly'
+
+- content_for_once :js do
+  :javascript
+    $events = $("#events");
+    $dateFields = $events.find('.event-booking-datepicker')
+    setUpDatepicker($dateFields, 'D dd/mm/yy');
+    $dateFields.watermark('DD/MM/YYYY', {className: 'watermark'});
+    $events.find('select[name="event_clients[]"]').select2();

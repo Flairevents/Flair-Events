@@ -1,0 +1,196 @@
+.public.about
+  = render :partial => 'shared/nav'
+  .content
+    .content-spacer
+    .background.background-laynards.background--fixed
+    .content-inner
+      .row.expanded--restricted.title.background.background--tall
+        .column.small-12.flex--middle.flex--center
+          %h4.white-text.h3.text-center.shadow-text
+            Welcome to the <br> World of Flair Events
+      .band-heading.row.expanded--restricted
+        %h3 About Us
+      .row.field.p2.expanded--restricted.align-center.translucent
+        .column.small-12.medium-8.text-justify
+          %p At Flair, we are firm believers that by ensuring every employee feels valued, well prepared and fairly treated, we are then able to deliver our clients the highest possible standards of service.  The key is not the sheer quantity of staff that can be provided but the ability to provide large numbers of quality, hand-picked staff that can represent our high standards.
+          %p We have the capability to operate and organise a multitude of different, unique and bespoke staffing packages and we are valued by many as the 'expert voice'.  Our success is built upon our preparation and attention to detail and we are extremely proud to consistently deliver honest, hardworking and locally sourced teams.
+          %p We know events, we understand people and we offer a service beyond expectations.
+      .band-heading.row.expanded--restricted
+        %h3 Benefits of using Flair:
+      .row.field.translucent.expanded--restricted.pt2.pb2
+        .column.small-12
+          .advantage-slider.flexslider-container
+            %ul.slides
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-uk" />
+                %h6.h6
+                  Nationwide
+                %p.pl1.pr1
+                  From the Scottish Highlands to the Cornish Coast we can comfortably operate anywhere in the UK. We actively recruit local staff, therefore creating jobs and reducing travel costs.
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-24-hours" />
+                %h6.h6
+                  24-7 Support
+                %p.pl1.pr1
+                  Every contract has our full commitment, whether this includes an expert on-site manager or round the clock office support.
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-time" />
+                %h6.h6
+                  Time Clocking
+                %p.pl1.pr1
+                  We are constantly embracing new technology and we operate using a bespoke time clocking system.  This helps streamline timesheets and other data, accurately and efficiently, to the benefit of both clients and employees.
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-training" />
+                %h6.h6
+                  Training Academy
+                %p.pl1.pr1
+                  Before being engaged in employment all staff members are required to complete mandatory training modules. We also offer the option for staff to participate in industry standard qualifications.
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-bespoke" />
+                %h6.h6
+                  Bespoke System
+                %p.pl1.pr1
+                  Our operating system is constantly evolving meeting the ever changing needs of our clients.  Our specially designed database enables us to link specific skills to staff profiles, enabling a faster, more accurate recruitment process.
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-skill-db" />
+                %h6.h6
+                  Large Multi-skilled Database
+                %p.pl1.pr1
+                  Every event is completely different to the next and this requires our teams to be multi-skilled and adaptable.  We are proud of our 65% annual staff return rate, with 78% of people working more than one event!
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-honesty" />
+                %h6.h6
+                  Loyal and Honest
+                %p.pl1.pr1
+                  Our focus is on developing strong working partnerships. From requesting a quote to the event debrief, you will always receive a dedicated and honest service from Flair.
+              %li.text-center
+                .flair-svg-icon
+                  %svg
+                    <use xlink:href="#fl-icon-valued-staff" />
+                %h6.h6
+                  Valued Staff
+                %p.pl1.pr1
+                  Our teams are our customers; we value them to ensure you see them at their very best. Loyal committed employees embrace their work and in turn you will reap the benefits.
+      .band-heading.expanded--restricted.about-main-heading
+        %span How People
+        %span.yellow-heading Are Using Us
+      .column.small-12.medium-12.category-main-panel
+        .container.category-panel
+          .content-panel.about-card-content-panel
+            .content-overlay-panel
+            =image_tag 'sports-new.png', class: 'content-image-panel'
+            .card-label-row.text-center
+              %h4.about-us-card-label <img  height=20px; width: 20px; class = 'card-add-symbol' />Sports
+            .content-details.fadeIn-right
+              %ul
+                %li Race Marshals
+                %li Bag Drop Crew
+                %li Registration & Information
+                %li Directional Stewards
+                %li Start/Finish Line Reps
+                %li Pit stops & water stations
+                %li Merchandise Sales
+                %li Goody bag packer
+                %li Team Leaders
+                %li Volunteer Managers
+                %li Deployment Supervisors
+                %li Labouring crews
+                %li Other
+        .container.category-panel
+          .content-panel.about-card-content-panel
+            .content-overlay-panel
+            =image_tag 'hospitality-new.png', class: 'content-image-panel'
+            .card-label-row.text-center
+              %h4.about-us-card-label <img  height=20px; width: 20px; class = 'card-add-symbol' />Hospitality
+            .content-details.fadeIn-right
+              %ul
+                %li Bartenders
+                %li Bar Supervisors & Managers
+                %li Barbacks
+                %li Waitress & Waiters
+                %li Barista’s
+                %li Cashiers
+                %li Drinks Hawkers
+                %li Host/Hostess
+                %li Front of House Teams
+                %li Personal Licence Holders
+                %li Other
+        .container.category-panel
+          .content-panel.about-card-content-panel
+            .content-overlay-panel
+            =image_tag 'festivals-new.png', class: 'content-image-panel'
+            .card-label-row.text-center
+              %h4.about-us-card-label <img  height=20px; width: 20px; class = 'card-add-symbol' />Festivals
+            .content-details.fadeIn-right
+              %ul
+                %li Bar Teams
+                %li Ticket scanners, wristbands
+                %li Box office
+                %li Drinks Hawkers
+                %li RFID Top-up Crew
+                %li Accreditation Teams
+                %li Merchandise
+                %li Promotional Crew
+                %li On-Site Managers
+                %li Staffing Co-ordinators
+                %li Information stewards
+                %li Build Up & Break Down Crews
+        .container.category-panel
+          .content-panel.about-card-content-panel
+            .content-overlay-panel
+            =image_tag 'promotion-new.png', class: 'content-image-panel'
+            .card-label-row.text-center
+              %h4.about-us-card-label <img  height=20px; width: 20px; class = 'card-add-symbol' />Promotions
+            .content-details.fadeIn-right
+              %ul
+                %li Brand Ambassadors
+                %li Sampling Crew
+                %li Touring Teams
+                %li Street Marketers
+                %li Data Capture staff
+                %li Merchandise sellers
+                %li Product Demonstrators
+                %li Mystery shoppers
+                %li Retail staff
+                %li Leafleting Teams
+                %li Hosts/Hostesses
+        .container.category-panel
+          .content-panel.about-card-content-panel
+            .content-overlay-panel
+            =image_tag 'office-based.png', class: 'content-image-panel'
+            .card-label-row.text-center
+              %h4.about-us-card-label
+                <img  height=20px; width: 20px; class = 'card-add-symbol' />Office Based
+            .content-details.fadeIn-right
+              %ul
+                %li Admin Assistance 
+                %li Call centres
+                %li  Reception & Front desk 
+                %li Bookings & telesales
+                %li  Customer Service Agents
+
+      .band-heading.expanded--restricted.about-main-heading
+        %span What Clients
+        %span.yellow-heading Are Saying
+      .row.padding-top-bottom.row.dark-green.translucent.expanded--restricted.centered-carosal
+        .column.small-12.medium-9.mt3
+          .testimonial-carousel.flexslider-container.message-background-image
+            =image_tag 'quotation-mark.png', class:'quote-image', height: '80px', width: '80px;'
+            %ul.slides
+              = render partial: 'shared/testimonial_client'
+  .content-after
+  = render :partial => 'footer'

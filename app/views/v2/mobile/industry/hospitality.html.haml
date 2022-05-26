@@ -1,0 +1,141 @@
+- content_for :head do
+  %title Need Great Staff with Hospitality Experience?
+  %meta{ name: "description", content: "We source and provide skilled, reliable temp staff across the UK who can help with all of your hospitality requirements – from bar managers to table staff and beyond."}
+.public.industry.hospitality
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .content-inner
+      .container-fluid.position-relative.px-0.d-flex
+        .industry-header-bg
+        .industry-header-bg-overlay
+        .v2-industry-header
+          %h1
+            Hospitality
+            .staffing-img
+          %p Customer service has always been a Flair strongpoint. We have a tireless work ethic that we pass down through our teams – so your guests will be in safe hands.
+          .orange-btn.d-flex.align-items-center.justify-content-center.request
+            %a{href: "/contact"}
+              %button Request more info
+          .industry-image
+      .container-fluid.position-relative.px-0
+        .v2-industry-section-1
+          %h1
+            Warm, welcoming workers
+            %br/
+            ready to serve
+          %p Hospitality is part of the bedrock on which Flair is built - we have been providing key staff for events that require food, drink and excellent service since the very start. Our network includes an impressive array of event co-ordinators, front-line workers, cloakroom attendees and even parking valets - all primed and motivated to make sure that your function runs smoothly and Leaves a positive, lasting impression.
+          %p Our people have routinely impressed customers and clients with their top notch service skills at venues including Edgbaston, Principality and Wembley Stadium be that public to corporate levels, short notice to regular fixtures. With top-notch service skills We also deliver to bespoke VIP functions, our favourite being Virgin crew parties!
+        .v2-industry-section-3
+          .bg-industry-worker
+          .industry-worker-content
+            .d-flex.flex-row
+              .border-line
+              %h1
+                Workers who
+                %br/
+                give a little extra
+            %p Flair has built some amazing relationships over the years with the people on our database. Mutual respect and understanding promotes loyalty and reliability among our workers and enables us to successfully deliver brilliant teams again and again.
+        .v2-industry-section-2
+          %ul
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Corporate
+                .type-desc.d-flex.flex-column
+                  %span Well-turned-out workers
+                  %span bringing sparkle to your
+                  %span event.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Stadiums
+                .type-desc.d-flex.flex-column
+                  %span People with experience
+                  %span of crowds, from regular
+                  %span fixtures to one-offs.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Host & Receptionist
+                .type-desc.d-flex.flex-column
+                  %span Brilliant, organised people handpicked for attention to details.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Events & Functions
+                .type-desc.d-flex.flex-column
+                  %span People to match your every event - from formal to quirky.
+        .v2-industry-section-4
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No stress
+            %span{style: "margin-top: 5px;"} Our staff come fully-vetted
+            %span and ready to work.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No fuss
+            %span{style: "margin-top: 5px;"} Pre and post-contract admin and
+            %span payroll handled by us.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No surprises
+            %span{style: "margin-top: 5px;"} A cost-effective, bespoke staffing
+            %span solution that works for you.
+        .v2-industry-section-5
+          %h1
+            Hospitality at Flair
+            %br/
+            means.....
+          %p Smiling greeters, breakfast servers, hosts to hostesses, champagne pourers, pint pullers, charming ushers, party planners, dapper dishers, cloakroom warriors and a whole supporting cast of seasoned events staff.
+          .industry-about-bg
+          %h3 Real people, real skills, real simple
+          .d-flex.justify-content-center
+            .orange-btn.d-flex.align-items-center.justify-content-center.mr1
+              %a{ href: "/events?category=Sports"}
+                %button View Jobs
+            .orange-btn.d-flex.align-items-center.justify-content-center
+              %a{ href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                %button Hire Staff
+        .v2-industry-section-8
+          %h6 Case Study
+          .d-flex.flex-inline.align-items-center
+            .border-line
+            %div{style: "margin-left: 5px;"}
+              %h5 GIN & RUM FESTIVAL TOUR
+              %h3 Supporting a client's new venture
+          .image-container.d-flex.justify-content-center
+            .cs-image
+            %div
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center{style: 'margin-bottom: 5px;'}
+                %h1 29
+                %h3 Events
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center
+                %h1 338
+                %h3 Staff
+          %p With an ambitious season ahead and 29 venues booked to host a Gin & Rum festival tour, our hospitality account manager relished the new challenge set by our client. We devised a clear set of roles and knew the different skill sets required from our UK-wide database. The recruits needed to be:
+          .see-content
+            %p A / Focused fast learners who exuded professionalism B / Capable of upselling products and able to talk confidently with event-goers Our client consistently puts their trust in Flair and likes our “low maintenance approach”. Briefed once, we plan, deliver and manage their teams.
+            %a(href="/case_studies/hospitality" data-turbolinks="false")
+              .read-more READ MORE
+          .see-more{onclick: "see_more_less()"}
+        .v2-industry-section-9
+          %h1 Flair provides a complete
+          %h1.d-flex.flex-inline
+            %span.mr1 hospitality
+            staff service.
+          %h1{style: 'margin-top: 20px;'} So, how can we help?
+          .orange-btn.mt3.d-flex.align-items-center.justify-content-center{style: 'margin-top: 18px;'}
+            %a{ href: '/contact'}
+              %button Let's chat today
+          .v2-home-bottom
+
+  = render :partial => 'v2/mobile/application/footer'

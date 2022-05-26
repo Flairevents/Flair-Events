@@ -1,0 +1,20 @@
+.public.login
+  = render :partial => "shared/nav"
+  .content
+    .content-spacer
+    .content-inner
+      .row.darkgreen.background.background-photo-strip.expanded{style: "height:200px"}
+      .band-heading.row.expanded--restricted{style: 'background-color: #005949;'}
+        %h3 Registration
+      .row.expanded
+        .column.small-12.medium-6{style: 'background-color: #a3d39c;'}
+          .row.padding-top-bottom.restrict-right
+            .column.small-12.restrict
+              = render :partial => 'registration_form'
+        .column.small-12.medium-6{style: 'background-color: #a3d39c;'}
+          .row.padding-top-bottom.field-light.expanded.restrict-left{style: 'background-color: #a3d39c;'}
+            .column.small-10
+              .article.text-left.pl4.pr4.our-golden-rules#registration-page-text
+                %b.article-text{style: 'color: black;'} Whether you are wanting to work the occasional specific event or seeking regular flexible work, we look forward to working for you.
+  .content-after
+  = render :partial => "footer"

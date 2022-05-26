@@ -1,0 +1,17 @@
+<p>Dear <%= @name %>,</p>
+
+<p>Thank you for your time with Flair Events. As requested, your account has been deactivated and you should no longer receive contact from us. If you wish to work future events, simply log into your staff zone and reactivate your account.</p>
+
+<% if @upcoming_gigs && @upcoming_gigs.length > 0 %>
+  <p>We have cancelled the following work engagements:</p>
+
+  <p><ul>
+    <% @upcoming_gigs.each do |gig| %>
+      <li><%= gig.event.display_name_with_location %> <%= gig.period %></li>
+    <% end %>
+  </ul></p>
+
+<% end %>
+<p>We wish you well in your future career path.</p>
+
+<%= render partial: 'staff_mailer/signature' %>

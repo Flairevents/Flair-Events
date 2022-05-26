@@ -1,0 +1,70 @@
+- content_for :head do
+  %title Royal Park Marathon Staffing with Flair People
+  %meta{ name: "description", content: "Working in complete harmony with our client, our bespoke staffing system made light of deploying 492 people along a 13.1 mile course. With everyone in position and fully informed of the day ahead, Flair’s on-site team turned on the welcoming smiles and set the teams up for a positive, enjoyable day."}
+.public.case-study.sports
+  = render :partial => 'v2/shared/nav'
+  .content
+    .container-fluid.px-0.d-flex
+      .case-header-bg
+      .v2-case-industry-1.d-flex.align-items-center
+        .container.px-0
+          .case-study Case Studies
+          %h3 SPORTS
+    .v2-case-industry-2.d-flex.align-items-center
+      .container.px-0.d-flex
+        .d-flex.flex-inline
+          .border-line
+          .d-flex.flex-column.ml-05
+            %h5 ROYAL PARKS HALF MARATHON
+            %h3 Fully staffed at 6am with Flair.
+    .v2-case-industry-3.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column.mr1
+          %h2 Key Challenge
+          %p.mt2 For just one day, hundreds of workers were required to assist in the operation of the Royal Parks Half Marathon, attended by over 16,000 participants. Staff began to arrive at 4.30am and were required throughout the entire 13.1-mile course.
+        .cs-image.d-flex.sports
+    .v2-case-industry-4.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .cs-image.d-flex.sports.mr1
+        .d-flex.flex-column
+          %h2 How we helped:
+          %p.mt2 Our client is an industry leader in high-energy mass participation sporting events and campaigns. Having worked with Flair since 2001, they know we are committed, experienced and that we have continually exceeded expectations.
+          %p.mt1 This year, their brief not only doubled in size to deliver properly-prepared teams just before daybreak – it also involved nine separate London locations and covered 51 very specific roles. We didn’t skip a beat and got straight to work; we thrive on this kind of challenge.
+          %p.mt1 We made sure that all 494 staff were outdoorsy candidates from our own database, and had a clear understanding of their job role. Some workers were also required to collect or be assigned specific equipment in order to complete their jobs. Flair's own leadership team came in to manage the day's operations, assembling smaller teams as needed and managing the event with military-like precision.
+          %p.mt1 Additionally, we knew that the client took the reputation of its marshals and staff members very seriously, so we made sure all of our workers felt confident about what they had to do and that they would turn up ready and willing to help the day run as smoothly as possible – which it did.
+    .v2-case-industry-5.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column
+          %h2 The Results
+          %p.mt2 After greeting all staff with a warm breakfast, we got everyone signed in and quickly deployed. We worked in total sync with the client to deliver another successful Royal Parks Half Marathon.
+          .d-flex.flex-inline.align-items-center.mt1
+            .checkbox
+            %h5.ml-05 All 494 positions filled with handpicked fully-vetted workers.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Bespoke staffing system enabled us to react quickly.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Leadership team on site, proactive demonstrating our full event experience.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Exceeded on expectation.
+        .d-flex.flex-column
+          %h2.mb1 Case Studies
+          - ["Festivals & Events", "Hospitality", "Logistics", "Promotional", "Sports", "Commercial"].each do |f|
+            %a{ href: v2_case_industry_path(industry: f == "Festivals & Events" ? "events" : f.downcase) }
+              .d-flex.flex-inline.align-items-center
+                %i.fa.fa-caret-right
+                %h3.ml-05{ class: f.downcase == "sports" ? 'active-study' : '' }=f
+    .v2-case-industry-6.d-flex.align-items-start.sports
+      .container.px-0.d-flex.mt5
+        .d-flex.flex-column
+          %h1 Our job is to make our client's job easier.
+          %h1 Workforce solutions delivered with event expertise.
+          %h1 Tell us how can we help?
+          .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt1
+            %a{href: "/contact"}
+              %button.v2-home-staff-req-btn.join-team Chat with us today
+
+    .v2-home-bottom
+  = render :partial => 'v2/application/footer'

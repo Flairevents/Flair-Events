@@ -1,0 +1,142 @@
+- content_for :head do
+  %title We Have Skilled Commercial Staff Throughout the UK
+  %meta{ name: "description", content: "Need commercial staff or temp workers for light industry? Flair has a large database of skilled workers who will meet your needs."}
+.public.industry.commercial
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .content-inner
+      .container-fluid.position-relative.px-0.d-flex
+        .industry-header-bg
+        .industry-header-bg-overlay
+        .v2-industry-header
+          %h1
+            Commercial
+            .staffing-img
+          %p Supplying you with strategic thinkers and great communicators. Come to Flair first when your existing retail and office teams are in need of a boost. We're ready to help out for as long as it takes.
+          .orange-btn.d-flex.align-items-center.justify-content-center.request
+            %a{href: "/contact"}
+              %button Request more info
+          .industry-image
+      .container-fluid.position-relative.px-0
+        .v2-industry-section-1
+          %h1
+            A Flexible workforce
+            %br/
+            at a moment's notice
+          %p We speak your language when you tell us you need customer service reps, retail assistants, call centre agents, capture data staff and front desk greeters. From flexible on the day requirements to in advance and strategically-planned.
+          %p By constantly updating our database to assist big names such as Ebay, Stubhub, Tesco and Eventbrite to find workers who will complement their existing culture. This is a key goal at Flair, as great teams tend to emerge when skills and personalities match up.
+        .v2-industry-section-3
+          .bg-industry-worker
+          .industry-worker-content
+            .d-flex.flex-row
+              .border-line
+              %h1
+                Workers who
+                %br/
+                give a little extra
+            %p Flair has built some amazing relationships over the years with the people on our database. Mutual respect and understanding promotes loyalty and reliability among our workers and enables us to successfully deliver brilliant teams again and again.
+        .v2-industry-section-2
+          %ul
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Retail
+                .type-desc.d-flex.flex-column
+                  %span Savvy shop workers who can handle customers, payments and more.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Merchandise Sales
+                .type-desc.d-flex.flex-column
+                  %span Energetic merch handlers to
+                  %span skilfully man your stalls.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Office Administration
+                .type-desc.d-flex.flex-column
+                  %span Accounts assistants, stock
+                  %span managers, front-desk staff and
+                  %span more.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Contact Centre Agents
+                .type-desc.d-flex.flex-column
+                  %span Customer service and data
+                  %span capture reps to connect with
+                  %span your clients.
+        .v2-industry-section-4
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No stress
+            %span{style: "margin-top: 5px;"} Our staff come fully-vetted
+            %span and ready to work.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No fuss
+            %span{style: "margin-top: 5px;"} Pre and post-contract admin and
+            %span payroll handled by us.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No surprises
+            %span{style: "margin-top: 5px;"} A cost-effective, bespoke staffing
+            %span solution that works for you.
+        .v2-industry-section-5
+          %h1
+            Commercial at Flair
+            %br/
+            means.....
+          %p Data managers, super communicators, stall runners, contact centre champions, sales closers, customer-driven multitaskers, merch handlers, filing conquerors, high speed typers and reliable can-doers for a hundred other jobs.
+          .industry-about-bg
+          %h3 Real people, real skills, real simple
+          .d-flex.justify-content-center
+            .orange-btn.d-flex.align-items-center.justify-content-center.mr1
+              %a{ href: "/events?category=Sports"}
+                %button View Jobs
+            .orange-btn.d-flex.align-items-center.justify-content-center
+              %a{ href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                %button Hire Staff
+        .v2-industry-section-8
+          %h6 Case Study
+          .d-flex.flex-inline.align-items-center
+            .border-line
+            %div{style: "margin-left: 5px;"}
+              %h5 THE LOWRY
+              %h3 Meet demand with flexibility.
+          .image-container.d-flex.justify-content-center
+            .cs-image
+            %div
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center{style: 'margin-bottom: 5px;'}
+                %h1 Flexible
+                %h3 Team
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center
+                %h1 65
+                %h3 Months
+          %p A major ticketing centre needed ‘top up crew’ to meet spikes in demand. Our workers would need to know the company’s system, standards, and protocols – plus blend in with a permanent team. Key to our success was finding flexible local people who would accept the unpredictable nature of the contract.
+          .see-content
+            %p Honesty being the best policy to build loyalty for us and our clients, we gathered together a pool of experienced call centre staff who understood the need for flexibility. This, and our reaction time, made it a success.
+            %p We met targets and saved our clients valuable time by outsourcing recruitment. Continuous feedback minimised the chances of surprises, with all stakeholders kept in the loop. Workers were valued, felt included and enjoyed the flexibility the contract offered.
+            %a(href="/case_studies/commercial" data-turbolinks="false")
+              .read-more READ MORE
+          .see-more{onclick: "see_more_less()"}
+        .v2-industry-section-9
+          %h1 Flair provides a complete
+          %h1.d-flex.flex-inline
+            %span.mr1{style: "margin-right: 5px;"} commercial
+            staff service.
+          %h1{style: 'margin-top: 20px;'} So, how can we help?
+          .orange-btn.mt3.d-flex.align-items-center.justify-content-center{style: 'margin-top: 18px;'}
+            %a{ href: '/contact'}
+              %button Let's chat today
+          .v2-home-bottom
+  = render :partial => 'v2/mobile/application/footer'

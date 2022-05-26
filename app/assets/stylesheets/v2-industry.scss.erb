@@ -1,0 +1,3046 @@
+.container{ z-index: 0 }
+.industry-header-bg{
+  width: 100vw;
+  height: 724px;
+  position: absolute;
+  top: -70px;
+  left: 0;
+  /*z-index: 2;*/
+}
+
+.orange-btn{
+  width: 239px;
+  height: 60px;
+  background: #EE7623 0% 0% no-repeat padding-box;
+  box-shadow: 0px 3px 10px #0080807a;
+  border: 2px solid #FFFFFF;
+  border-radius: 5px;
+  opacity: 1;
+  height: 56px !important;
+
+  button{
+    text-align: center;
+    font: normal normal 700 20px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    background: transparent;
+    border: none;
+    opacity: 1;
+    outline: 0;
+    width: 233px !important;
+    height: 52px !important;
+  }
+}
+
+.mt-30{ margin-top: 30px; }
+.mt-05{ margin-top: 0.5rem; }
+.ml-05{ margin-left: 0.5rem; }
+.mt-10{ margin-top: 10rem; }
+
+.mac .staffing-dot{
+  top: calc(50% - 25px) !important;
+}
+.v2-industry-header{
+  width: 100vw;
+  height: 554px;
+  z-index: 0;
+
+  h1{
+    text-align: left;
+    font: normal normal bold 57px/30px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-shadow: 0px 3px 6px #00000029;
+    opacity: 1;
+    line-height: 60px;
+  }
+
+  .staffing-img{
+    width: 260px;
+    height: 74px;
+    background: transparent url("<%= asset_path 'v2/industry/Staffing.png' %>") 0% 0% no-repeat padding-box;
+    opacity: 1;
+    background-size: 247px;
+    background-position: 0px 9px;
+  }
+
+  .staffing-dot{
+    width: 10px;
+    height: 10px;
+    background-color: #6BCBB8;
+    border-radius: 50%;
+    position: absolute;
+    left: 0;
+    top: calc(65% - 25px);
+    margin-left: 125px;
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 24px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    text-shadow: 0px 3px 6px #00000029;
+    opacity: 1;
+    margin-top: 5px;
+    max-width: 790px;
+  }
+
+  .industry-image{
+    /*position: absolute;*/
+    float: right;
+    right: 10px;
+    width: 228px;
+    height: 130px;
+    margin-top: -62px;
+  }
+}
+
+.v2-industry-section-1{
+  height: 450px;
+  // height: 1220px;
+  // margin-top: -971px;
+  // padding-top: 760px;
+  z-index: 1;
+  background: #008080 0% 0% no-repeat padding-box;
+
+  .container{
+    z-index: 1;
+  }
+
+  h1{
+    text-align: left;
+    font: normal normal bold 45px/40px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 18px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    opacity: 1;
+    max-width: 833px;
+  }
+}
+
+.v2-industry-section-2{
+  height: 647px;
+  background: #EBF5FC 0% 0% no-repeat padding-box;
+
+  h1{
+    text-align: left;
+    font: normal normal bold 45px/45px Roboto;
+    letter-spacing: 0px;
+    color: #21145F;
+    opacity: 0.93;
+    /*max-width: 530px;*/
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 18px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #21145F;
+    opacity: 1;
+    max-width: 623px;
+  }
+
+  ul{
+    width: 36.38vw;
+    height: 520px;
+    list-style: none;
+    padding: 0;
+    @media only screen and (max-width: 1280px) and (min-width: 900px) {
+      width: 40vw;
+      min-width: 440px;
+
+    }
+    li{
+      width: 17.36vw;
+      height: 250px;
+      /*margin-right: 24px;*/
+      margin-bottom: 20px;
+      border-radius: 10px;
+      /*border: 1px solid;*/
+      cursor: pointer;
+      transition: all 300ms ease;
+      position: relative;
+      overflow: hidden;
+
+      &:nth-child(2), &:nth-child(4){ margin-right: 0px; }
+      &:nth-child(n+2){
+        margin-bottom: 0px;
+      }
+
+      .light-overlay{
+        width: 17.36vw;
+        height: 250px;
+        position: absolute;
+        top: 0;
+        background: #008080;
+        opacity: 0.30;
+        z-index: 1;
+      }
+
+      .flat-overlay {
+        position: absolute;
+        width: 17.36vw;
+        height: 250px;
+        background: transparent url("<%= asset_path 'v2/industry/Castlefield crowd.png' %>") 0% 0% no-repeat padding-box;
+        /*transform: scale(0);*/
+        /*opacity: 0.7;*/
+        background-size: cover;
+        cursor: pointer;
+        transition: all 100ms ease;
+        z-index: 2;
+        visibility: hidden;
+      }
+
+      .circular {
+        position: absolute;
+        width: 15.06vw;
+        height: 217px;
+        background: transparent url("<%= asset_path 'v2/clients/Path 3405.png' %>") 0% 0% no-repeat padding-box;
+        transform: scale(0);
+        opacity: 0.7;
+        background-position: center;
+        cursor: pointer;
+        top: 20px;
+        transition: all 300ms ease;
+        z-index: 3;
+      }
+
+      .type-image{
+        width: 17.36vw;
+        height: inherit;
+        position: absolute;
+        background-repeat: no-repeat;
+        background-position: center;
+        background-size: cover;
+        // background-size: cover;
+        z-index: 1;
+        transition: all 600ms ease;
+      }
+
+      .type-desc{
+        position: absolute;
+        text-align: center;
+        font: normal normal 400 18px/25px Proxima Nova;
+        color: #FFFFFF;
+        opacity: 0;
+        top: 55%;
+        z-index: 5;
+        transition: all 400ms ease;
+      }
+
+      a{
+        font: normal normal bold 2.22vw/2.29vw Roboto;
+        color: #ffffff !important;
+        position: relative;
+        text-align: center;
+        width: inherit;
+        z-index: 4;
+        transition: all 200ms ease;
+        /*visibility: hidden;*/
+        text-align: center;
+
+        &::before{
+          content: '';
+          position: absolute;
+          width: 250px;
+          height: 250px;
+          top: 0;
+          left: 0;
+          background-color: #28848475;
+          z-index: -1;
+          transition: all 300ms ease;
+          opacity: 0;
+          visibility: hidden;
+        }
+      }
+
+      &:hover .circular{
+        transform: scale(1.4);
+      }
+      &:hover .flat-overlay{
+        /*transform: scale(1);*/
+        visibility: visible;
+      }
+      &:hover .type-image{
+        transform: scale(1.1);
+      }
+      &:hover .type-desc{
+        opacity: 1;
+      }
+    }
+  }
+}
+
+.v2-industry-section-3{
+  height: 479px;
+  background: transparent linear-gradient(130deg, #21145F 0%, #008080 100%) 0% 0% no-repeat padding-box;
+
+  .bg-industry-worker{
+    width: 591px;
+    height: 479px;
+    position: absolute;
+  }
+
+  .industry-worker-content{
+    margin-left: 630px;
+
+    .border-line{
+      width: 8px;
+      height: 171px;
+      background: #6BCBB8 0% 0% no-repeat padding-box;
+      border-radius: 6px;
+    }
+
+    h1{
+      text-align: left;
+      font: normal normal 700 50px/60px Roboto;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+
+      span { color: #FAFAFC; }
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/25px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FAFAFC;
+      opacity: 1;
+      max-width: 597px;
+    }
+  }
+}
+
+.v2-industry-section-4{
+  height: 300px;
+
+  .box{
+    width: calc(100%/3);
+    height: 300px;
+
+    &:first-child{ background: #008080 0% 0% no-repeat padding-box; }
+    &:nth-child(2){ background: #6BCBB8 0% 0% no-repeat padding-box; }
+    &:nth-child(3){ background: #21145F 0% 0% no-repeat padding-box; }
+
+    h1{
+      text-align: center;
+      font: normal normal bold 55px/55px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+    }
+
+    span{
+      text-align: center;
+      font: normal normal 400 20px/30px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+    }
+  }
+}
+
+.v2-industry-section-5{
+  height: 644px;
+  background: #EBF5FC 0% 0% no-repeat padding-box;
+
+  h1, h3{
+    text-align: left;
+    font: normal normal bold 44px/55px Roboto;
+    letter-spacing: 0px;
+    color: #21145F;
+    opacity: 1;
+  }
+
+  p{
+    text-align: left;
+    font: normal normal 400 18px/24px Proxima Nova;
+    letter-spacing: 0px;
+    color: #21145F;
+    opacity: 1;
+    max-width: 535px;
+  }
+
+  h3{ font: normal normal bold 25px/49px Roboto; }
+
+  /*.industry-about{
+    margin-right: 100px;
+  }*/
+
+  .industry-about-bg{
+    width: 510px;
+    height: 444px;
+  }
+}
+
+.v2-industry-section-6{
+  height: 404px;
+  background: transparent url("<%= asset_path 'v2/industry/Group 4534.png' %>") 0% 0% no-repeat padding-box;
+  background-size: cover;
+
+  /*.bg-overlay{
+    width: 100vw;
+    height: 100%;
+    background: transparent linear-gradient(94deg, #15B9BB66 3%, #FFFFFF00 97%) 0% 0% no-repeat padding-box;
+    position: absolute;
+  }*/
+
+  h1{
+    font: normal normal 700 30px/29px Roboto;
+    letter-spacing: 0px;
+    color: #FAFAFC;
+    opacity: 1;
+  }
+
+  .testimonial{
+    text-align: left;
+    font: normal normal 400 18px/30px Proxima Nova;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    margin: 0 auto;
+    margin-top: 60px;
+    max-width: 945px;
+
+    .quote{ width: 40px; }
+
+    .reversed::before{
+      content: "";
+      position: absolute;
+      width: 25px;
+      height: 12px;
+      background: transparent url("<%= asset_path 'v2/Path 4106.png' %>") 0% 0% no-repeat padding-box;
+      transform: rotate(180deg);
+      margin-top: 5px;
+    }
+  }
+
+  .testimonial-owner{
+    width: 945px;
+    margin: 0 auto;
+  }
+
+  h2, span{
+    font: normal normal bold 25px/30px Roboto;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    margin-top: 30px;
+  }
+
+  span{
+    font: normal normal normal 25px/30px Roboto;
+  }
+}
+
+.v2-industry-section-7{
+  height: 233px;
+  background: #FFFFFF 0% 0% no-repeat padding-box;
+
+  h1{
+    text-align: center;
+    font: normal normal bold 30px/50px Roboto;
+    letter-spacing: 0px;
+    color: #21145F;
+    margin-top: 25px;
+  }
+
+  .company-logos{
+    margin-top: 30px;
+
+    img{
+      object-fit: contain;
+      max-height: 60px;
+    }
+  }
+}
+
+.v2-industry-section-8{
+  height: 615px;
+  background: #008080 0% 0% no-repeat padding-box;
+
+  .cs-image-content{
+    position: absolute;
+    width: 572px;
+    height: 680px;
+
+    .cs-image{
+      width: 100%;
+      height: 408px;
+      background: transparent url("<%= asset_path 'v2/industry/gin&rum 2.png' %>") 0% 0% no-repeat padding-box;
+      border-radius: 5px;
+      margin-bottom: 15px;
+    }
+
+    .cs-event-box{
+      width: 278px;
+      height: 257px;
+      margin-right: 20px;
+      background: #21145F 0% 0% no-repeat padding-box;
+      border-radius: 5px;
+
+      &:nth-child(2){ margin-right: 0px; }
+
+      h1, h3{
+        text-align: center;
+        font: normal normal bold 90px/171px Roboto;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 0.33;
+        line-height: 120px;
+
+        &.flexible{
+          font: normal normal bold 60px/119px Roboto;
+        }
+
+        span{
+          font: normal normal bold 49px/53px Roboto;
+        }
+      }
+
+      h3{
+        font: normal normal bold 55px/55px Roboto;
+        color: #FFFFFF;
+        opacity: 1;
+        line-height: 73px;
+      }
+    }
+  }
+
+  .cs-content{
+    margin-left: 612px;
+
+    h6, h5, h3{
+      text-align: left;
+      font: normal normal bold 18px/55px Roboto;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+      opacity: 1;
+      line-height: 18px;
+    }
+
+    h5{
+      font: normal normal bold 20px/50px Roboto;
+      color: #FAFAFC;
+      line-height: 20px;
+    }
+
+    h3{
+      font: normal normal bold 30px/60px Roboto;
+      color: #FAFAFC;
+      line-height: 30px;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 20px/25px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      margin-bottom: 0px;
+    }
+
+    a{
+      text-align: left;
+      text-decoration: underline;
+      font: normal normal bold 24px/55px Roboto;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+      opacity: 1;
+    }
+
+    .border-line{
+      width: 5px;
+      height: 75px;
+      background: #6BCBB8 0% 0% no-repeat padding-box;
+      border-radius: 4px;
+      opacity: 1;
+    }
+  }
+}
+
+.v2-industry-section-9{
+  // height: 635px;
+  height: 675px;
+  h1{
+    text-align: left;
+    font: normal normal bold 47px/55px Roboto;
+    letter-spacing: 0px;
+    color: #21145F;
+    max-width: 700px;
+
+    span{ color: #008080 }
+  }
+}
+
+.hospitality{
+  .industry-header-bg{
+    background: transparent url("<%= asset_path 'v2/industry/Group 4530.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .v2-industry-header .industry-image{
+    background: transparent url("<%= asset_path 'v2/industry/Component 29.png' %>") 0% 0% no-repeat padding-box;
+    position: absolute;
+    margin-top: 25px;
+    right: -68px;
+  }
+
+  .v2-industry-section-2{
+    ul{
+      li{
+        &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/hospitality-corporate.png' %>") }
+        &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/hospitality-stadiums.png' %>") }
+        &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/Sexy Cocktail@2x.png' %>") ;background-size: 124%;}
+        &:nth-child(4) .type-image{background-size: 125%;  background-image: url("<%= asset_path 'v2/industry/cocktail_girl.png' %>") }
+
+        &:first-child:hover a, &:nth-child(2):hover a{
+          visibility: visible;
+          transform: translate(0px, -20px);
+        }
+
+        &:nth-child(3):hover a, &:nth-child(4):hover a{
+          transform: translate(0px, -40px);
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-3{
+    .bg-industry-worker{
+      background: transparent url("<%= asset_path 'v2/industry/Mask Group 85.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-5{
+    .industry-about-bg{
+      background: transparent url("<%= asset_path 'v2/industry/Group 4498.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-8{
+    .cs-image-content{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/gin&rum 2.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-industry-section-9{
+    background: #FFFFFF url("<%= asset_path 'v2/industry/Ipad waitress.png' %>") 0% 0% no-repeat padding-box;
+    background-position: top;
+    height: 640px;
+  }
+}
+
+.events{
+  .industry-header-bg{
+    background: transparent url("<%= asset_path 'v2/industry/events/events-bg.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .v2-industry-header .industry-image{
+    background: transparent url("<%= asset_path 'v2/industry/events/Group 3760.png' %>") 0% 0% no-repeat padding-box;
+    width: 213px;
+    height: 137px;
+    margin-top: 19px;
+    position: absolute;
+  }
+
+  .v2-industry-section-2{
+    ul{
+      li{
+        &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-barteams.png' %>") }
+        &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-boxoffice.png' %>") }
+        &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-wristbanding.png' %>") }
+        &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-roadshow.png' %>") }
+
+        &:hover a{
+          visibility: visible;
+          transform: translate(0px, -40px);
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-3{
+    .bg-industry-worker{
+      background: transparent url("<%= asset_path 'v2/industry/events/Mask Group 87.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-5{
+    .industry-about-bg{
+      width: 581px;
+      height: 396px;
+      background: transparent url("<%= asset_path 'v2/industry/events/Group 4431.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-6{
+    background: transparent url("<%= asset_path 'v2/industry/events/Festival Testimony.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+
+    .testimonial{
+      max-width: 990px;
+
+      .quote{
+        width: 60px;
+      }
+    }
+  }
+
+  .v2-industry-section-8{
+    .cs-image-content{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/events/festivalstaff.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-industry-section-9{
+    background: #FFFFFF url("<%= asset_path 'v2/industry/events/flairevents-bottombg-1.png' %>") 0% 0% no-repeat padding-box;
+    background-position: center;
+    h1{ max-width: 850px; }
+  }
+}
+
+.commercial{
+
+  .industry-header-bg{
+    background: linear-gradient(to right, #62b8b8c4, #677b97c4), url("<%= asset_path 'v2/industry/commercial/commercial_top.png' %>") 0% 0% no-repeat padding-box;
+    background-size: contain;
+    background-position-y: bottom;
+    height: 682px;
+  }
+
+  .v2-industry-header .industry-image{
+    background: transparent url("<%= asset_path 'v2/industry/commercial/commercial-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+    width: 158px;
+    height: 142px;
+    margin-top: 0px;
+    position: absolute;
+  }
+  .v2-industry-header {
+    height: 512px;
+  }
+
+  .v2-industry-section-2{
+    ul{
+      li{
+        &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-retails.png' %>") }
+        &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-merchsales.png' %>") }
+        &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-ofcadmin.png' %>") }
+        &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-csr.png' %>") }
+
+        &:hover a{
+          visibility: visible;
+          transform: translate(0px, -30px);
+        }
+
+        &:first-child:hover a{
+          visibility: visible;
+          transform: translate(0px, -20px);
+        }
+
+        &:nth-child(n+2):hover a{
+          transform: translate(0px, -40px);
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-3{
+    .bg-industry-worker{
+      background: transparent url("<%= asset_path 'v2/industry/commercial/Mask Group 85.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-5{
+    .industry-about-bg{
+      width: 495px;
+      height: 492px;
+      background: transparent url("<%= asset_path 'v2/industry/commercial/Group 4434.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-6{
+    background: transparent url("<%= asset_path 'v2/industry/commercial/Commercial Testimony.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+
+    .testimonial{
+      max-width: 1030px;
+
+      .quote{
+        width: 60px;
+      }
+    }
+  }
+
+  .v2-industry-section-8{
+    .cs-image-content{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/commercial/wfh.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-industry-section-9{
+    background: #FFFFFF url("<%= asset_path 'v2/industry/commercial/commercial-bottom-bg.png' %>") 0% 0% no-repeat padding-box;
+    background-position: top;
+    height: 620px;
+
+    h1{
+      &:nth-child(2){ max-width: 710px; }
+    }
+  }
+}
+
+.promo{
+  .industry-header-bg{
+    background: transparent url("<%= asset_path 'v2/industry/promo/Promotional heading.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+    background-position: center;
+  }
+
+  .v2-industry-header .industry-image{
+    background: transparent url("<%= asset_path 'v2/industry/promo/promo-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+    width: 200px;
+    height: 171px;
+    margin-top: -14px;
+    position: absolute;
+  }
+
+  .v2-industry-section-2{
+    ul{
+      li{
+        &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-tradeshows.png' %>") }
+        &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-streetmarketing.png' %>") }
+        &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-brand-ambassadors.png' %>") }
+        &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-datacapture.png' %>") }
+
+        &:nth-child(n+1):hover a{
+          visibility: visible;
+          transform: translate(0px, -40px);
+        }
+
+        &:first-child:hover a, &:nth-child(4):hover a{
+          visibility: visible;
+          transform: translate(0px, -20px);
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-3{
+    .bg-industry-worker{
+      background: transparent url("<%= asset_path 'v2/industry/promo/Mask Group 88.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-5{
+    .industry-about-bg{
+      width: 579px;
+      height: 312px;
+      background: transparent url("<%= asset_path 'v2/industry/promo/Group 4457.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-6{
+    background: transparent url("<%= asset_path 'v2/industry/promo/Promo Testimony.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+
+    .testimonial{
+      max-width: 890px;
+    }
+  }
+
+  .v2-industry-section-8{
+    .cs-image-content{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/promo/ECC leaderboard.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-industry-section-9{
+    background: #FFFFFF url("<%= asset_path 'v2/industry/promo/promo-bottom-bg.png' %>") 0% 0% no-repeat padding-box;
+    /*background-size: 100%;*/
+
+    height: 620px;
+
+    h1{
+      &:nth-child(2){ max-width: 730px; }
+    }
+  }
+}
+
+.sports{
+  .industry-header-bg{
+    background: transparent url("<%= asset_path 'v2/industry/sports/Sports Heading.png' %>") 0% 0% no-repeat padding-box;
+    /*background-size: 100%;*/
+    /*height: 1001px;*/
+    background-position: center;
+    height: 1050px;
+    z-index: 1;
+  }
+
+  .v2-industry-header{
+    /*height: 1001px;*/
+    height: 530px;
+    z-index: 1;
+
+    .industry-image{
+      background: transparent url("<%= asset_path 'v2/industry/sports/sports-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+      width: 144px;
+      height: 147px;
+      margin-top: -350px;
+      position: absolute;
+      right: 207px;
+      background-size: contain;
+    }
+
+    // .container{
+    //   height:
+    // }
+  }
+
+  .v2-industry-section-1{
+    h1{
+      width: 45%;
+      line-height: 60px;
+    }
+  }
+
+  .v2-industry-section-1{
+    height: 450px;
+  }
+
+  .v2-industry-section-2{
+    height: 360px;
+
+    ul{
+      width: auto;
+      height: 250px;
+
+      li{
+        margin-right: 50px;
+
+        &:last-child{ margin-right: 0px; }
+
+        &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/sports-community.png' %>") }
+        &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/sports-massparticipation.png' %>") }
+        &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/sports-worldevents.png' %>") }
+        &:nth-child(4) .type-image{ background-size: 136%;background-image: url("<%= asset_path 'v2/industry/sports/industry_sports_4.png' %>") }
+
+        &:hover a{
+          visibility: visible;
+          transform: translate(0px, -40px);
+        }
+
+        &:nth-child(3):hover a{
+          visibility: visible;
+          transform: translate(0px, -25px);
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-3{
+    .bg-industry-worker{
+      background: transparent url("<%= asset_path 'v2/industry/sports/Mask Group 86.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-5{
+    .industry-about-bg{
+      width: 620px;
+      height: 430px;
+      background: transparent url("<%= asset_path 'v2/industry/sports/Group 4460.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-6{
+    background: transparent url("<%= asset_path 'v2/industry/sports/Sports Testimony.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+
+    .testimonial{
+      max-width: 995px;
+
+      .quote{
+        width: 60px;
+      }
+    }
+  }
+
+  .v2-industry-section-8{
+    .cs-image-content{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/sports/Mask Group 83.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-industry-section-9{
+    background: #FFFFFF url("<%= asset_path 'v2/industry/sports/sports-bottom-bg.png' %>") 0% 0% no-repeat padding-box;
+    background-size: 100%;
+//    background-position: top center;
+    height: 611px;
+  }
+}
+
+.logistics{
+  .industry-header-bg{
+    background: transparent url("<%= asset_path 'v2/industry/logistics/Logistic Heading.png' %>") 0% 0% no-repeat padding-box;
+    /*background-size: cover;
+    height: 1001px;*/
+    background-position: top;
+    background-size: cover;
+    height: 1017px;
+    z-index: 1;
+  }
+
+  .v2-industry-header{
+    /*height: 1001px;*/
+    height: 496px;
+    z-index: 1;
+
+    .industry-image{
+      background: transparent url("<%= asset_path 'v2/industry/logistics/logistics-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+      width: 160px;
+      height: 172px;
+      // margin-top: -390px;
+      position: absolute;
+      right: 63px;
+      top: 66px;
+      background-size: contain;
+    }
+  }
+
+  .v2-industry-section-1{
+    height: 452px;
+  }
+
+  .v2-industry-section-2{
+    height: 360px;
+
+    ul{
+      width: auto;
+      height: 250px;
+
+      li{
+        margin-right: 50px;
+
+        &:last-child{ margin-right: 0px; }
+
+        &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-covidsupport.png' %>") }
+        &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-warehouse.png' %>") }
+        &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-eventcrew.png' %>") }
+        &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-supplychain.png' %>") }
+
+        &:hover a{
+          visibility: visible;
+          transform: translate(0px, -25px);
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-3{
+    .bg-industry-worker{
+      background: transparent url("<%= asset_path 'v2/industry/logistics/Mask Group 93.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-5{
+    .industry-about-bg{
+      width: 484px;
+      height: 442px;
+      background: transparent url("<%= asset_path 'v2/industry/logistics/Group 4462.png' %>") 0% 0% no-repeat padding-box;
+    }
+  }
+
+  .v2-industry-section-6{
+    background: transparent url("<%= asset_path 'v2/industry/logistics/Logistics Testimony.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+
+    .testimonial{
+      max-width: 1000px;
+
+      .quote{
+        width: 60px;
+      }
+    }
+  }
+
+  .v2-industry-section-8{
+    .cs-image-content{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/logistics/Covid Sign.png' %>") 0% 0% no-repeat padding-box;
+      }
+    }
+  }
+
+  .v2-industry-section-9{
+    background: #FFFFFF url("<%= asset_path 'v2/industry/logistics/logistics-bottom-bg.png' %>") 0% 0% no-repeat padding-box;
+    /*background-size: 100%;
+    background-position: top center;*/
+    height: 630px;
+  }
+
+}
+
+@media only (min-width: 1200px) and (max-width: 1299px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 103px -92px;
+      // background-size: 134%;
+      background-size: 102%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px 0px;
+      // background-size: 107%;
+      background-position: center;
+      background-size: 100%;
+      height: 640px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -34px;
+      // background-size: 116%;
+      background-position: center -33px;
+      background-size: 103%;
+      height: 640px;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-header .industry-image{
+      right: 13px;
+    }
+    .v2-industry-section-9{
+      // background-position: -335px -362px;
+      // background-size: 191%;
+      background-position: center 0px;
+      background-size: 113%;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: center -32px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -345px -327px;
+      // background-size: 197%;
+      background-position: -188px -324px;
+      background-size: 163%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      // background-position-x: 0px;
+      // background-size: 135%;
+      // background-position-y: -81px;
+      background-position: 71px -68px;
+      background-size: 105%;
+    }
+  }
+}
+
+@media only (min-width: 1300px) and (max-width: 1399px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 114px -142px;
+      // background-size: 128%;
+      background-size: 115%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      background-position: center -103px;
+      background-size: 100%;
+      height: 640px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -27px;
+      // background-size: 109%;
+      background-position: center -27px;
+      background-size: 95%;
+      height: 640px;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-section-9{
+      // background-position: -143px 6px;
+      // background-size: 127%;
+      background-position: center -10px;
+      background-size: 106%;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: center -32px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -335px -362px;
+      // background-size: 191%;
+      background-position: -161px -335px;
+      background-size: 161%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      // background-position-x: 0px;
+      // background-size: 126%;
+      // background-position-y: -81px;
+      background-position: 83px -64px;
+      background-size: 102%;
+    }
+  }
+}
+
+@media only (min-width: 1400px) and (max-width: 1499px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 73px -224px;
+      // background-size: 136%;
+      background-size: 120%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px -90px;
+      // background-size: 107%;
+      background-position: center -161px;
+      background-size: 100%;
+      height: 640px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -46px;
+      // background-size: 106%;
+      background-position: center -35px;
+      background-size: 100%;
+      height: 780px;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-header .industry-image{
+      right: -26px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -150px -35px;
+      // background-size: 126%;
+      background-position: center -35px;
+      background-size: 105%;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: center 0px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -335px -342px;
+      // background-size: 176%;
+      background-position: -201px -344px;
+      background-size: 155%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      // background-position-x: 0px;
+      // background-size: 120%;
+      // background-position-y: -92px;
+      background-position: center -82px;
+      background-size: 110%;
+      height: 780px;
+    }
+  }
+}
+
+@media only (min-width: 1500px) and (max-width: 1599px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 124px -238px;
+      // background-size: 129%;
+      background-size: 118%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px -132px;
+      // background-size: 107%;
+      background-position: center -181px;
+      background-size: 100%;
+      height: 640px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -50px;
+      // background-size: 100%;
+      background-position: center -80px;
+      background-size: 100%;
+      height: 780px;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-section-9{
+      // background-position: -63px -21px;
+      // background-size: 119%;
+      background-position: center;
+      background-size: 100%;
+      height: 710px;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: 0px -32px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -345px -405px;
+      // background-size: 176%;
+      background-position: -180px -369px;
+      background-size: 151%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      // background-position-x: 0px;
+      // background-size: 111%;
+      // background-position-y: -92px;
+      background-position: center -76px;
+      background-size: 110%;
+      height: 780px;
+    }
+  }
+}
+
+@media only (min-width: 1600px) and (max-width: 1699px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 173px -255px;
+      // background-size: 123%;
+      background-size: 112%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px -167px;
+      // background-size: 107%;
+      background-position: center -167px;
+      background-size: 100%;
+      height: 820px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -59px;
+      // background-size: 100%;
+      background-position: center -82px;
+      background-size: 100%;
+      height: 900px;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-section-9{
+      // background-position: 0px -16px;
+      // background-size: 111%;
+      background-position: center -16px;
+      background-size: 100%;
+      height: 780px;
+
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: 0px -79px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -288px -405px;
+      // background-size: 164%;
+      background-position: -80px -371px;
+      background-size: 141%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      background-position: center -83px;
+      background-size: 110%;
+      height: 780px;
+    }
+  }
+}
+
+@media only (min-width: 1700px) and (max-width: 1799px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 225px -255px;
+      // background-size: 118%;
+      background-size: 106%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px -202px;
+      // background-size: 107%;
+      background-position: center -180px;
+      background-size: 100%;
+      height: 640px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -69px;
+      // background-size: 100%;
+      background-position: center -37px;
+      background-size: 100%;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-section-9{
+      // background-position: 0px -52px;
+      // background-size: 111%;
+      background-position: center -43px;
+      background-size: 100%;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: 0px -102px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -202px -376px;
+      // background-size: 157%;
+      background-position: 0px -358px;
+      background-size: 129%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      background-position-x: center;
+      background-size: 100%;
+      background-position-y: -79px;
+    }
+  }
+}
+
+@media only (min-width: 1800px) and (max-width: 1899px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 273px -297px;
+      // background-size: 118%;
+      background-size: 107%;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px -240px;
+      // background-size: 107%;
+      background-position: center -189px;
+      background-size: 100%;
+      height: 693px;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -69px;
+      // background-size: 100%;
+      background-position: center -46px;
+      background-size: 100%;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-section-9{
+      // background-position: 0px -52px;
+      // background-size: 107%;
+      background-position: center -43px;
+      background-size: 100%;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: 0px -143px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: -217px -405px;
+      // background-size: 156%;
+      background-position: 0px -360px;
+      background-size: 123%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      // background-position-x: 100px;
+      // background-size: 100%;
+      // background-position-y: -109px;
+      background-position: 223px -77px;
+      background-size: 100%;
+    }
+  }
+}
+
+@media only (min-width: 1900px) and (max-width: 2000px){
+  .sports{
+    .v2-industry-section-9{
+      background-position: 327px -290px;
+    }
+  }
+
+  .events {
+    .v2-industry-section-9{
+      // background-position: 0px -266px;
+      // background-size: 104%;
+      background-position: center -187px;
+      background-size: 100%;
+    }
+  }
+
+  .promo {
+    .v2-industry-section-9{
+      // background-position: 0px -69px;
+      // background-size: 100%;
+
+      background-position: center -52px;
+      background-size: 100%;
+    }
+  }
+
+  .hospitality {
+    .v2-industry-section-9{
+      // background-position: 0px -42px;
+      // background-size: 100%;
+      background-position: center -35px;
+      background-size: 100%;
+    }
+  }
+
+  .logistics {
+    .industry-header-bg{
+      background-position: 0px -188px;
+    }
+
+    .v2-industry-section-9{
+      // background-position: 0px -363px;
+      // background-size: 131%;
+      background-position: 0px -363px;
+      background-size: 120%;
+    }
+  }
+
+  .commercial {
+    .v2-industry-section-9{
+      // background-position-x: center;
+      // background-size: 100%;
+      // background-position-y: -118px;;
+      background-position-x: center;
+      background-size: 100%;
+      background-position-y: -91px;
+    }
+  }
+}
+@media only (min-width: 900px) and (max-width: 1024px){
+  .v2-industry-header, .v2-industry-section-1, .v2-industry-section-2, .v2-industry-section-5,
+  .v2-industry-section-6, .v2-industry-section-9{
+    padding: 0px 25px !important;
+  }
+
+  .v2-industry-section-2 {
+    h1{
+      font-size: 38px;
+      line-height: 32px;
+    }
+
+    ul{
+      align-items: center;
+      li{
+        width: 212px;
+        height: 180px;
+        margin-bottom: 0px;
+        }
+      }
+    }
+
+  // .v2-industry-section-5 h3{
+  //   font-size: 26px;
+  // }
+
+  .sports {
+    .v2-industry-section-1 {
+      h1 {
+        width: 60%;
+        }
+      }
+
+    .v2-industry-section-2{
+      ul {
+        width: 100%;
+        li{
+          margin-right: 20px;
+          width: 235px;
+          height: 180px;
+        }
+      }
+    }
+
+    .v2-industry-section-9{
+      background-size: 125%;
+      background-position: 98px 70px;
+    }
+  }
+
+  .events{
+    .v2-industry-section-9{
+      background-size: 107%;
+      background-position: 0px 98px;
+    }
+  }
+
+  .promo{
+    .v2-industry-section-9{
+      background-size: 116%;
+      background-position: -3px 101px;
+    }
+  }
+
+  .logistics{
+    .v2-industry-section-9{
+      background-size: 110%;
+      background-position: -3px 56px;
+    }
+  }
+
+  .commercial{
+    .v2-industry-section-9{
+      background-size: 139%;
+      background-position: -3px 56px;
+    }
+  }
+}
+
+/* mobile */
+@media only screen and (max-width: 600px){
+  .orange-btn{
+    width: 163px !important;
+    height: 45px !important;
+    background: #EE7623 0% 0% no-repeat padding-box;
+    box-shadow: 0px 3px 10px #0080807a;
+    border: 2px solid #FFFFFF;
+    border-radius: 5px;
+    opacity: 1;
+    margin-top: 44px;
+
+    button{
+      width: 159px !important;
+      height: 41px !important;
+      text-align: center;
+      font: normal normal 700 14px/16px Proxima Nova !important;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      background: transparent;
+      border: none;
+      opacity: 1;
+      outline: 0;
+    }
+
+    &.request {
+      width: 180px !important;
+      button {
+        width: 176px !important;
+      }
+    }
+  }
+
+  .v2-industry-header{
+    width: 100%;
+    height: 526px;
+    padding: 82px 15px 0 15px;
+    z-index: 0;
+
+    h1{
+      text-align: left;
+      font: normal normal bold 50px/55px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      text-shadow: 0px 3px 6px #00000029;
+      opacity: 1;
+      line-height: 70px;
+      // margin-top: 85px;
+    }
+
+    .staffing-img{
+      width: 215px;
+      height: 70px;
+      background: transparent url("<%= asset_path 'v2/industry/Staffing.png' %>") 0% 0% no-repeat padding-box;
+      opacity: 1;
+      background-size: contain;
+      margin-left: -10px;
+      margin-top: -10px;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/24px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      text-shadow: 0px 3px 6px #00000029;
+      opacity: 1;
+      margin-top: 25px;
+      max-width: 100%;
+      width: 330px;
+    }
+
+    .industry-image{
+      position: absolute;
+      float: right;
+      right: 10px;
+      margin-top: -62px;
+    }
+  }
+
+  .v2-industry-section-1{
+    height: auto !important;
+    width: 100%;
+    z-index: 1;
+    background: #008080 0% 0% no-repeat padding-box;
+    padding: 12px 15px;
+
+    .container{
+      z-index: 1;
+    }
+
+    h1{
+      text-align: left;
+      font: normal normal 400 25px/30px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 18px/24px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      max-width: 100%;
+      margin-top: 15px;
+    }
+  }
+
+  .v2-industry-section-3{
+    height: auto;
+    width: 100% !important;
+    background: transparent linear-gradient(130deg, #21145F 0%, #008080 100%) 0% 0% no-repeat padding-box;
+
+    .bg-industry-worker{
+      width: 100%;
+      height: 280px;
+      position: unset;
+    }
+
+    .industry-worker-content{
+      margin-left: 0;
+      padding: 22px 15px;
+
+      .border-line{
+        width: 7px;
+        height: 78px;
+        background: #6BCBB8 0% 0% no-repeat padding-box;
+        border-radius: 4px;
+      }
+
+      h1{
+        text-align: left;
+        font: normal normal 700 30px/37px Roboto;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        margin-left: 18px;
+        padding-top: 5px;
+
+        span { color: #FAFAFC; }
+      }
+
+      p{
+        text-align: left;
+        font: normal normal 400 16px/25px Proxima Nova;
+        letter-spacing: 0px;
+        color: #FAFAFC;
+        opacity: 1;
+        max-width: 100%;
+        margin: 0;
+        margin-top: 18px;
+      }
+    }
+  }
+
+  .v2-industry-section-2{
+    height: 350px !important;
+    padding: 32px 19px;
+    background: #EBF5FC 0% 0% no-repeat padding-box;
+
+    ul{
+      width: 290px !important;
+      height: 290px;
+      list-style: none;
+      padding: 0;
+      margin: auto;
+
+      li{
+        width: 135px;
+        height: 135px;
+        margin: 5px !important;
+        border-radius: 10px !important;
+        float: left;
+        /*border: 1px solid;*/
+        cursor: pointer;
+        transition: all 300ms ease;
+        position: relative;
+        overflow: hidden;
+
+        &:nth-child(2), &:nth-child(4){ margin-right: 0px; }
+        &:nth-child(n+2){
+          margin-bottom: 0px;
+        }
+
+        .d-flex {
+          border-radius: 10px !important;
+        }
+
+        .light-overlay{
+          width: 164px;
+          height: 164px;
+          position: absolute;
+          top: 0;
+          background: #008080;
+          opacity: 0.30;
+          z-index: 1;
+        }
+
+        .flat-overlay {
+          position: absolute;
+          width: 164px;
+          height: 164px;
+          background: transparent url("<%= asset_path 'v2/industry/Castlefield crowd.png' %>") 0% 0% no-repeat padding-box;
+//          background: linear-gradient(#0080805E,#008080);
+          cursor: pointer;
+          transition: all 100ms ease;
+          z-index: 2;
+          visibility: hidden;
+        }
+
+        .circular {
+          position: absolute;
+          width: 125px;
+          height: 125px;
+          background: transparent url("<%= asset_path 'v2/clients/Path 3405.png' %>") 0% 0% no-repeat padding-box;
+          transform: scale(0);
+          opacity: 0.7;
+          cursor: pointer;
+          top: 20px;
+          transition: all 300ms ease;
+          z-index: 3;
+          background-size: contain;
+        }
+
+        .type-image{
+          width: 164px !important;
+          height: 164px !important;
+          position: absolute;
+          background-position: center;
+          background-size: auto;
+          // background-size: cover;
+          z-index: 1;
+          transition: all 600ms ease;
+        }
+
+        .type-desc{
+          position: absolute;
+          text-align: center;
+          font: normal normal 400 10px/16px Proxima Nova;
+          color: #FFFFFF;
+          opacity: 0;
+          top: 50%;
+          z-index: 5;
+          transition: all 400ms ease;
+
+        }
+
+        a{
+          font: normal normal bold 18px/20px Roboto;
+          color: #ffffff !important;
+          position: relative;
+          text-align: center;
+          width: 135px !important;
+          height: 135px !important;
+          z-index: 4;
+          transition: all 200ms ease;
+          /*visibility: hidden;*/
+          text-align: center;
+
+          &::before{
+            content: '';
+            position: absolute;
+            width: 135px;
+            height: 135px;
+            top: 0;
+            left: 0;
+            background-color: #28848475;
+            z-index: -1;
+            transition: all 300ms ease;
+            opacity: 0;
+            visibility: hidden;
+          }
+        }
+
+        &:hover .circular{
+          transform: scale(1.25);
+        }
+        &:hover .flat-overlay{
+          /*transform: scale(1);*/
+          visibility: visible;
+        }
+        &:hover .type-image{
+          transform: scale(1.1);
+        }
+        &:hover .type-desc{
+          opacity: 1;
+        }
+      }
+    }
+  }
+
+  .v2-industry-section-4{
+    height: auto !important;
+
+    .box{
+      width: 100%;;
+      height: auto;
+      padding: 20px 0;
+
+      &:first-child{ background: #008080 0% 0% no-repeat padding-box; }
+      &:nth-child(2){ background: #6BCBB8 0% 0% no-repeat padding-box; }
+      &:nth-child(3){ background: #21145F 0% 0% no-repeat padding-box; }
+
+      h1{
+        text-align: center;
+        font: normal normal bold 40px/40px Roboto;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+      }
+
+      span{
+        text-align: center;
+        font: normal normal 400 18px/25px Proxima Nova;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 1;
+      }
+    }
+  }
+
+  .v2-industry-section-5{
+    height: auto !important;
+    width: 100% !important;
+    padding: 20px;
+    background: #EBF5FC 0% 0% no-repeat padding-box;
+
+    h1, h3{
+      text-align: center;
+      font: normal normal bold 30px/40px Roboto;
+      letter-spacing: 0px;
+      color: #21145F;
+      opacity: 1;
+    }
+
+    p{
+      text-align: center;
+      font: normal normal 400 16px/24px Proxima Nova;
+      letter-spacing: 0px;
+      color: #21145F;
+      opacity: 1;
+      max-width: 100%;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    h3{ font: normal normal bold 17px/51px Roboto; }
+
+    .industry-about-bg{
+      width: 510px;
+      height: 444px;
+    }
+  }
+
+  .v2-industry-section-6{
+    height: 404px;
+    background: transparent url("<%= asset_path 'v2/industry/Group 4534.png' %>") 0% 0% no-repeat padding-box;
+    background-size: cover;
+
+    /*.bg-overlay{
+      width: 100vw;
+      height: 100%;
+      background: transparent linear-gradient(94deg, #15B9BB66 3%, #FFFFFF00 97%) 0% 0% no-repeat padding-box;
+      position: absolute;
+    }*/
+
+    h1{
+      font: normal normal 700 30px/29px Roboto;
+      letter-spacing: 0px;
+      color: #FAFAFC;
+      opacity: 1;
+    }
+
+    .testimonial{
+      text-align: left;
+      font: normal normal 400 18px/30px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      margin: 0 auto;
+      margin-top: 60px;
+      max-width: 945px;
+
+      .quote{ width: 40px; }
+    }
+
+    .testimonial-owner{
+      width: 945px;
+      margin: 0 auto;
+    }
+
+    h2, span{
+      font: normal normal bold 25px/30px Roboto;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      margin-top: 30px;
+    }
+
+    span{
+      font: normal normal normal 25px/30px Roboto;
+    }
+  }
+
+  .v2-industry-section-7{
+    height: 233px;
+    background: #FFFFFF 0% 0% no-repeat padding-box;
+
+    h1{
+      text-align: center;
+      font: normal normal bold 30px/50px Roboto;
+      letter-spacing: 0px;
+      color: #21145F;
+      margin-top: 25px;
+    }
+
+    .company-logos{
+      margin-top: 30px;
+
+      img{
+        object-fit: contain;
+      }
+    }
+  }
+
+  .v2-industry-section-8{
+    height: auto !important;
+    width: 100% !important;
+    padding: 20px 15px;
+    background: #008080 0% 0% no-repeat padding-box;
+    position: relative;
+
+    .image-container {
+      margin-bottom: 19px;
+      margin-top: 19px;
+    }
+
+    h6{
+      text-align: left;
+      font: normal normal bold 14px/14px Roboto;
+      letter-spacing: 0px;
+      color: #6BCBB8;
+      opacity: 1;
+      margin-bottom: 5px;
+    }
+
+    h5{
+      text-align: left;
+      font: normal normal bold 15px/20px Roboto;
+      letter-spacing: 0px;
+      color: white;
+      opacity: 1;
+      margin-bottom: 5px;
+    }
+
+    h3{
+      text-align: left;
+      font: normal normal bold 18px/20px Roboto;
+      letter-spacing: 0px;
+      color: white;
+      opacity: 1;
+      margin-bottom: 5px;
+    }
+
+    .border-line{
+      width: 5px;
+      height: 55px;
+      background: #6BCBB8 0% 0% no-repeat padding-box;
+      border-radius: 4px;
+      opacity: 1;
+    }
+
+    .cs-image{
+      width: 181px;
+      height: 154px;
+      background: transparent url("<%= asset_path 'v2/industry/gin&rum 2.png' %>") 0% 0% no-repeat padding-box;
+      border-radius: 5px;
+      margin-bottom: 0;
+      margin-right: 10px;
+    }
+
+    .cs-event-box{
+      width: 153px;
+      height: 77px;
+      margin: 0;
+      background: #21145F 0% 0% no-repeat padding-box;
+      border-radius: 5px;
+
+      &:nth-child(2){ margin-right: 0px; }
+
+      h1, h3{
+        text-align: center;
+        font: normal normal bold 26px/49px Roboto;
+        letter-spacing: 0px;
+        color: #FFFFFF;
+        opacity: 0.33;
+
+        &.flexible{
+          font: normal normal bold 60px/119px Roboto;
+        }
+
+        span{
+          font: normal normal bold 49px/53px Roboto;
+        }
+      }
+
+      h3{
+        font: normal normal bold 20px/25px Roboto;
+        color: #FFFFFF;
+        opacity: 1;
+      }
+    }
+
+    p{
+      text-align: left;
+      font: normal normal 400 16px/25px Proxima Nova;
+      letter-spacing: 0px;
+      color: #FFFFFF;
+      opacity: 1;
+      margin-bottom: 10px;
+    }
+
+    .see-content {
+      display: none;
+    }
+
+    .see-more {
+      width: 50px;
+      height: 50px;
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4592.png' %>") 0% 0% no-repeat padding-box;
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      z-index: 2;
+      cursor: pointer;
+    }
+
+    .see-less {
+      width: 50px;
+      height: 50px;
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4640.png' %>") 0% 0% no-repeat padding-box;
+      position: absolute;
+      bottom: -25px;
+      left: 50%;
+      transform: translate(-50%, 0);
+      z-index: 2;
+      cursor: pointer;
+    }
+  }
+
+  .v2-industry-section-9{
+    height: 320px !important;
+    width: 100% !important;
+    padding: 39px 15px;
+    position: relative;
+
+    h1{
+      text-align: left;
+      font: normal normal bold 25px/28px Roboto;
+      letter-spacing: 0px;
+      color: #21145F;
+      max-width: 700px;
+
+      span{ color: #008080 }
+    }
+
+    .v2-home-bottom {
+      position: absolute;
+      bottom: 0;
+      background-size: cover;
+      width: 100%;
+      height: 50px;
+    }
+  }
+
+  .type-image{
+    width: inherit;
+    height: inherit;
+    position: absolute;
+    background-position: center;
+    background-size: auto;
+
+    z-index: 0;
+    transition: all 600ms ease;
+  }
+
+  .sports{
+    .industry-header-bg{
+      background: transparent url("<%= asset_path 'v2/mobile/Mask Group 70.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -2;
+      width: 100%;
+      background-size: 100% 596px;
+    }
+
+    .industry-header-bg-overlay{
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4208.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -1;
+      width: 100%;
+      background-size: 100% 596px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .v2-industry-header{
+      z-index: 1;
+
+      .industry-image{
+        background: transparent url("<%= asset_path 'v2/industry/sports/sports-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        width: 108px;
+        height: 111px;
+        margin-top: -5px;
+        background-size: contain;
+      }
+    }
+
+    .v2-industry-section-1{
+      h1{
+        width: 100%;
+        line-height: 30px;
+      }
+    }
+
+    .v2-industry-section-3{
+      .bg-industry-worker{
+        background: transparent url("<%= asset_path 'v2/mobile/sports_top.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 308px;
+      }
+    }
+
+    .v2-industry-section-2{
+      height: 360px;
+
+      ul{
+        height: 250px;
+
+        li{
+          &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/sports-community.png' %>") ; background-size: contain}
+          &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/sports-massparticipation.png' %>") }
+          &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/sports-worldevents.png' %>");background-size: contain }
+          &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/sports/industry_sports_4.png' %>");background-size: 136% }
+
+          &:hover a{
+            visibility: visible;
+            transform: translate(0px, -20px);
+          }
+
+          &:nth-child(3):hover a{
+            visibility: visible;
+            transform: translate(0px, -20px);
+          }
+        }
+      }
+    }
+
+    .v2-industry-section-5{
+      .industry-about-bg{
+        width: 248px;
+        height: 220px;
+        background: transparent url("<%= asset_path 'v2/mobile/sports_grid.png' %>") 0% 0% no-repeat padding-box;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-size: cover;
+      }
+
+      p {
+        width: 325px;
+        margin: auto;
+      }
+
+      .orange-btn {
+        margin-top: 0;
+      }
+    }
+
+    .v2-industry-section-8{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/mobile/sports_park.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+      }
+    }
+
+    .v2-industry-section-9{
+      background: #FFFFFF url("<%= asset_path 'v2/mobile/sports_bottom.png' %>") 0% 0% no-repeat padding-box;
+      background-size: 100%;
+      background-position-y: 25px;
+    }
+  }
+
+  .hospitality{
+    .industry-header-bg{
+      background: transparent url("<%= asset_path 'v2/mobile/Mask Group 94.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -2;
+      width: 100%;
+      background-size: 100% 596px;
+    }
+
+    .industry-header-bg-overlay{
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4208.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -1;
+      width: 100%;
+      background-size: 100% 596px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .v2-industry-header{
+      z-index: 1;
+
+      .industry-image{
+        background: transparent url("<%= asset_path 'v2/industry/Component 29.png' %>") 0% 0% no-repeat padding-box;
+        width: 149px;
+        height: 148px;
+        margin-top: -5px;
+        background-size: 149px 111px;
+        right: 10px;
+      }
+    }
+
+    .v2-industry-section-1{
+      h1{
+        width: 100%;
+        line-height: 30px;
+      }
+    }
+
+    .v2-industry-section-3{
+      .bg-industry-worker{
+        background: transparent url("<%= asset_path 'v2/mobile/hospitality-top-bar-girl.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 305px;
+      }
+    }
+
+    .v2-industry-section-2{
+      ul{
+        li{
+          &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/hospitality-corporate.png' %>") }
+          &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/hospitality-stadiums.png' %>") }
+          &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/hospitality-hostreceptionist.png' %>") }
+          &:nth-child(4) .type-image{ background-size: 123%; background-image: url("<%= asset_path 'v2/industry/cocktail_girl.png' %>") }
+
+          &:hover a,{
+            visibility: visible;
+            transform: translate(0px, -20px) !important;
+          }
+        }
+      }
+    }
+
+    .v2-industry-section-5{
+      .industry-about-bg{
+        width: 248px;
+        height: 220px;
+        background: transparent url("<%= asset_path 'v2/mobile/hopitality-mobile.png' %>") 0% 0% no-repeat padding-box;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-size: contain;
+      }
+
+      p {
+        width: 325px;
+        margin: auto;
+      }
+
+      .orange-btn {
+        margin-top: 0;
+      }
+    }
+
+    .v2-industry-section-8{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/mobile/ginRum.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+      }
+    }
+
+    .v2-industry-section-9{
+      background: #FFFFFF url("<%= asset_path 'v2/industry/Ipad waitress.png' %>") 0% 0% no-repeat padding-box;
+      background-size: 470px;
+      background-position: -15px 90px;
+    }
+  }
+
+  .events{
+    .industry-header-bg{
+      background: transparent url("<%= asset_path 'v2/mobile/Mask Group 72.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -2;
+      width: 100%;
+      background-size: 100% 596px;
+    }
+
+    .industry-header-bg-overlay{
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4208.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -1;
+      width: 100%;
+      background-size: 100% 596px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .v2-industry-header{
+      z-index: 1;
+
+      .industry-image{
+        background: transparent url("<%= asset_path 'v2/industry/events/Group 3760.png' %>") 0% 0% no-repeat padding-box;
+        width: 108px;
+        height: 111px;
+        margin-top: 7px;
+        background-size: contain;
+      }
+    }
+
+    .v2-industry-section-1{
+      h1{
+        width: 100%;
+        line-height: 30px;
+      }
+    }
+
+    .v2-industry-section-3{
+      .bg-industry-worker{
+        background: transparent url("<%= asset_path 'v2/mobile/events_girls.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 310px;
+      }
+    }
+
+    .v2-industry-section-2{
+      ul{
+        li{
+          &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-barteams.png' %>") }
+          &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-boxoffice.png' %>") }
+          &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-wristbanding.png' %>") }
+          &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/events/events-roadshow.png' %>") }
+
+          &:hover a{
+            visibility: visible;
+            transform: translate(0px, -20px);
+          }
+        }
+      }
+    }
+
+    .v2-industry-section-5{
+      .industry-about-bg{
+        width: 248px;
+        height: 220px;
+        background: transparent url("<%= asset_path 'v2/mobile/events-grids.png' %>") 0% 0% no-repeat padding-box;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+      }
+
+      p {
+        width: 325px;
+        margin: auto;
+      }
+
+      .orange-btn {
+        margin-top: 0;
+      }
+    }
+
+    .v2-industry-section-8{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/mobile/event_girl_group.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+      }
+    }
+
+    .v2-industry-section-9{
+      background: #FFFFFF url("<%= asset_path 'v2/mobile/event_team.png' %>") 0% 0% no-repeat padding-box;
+      background-size: 100%;
+      height: 360px !important;
+      background-position-y: 20px;
+    }
+  }
+
+  .promo{
+    .industry-header-bg{
+      background: transparent url("<%= asset_path 'v2/mobile/Mask Group 74.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -2;
+      width: 100%;
+      background-size: 100% 596px;
+    }
+
+    .industry-header-bg-overlay{
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4208.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -1;
+      width: 100%;
+      background-size: 100% 596px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .v2-industry-header{
+      z-index: 1;
+
+      .industry-image{
+        background: transparent url("<%= asset_path 'v2/industry/promo/promo-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        width: 108px;
+        height: 111px;
+        margin-top: -15px;
+        background-size: contain;
+      }
+    }
+
+    .v2-industry-section-1{
+      h1{
+        width: 100%;
+        line-height: 30px;
+      }
+    }
+
+    .v2-industry-section-3{
+      .bg-industry-worker{
+        background: transparent url("<%= asset_path 'v2/mobile/promo_bicycle.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 310px;
+      }
+    }
+
+    .v2-industry-section-2{
+      ul{
+        li{
+          &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-tradeshows.png' %>") }
+          &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-streetmarketing.png' %>") }
+          &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-brand-ambassadors.png' %>") }
+          &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/promo/promo-datacapture.png' %>"); background-size: contain }
+
+          &:hover a{
+            visibility: visible;
+            transform: translate(0px, -20px) !important;
+          }
+        }
+      }
+    }
+
+    .v2-industry-section-5{
+      .industry-about-bg{
+        width: 300px;
+        height: 235px;
+        background: transparent url("<%= asset_path 'v2/mobile/promo_grid.png' %>") 0% 0% no-repeat padding-box;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-size: 300px;
+      }
+
+      p {
+        width: 325px;
+        margin: auto;
+      }
+
+      .orange-btn {
+        margin-top: 0;
+      }
+    }
+
+    .v2-industry-section-8{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/mobile/promo_bottom.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+      }
+    }
+
+    .v2-industry-section-9{
+      background: #FFFFFF url("<%= asset_path 'v2/mobile/promotional_ice.png' %>") 0% 0% no-repeat padding-box;
+      background-size: 100%;
+      background-position-y: 60px;
+      height: 360px !important;
+    }
+  }
+
+  .logistics{
+    .industry-header-bg{
+      background: transparent url("<%= asset_path 'v2/mobile/Mask Group 68.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -2;
+      width: 100%;
+      background-size: 100% 596px;
+    }
+
+    .industry-header-bg-overlay{
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4208.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -1;
+      width: 100%;
+      background-size: 100% 596px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .v2-industry-header{
+      z-index: 1;
+
+      .industry-image{
+        background: transparent url("<%= asset_path 'v2/industry/logistics/logistics-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        width: 108px;
+        height: 111px;
+        margin-top: -40px;
+        background-size: contain;
+      }
+    }
+
+    .v2-industry-section-1{
+      h1{
+        width: 100%;
+        line-height: 30px;
+      }
+    }
+
+    .v2-industry-section-3{
+      .bg-industry-worker{
+        background: transparent url("<%= asset_path 'v2/mobile/Logistic_workers.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 310px;
+      }
+    }
+
+    .v2-industry-section-2{
+      ul{
+        width: auto;
+        height: 250px;
+
+        li{
+          margin-right: 50px;
+
+          &:last-child{ margin-right: 0px; }
+
+          &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-covidsupport.png' %>") }
+          &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-warehouse.png' %>") }
+          &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-eventcrew.png' %>") }
+          &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/logistics/logistics-supplychain.png' %>") }
+
+          &:hover a{
+            visibility: visible;
+            transform: translate(0px, -20px);
+          }
+        }
+      }
+    }
+
+    .v2-industry-section-5{
+      .industry-about-bg{
+        width: 248px;
+        height: 220px;
+        background: transparent url("<%= asset_path 'v2/mobile/logistics_about.png' %>") 0% 0% no-repeat padding-box;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-size: cover;
+      }
+
+      p {
+        width: 325px;
+        margin: auto;
+      }
+
+      .orange-btn {
+        margin-top: 0;
+      }
+    }
+
+    .v2-industry-section-8{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/industry/logistics/Covid Sign.png' %>") 0% 0% no-repeat padding-box;
+        background-size: 181px 154px;
+      }
+    }
+
+    .v2-industry-section-9{
+      background: #FFFFFF url("<%= asset_path 'v2/mobile/logistics_bottom.png' %>") 0% 0% no-repeat padding-box;
+      background-size: 100%;
+      background-position-y: 25px;
+    }
+  }
+
+  .commercial{
+    .industry-header-bg{
+      background: transparent url("<%= asset_path 'v2/mobile/Mask Group 77.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -2;
+      width: 100%;
+      background-size: 100% 596px;
+    }
+
+    .industry-header-bg-overlay{
+      background: transparent url("<%= asset_path 'v2/mobile/Group 4208.png' %>") 0% 0% no-repeat padding-box;
+      background-position: unset;
+      height: 596px;
+      z-index: -1;
+      width: 100%;
+      background-size: 100% 596px;
+      position: absolute;
+      top: -70px;
+    }
+
+    .v2-industry-header{
+      z-index: 1;
+
+      .industry-image{
+        background: transparent url("<%= asset_path 'v2/industry/commercial/commercial-industry-icon.png' %>") 0% 0% no-repeat padding-box;
+        width: 108px;
+        height: 111px;
+        margin-top: -20px;
+        background-size: contain;
+      }
+    }
+
+    .v2-industry-section-1{
+      h1{
+        width: 100%;
+        line-height: 30px;
+      }
+    }
+
+    .v2-industry-section-3{
+      .bg-industry-worker{
+        background: transparent url("<%= asset_path 'v2/mobile/commercial_worker.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+        height: 310px;
+      }
+    }
+
+    .v2-industry-section-2{
+      ul{
+        li{
+          &:first-child .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-retails.png' %>"); background-size: cover; }
+          &:nth-child(2) .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-merchsales.png' %>");background-size: cover; }
+          &:nth-child(3) .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-ofcadmin.png' %>");background-size: cover; }
+          &:nth-child(4) .type-image{ background-image: url("<%= asset_path 'v2/industry/commercial/commercial-csr.png' %>"); background-size: cover;}
+
+          &:hover a{
+            visibility: visible;
+            transform: translate(0px, -20px) !important;
+          }
+        }
+      }
+    }
+
+    .v2-industry-section-5{
+      .industry-about-bg{
+        width: 300px;
+        height: 230px;
+        background: transparent url("<%= asset_path 'v2/mobile/commercial_grid.png' %>") 0% 0% no-repeat padding-box;
+        margin: auto;
+        margin-top: 20px;
+        margin-bottom: 20px;
+        background-size: cover;
+      }
+
+      p {
+        width: 325px;
+        margin: auto;
+      }
+
+      .orange-btn {
+        margin-top: 0;
+      }
+    }
+
+    .v2-industry-section-8{
+      .cs-image{
+        background: transparent url("<%= asset_path 'v2/mobile/commercial_working.png' %>") 0% 0% no-repeat padding-box;
+        background-size: cover;
+      }
+    }
+
+    .v2-industry-section-9{
+      background: #FFFFFF url("<%= asset_path 'v2/mobile/commecial_bottom.png' %>") 0% 0% no-repeat padding-box;
+      background-size: 100%;
+      background-position: 0px 96px;
+    }
+  }
+
+  .read-more {
+    font: normal normal bold 20px/20px Roboto;
+    border-bottom: 1px solid #95e7d7;
+    color: #95e7d7;
+    width: fit-content;
+    margin-top: 15px;
+  }
+}
+@media only screen and (min-width: 1700px) {
+  .promo .v2-industry-section-9 {
+    height: 900px;
+    background-position: center -82px;
+  }
+}
+@media only screen and (min-width: 1820px) {
+//  .logistics .v2-industry-header {
+//    height: 679px;
+//  }
+  .logistics .industry-header-bg {
+    background-position: 0px -188px;
+    height: 1017px;
+  }
+  .promo .v2-industry-section-9 {
+    height: 1100px;
+    background-size: cover;
+    background-position-y: -100px;
+  }
+  .v2-home-box-5 .container {
+    margin-top: 340px;
+  }
+  .sports .industry-header-bg {
+    background-size: 100%;
+  }
+  .v2-industry-header .staffing-dot {
+    top: calc(65% - 34px);
+    margin-left: 125px;
+  }
+  .hospitality .v2-industry-section-9 {
+    height: 810px;
+    background-position: center -70px;
+    background-size: 100%;
+//    background-attachment: fixed;
+  }
+  .events .v2-industry-section-9 {
+    background-size: 100% !important;
+    background-position: center -230px;
+    height: 780px;
+  }
+  .commercial .v2-industry-section-9 {
+    background-size: 111%;
+    height: 860px;
+    background-position-y: -150px;
+  }
+  .commercial .industry-header-bg {
+    background-size: cover;
+    background-position-y: top;
+  }
+}
+@media only screen and (min-width: 2000px) {
+  .logistics .v2-industry-header {
+        height: 620px;
+  }
+  .logistics .v2-industry-section-9 {
+    background-position: 0 -280px;
+    background-size: 110%;
+    height: 750px;
+  }
+  .logistics .industry-header-bg {
+//    background-position: 0px -188px;
+    height: 1142px;
+  }
+  .sports .v2-industry-section-9 {
+    background-position-y: -400px;
+    background-position-x: 400px;
+  }
+  .sport-page-gradient {
+      background: linear-gradient(to left bottom, transparent, transparent, transparent, #fff, #ffffff);
+    left: -61px;
+    background: linear-gradient(to left bottom, transparent, transparent, transparent, #fff, #ffffff);
+    position: absolute;
+    height: 150px;
+    width: 150px;
+    bottom: 109px;
+  }
+}
+// moving boxes css for I pad added by raza
+@media only screen and (max-width: 1100px) and (min-width: 548px) {
+  .moving-boxes-container {
+    flex-wrap: wrap;
+    height: 400px;
+    & li {
+      margin-right: 0px !important;
+      max-width: 45%;
+      flex: 0 0 45%;
+      height: 150px !important;
+      margin-bottom: 20px !important;
+      width: 212px;
+    }
+  }
+  .case-study.logistics .v2-case-industry-4 {
+    height: 920px !important;
+  }
+  .v2-industry-section-8 {
+    height: 665px;
+  }
+  .commercial .v2-industry-section-8,
+  .logistics .v2-industry-section-8 {
+    height: 720px;
+  }
+  .sports .v2-industry-section-2 ul li {
+    width: 212px !important;
+  }
+  .v2-industry-section-2 {
+    height: auto;
+    padding-top: 20px;
+  }
+  .v2-industry-section-2 ul {
+    width: 40%;
+    height: 363px;
+    margin: auto;
+  }
+  .flex-wrap-at-ipad {
+    flex-wrap: wrap;
+  }
+  .logistics .v2-industry-section-2 {
+    height: 420px;
+  }
+  .v2-industry-section-2 ul li a {
+    font: normal normal bold 1.7vw/1.8vw Roboto;
+  }
+  .v2-industry-section-2 ul li .type-desc {
+    font: normal normal 400 11px/12px Proxima Nova;
+  }
+  .sports .v2-industry-section-2 {
+    height: 450px;
+  }
+  .v2-industry-section-2 ul li:hover .flat-overlay {
+    transform: scale(1.1);
+  }
+  .v2-industry-section-2 ul li:hover .circular {
+    transform: scale(1);
+  }
+  .sports .v2-industry-section-2 ul li:nth-child(4) .type-image {
+    background-size: 138%;
+  }
+  .v2-industry-header .staffing-dot {
+    margin-left: 124px;
+  }
+  .sports .v2-industry-section-9 {
+    background-position-x: center;
+    background-position-y: -80px;
+  }
+}
+.company-logos {
+
+  & img {
+    @media only screen and (max-width: 1024px) {
+//      width: 100vw;
+      display: block !important;
+      height: 80px;
+      margin-right: 50px;
+    }
+  }
+  @media only screen and (max-width: 1024px) {
+    width: 100vw;
+    display: block !important;
+    height: 80px;
+  }
+}
+.row.bottom-more-info.d-flex.justify-content-center label:first-child {
+  margin-bottom: 23px;
+}

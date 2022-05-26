@@ -1,0 +1,20 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td Still looking for flexible work?
+  %tr
+    %td
+      If yes then book your interview
+      %a{ href: "#{Flair::Application.config.base_https_url}/staff#interview" } here
+      and we can discuss your options.
+  %tr
+    %td Have a question? Feel free to call us
+  %tr
+    %td Find flexible work that fits into your schedule. We pay weekly and offer opportunities to work alongside some of the top brands in the UK.
+= render partial: 'staff_mailer/signature'

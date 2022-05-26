@@ -1,0 +1,231 @@
+user deploy;
+worker_processes <%= fetch(:workers) %>;
+pid <%= fetch(:nginx_pidfile) %>;
+
+events {
+	worker_connections 1024;
+	# multi_accept on;
+}
+
+http {
+
+	##
+	# Basic Settings
+	##
+
+	sendfile on;
+	tcp_nopush on;
+	tcp_nodelay on;
+	keepalive_timeout 65;
+	types_hash_max_size 2048;
+	server_tokens off;
+
+	# server_names_hash_bucket_size 64;
+	# server_name_in_redirect off;
+
+	include /etc/nginx/mime.types;
+	default_type application/octet-stream;
+
+	##
+	# Logging Settings
+	##
+
+	access_log /var/log/nginx/access.log;
+	error_log /var/log/nginx/error.log;
+
+	##
+	# Gzip Settings
+	##
+
+	gzip on;
+	gzip_disable "msie6";
+	gzip_vary on;
+	gzip_proxied any;
+	gzip_comp_level 6;
+	# gzip_buffers 16 8k;
+	# gzip_http_version 1.1;
+	gzip_types text/plain text/css application/json application/x-javascript text/xml application/xml application/xml+rss text/javascript;
+
+	##
+	# Hardening security
+	##
+
+	# don't let those dirty hackers know what we are using
+	more_set_headers "Server: Apache";
+	more_clear_headers "X-*";
+
+	##
+	# Virtual Host Configs
+	##
+
+  # Thin cluster
+  upstream thin_cluster {
+    <% 3000.upto(3000 + fetch(:workers) - 1) do |port| %>
+    server localhost:<%= port %>;
+    <% end %>
+  }
+  upstream staging_thin_cluster {
+    server localhost:4000;
+  }
+
+  #############
+  # PRODUCTION
+  #############
+
+  ### Redirect www to non-www
+  server {
+    server_name www.<%=fetch(:domain)%>;
+    return 301 $scheme://<%=fetch(:domain)%>$request_uri;
+  }
+
+  # Allow nginx to serve static files
+  server {
+    listen 80;
+
+    client_max_body_size 500M;
+    server_name <%= fetch(:domain) %>;
+    keepalive_timeout 5;
+    root /var/www/flair/current/public;
+
+    location / {
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+
+      expires 1M; # allow client-side caching of static files
+      if (!-f $request_filename) {
+        proxy_pass http://thin_cluster;
+        expires off; # but disable client-side caching for dynamic pages
+        break;
+      }
+    }
+
+    location ~ ^/(assets)/  {
+      root /var/www/flair/current/public;
+      gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header Cache-Control public;
+      add_header ETag "";
+    }
+
+    error_page 500 502 503 504 /500.html;
+    location = /500.html { root /var/www/flair/current/public; }
+  }
+
+  server {
+    listen 443;
+    ssl on;
+
+    ssl_certificate /var/www/flair/current/certs/public_chained.crt;
+    ssl_certificate_key /var/www/flair/current/certs/public.key;
+
+    client_max_body_size 500M;
+    server_name <%= fetch(:domain) %>;
+    keepalive_timeout 60 60;
+    root /var/www/flair/current/public;
+
+    location / {
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+
+      expires 1M; # allow client-side caching of static files
+      if (!-f $request_filename) {
+        proxy_pass http://thin_cluster;
+        expires off; # but disable client-side caching for dynamic pages
+        break;
+      }
+    }
+
+    location ~ ^/(assets)/  {
+      root /var/www/flair/current/public;
+      gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header Cache-Control public;
+      add_header ETag "";
+    }
+
+    error_page 500 502 503 504 /500.html;
+    location = /500.html { root /var/www/flair/current/public; }
+  }
+
+  ##########
+  # STAGING
+  ##########
+
+  server {
+    listen 80;
+
+    client_max_body_size 500M;
+    server_name staging.<%= fetch(:domain) %>;
+    keepalive_timeout 5;
+    root /var/www/flair_staging/current/public;
+
+    location / {
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+
+      expires 1M; # allow client-side caching of static files
+      if (!-f $request_filename) {
+        proxy_pass http://staging_thin_cluster;
+        expires off; # but disable client-side caching for dynamic pages
+        break;
+      }
+    }
+
+    location ~ ^/(assets)/  {
+      root /var/www/flair_staging/current/public;
+      gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header Cache-Control public;
+      add_header ETag "";
+    }
+
+    error_page 500 502 503 504 /500.html;
+    location = /500.html { root /var/www/flair_staging/current/public; }
+  }
+
+  server {
+    listen 443;
+    ssl on;
+
+    ssl_certificate /etc/letsencrypt/live/staging.eventstaffing.co.uk/fullchain.pem;
+    ssl_certificate_key /etc/letsencrypt/live/staging.eventstaffing.co.uk/privkey.pem;
+
+    client_max_body_size 500M;
+    server_name staging.<%= fetch(:domain) %>;
+    keepalive_timeout 60 60;
+    root /var/www/flair_staging/current/public;
+
+    location / {
+      proxy_set_header X-Real-IP $remote_addr;
+      proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
+      proxy_set_header X-Forwarded-Proto https;
+      proxy_set_header Host $http_host;
+      proxy_redirect off;
+
+      expires 1M; # allow client-side caching of static files
+      if (!-f $request_filename) {
+        proxy_pass http://staging_thin_cluster;
+        expires off; # but disable client-side caching for dynamic pages
+        break;
+      }
+    }
+
+    location ~ ^/(assets)/  {
+      root /var/www/flair_staging/current/public;
+      gzip_static on; # to serve pre-gzipped version
+      expires max;
+      add_header Cache-Control public;
+      add_header ETag "";
+    }
+
+    error_page 500 502 503 504 /500.html;
+    location = /500.html { root /var/www/flair_staging/current/public; }
+  }
+}

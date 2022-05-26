@@ -1,0 +1,15 @@
+%table.table-widget{style: 'width:100%', cellspacing: 0}
+  %tr.tr-head
+    %td.table-th Changed
+    %td.table-th Previous
+    %td.table-th New
+    %td.table-th Date
+    %td.table-th Changed/Approved By
+  - i = 0
+  - @history.each do |h|
+    %tr{class: (i = ((i + 1) % 2)).odd? ? 'tr-even' : 'tr-odd'}
+      %td.td= Prospect.human_attribute_name(h.column.to_sym).split.map(&:upcase_first).join(' ')
+      %td.td= h.prev_value
+      %td.td= h.new_value
+      %td.td= h.created_at.try(:to_print)
+      %td.td= h.changed_by

@@ -1,0 +1,15 @@
+.terms
+  -if @prospect.agreed_to_terms?
+    %p.strong
+      You agreed to these terms on #{@agreed_on.to_date.to_print}:
+  .article
+    = @terms
+  -unless @prospect.agreed_to_terms?
+    = form_tag '/staff/terms' do
+      %p
+        .fl-form__checkbox.form-control
+          = check_box_tag :agreed, 'true', false, required: true
+          %label{for: 'agreed'}
+            I agree to abide by these terms.
+      %p.text-right.mt1
+        = submit_tag 'I Agree', class: 'btn btn-default'

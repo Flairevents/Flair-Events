@@ -1,0 +1,48 @@
+.command-bar
+  .btn-group
+    %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+    %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteOfficer'} Delete
+    %button.btn.btn-default.command-link.command-lock.disabled{:"data-command" => 'lockOfficer'} Lock
+    %button.btn.btn-default.command-link.command-unlock.disabled{:"data-command" => 'unlockOfficer'} Unlock
+    %button.btn.btn-default.command-link{:"data-command" => 'clearFilters'} Clear Filters
+/-------- filter bar
+%hr
+.filter-bar-container
+  %form.filters.filter-bar#events-filter-bar
+    %table
+      %tr
+        %th Name
+        %th Role
+        %th Locked Out
+      %tr
+        %td= _text_field :search, class: 'form-control'
+        %td= _select :role, options_for_select([['Active','Active'],['All',''],['Admin','admin'],['Manager','manager'],['Staffer','staffer'],['Archived','archived']]), class: 'form-control'
+        %td= _select :locked_out, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    .slideover-tabs
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#officer-details', :"data-toggle" => 'tab'} Details
+        %li
+          %a{href: '#officer-session-log', :"data-toggle" => 'tab'} Session Log
+    .slideover-tab-panes.tab-content
+      .tab-pane.active#officer-details
+        = render partial: 'officer_form', locals: { officer: Officer.new }
+      .tab-pane#officer-session-log

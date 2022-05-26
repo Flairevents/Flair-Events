@@ -1,0 +1,184 @@
+.command-bar
+  .timesheet-view-only
+    %button.btn.btn-default.NEW.TO_APPROVE.PENDING.SUBMITTED.NODATA.command-link{:"data-command" => 'toggleSubview'} See Payroll
+    .btn-group
+      %button.btn.btn-default.NEW.PENDING.SUBMITTED.EDITABLE.NEEDSEVENT.NODATA.dropdown-toggle.command-link{:"data-toggle" => 'dropdown'}
+        Import Employees
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %a.command-link{:"data-command" => 'importTimesheetsForEvent'} Timesheets/Payroll
+        %li
+          %a.command-link{:"data-command" => 'importPayrollForEvent'} Payroll Only
+    .btn-group
+      %button.btn.btn-default.NEW.TO_APPROVE.PENDING.SUBMITTED.NEEDSEVENT.NODATA.dropdown-toggle.command-link{:"data-toggle" => 'dropdown'}
+        Scanned Timesheets
+        %span.caret
+      %ul.dropdown-menu
+        %li
+          %label.dropdown-item
+            Upload
+            %input#uploadScannedTimesheet{type: 'file', style: 'display: none;', multiple: true}
+        %li
+          %a.command-link{:"data-command" => 'downloadScannedTimesheet'} Download
+    .btn-group
+      %button.btn.btn-default.PENDING.SUBMITTED.NEEDSEVENT.dropdown-toggle.command-link{:"data-toggle" => 'dropdown'}
+        Report
+        %span.caret
+      %ul.dropdown-menu.report-dropdown
+        - Report.where(table: 'timesheet_entries').sort_by(&:print_name).each do |report|
+          %li
+            %a{href: '#', :"data-report-name" => report.name}= report.print_name
+    = check_box_tag 'allowTimesheetEdit', 1, false, {:class => "SUBMITTED"}
+    %label.SUBMITTED Allow Editing
+  .payroll-view-only
+    %button.btn.btn-default.NEW.TO_APPROVE.PENDING.SUBMITTED.NODATA.command-link{:"data-command" => 'toggleSubview'} See Timesheets
+    .btn-group
+      .btn-group
+        %button.btn.btn-default.NEW.PENDING.SUBMITTED.EDITABLE.NEEDSEVENT.NODATA.dropdown-toggle.command-link{:"data-toggle" => 'dropdown'}
+          Import Employees
+          %span.caret
+        %ul.dropdown-menu
+          %li
+            %a.command-link{:"data-command" => 'importTimesheetsForEvent'} Timesheets/Payroll
+          %li
+            %a.command-link{:"data-command" => 'importPayrollForEvent'} Payroll Only
+        %button.btn.btn-default.NEW.PENDING.SUBMITTED.EDITABLE.NEEDSWEEK.command-link{:"data-command" => 'addRemoveEmployees'} Add/Remove Employees
+    %button.btn.btn-default.NEW.TO_APPROVE.NEEDSWEEK.NEEDSDATA.command-link{:"data-command" => 'moveToPending'} Move to Pending
+    %button.btn.btn-default.PENDING.SUBMITTED.NEEDSWEEK.NOEVENT.command-link{:"data-command" => 'export'} Create Brightpay Files
+    %button.btn.btn-default.ENDING.NEEDSWEEK.NOEVENT.command-link{:"data-command" => 'moveToSubmitted'} Move to Submitted
+    .btn-group
+      %button.btn.btn-default.PENDING.SUBMITTED.NEEDSWEEK.dropdown-toggle.command-link{:"data-toggle" => 'dropdown'}
+        Report
+        %span.caret
+      %ul.dropdown-menu.report-dropdown
+        - Report.where(table: 'pay_weeks').sort_by(&:print_name).each do |report|
+          %li
+            %a{href: '#', :"data-report-name" => report.name}= report.print_name
+    = check_box_tag 'allowPayrollEdit', 1, false, {:class => "SUBMITTED"}
+    %label.SUBMITTED Allow Editing
+    %button.btn.btn-default.PENDING.SUBMITTED.NEEDSWEEK.FLOATRIGHT.command-link{:"data-command" => 'viewEmployeeDetailUpdates'} Weekly Changes
+%hr
+.filter-bar-container
+  .filter-bar
+    %table
+      %tr
+        %th Status
+        %th Tax Year
+        %th Tax Week
+        %th Event
+        %th.timesheet-view-only
+          .TO_APPROVE
+            Report
+        %th.payroll-view-only Job
+        %th.payroll-view-only Type
+        %th.timesheet-view-only Assignment
+        %th.timesheet-view-only Job
+        %th.timesheet-view-only Location
+        %th.timesheet-view-only Shift
+        %th.timesheet-view-only Date
+        %th Name
+      %tr
+        %td= _select :status, options_for_select([['New','NEW'],['To Approve','TO_APPROVE'],['Pending','PENDING'],['Submitted','SUBMITTED']]), class: 'form-control'
+        %td= _select :tax_year_id, '', class: 'ignore form-control'
+        %td= _select :tax_week_id, '', class: 'form-control'
+        %td= _select :event_id, '', class: 'form-control'
+        %td.timesheet-view-only
+          .TO_APPROVE
+            = _select :time_clock_report_id, '', class: 'form-control'
+        %td.payroll-view-only= _select :job_id, '', class: 'form-control'
+        %td.payroll-view-only= _select :type, options_for_select([['',''],['Auto', 'AUTO'],['Manual', 'MANUAL']]), class: 'form-control'
+        %td.timesheet-view-only= _select :assignment_id, '', class: 'form-control'
+        %td.timesheet-view-only= _select :assignment_job_id, '', class: 'form-control'
+        %td.timesheet-view-only= _select :assignment_location_id, '', class: 'form-control'
+        %td.timesheet-view-only= _select :assignment_shift_id, '', class: 'form-control'
+        %td.timesheet-view-only= _select :assignment_date, '', class: 'form-control'
+        %td= _text_field :search, size: 24, class: 'form-control'
+%hr
+.bulk-update-container.payroll-view-only
+  #bulk-update-payroll.bulk-update-grid.NEW.PENDING.TO_APPROVE.SUBMITTED.EDITABLE
+  %button.btn.btn-default.command-link.bulk-command.NEW.PENDING.TO_APPROVE.SUBMITTED.NEEDSWEEK.NEEDSEVENT.EDITABLE{:"data-command" => 'bulkUpdatePayroll'} Bulk Update
+  %table.payroll-summary.summary-table
+    %tr
+      %th Total Staff
+      %th Total Hours
+    %tr
+      %td#payroll-summary-total-staff
+      %td#payroll-summary-total-hours
+  %h5.expense-message.payroll-message.info
+  %h5.min-hrs-message.payroll-message.info
+.bulk-update-container.timesheet-view-only
+  #bulk-update-timesheet.bulk-update-grid.NEW.PENDING.TO_APPROVE.SUBMITTED.EDITABLE
+  %button.btn.btn-default.command-link.bulk-command.NEW.PENDING.TO_APPROVE.SUBMITTED.NEEDSWEEK.NEEDSEVENT.EDITABLE{:"data-command" => 'bulkUpdateTimesheet'} Bulk Update
+  #bulk-update-timesheet-invoice.bulk-update-grid.SUBMITTED.READONLY
+  %button.btn.btn-default.command-link.bulk-command.SUBMITTED.NEEDSWEEK.NEEDSEVENT.READONLY{:"data-command" => 'bulkUpdateTimesheetInvoice'} Bulk Update
+  %table.payroll-summary.summary-table
+    %tr
+      %th Total Staff
+      %th Total Hours
+      %th Total Breaks
+      %th Net Hours
+      %th Paid Hours
+    %tr
+      %td#timesheet-summary-total-staff
+      %td#timesheet-summary-total-hours
+      %td#timesheet-summary-total-breaks
+      %td#timesheet-summary-net-hours
+      %td#timesheet-summary-paid-hours
+  %h5.expense-message.payroll-message.info
+  %h5.min-hrs-message.payroll-message.info
+.clear
+
+.multi-assigner.modal.fade{style: 'display:none'}
+  .modal-header
+    %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+      &times;
+    %h3 Add/Remove Employees
+  .modal-body
+  .modal-footer
+    .command-bar
+      %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel
+      %button.btn.btn-default.command-link{:"data-command" => 'saveAndCloseAssigner'} Save & Close
+
+.timesheet-view-only
+  #approval{style: 'display:none'}
+    %table.summary-table
+      %tr
+        %th Team Leader
+        %th Approved By
+        %th Client
+      %tr
+        %td
+          #approval-date-submitted
+        %td
+          #approved-by
+        %td
+          #approval-client-rating
+      %tr
+        %td
+          #approval-notes
+        %td
+          %img#approval-client-signature{alt: 'Signature'}
+        %td
+          #approval-client-notes
+
+.payroll-view-only
+  .payroll-grid
+
+.timesheet-view-only
+  .timesheet-grid
+
+.report-download-dialog.modal.fade{style: 'display:none'}
+  .modal-header
+    %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+      &times;
+    %h3 Download Report
+  .modal-body
+    %a.download-xlsx{download: true}>
+      %img{src: image_path('xlsx-icon.png'), width: 128, height: 128, alt: 'Excel'}>
+    %a.download-csv{download: true}>
+      %img{src: image_path('csv-icon.png'), width: 128, height: 128, alt: 'CSV'}>
+    %a.download-pdf{download: true}>
+      %img{src: image_path('pdf-icon.png'), width: 128, height: 128, alt: 'PDF'}>
+  .modal-footer
+    %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel

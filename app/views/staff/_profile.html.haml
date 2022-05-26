@@ -1,0 +1,183 @@
+.profile{:class => ('me--completed' if @profile_complete)}
+  .row
+    .column.small-12.pt2{style: 'background-image: linear-gradient(#a3d39c 0%, #f5f5f5 50%, #a3d39c 100%);'}
+      %ul.nav.nav-tabs.nav-tabs--real-tabs.nav-tabs--scroll.staff-nav.staff-text-color{:role => "tablist", style: 'background: unset;'}
+        -active_class_name = 'active'
+        -if @detail_submited
+          -active_class_name = ''
+        -if @show_profile_personal_details
+          %li.staff-nav-link{:role => "tablist", class: active_class_name}
+            %span.anchor#anchor-personal-details
+            %a.text-left.staff-middle-bar-items.staff-details{"aria-controls" => "tab-personal-details", "data-toggle" => "tab", :href => "#tab-personal-details", :role => "tab", style: ' margin-right: 17px;'}
+              -if !@prospect.has_personal_details?
+                .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -else
+                .fl-icon.fl-icon--small.fl-icon--checkmark{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              Details
+        -if @show_profile_questionnaire
+          -active_class_name = ''
+          -if @detail_submited
+            -active_class_name = 'active'
+          %li.staff-nav-link#staff-application{:role => "tablist", class: active_class_name}
+            %span.anchor#anchor-questions
+              -application_class = ''
+            -if !@prospect.almost_has_personal_details?
+              -application_class = 'staff-application-nav-item'
+            %a.text-left.staff-middle-bar-items{"aria-controls" => "tab-questions", "data-toggle" => "tab", :href => "#tab-questions", :role => "tab", style: 'color: #005949;', class: application_class}
+              -if !@prospect.answered_whole_questions?
+                .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -else
+                .fl-icon.fl-icon--small.fl-icon--checkmark{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              Application
+        -if @show_profile_tax_choice
+          %li{:role => "tablist"}
+            %span.anchor#anchor-tax-choice
+            %a.text-left.staff-middle-bar-items{"aria-controls" => "tab-tax-choice", "data-toggle" => "tab", :href => "#tab-tax-choice", :role => "tab"}
+              -if !@prospect.has_tax_choice?
+                -if @prospect.applicant?
+                  .fl-icon.fl-icon--small.fl-icon--optional{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+                -else  
+                  .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -else
+                .fl-icon.fl-icon--small.fl-icon--checkmark{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              Tax
+        -if @show_profile_bank_details
+          %li{:role => "tablist"}
+            %span.anchor#anchor-bank-details
+            %a.text-left.staff-middle-bar-items{"aria-controls" => "tab-bank-details", "data-toggle" => "tab", :href => "#tab-bank-details", :role => "tab"}
+              -if !@prospect.has_bank_details?
+                -if @prospect.applicant?
+                  .fl-icon.fl-icon--small.fl-icon--optional{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -elsif @pending_bank_details_approval
+                .fl-icon.fl-icon--small.fl-icon--checkmark-pending{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -else
+                .fl-icon.fl-icon--small.fl-icon--checkmark{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              Bank
+        -if @show_profile_id
+          %li{:role => "tablist"}
+            %span.anchor#anchor-upload-id
+            %a.text-left.staff-middle-bar-items{"aria-controls" => "tab-upload-id", "data-toggle" => "tab", :href => "#tab-upload-id", :role => "tab"}
+              -if !@prospect.id_submitted?
+                -if @prospect.applicant?
+                  .fl-icon.fl-icon--small.fl-icon--optional{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -elsif @pending_id_approval
+                .fl-icon.fl-icon--small.fl-icon--checkmark-pending{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -else
+                .fl-icon.fl-icon--small.fl-icon--checkmark{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              ID
+        -if @show_profile_terms
+          %li{:role => "tablist"}
+            %span.anchor#anchor-terms
+            %a.text-left.staff-middle-bar-items{"aria-controls" => "tab-terms", "data-toggle" => "tab", :href => "#tab-terms", :role => "tab"}
+              -if !@prospect.agreed_to_terms?
+                .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              -else
+                .fl-icon.fl-icon--small.fl-icon--checkmark{style: 'width: 22px; height: 22px; float: left; margin-left: -8px; margin-right: 12px;'}
+              Terms
+
+        -# -if @show_profile_contact_preferences
+        -#   %li{:role => "tablist"}
+        -#     %span.anchor#anchor-contact-preferences
+        -#     %a{"aria-controls" => "tab-contact-preferences", "data-toggle" => "tab", :href => "#tab-contact-preferences", :role => "tab"}
+        -#       -if !@prospect.has_contact_preferences?
+        -#         .fl-icon.fl-icon--small.fl-icon--checkmark-unchecked
+        -#       -else
+        -#         .fl-icon.fl-icon--small.fl-icon--checkmark
+        -#       Contact Preferences
+        -#-if @show_bar_license   # This and if statement (5 lines of code) previously commented out
+        -#  %li{:role => "tablist"}
+        -#    %span.anchor#anchor-bar-license
+        -#    %a{"aria-controls" => "tab-bar-license", "data-toggle" => "tab", :href => "#tab-bar-license", :role => "tab"}
+        -#      Bar License
+      .tab-content.p2{style: 'color: black;'}
+        -active_class_name = 'active'
+        -if @detail_submited
+          -active_class_name = ''
+        #tab-personal-details.tab-pane{:role => "tabpanel", class: active_class_name}
+          =render partial: 'profile_personal_details'
+        -active_class_name = ''
+        -if @detail_submited
+          -active_class_name = 'active'
+        -if @prospect.almost_has_personal_details?
+          #tab-questions.tab-pane{:role => "tabpanel", class: active_class_name}
+            =render partial: 'profile_questions'
+        #tab-terms.tab-pane{:role => "tabpanel"}
+          =render partial: 'profile_terms'
+        #tab-contact-preferences.tab-pane{:role => "tabpanel"}
+          =render partial: 'profile_contact_preferences'
+        #tab-tax-choice.tab-pane{:role => "tabpanel"}
+          =render partial: 'profile_tax_choice'
+        #tab-bank-details.tab-pane{:role => "tabpanel"}
+          =render partial: 'profile_bank_details'
+        #tab-upload-id.tab-pane{:role => "tabpanel"}
+          =render partial: 'profile_upload_id'
+        -##tab-bar-license.tab-pane{:role => "tabpanel"}
+        -#  =render partial: 'profile_bar_license'
+
+
+- content_for_once :js do
+  :javascript
+          $('.staff-application-nav-item').on('click', function() {
+            var genderFilled = $('.staff-gender').prop('checked');
+            if (!genderFilled) {
+              $('.gender-row').addClass('empty-staff-field')
+            }
+            var hasNi = $('.staff-ni').val().length > 0;
+            if (!hasNi) {
+              $('.staff-ni').addClass('empty-staff-field')
+            }
+            var hasNationality = $('.staff-nationality').val().length > 0;
+            if (!hasNationality) {
+              $('.staff-nationality').addClass('empty-staff-field')
+            }
+            var hasMobile = $('.staff-mobile').val().length > 0;
+            if (!hasMobile) {
+              $('.staff-mobile').addClass('empty-staff-field')
+            }
+            var hasAddress = $('.staff-address').val().length > 0;
+              if (!hasAddress) {
+                $('.staff-address').addClass('empty-staff-field')
+              }
+          });
+
+          $('.staff-details').on('click', function() {
+            $('.staff-mobile').removeClass('empty-staff-field');
+            $('.staff-nationality').removeClass('empty-staff-field');
+            $('.staff-ni').removeClass('empty-staff-field');
+            $('.gender-row').removeClass('empty-staff-field');
+            $('.staff-address').removeClass('empty-staff-field');
+          });
+
+          $('.sports-outdoor').on('click', function() {
+            $('#sports-outdoor-heading').removeClass('fl-icon--close-mark');
+            $('#sports-outdoor-heading').addClass('fl-icon--checkmark')
+          });
+
+          $('.bar-hospitality').on('click', function() {
+            $('#bar-hospitality-heading').removeClass('fl-icon--close-mark');
+            $('#bar-hospitality-heading').addClass('fl-icon--checkmark')
+          });
+
+          $('.festivals-concerts').on('click', function() {
+            $('#festivals-concerts-heading').removeClass('fl-icon--close-mark');
+            $('#festivals-concerts-heading').addClass('fl-icon--checkmark')
+          });
+
+          $('.merchandise-retail').on('click', function() {
+            $('#merchandise-retail-heading').removeClass('fl-icon--close-mark');
+            $('#merchandise-retail-heading').addClass('fl-icon--checkmark')
+          });
+
+          $('.promotional-street').on('click', function() {
+            $('#promotional-street-heading').removeClass('fl-icon--close-mark');
+            $('#promotional-street-heading').addClass('fl-icon--checkmark')
+          });
+
+          $('.reception-office').on('click', function() {
+            $('#reception-office-heading').removeClass('fl-icon--close-mark');
+            $('#reception-office-heading').addClass('fl-icon--checkmark')
+          })

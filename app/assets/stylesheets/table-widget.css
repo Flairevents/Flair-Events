@@ -1,0 +1,103 @@
+.table-widget {
+  font-family: arial, helvetica;
+  font-size: 10pt;
+  cursor: default;
+  margin: 0;
+  background: white;
+  border-spacing: 0;
+}
+
+.table-widget tbody {
+  background: transparent;
+}
+
+.table-widget td {
+  margin: 0;
+  vertical-align: middle;
+  padding: 2px;
+}
+
+.table-widget td textarea {
+  vertical-align: middle;
+}
+
+.tr-head, .tr-head td, .tr-head-nonstrict {
+  font-weight: bold;
+  background-color: #f9f9f9;
+  border-color: #eee;
+  text-align: left;
+  padding-left: 5px;
+}
+
+.table-widget tr td:first-child {
+  width: 20%;
+}
+
+.tr-even, .tr-even td, .tr-even-nonstrict {
+  background-color: #FFFFE6 /* Light Yellow */
+}
+
+.tr-odd, .tr-odd td, .tr-odd-nonstrict {
+  background-color: #EDFFE6 /* Light Green */
+}
+
+.tr-over, .tr-over td, .tr-over-nonstrict {
+  background-color: #e7e9f9;
+}
+
+.tr-sel, .tr-sel td, .tr-sel-nonstrict {
+  background-color: #d6e9f8;
+}
+
+.sorthdr {
+  cursor: pointer;
+}
+
+.sortind {
+  color: #ccc;
+  font-size: 9px;
+  padding-left: 6px; /* do not chage - see table.js */
+}
+
+.table-widget .th {
+  border: 1px solid #eee;
+  padding: 6px;
+}
+
+.th-webkit td, .th-webkit-nonstrict {
+  background-color: #fff;
+  border: 1px solid #eee;
+  padding: 6px;
+}
+
+.td-freeze-rightmost {
+  border-right-width: 4px;
+}
+
+.table-widget .td {
+  border: 1px solid #eee;
+}
+
+.td-boolean {
+  text-align: center;
+  font-family: Arial Unicode MS, Arial, Helvetica;
+}
+
+.td-center {
+  text-align: center;
+}
+
+.td-number {
+  text-align: right;
+  white-space: nowrap;
+}
+
+.seq {
+  text-align: right;
+  color: #666;
+}
+
+.div-page {
+  margin: 2px 0 0 0;
+  padding: 0;
+}

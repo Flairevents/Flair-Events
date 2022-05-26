@@ -1,0 +1,51 @@
+<% sample_pic_class    = '.passport-pic-popup'    if sample_pic_class.nil? %>
+<% sample_front_class  = '.passport-front-popup'  if sample_front_class.nil? %>
+<% sample_expiry_class = '.passport-expiry-popup' if sample_expiry_class.nil? %>
+<% sample_number_class = '.passport-number-popup' if sample_number_class.nil? %>
+
+<div class="v2-mobile-upload-label">
+  Picture Page
+  <% if sample_pic_class %>
+    <a class="v2-help" onclick="$('<%= sample_pic_class %>').show()" style='margin-left: 6px;'>
+      <i class="glyphicon glyphicon-question-sign"></i>
+    </a>
+  <% end %>
+</div>
+<div class="d-flex flex-row bd-highlight">
+  <div class="v2-profile-identification-passport-inputs d-flex flex-row bd-highlight">
+    <div class="v2-upload-file-button" id='v2-identification-upload-picture-page'>Upload File</div>
+    <div class="v2-upload-file-content" id='v2-identification-upload-picture-page-content'>Picture Page (.jpg, .png)</div>
+  </div>
+  <%= file_field_tag :picture_page, required: true, class: "file-field-1 form-control", accept: @accepted_images, style: 'display: block; position: absolute;left: 0;opacity: 0;z-index: -1;'%>
+</div>
+<br>
+<div class="v2-mobile-upload-label">
+  Front Cover
+  <% if sample_front_class %>
+    <a class="v2-help" onclick="$('<%= sample_front_class %>').show()"  style='margin-left: 6px;'>
+      <i class="glyphicon glyphicon-question-sign"></i>
+    </a>
+  <% end %>
+</div>
+<div class="d-flex flex-row bd-highlight">
+  <div class="v2-profile-identification-passport-inputs d-flex flex-row bd-highlight">
+    <div class="v2-upload-file-button" id='v2-identification-upload-front-cover'>Upload File</div>
+    <div class="v2-upload-file-content" id='v2-identification-upload-front-cover-content'>Front Cover (.jpg, .png)</div>
+  </div>
+  <%= file_field_tag :front_cover,required: true, class: "file-field-2 form-control", style: 'display: block; position: absolute; opacity: 0;z-index: -1;  right: 0; width: fit-content;', accept: @accepted_images %>
+</div>
+<br>
+
+<div class="v2-mobile-upload-label">Expiry Date</div>
+<%= date_field_tag :id_expiry, @prospect.id_expiry, required: true, class: "form-control v2-profile-identification-passport-text-inputs v2-inputs"  %>
+<br>
+<div class="v2-mobile-upload-label">
+  Passport Number
+  <% if sample_number_class %>
+    <a class="v2-help" onclick="$('<%= sample_number_class %>').show()"  style='margin-left: 6px;'>
+      <i class="glyphicon glyphicon-question-sign"></i>
+    </a>
+  <% end %>
+</div>
+<%= text_field_tag :id_no, nil, class: "date-check form-control v2-profile-identification-passport-text-inputs v2-inputs", placeholder: 'Passport Number', autocomplete: "off" %>
+<br>

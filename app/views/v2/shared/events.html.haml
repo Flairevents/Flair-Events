@@ -1,0 +1,160 @@
+- content_for :head do
+  %title Flexible rewarding jobs throughout the UK
+  %meta{ name: "description", content: "The one-stop shop for all our currently-available flexible staffing positions. We have flexible jobs of all kinds - and over the country, too!"}
+= javascript_include_tag "v2-events"
+.public.events{style: 'background: none;'}
+  = render :partial => 'v2/shared/nav'
+  .content
+    .content-inner
+      .map-bg
+      .v2-jobboard-header-container
+      .row
+        .center
+          .v2-search-apply
+            Search. Apply.
+            .v2-work Work
+          .v2-search-job
+            - keyword = @keyword.present? ? @keyword : ''
+            - region = @region.present? ? @region : ''
+            #flair_url{url: Flair::Application.config.base_https_url, style: 'display: none;'}
+            = form_for "/events", method: 'GET', html: { class: 'd-flex justify-content-center' }  do |f|
+              %input#keywordSearch.v2-job-keyword{placeholder: "Keyword, Jobs, Skills", name: "keyword", value: keyword, autocomplete: "off"}
+              = select_tag 'region', options_for_select(@regions.unshift('All'), region), class: ' v2-job-region', id: 'citySearch', include_blank: 'Select Region'
+              %input#selectedCategory{type: :hidden, name: "category", value: @category.present? ? @category : 'All'}
+              %button#searchBtn.v2-find-jobs.ml-5 FIND JOBS
+          - public_events_jobs = Event.where(status: ["OPEN", "HAPPENING"]).map{|event| event.jobs.all }.flatten
+          - no_of_jobs = public_events_jobs.map{|job| job.number_of_positions }.compact.sum
+          %div{style: "display: none;", show_event_id: "#{@show_event}", id: "show_event_id", mobile: "false"}
+          .v2-search-additional{style: "padding-bottom: 0;#{no_of_jobs > 200 ? '' : 'visibility:hidden;'}"}
+            .job-detail= no_of_jobs
+            Jobs across our industries
+          %ul.v2-job-nav.d-flex.justify-content-center{style: 'margin-top: 30px;'}
+            - categories = EventCategory.where.not(name: "Concert").sort().pluck(:name)
+            - categories.each do |category|
+              %li{category_name: category, "data-csd" => @category, id: "job-board-#{category}", class: 'filter_events'}
+                %a(href="#{@prospect ? "/staff" : ""}/events?category=#{category}&keyword=#{keyword}&region=#{region}")
+                  - if @category.present? && @category.titleize == category
+                    %img.unselected.hide{src: asset_path("v2/job_type/job-#{category.downcase}.png")}
+                    %img.selected{src: asset_path("v2/job_type/job-#{category.downcase}-selected.png")}
+                  - else
+                    %img.unselected{src: asset_path("v2/job_type/job-#{category.downcase}.png")}
+                    %img.selected.hide{src: asset_path("v2/job_type/job-#{category.downcase}-selected.png")}
+                  %span=category.upcase
+                  .three-dots.d-flex.justify-content-center{class: @category.present? && @category.titleize == category ? '' : 'hide'}
+                    .v2-circle
+                    .v2-circle.ml-10
+                    .v2-circle.ml-10
+      .v2-profile-applications-content-layer-1{style:'top:590px;z-index:-2;'}
+      .v2-profile-applications-content-layer-2{style:'top:590px;z-index:-2;'}
+      .v2-profile-applications-content-layer-3{style:'top:590px;'}
+      .v2-profile-applications-content-layer-4{style:'top:590px;'}
+      .row.v2-job-content.mt-20#v2-events-bg-indicator
+        .center.d-flex.justify-content-center.p-0
+          %div{style: "min-width: 1012px;"}
+            .title-content.align-items-center.job-board-header.mb-20
+              - if keyword != '' || region != ''
+                %button.btn-all-jobs All Jobs
+              - else
+                %button.btn-all-jobs.hide All Jobs
+              .latest-jobs-text
+                - if keyword != '' && region != ''
+                  = "#{keyword.split(' ').first}, #{region.split(' ').first} Jobs"
+                - elsif keyword != ''
+                  = "#{keyword.split(' ').first} Jobs"
+                - elsif region != ''
+                  = "#{region.split(' ').first} Jobs"
+                - else
+                  All Available Jobs
+              .pagination-job-board-header
+                = paginate @events
+            .separator.separator-green.mb-20
+            = render :partial => 'v2/shared/events_job_list'
+      .row.v2-job-content
+        .column.large-7.center.p-0
+          .row.bottom-more-info.d-flex.justify-content-center
+            .d-flex.flex-column.you-need.mt-5
+            .d-flex.flex-column.work-with-flair To work with flair you need:
+            .d-flex.flex-wrap.justify-content-center.align-items-center.mt-20
+              .d-flex.flex-row.mr-50
+                %img{src: asset_path("v2/stamp.png")}
+                %label Proof of Right to Work
+              .d-flex.flex-row.mr-50
+                %img{src: asset_path("v2/bank-bldg.png")}
+                %label UK Bank Account
+              .d-flex.flex-row
+                %img{src: asset_path("v2/thumbsup.png")}
+                %label Reliability
+            .d-flex.flex-column.justify-content-center.mt-30.mb-40
+              Flair has always been an equal opportunity employer. As part of our commitment to fight for equality, we work to ensure a fair and consistent interview process. We celebrate diversity and we are committed to an inclusive work environment
+
+  .job-board-footer
+    = render :partial => 'v2/application/footer'
+  /   .content-inner
+  /     .row.expanded.row--collapse.full-screen
+  /       .column.small-12.large-6.hidden-xs.hidden-sm.flex.flex--vert
+  /         -#.map-title.dark-green
+  /         -#  Check out events near you:
+  /         .region-map.field.flex--fill-rest.flex.tab-content
+  /           = render partial: 'shared/region_map'
+  /       .column.small-12.large-6.flex.flex--vert
+  /         .events-list.field-light.flex--fill-rest{style: 'background-color: #a3d39c;'}
+  /           -#%ul.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll.staff-nav{:role => "tablist", style: 'height: 55px;'}
+  /           -#  %li.active{:role => "tablist"}
+  /           -#    %a{"aria-controls" => "tab-all", "data-toggle" => "tab", role: "tab", category: 'All'} All
+  /           -#  %li{:role => "tablist"}
+  /           -#    %a{"aria-controls" => "tab-sports", "data-toggle" => "tab", role: "tab", category: 'Sport'} Sports
+  /           -#  %li{:role => "tablist"}
+  /           -#    %a{"aria-controls" => "tab-music", "data-toggle" => "tab", role: "tab", category: 'Music'} Music
+  /           -#  %li{:role => "tablist"}
+  /           -#    %a{"aria-controls" => "tab-promo", "data-toggle" => "tab", role: "tab", category: 'Promo'} Promo
+  /           -#  %li{:role => "tablist"}
+  /           -#    %a{"aria-controls" => "tab-hospitality", "data-toggle" => "tab", role: "tab", category: 'Hospitality'} Hospitality
+  /             -#%li{:role => "tablist"}
+  /               -#%a{"aria-controls" => "tab-ongoing", "data-toggle" => "tab", role: "tab", category: 'Ongoing'} Ongoing
+  /           -##region-filter.visible-sm.visible-xs
+  /           -#  %label
+  /           -#    Filter By Region &nbsp;
+  /           -#  %select.region-filter-dropdown
+  /           -#    %option.form-control{:value => "All_UK"} All UK
+  /           -#    %option.form-control{:value => "Wales"} Wales
+  /           -#    %option.form-control{:value => "Ireland"} Ireland
+  /           -#    %option.form-control{:value => "Scotland"} Scotland
+  /           -#    %option.form-control{:value => "East_Midlands"} East Midlands
+  /           -#    %option.form-control{:value => "London"} London
+  /           -#    %option.form-control{:value => "Southwest"} Southwest
+  /           -#    %option.form-control{:value => "Yorkshire"} Yorkshire Humberside
+  /           -#    %option.form-control{:value => "Northeast"} Northeast
+  /           -#    %option.form-control{:value => "Northwest"} Northwest
+  /           -#    %option.form-control{:value => "Midlands"} Midlands
+  /           -#    %option.form-control{:value => "Southeast"} Southeast
+  /           -#    %option.form-control{:value => "Eastern"} East Anglia
+  /           -#.tab-content{:style => "height: calc(100vh - 160px); overflow-y: scroll; -webkit-overflow-scrolling: touch; height: 90%;"}
+  /           -#  #tab-all.tab-pane.active{:role => "tabpanel"}
+  /           #event-category{category: 'All'}
+  /           #event-region{region: 'All'}
+  /           .event-list-all#event-list-all
+  /             = render partial: 'shared/event_list', locals: {new_events: @new_events, events: @events, job_groups: @job_groups}
+  /             -#.temporary-block{style: 'padding: 30px; width: 90%;'}
+  /             -#  %h2.job-board-top-heading A Temporary Measure
+  /             -#  %h4.diversity-flair-people{style: 'margin-top: 0px;'} We are removing 2020 event job posts.
+  /             -#  %p.job-board-paragraph-text Once further clarification and worker safety reassurances are provided, event job openings will be re-advertised. If you are already a part of the Flair team, all your existing work bookings remain on your profile and you will be updated directly.
+  /             -#
+  /             -#  %h2.mt2.job-board-top-heading{style:'margin-bottom: 10px;'} Diversity of Flair's People
+  /             -#  -if current_user && current_user.is_a?(Prospect)
+  /             -#    %p.job-board-paragraph-text As industries slowly reopen, we are reaching out to different sectors of the job market to then contact you direct by matching job categories of interest.
+  /             -#  -else
+  /             -#    %p.job-board-paragraph-text As industries slowly reopen, we are reaching out to different sectors of the job market. Events have always attached workers from many backgrounds, offering a vibrant array of skills and experiences. Our database is no exception to this rule, so if you're seeking flexible work opportunities, register today.
+  /             -#    .mt3
+  /             -#    .yellow-button{style: 'margin: 0px; border-radius: 18px;'}
+  /             -#      %a.pop-up-request-quote{href: '/register'}
+  /             -#        %p.bottom-button
+  /             -#          %b{style: 'color: #005949'} Join Us
+  /             -#  - unless current_user && current_user.is_a?(Prospect)
+  /             -#    .mt3
+  /             -#      %p.job-board-paragraph-text Flair Team login to check out your new application form. Advance your profile by selecting job categories of interest to receive all the latest job notifications.
+  /             -#    .mt1
+  /             -#    .yellow-button{style: 'margin: 0px; border-radius: 18px;'}
+  /             -#      %a.pop-up-request-quote{href: '/login'}
+  /             -#        %p.bottom-button
+  /             -#          %b{style: 'color: #005949'} Login
+  / .content-after

@@ -1,0 +1,66 @@
+/**
+ * $TRAINING
+ */
+
+.fl-training__step:not(.active) {
+  display: none;
+}
+
+.fl-training__notice:not(.active) {
+  visibility: hidden;
+  position: absolute;
+}
+
+img.centered {
+  margin: 0 auto;
+}
+
+div.person {
+  margin: 10px;
+}
+
+.ageslot {
+  display: inline-block;
+  height: 150px;
+  width: 150px;
+  border: 1px dashed green;
+  background: rgba(0,0,0,0.2);
+  padding: 0px;
+}
+
+.personpicture {
+  display: inline-block;
+  vertical-align: baseline;
+}
+
+div#agelist {
+  border: 1px dashed green;
+  width: 100%;
+  padding: 0px;
+}
+
+ul#bar {
+}
+
+ul.wrong {
+  border: 2px solid red;
+  background: rgba(200,0,0,0.6);
+}
+
+li.age, div.hiddenage {
+  list-style: none;
+  font-size: 3.5em;
+  font-weight: bold;
+  min-height: 2em;
+  min-width: 2em;
+  margin: 10px;
+  border: 1px solid black;
+  background: rgba(255,255,255,0.5);
+  box-shadow: 0px 3px 5px rgba(0,0,0,0.4);
+  float: left;
+}
+
+div.hiddenage {
+  color: white;
+  background-color: #7caf68;
+}

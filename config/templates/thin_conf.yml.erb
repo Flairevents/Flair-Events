@@ -1,0 +1,5 @@
+servers: <%= fetch(:workers) %>
+port: <%= fetch(:port) %>
+environment: '<%= fetch(:rails_env) %>'
+onebyone: true
+daemonize: true

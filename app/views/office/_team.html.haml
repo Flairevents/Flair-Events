@@ -1,0 +1,250 @@
+.command-bar
+  .btn-toolbar.list-view-only
+    .btn-group
+      %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} Map
+      %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+      %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+      %button.btn.btn-default.command-link.command-assign.disabled{:"data-command" => 'assignEvents'} Assign
+      .btn-group
+        %button.btn.btn-default.dropdown-toggle.command-link.command-ids.disabled{:"data-toggle" => 'dropdown'}
+          Scans
+          %span.caret
+        %ul.dropdown-menu.scans-dropdown
+          %li
+            %a.command-view-id View ID
+          %li
+            %a.command-upload-id Upload ID
+          %li.divider
+          %li
+            %a.command-upload-photo Upload Photo
+          %li.divider
+          %li
+            %a.command-view-bar-license View Bar Licence
+          %li
+            %a.command-upload-bar-license Upload Bar Licence
+          %li.divider
+          %li
+            %a.command-view-dbs View DBS
+          %li
+            %a.command-upload-dbs Upload DBS
+      %button.btn.btn-default.command-link{:"data-command" => 'clearFilters'} Clear Filters
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+        Bulk
+        %span.caret
+      %ul.dropdown-menu.id-dropdown
+        %li
+          %a.command-link{:"data-command" => 'bulkSMS'} Marketing SMS
+        %li
+          %a.command-link{:"data-command" => 'bulkEmail'} Marketing E-mail
+        %li
+          %a.command-link{:"data-command" => 'bulkEmailGrouped'} Marketing E-mail (Grouped)
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle.command-link.command-report{:"data-toggle" => 'dropdown'}
+        Report
+        %span.caret
+      %ul.dropdown-menu.report-dropdown
+        - Report.where(table: 'prospects').sort_by(&:print_name).each do |report|
+          %li
+            %a{href: '#', :"data-report-name" => report.name}= report.print_name
+    .btn-group
+      %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+        Admin
+        %span.caret
+      %ul.dropdown-menu.id-dropdown
+        %li
+          %a.command-password-reset-link Password Reset Link
+        %li
+          %a.command-unlock-account Unlock Account
+  .btn-group.map-view-only{style: 'display:none'}
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} List
+    %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+
+  .map-view-only{style: 'float:right; display:none'}
+    Autozoom
+    %input.autozoom{type: 'checkbox'}
+  %div{style: 'clear:both'}
+
+%hr
+.filter-bar-container
+  %form.filters.filter-bar{style: 'float:left'}
+    %table
+      %tr
+        %th.header-symbol ☑
+        %th Name
+        %th Email/Phone
+        %th Skills
+        %th Marketing
+        %th Size
+        %th Manager
+        %th Requests?
+        %th Gigs
+        %th No-Gig
+        %th Distance
+        %th Region
+        %th Status
+        %th Active
+        %th Years
+        %th AvgR
+        %th Payroll
+        %th Admin
+        %th Profile
+        %th Qual
+        %th Age
+        %th Live?
+        %th MngLvl
+        %th City
+        %th Coms
+        %th Pattern
+        %th CityOfStudy
+      %tr
+        %td= _select :selected_team, options_for_select(([['',''],['Y','true'],['N','false']])), class: 'form-control'
+        %td{style: 'min-width: 200px;'}= _text_field :search, size: 24, class: 'form-control'
+        %td{style: 'min-width: 200px;'}= _text_field :search_email, size: 24, class: 'form-control'
+        %td= _select :prospect_skills, options_for_select([['',''],['Sport','has_sports'],['Hospitality','has_hospitality'],['Bar','has_bar'],['Promo','has_promotional'],['Retail','has_retail'],['Office','has_office'],['Festivals','has_festivals'],['Logistics','has_warehouse'],['Bar Manager','bar_manager'],['Staff Leader','staff_leadership'],['Festival & Events Bar Manager','festival_event_bar_manager'],['Event Production','event_production']]), class: 'form-control'
+        %td= _select :prospect_marketing, options_for_select([['',''],['Sport','has_sports'],['Hospitality','has_hospitality'],['Bar','has_bar'],['Promo','has_promotional'],['Retail','has_retail'],['Office','has_office'],['Festivals','has_festivals'],['Logistics','has_warehouse'],['Bar Manager','bar_manager'],['Staff Leader','staff_leadership'],['Festival & Events Bar Manager','festival_event_bar_manager'],['Event Production','event_production']]), class: 'form-control'
+        %td= _select :team_size, options_for_select(([['',''],['Big','BIG'],['Majority','ALL'],['BeSp', 'Bespoke']])), class: 'form-control'
+        %td= _select '', options_for_select(([['','']])), class: 'form-control'
+        %td= _select :has_gig_requests, options_for_select([['',''], ['Requests','REQUESTS'], ['Spare','SPARE']]), class: 'form-control'
+        %td= _select :gig, options_for_select([['','']]), class: 'form-control'
+        %td= _select :no_gig, options_for_select([['','']]), class: 'form-control'
+        %td= _select :distance, options_for_select([['','']]), class: 'form-control'
+        %td= _select :region_name, ('<option value="" selected="selected"></option>'+options_from_collection_for_select(Region.all.sort_by(&:name), :name, :name)).html_safe, class: 'form-control'
+        %td= _select :status, options_for_select([['Employee','EMPLOYEE'],['Has-Been','HAS_BEEN'],['Sleeper','SLEEPER'],['Ignored', 'IGNORED'],['Deactivated','DEACTIVATED'],['External','EXTERNAL']], 'EMPLOYEE'), class: 'form-control'
+        %td= _select :active_team, options_for_select([['',''],['Yes','Y'],['No','N']]), class: 'form-control'
+        %td= _select :active_in_year, options_for_select([['',''],['This year','THIS_YEAR'],['Last year','LAST_YEAR'],['Both last and this year','THIS_OR_LAST_YEAR']]), class: 'form-control'
+        %td= _select :avg_rating, options_for_select([['',''],['None','None'],['5',5],['4.5+', 4.5],['4.1+',4.1],['4+',4],['3.5+',3.5],['3+',3]]), class: 'form-control'
+        %td= _select :payroll_status, options_for_select([['',''], ['This Week','THIS_WEEK'], ['Next Week','NEXT_WEEK'], ['This and/or Next Week', 'THIS_OR_NEXT_WEEK']]), class: 'form-control'
+        %td= _select :team_view_admin, options_for_select([['',''], ['Has Large Photo', 'LARGE'],['Has Photo','true'],['Has Not Photo','false'], ['Has No Bank','bank_false'], ['Has Not NI Number','ni_false'], ['Has No Tax Choice','tax_false'], ['Has No Id','id_false']]), class: 'form-control'
+        %td= _select :completed_training, options_for_select([['',''], ['WE','training_ethics'], ['CS','training_customer_service'], ['HS','training_health_safety'], ['Sport','training_sports'], ['Bar','training_bar_hospitality'], ['NONE','NONE'], ['NO WE','NO-training_ethics'], ['NO CS','NO-training_customer_service'], ['NO HS','NO-training_health_safety'], ['NO Sport','NO-training_sports'], ['NO Bar','NO-training_bar_hospitality'], ['Male', 'M'], ['Female', 'F']]), class: 'form-control'
+        %td= _select :fact_team, options_for_select([['',''],['SALPS','SCLPS_2_HR_TRAINING'],['SS','SCREEN_SHOT_OF_SCLPS'],['Scot PL','SCOTTISH_PERSONAL_LICENSE'],['Eng PL','ENGLISH_PERSONAL_LICENSE'],['FH2','qualification_food_health_2'],['No FH2','no_qualification_food_health_2'],['Basic DBS', 'qualification_dbs_basic'], ['E DBS','qualification_dbs_enhanced'], ['E DBS B', 'qualification_dbs_enhanced_barred'], ['No DBS','no_qualification_dbs']]), class: 'form-control'
+        %td= _select :age, options_for_select([['',''],['21+','>=21'],['18+','>=18'],['<21','<21'],['<18','<18']]), name: 'age', class: 'form-control'
+        %td= _select :is_live, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td= _select :manager_level, options_for_select([['',''],['Top Volume','Level 1'],['Medium Volume','Level 2'],['Flair TL','Level 3'],['Bar TL','Level 4']]), class: 'form-control'
+        %td= _select :city, ('<option value="" selected="selected"></option>'+options_from_collection_for_select(Prospect.all.select(:city).where.not(city: nil, city: '', status: prospectStatus).distinct.sort_by(&:city), :city, :city)).html_safe, class: 'form-control'
+        %td= _select :coms, options_for_select([['',''],['Email','email'],['Text','text'],['Tele','tele'],['W-App', 'w_app']]), class: 'form-control'
+        %td= _select :patterns, options_for_select([['',''],['Wkdays','weekdays'],['Wkends','weekends'],['Day','day'],['Evening', 'evening']]), class: 'form-control'
+        %td= _select :city_of_study, ('<option value="" selected="selected"></option>'+options_from_collection_for_select(Prospect.city_of_study('EMPLOYEE'), :city_of_study, :city_of_study)).html_safe, class: 'form-control'
+
+%div{style: 'clear:both'}
+
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list.record-list-team{tabindex: '0'}
+
+  .report-download-dialog.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Download Report
+    .modal-body
+      %a.download-xlsx{download: true}>
+        %img{src: image_path('xlsx-icon.png'), width: 128, height: 128, alt: 'Excel'}>
+      %a.download-csv{download: true}>
+        %img{src: image_path('csv-icon.png'), width: 128, height: 128, alt: 'CSV'}>
+      %a.download-pdf{download: true}>
+        %img{src: image_path('pdf-icon.png'), width: 128, height: 128, alt: 'PDF'}>
+    .modal-footer
+      %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel
+
+  .scanned-id-dialog.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Scanned IDs
+    .modal-body
+    .modal-footer
+      %a.btn.btn-default.approve-id-btn Approve
+      %a.btn.btn-default.reject-id-btn Reject
+      %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Close
+
+  .scanned-dbs-dialog.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Scanned DBS
+    .modal-body
+
+  .scanned-bar-license-dialog.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Scanned Bar Licenses
+    .modal-body
+
+  .multi-assigner.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Assign Events
+    .modal-body
+    .modal-footer
+      .command-bar
+        %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel
+        %button.btn.btn-default.command-link{:"data-command" => 'saveAndCloseAssigner'} Save & Close
+
+  .bulk-sms-dialog.modal.fade{style: 'display:none'}
+    .modal-header
+      %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+        &times;
+      %h3 Bulk SMS
+    .modal-body
+      .content
+    .modal-footer
+      %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Close
+
+.map-view{style: 'display: none'}
+  .map
+
+= slideover_form 'record-new', partial: 'prospect_form', locals: { form_id: 'team_new_prospect', prospect: Prospect.new }
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    .slideover-tabs
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#prospect-details', :"data-toggle" => 'tab'} Details
+        %li
+          %a{href: '#prospect-profile', :"data-toggle" => 'tab'} Profile
+        %li
+          %a.prospect-events-tab{href: '#prospect-events', :"data-toggle" => 'tab'} Events
+        %li
+          %a.prospect-future-events-tab{href: '#prospect-future-events', :"data-toggle" => 'tab'} Future Events
+        %li
+          %a.prospect-requests-tab{href: '#prospect-requests', :"data-toggle" => 'tab'} Gig Requests
+        %li
+          %a{href: '#prospect-changes', :"data-toggle" => 'tab'} Change Log
+        %li
+          %a.prospect-action-taken-tab{href: '#prospect-action-takens', :"data-toggle" => 'tab'} Action Logs
+        %li
+          %a{href: '#prospect-timesheet-notes', :"data-toggle" => 'tab'} Timesheet Notes
+    .slideover-tab-panes.tab-content
+      .tab-pane.active#prospect-details
+        = render partial: 'prospect_form', locals: { form_id: 'team_edit_prospect', prospect: Prospect.new }
+      .tab-pane.prospect-events-tab-pane#prospect-events
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane.prospect-future-events-tab-pane#prospect-future-events
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane.prospect-requests-tab-pane#prospect-requests
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+        .btn.btn-default.hire-btn Hire
+        .btn.btn-default.reject-btn Reject
+      .tab-pane.prospect-action-taken-tab-pane#prospect-action-takens
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane#prospect-profile
+      .tab-pane#prospect-changes
+      .tab-pane#prospect-timesheet-notes

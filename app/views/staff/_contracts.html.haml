@@ -1,0 +1,34 @@
+%ul.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll.staff-nav.mt1{:role => "tablist", style: 'background-color: unset'}
+  %li.active{:role => "contracts"}
+    %a{"aria-controls" => "tab-upcoming-contracts", "data-toggle" => "tab", :href => "#tab-upcoming-contracts", :role => "tab", style: 'width: 180px; color: #005949'}
+      Hired
+      -#-if @confirmed_events.length > 0
+      -#  .badge#badge-upcoming-contracts= @confirmed_events.length
+      -#- else
+      -#  .badge#badge-upcoming-contracts{style: 'display:none;'}
+  %li{:role => "contracts"}
+    %a{"aria-controls" => "tab-pending-contracts", "data-toggle" => "tab", :href => "#tab-pending-contracts", :role => "tab", style: 'width: 180px; color: #005949'}
+      Applied
+      -#-if @pending_events.length > 0
+      -#  .badge#badge-pending-contracts= @pending_events.length{}
+      -#- else
+      -#  .badge#badge-pending-contracts{style: 'display:none;'}
+  -#%li{:role => "contracts"}
+    %a{"aria-controls" => "tab-missed-contracts", "data-toggle" => "tab", :href => "#tab-work-history", :role => "tab"}
+      Missed Contracts
+      .badge 1
+  %li{:role => "contracts"}
+    %a{"aria-controls" => "tab-work-history", "data-toggle" => "tab", :href => "#tab-work-history", :role => "tab", style: 'width: 180px; color: #005949'} Work History
+.tab-content.field{style: 'background-color: unset'}
+  #tab-upcoming-contracts.tab-pane.active.pl1.pr1{:role => "tabpanel"}
+    -if @confirmed_events.length > 0
+      =render partial: 'shared/event_list', locals: {events: @confirmed_events, new_events: nil}
+  #tab-pending-contracts.tab-pane.pl1.pr1{:role => "tabpanel"}
+    -if @pending_events.length > 0
+      =render partial: 'shared/event_list', locals: {events: @pending_events, new_events: nil}
+  #tab-work-history.tab-pane{:role => "tabpanel"}
+    - unless @past_gigs.empty?
+      = render partial: 'contracts_my_event_history'
+  -# #tab-missed-contracts.tab-pane.p2{:role => "tabpanel"}
+  -#.text-center.pb1.pt1
+  -#  %a.white-text.btn.btn-default{href: '/staff/events'} Select Events Here!

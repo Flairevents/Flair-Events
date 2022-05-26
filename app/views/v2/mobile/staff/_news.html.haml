@@ -1,0 +1,12 @@
+-if @news_items.length > 4 then classes = ["list-expandable", "list-expandable--show-4"] else classes = [] end
+%ul.flair-news-list.accordion-list{class: classes}
+  -@news_items.each do |news|
+    %li.flair-news-list__item.accordion-item
+      .header
+        %a
+          .flair-news-list__item__image
+            %img{src: news.thumbnail_url}
+          .flair-news-list__item__title
+            =news.title
+      .accordion-item__expanded
+        =news.contents.html_safe

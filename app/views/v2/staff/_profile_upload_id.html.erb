@@ -1,0 +1,67 @@
+<div class="v2-upload-id">
+  <% if @prospect.lacking_needed_share_code? %>
+    <div class="v2-profile-identification-title">Update your "Right to Work" evidence</div>
+    <div class="v2-profile-identification-birthcert-content">
+      <p>The "Right to Work" has changed and gone digital for your nationality.</p>
+      <p>You already sent us your passport, but we now need your Share Code.</p>
+    </div>
+    <div class="id_type">
+      <%= render partial: @id_view %>
+  </div>
+  <% elsif @prospect.id_submitted? %>
+    <div class="v2-interview-dates-content" style="margin-bottom:12vh; text-align:center;">
+      <% if @pending_id_approval %>
+        <p>
+          <%= "Your ID has been submitted and is pending approval. Submitted on #{@prospect.id_submitted_date ? @prospect.id_submitted_date.strftime('%b %d, %Y') : ""}" %>
+        </p>
+      <% else %>
+        <p>
+          <%= "Your ID was approved on #{@prospect.id_sighted.try(:to_print)}. Flair will securely store your ID evidence for the duration of your employment and a further 2 years in compliance with the Immigration, Asylum and Nationality Act of 2006. If you have any working time limits we are required to re-check your documents every 12 months." %>
+        </p>
+      <% end %>
+    </div>
+  <% else %>
+    <div>
+      <div class="v2-profile-identification-content text-center">*Please bring your uploaded originals to your first Flair contract*</div>
+      <div class="v2-profile-identification-content text-center" style='margin-bottom: 24px;'>Basic Standard photo ID to all sequential events.</div>
+    </div>
+    <div class="v2-profile-identification-title">Confirm your nationality:</div>
+
+    <div class="d-flex" style='margin-bottom: 29px'>
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= radio_button_tag :nationality_id, get_id_by_name('United Kingdom'), @prospect.nationality_id == get_id_by_name('United Kingdom'), class: 'form-check-input', id: 'nationality_united_kingdom', onchange: 'v2_nationality_changed()', disabled: @prospect.id_submitted? || @prospect.id_sighted %>
+        <label class="form-check-label" for="nationality_united_kingdom">United Kingdom</label>
+      </div>
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= radio_button_tag :nationality_id, get_id_by_name('Ireland'), @prospect.nationality_id == get_id_by_name('Ireland'), class: 'form-check-input', id: 'nationality_ireland', onchange: 'v2_nationality_changed()', disabled: @prospect.id_submitted? || @prospect.id_sighted %>
+        <label for="nationality_ireland" class="form-check-label">Republic of Ireland</label>
+      </div>
+      <div class="form-check v2-profile-radio v2-application-forms-radio-buttons">
+        <%= radio_button_tag :nationality_id, 1, !main_groups_id.include?(@prospect.nationality_id), class: 'form-check-input', id: 'nationality_others', onchange: 'v2_nationality_changed();', disabled: @prospect.id_submitted? || @prospect.id_sighted %>
+        <label class="form-check-label" for="nationality_others">Other</label>
+      </div>
+    </div>
+
+    <div class="collapse" id="collapse">
+      <%= select_tag(:nationality_id, options_for_select(other_nationality_options, @prospect.nationality_id || ''), {onchange: "v2_nationality_changed();", class: "form-control v2-profile-identification-nationality", disabled: @prospect.id_submitted? || @prospect.id_sighted}) %>
+    </div>
+
+    <div class="id_type">
+      <%= render partial: @id_view %>
+    </div>
+  <% end %>
+</div>
+
+<% content_for :js do %>
+  <script>
+    window.onload = function () { onLoadCollapse() }
+
+    function onLoadCollapse() {
+      if($('#nationality_others').prop('checked')) {
+        $('#collapse').collapse('show')
+      } else {
+        $('#collapse').collapse('hide')
+      }
+    }
+  </script>
+<% end %>

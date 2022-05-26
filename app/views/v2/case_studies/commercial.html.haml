@@ -1,0 +1,70 @@
+- content_for :head do
+  %title The Lowry flexible call centre staffing
+  %meta{ name: "description", content: "Flair supplied 'top-up' crew to meet spikes in demand. Key to our success was local flexible people who wanted to accept the unpredictable nature of the contract and willing to learn complex booking systems, standards, and protocols. Many workers became permanent, and Flair delivered every time."}
+.public.case-study.commercial
+  = render :partial => 'v2/shared/nav'
+  .content
+    .container-fluid.px-0.d-flex
+      .case-header-bg
+      .v2-case-industry-1.d-flex.align-items-center
+        .container.px-0
+          .case-study Case Studies
+          %h3 COMMERCIAL
+    .v2-case-industry-2.d-flex.align-items-center
+      .container.px-0.d-flex
+        .d-flex.flex-inline
+          .border-line
+          .d-flex.flex-column.ml-05
+            %h5 THE LOWRY
+            %h3 Scale up operations with flexible staffing.
+    .v2-case-industry-3.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column.mr1
+          %h2 Key Challenge
+          %p.mt2 Flexibility. Call centres have notoriously high churn rates due partly to the unpredictable nature of their demands. Our client wanted to avoid this by finding a staffing partner to supply the required numbers without the lengthy engagement process.
+        .cs-image.d-flex.commercial
+    .v2-case-industry-4.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-around
+        .cs-image.d-flex.commercial.mr1
+        .d-flex.flex-column
+          %h2 How we helped:
+          %p.mt2 The Lowry’s needs were very specific – they wanted reliable, responsible fast-learners who could quickly get to grips with their booking systems and software.
+          %p.mt1 It was also important that this new flexible workforce could confidently answer questions about the various shows and events they were selling tickets for, and that they would work seamlessly alongside existing teams. In short, the Lowry wanted several things that are sometimes difficult to find in call centre staff: tech skills, a personable nature, and a willingness to accept that work would come in sudden bursts, followed by quieter periods.
+          %p.mt1 We identified that the ideal candidates would first need to understand the highly flexible nature of the work. Once we'd sourced and placed the first wave of these, we liaised with them to glean more information about the exact nature of the work – information which we then used to recruit future candidates.
+          %p.mt1 It meant that the client was consistently supplied with exactly the kind of worker they needed; many of these people went on to form a core team that stayed with the Lowry for six whole months.
+    .v2-case-industry-5.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-around
+        .d-flex.flex-column
+          %h2 The Results
+          %p.mt2 Our client found a staffing partner that not only delivered skilled workers but who could be trusted to meet their requirements. Our people filled absentee gaps at the last minute, helped with planned bookings around Christmas and more.
+          .d-flex.flex-inline.align-items-center.mt1
+            .checkbox
+            %h5.ml-05 Outsourcing saved our client time and money.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Demonstrated constant flexibility.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Provided 7 day week account managers.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Every last-minute request filled.
+        .d-flex.flex-column
+          %h2.mb1 Case Studies
+          - ["Festivals & Events", "Hospitality", "Logistics", "Promotional", "Sports", "Commercial"].each do |f|
+            %a{ href: v2_case_industry_path(industry: f == "Festivals & Events" ? "events" : f.downcase) }
+              .d-flex.flex-inline.align-items-center
+                %i.fa.fa-caret-right
+                %h3.ml-05{ class: f.downcase == "commercial" ? 'active-study' : '' }=f
+    .v2-case-industry-6.d-flex.align-items-start.commercial
+      .container.px-0.d-flex.mt5
+        .d-flex.flex-column
+          %h1 Our job is to make our client's job easier.
+          %h1 Workforce solutions delivered with event expertise.
+          %h1 Tell us how can we help?
+          .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt1
+            %a{href: "/contact"}
+              %button.v2-home-staff-req-btn.join-team Chat with us today
+
+    .v2-home-bottom
+  = render :partial => 'v2/application/footer'

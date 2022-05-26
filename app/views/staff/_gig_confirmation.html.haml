@@ -1,0 +1,111 @@
+.gig-confirmation
+  .text-center
+    .h5 Confirmation
+    %p IF ONE MONTH AHEAD, SHOW THIS TEXT: As it may have been several weeks since you registered your interest, we would like to confirm that you are still keen to work this contract. Asking you to touch base really helps with everyone’s planning. Please review the latest information on this contract and we will keep you informed as the planning evolves.
+    %p IF ONE WEEK AHEAD, SHOW THIS TEXT: I have read all pre-event information for “title” “dates”, “venue” and happy to accept this contract know all the parameters of the job”.
+    .text-center.pt1
+      %span.fl-form__radio.pr2
+        <input required="required" type="radio" value="true" checked="checked" name="confirm[canattend]" id="confirm-can-attend">
+        <label for="confirm-can-attend">Yes I confirm I am working</label>
+      %span.fl-form__radio
+        <input required="required" type="radio" value="true" checked="checked" name="confirm[canattend]" id="confirm-cannot-attend">
+        <label for="confirm-cannot-attend">Cancel, Sorry unable to attend</label>
+    .h6.text-center.pt1 Please select your contract from below openings:
+    .row
+      .column.small-12.medium-3
+        .strong
+          Job Position
+        <select value="108" class="form-control" required="required" name="prospect[nationality_id]" id="prospect_nationality_id"><option value=""></option><option selected="selected" value="108">Race Crew</option></select>
+      .column.small-12.medium-3
+        .strong
+          Shift
+        <select value="108" class="form-control" required="required" name="prospect[nationality_id]" id="prospect_nationality_id"><option value=""></option><option selected="selected" value="108">16:00-23:00</option></select>
+      .column.small-12.medium-3
+        .strong
+          Location
+        <select value="108" class="form-control" required="required" name="prospect[nationality_id]" id="prospect_nationality_id"><option value=""></option><option selected="selected" value="108">Bag Drop</option></select>
+      .column.small-12.medium-3
+        .strong
+          Other
+        <select value="108" class="form-control" required="required" name="prospect[nationality_id]" id="prospect_nationality_id"><option value=""></option><option selected="selected" value="108">Race Crew</option></select>
+    .row.pt2
+      .column.small-12.medium-2
+        .h6.inline.mr2 Days Working:
+      .column.small-12.medium-10
+        .fl-form__checkbox.inline.mr1
+          <input id="date-all" name="date-all" type="checkbox" value="all">
+          <label for="date-all">All</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160215" name="date-20160215" type="checkbox" value="20160215">
+          <label for="date-20160215">Mon 15 Feb</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160216" name="date-20160216" type="checkbox" value="20160216">
+          <label for="date-20160216">Tue 16 Feb</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160217" name="date-20160217" type="checkbox" value="20160217">
+          <label for="date-20160217">Wed 17 Feb</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160218" name="date-20160218" type="checkbox" value="20160218">
+          <label for="date-20160218">Thu 18 Feb</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160219" name="date-20160219" type="checkbox" value="20160219">
+          <label for="date-20160219">Fri 19 Feb</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160220" name="date-20160220" type="checkbox" value="20160220">
+          <label for="date-20160220">Sat 20 Feb</label>
+        .fl-form__checkbox.inline.mr1
+          <input id="date-20160221" name="date-20160221" type="checkbox" value="20160221">
+          <label for="date-20160221">Sun 21 Feb</label>
+    .row.mt1
+      .column.small-12.medium-10
+        I can arrive on time, if traveling via public transport I have checked all the relevant details.
+      .column.small-12.medium-2
+        .fl-form__checkbox
+          <input id="arrive-on-time" name="arrive-on-time" type="checkbox" value="yes">
+          <label for="arrive-on-time">YES</label>
+    %hr
+    .h6 Question Time
+    .row
+      .column.small-12.medium-9
+        1) I am aware to be on site 30 mins before my first shift to sign in:
+      .column.small-12.medium-3
+        %span.fl-form__radio.pr2
+          <input type="radio" value="true" checked="checked" name="confirm[question1]" id="confirm-question-1-yes">
+          <label for="confirm-question-1-yes">Yes</label>
+        %span.fl-form__radio
+          <input type="radio" value="false" checked="checked" name="confirm[question1]" id="confirm-question-1-no">
+          <label for="confirm-question-1-no" onclick="alert('Please re-read information to confirm'); return false;">No</label>
+    .row
+      .column.small-12.medium-9
+        2) I am aware my uniform is formal dress with polished black shoes:
+      .column.small-12.medium-3
+        %span.fl-form__radio.pr2
+          <input type="radio" value="true" checked="checked" name="confirm[question2]" id="confirm-question-2-yes">
+          <label for="confirm-question-2-yes">Yes</label>
+        %span.fl-form__radio
+          <input type="radio" value="false" checked="checked" name="confirm[question2]" id="confirm-question-2-no">
+          <label for="confirm-question-2-no" onclick="alert('Please re-read information to confirm'); return false;">No</label>
+    .row
+      .column.small-12.medium-9
+        3) I am happy to meet the Flair manager at stage right, gate 5
+      .column.small-12.medium-3
+        %span.fl-form__radio.pr2
+          <input type="radio" value="true" checked="checked" name="confirm[question3]" id="confirm-question-3-yes">
+          <label for="confirm-question-3-yes">Yes</label>
+        %span.fl-form__radio
+          <input type="radio" value="false" checked="checked" name="confirm[question3]" id="confirm-question-3-no">
+          <label for="confirm-question-3-no" onclick="alert('Please re-read information to confirm'); return false;">No</label>
+    .row
+      .column.small-12.medium-9
+        4) Open question where answers are posted in the note section in Green?
+      .column.small-12.medium-3
+        %span.fl-form__radio.pr2
+          <input type="radio" value="true" checked="checked" name="confirm[question4]" id="confirm-question-4-yes" onclick="alert('Please re-read information to confirm'); return false;">
+          <label for="confirm-question-4-yes">Yes</label>
+        %span.fl-form__radio
+          <input type="radio" value="false" checked="checked" name="confirm[question4]" id="confirm-question-4-no">
+          <label for="confirm-question-4-no" onclick="alert('Please re-read information to confirm'); return false;">No</label>
+    .row.mt2
+      .column.small-12.text-center
+        <input type="submit" value="Submit" class="btn btn-default">
+    %hr

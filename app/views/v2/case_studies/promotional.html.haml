@@ -1,0 +1,70 @@
+- content_for :head do
+  %title Promotional Tours with Flair People
+  %meta{ name: "description", content: "To streamline operations, our client turned to Flair to supply all 22 venues for their recycling campaign that was linked to the Tour Of Britain cycling series. Our teams needed to be tech-savvy ‘personalities’ who could champion the recycling cause."}
+.public.case-study.promo
+  = render :partial => 'v2/shared/nav'
+  .content
+    .container-fluid.px-0.d-flex
+      .case-header-bg
+      .v2-case-industry-1.d-flex.align-items-center
+        .container.px-0
+          .case-study Case Studies
+          %h3 PROMOTIONAL
+    .v2-case-industry-2.d-flex.align-items-center
+      .container.px-0.d-flex
+        .d-flex.flex-inline
+          .border-line
+          .d-flex.flex-column.ml-05
+            %h5 EVERY CAN COUNTS
+            %h3 Brand ambassadors with a 'can do' attitude.
+    .v2-case-industry-3.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column.mr1
+          %h2 Key Challenge:
+          %p.mt2 To coincide with the prestigious Tour of Britain cycling race, Alupro embarked on a recycling campaign named Every Can Counts. The aim was to educate members of the public at each finish zone by having tech-savvy brand ambassadors who could handle and deliver every aspect of their UK-wide campaign.
+        .cs-image.d-flex.promo
+    .v2-case-industry-4.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .cs-image.d-flex.promo.mr1
+        .d-flex.flex-column
+          %h2 How we helped:
+          %p.mt2 With a few years into the project, our client needed to streamline their operations. Working with multiple regional staffing suppliers had been highlighted as complex, repetitive, and becoming a drain on their production team. They needed consistency, reliability and to feel assured that only the right staff would be supplied – and importantly, arrive fully prepared.
+          %p.mt1 Flair became the solution: one staffing agency who could not only deliver nationally but who could provide consistency without being asked twice.
+          %p.mt1 Destinations ranged from Yorkshire to London, some much closer to urban hubs than others. The reach of our own database proved invaluable as we selected people who could seamlessly move from one role to the next as needed; people who were both tech savvy and ‘personalities’ who could champion the recycling cause and encourage visitors to partake in various activities.
+          %p.mt1 Entering the contract run fully staffed is one aspect we control. The weather, unfortunately, is not. With visitor numbers fluctuating wildly, we not only prepared our teams to be flexible but available seven days a week. That way, we could manage our teams and respond quickly for our clients.
+    .v2-case-industry-5.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column
+          %h2 The Results
+          %p.mt2 We met all key brief requirements and helped Alupro establish a memorable presence across the 14 planned dates and seven extra bookings mid-season.
+          .d-flex.flex-inline.align-items-center.mt1
+            .checkbox
+            %h5.ml-05 Client saved valuable time using one supplier.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Teams prepared and fully flexible.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Consistent teams UK wide.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Start of a lasting, ongoing partnership.
+        .d-flex.flex-column.mr5
+          %h2.mb1 Case Studies
+          - ["Festivals & Events", "Hospitality", "Logistics", "Promotional", "Sports", "Commercial"].each do |f|
+            %a{ href: v2_case_industry_path(industry: f == "Festivals & Events" ? "events" : f.downcase) }
+              .d-flex.flex-inline.align-items-center
+                %i.fa.fa-caret-right
+                %h3.ml-05{ class: f.downcase == "promotional" ? 'active-study' : '' }=f
+    .v2-case-industry-6.d-flex.align-items-start.promo
+      .container.px-0.d-flex.mt5
+        .d-flex.flex-column
+          %h1 Our job is to make our client's job easier.
+          %h1 Workforce solutions delivered with event expertise.
+          %h1 Tell us how can we help?
+          .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt1
+            %a{href: "/contact"}
+              %button.v2-home-staff-req-btn.join-team Chat with us today
+
+    .v2-home-bottom
+  = render :partial => 'v2/application/footer'

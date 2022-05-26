@@ -1,0 +1,70 @@
+.row.expanded.dark-green
+  / This is the 'funky popup'
+  = render partial: 'header'
+.row.expanded--restricted.dark-green.align-center.align-middle.z-top.affix-medium.navbar
+  .large-2.medium-2.small-5.columns.small-order-2.medium-order-1.flex.small-flex-horiz-center
+    .site-logo
+      %span Flair Event Staffing & Management
+  .small-2.medium-10.large-8.columns.flex-horiz-center.small-flex-horiz-left.small-order-1.medium-order-2.flex.pt1.pb1
+    .flair-nav-menu
+      / Brand and toggle get grouped for better mobile display
+      %button.flair-nav-menu__toggle.navbar-toggle.collapsed{"aria-expanded" => "false", "data-target" => ".flair-nav-menu__items", "data-toggle" => "collapse", :type => "button"}
+        %i.glyphicon.glyphicon-menu-hamburger
+        %span.sr-only Toggle navigation
+      / Collect the nav links, forms, and other content for toggling
+      %ul.flair-nav-menu__items.collapse.navbar-collapse.col-lg-10.col-md-10.col-sm-10
+        %li.flair-nav-menu__item{class: current_page?( '/' ) ? 'active' : ''}
+          %a{href: '/'}
+            %i.glyphicon.glyphicon-home
+            Home
+        - if current_user
+          %li.flair-nav-menu__item{class: current_page?( '/staff/events' ) ? 'active' : ''}
+            %a{href: '/staff/events'}
+              %i.glyphicon.glyphicon-calendar
+              Job Board
+        - else
+          %li.flair-nav-menu__item{class: current_page?( '/events' ) ? 'active' : ''}
+            %a{href: '/events'}
+              %i.glyphicon.glyphicon-calendar
+              Job Board
+        %li.flair-nav-menu__item{class: current_page?( '/join_us' ) ? 'active' : ''}
+          %a{href: '/join_us'}
+            %i.glyphicon.glyphicon-user
+            Join Us
+        %li.flair-nav-menu__item{class: current_page?( '/about' ) ? 'active' : ''}
+          %a{href: '/about'}
+            %i.nav-icon-image
+            About
+        %li.flair-nav-menu__item{class: current_page?( '/contact' ) ? 'active' : ''}
+          %a{href: '/contact'}
+            %i.glyphicon.glyphicon-earphone
+            Contact
+
+  .small-5.medium-3.large-2.columns.flex.flex-horiz-right.small-order-3.medium-order-3.hidden-sm
+    -unless current_user && current_user.is_a?(Prospect)
+      %ul.nav-login
+        %li
+          %a
+            .account-logo
+      %ul.nav-login
+        %li
+          %a{href: '/login', title: "Login"}
+            %div.login-button
+              %b Login
+    -else
+      %ul.nav-login{style: 'min-width: 220px; height: 100px; padding-top: 15px;'}
+        %li.flair-nav-menu__item.user-profile-setting{class: current_page?( '/login' ) ? 'active' : ''}
+          %a{href: '/staff'}
+            -if current_user.photo? && current_user.photo_url
+              %img{src: current_user.photo_url, class: 'flair-nav-menu__profile-photo'}
+            -else
+              =image_tag 'icon-avatar.png', class: 'flair-nav-menu__profile-photo', style: 'width:36px; height:36px;'
+            %div.nav-login.login-button
+              =current_user.first_name
+          %ul.flair-nav-menu__submenu
+            %li.flair-nav-menu__submenu_item
+              %a{href: '/staff/logout'} Logout
+
+.row
+  .column
+    .push-top.hidden-xs

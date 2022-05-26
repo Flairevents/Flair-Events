@@ -1,0 +1,372 @@
+.command-bar
+  .btn-group.hired-view-only
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} See Requests
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revertGigs'} Revert
+    %button.btn.btn-default.command-link.command-remove{:"data-command" => 'removeProspects'} Remove
+    %button.btn.btn-default.command-link.command-delete{:"data-command" => 'deleteProspects'} Delete
+    %button.btn.btn-default.command-link{:"data-command" => 'clearAndApplyFilters'} Clear Filters
+  .btn-group.applied-view-only{style: 'display:none'}
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} See Hired
+    %button.btn.btn-default.command-link.command-revert-form.disabled{:"data-command" => 'revertEditForm'} Revert
+    %button.btn.btn-default.command-link.command-assign.disabled{:"data-command" => 'assignEvents'} Assign
+    %button.btn.btn-default.command-link.command-hire{:"data-command" => 'hireProspects'} Hire
+    %button.btn.btn-default.command-link.command-reject{:"data-command" => 'rejectProspects'} Reject
+    %button.btn.btn-default.command-link{:"data-command" => 'clearFilters'} Clear Filters
+  .btn-group.hired-view-only
+    %button.btn.btn-default.command-link{:"data-command" => 'showAssignmentEmailDialog'} Send Assignment Email
+  .btn-group.hired-view-only
+    %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+      Bulk
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a.command-link{:"data-command" => 'bulkSmsRegular'} SMS List
+      %li
+        %a.command-link{:"data-command" => 'bulkEmailRegular'} E-mail List
+      %li
+        %a.command-link{:"data-command" => 'bulkEmailRegularGrouped'} E-mail List (Grouped)
+      %li.divider
+      %li
+        %a.command-link{:"data-command" => 'bulkSmsMarketing'} Marketing SMS List (Employees Only)
+      %li
+        %a.command-link{:"data-command" => 'bulkEmailMarketing'} Marketing E-mail List (Employees Only)
+      %li
+        %a.command-link{:"data-command" => 'bulkEmailMarketingGrouped'} Marketing E-mail List (Employees Only) (Grouped)
+      %li.divider
+      %li
+        %a.command-link{:"data-command" => 'removeUnconfirmedGigs'} Remove 'No Confirm' Gigs
+      %li.divider
+      %li
+        %a.command-link{:"data-command" => 'clearConfirmed'} Clear Confirmed
+      %li
+        %a.command-link{:"data-command" => 'clearMisc'} Clear Misc
+  .btn-group.applied-view-only{style: 'display:none'}
+    %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+      Bulk
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a.command-link{:"data-command" => 'bulkSmsRegular'} SMS List
+      %li
+        %a.command-link{:"data-command" => 'bulkEmailRegular'} E-mail List
+      %li
+        %a.command-link{:"data-command" => 'bulkEmailRegularGrouped'} E-mail List (Grouped)
+  .btn-group
+    %button.btn.btn-default.dropdown-toggle.command-link.command-email{:"data-toggle" => 'dropdown'}
+      E-mail
+      %span.caret
+    %ul.dropdown-menu.email-dropdown
+  .btn-group.hired-view-only
+    %button.btn.btn-default.dropdown-toggle.command-link.command-report{:"data-toggle" => 'dropdown'}
+      Report
+      %span.caret
+    %ul.dropdown-menu.report-dropdown
+      - %w(small medium large).each do |type|
+        %li
+          %a{href: '#', :"data-report-event-type" => type}= "#{type.capitalize} Event"
+      - %w(medium large).each do |type|
+        %li
+          %a{href: '#', :"data-report-event-type" => type, :"data-with-page-breaks" => 'true'}= "#{type.capitalize} Event (with Page Breaks)"
+      %li
+        %a{href: '#', :"data-report-event-type" => "GoogleEvent"}= "Google Event"
+      %li.divider
+      - Report.where(table: 'gigs').sort_by(&:print_name).each do |report|
+        %li
+          %a{href: '#', :"data-report-name" => report.name, :"data-report-table" => report.table }= report.print_name
+      %li.divider
+      - Report.where(table: 'gig_assignments').sort_by(&:print_name).each do |report|
+        %li
+          %a{href: '#', :"data-report-name" => report.name, :"data-report-table" => report.table }= report.print_name
+      %li.divider
+      %li
+        %a{href: '#', :"data-report-reg-sheet-with-blanks" => true }= "Reg Sheet w/Blanks"
+      %li
+        %a{href: '#', :"data-report-reg-sheet-with-blanks-daily" => true }= "Reg Sheet w/Blanks (Daily)"
+      %li.divider
+      - Report.where(table: 'assignments').sort_by(&:print_name).each do |report|
+        %li
+          %a{href: '#', :"data-report-name" => report.name, :"data-report-table" => report.table }= report.print_name
+  .btn-group.applied-view-only
+    %button.btn.btn-default.dropdown-toggle.command-link.command-report{:"data-toggle" => 'dropdown'}
+      Report
+      %span.caret
+    %ul.dropdown-menu.report-dropdown
+      - Report.where(table: 'gig_requests').sort_by(&:print_name).each do |report|
+        %li
+          %a{href: '#', :"data-report-name" => report.name}= report.print_name
+  .btn-group.hired-view-only
+    %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+      Admin
+      %span.caret
+    %ul.dropdown-menu
+      %li
+        %a.command-link{:"data-command" => 'downloadEtihadPackage'} Download Etihad Package
+      %li
+        %a.command-link{:"data-command" => 'downloadAccreditation'} Download Accreditation
+      %li
+        %a.command-link{:"data-command" => 'downloadWebAppData'} Download WebApp Data
+      %li
+        %a.command-link{:"data-command" => 'downloadDbsReport'} Download DBS Report
+  %button.hired-view-only.btn.btn-primary.command-link{:"data-command" => 'openAssignmentDetailsWindow'}
+    %span.summary-value#value-confirmed
+    %span.summay-label Confirmed /
+    %span.summary-value#value-assigned
+    %span.summay-label Assigned /
+    %span.summary-value#value-needed
+    %span.summay-label Needed
+%hr
+.filter-bar-container
+  .filter-bar
+    %table
+      %tr
+        %th Active
+        %th Event
+        %th Name
+        %th.hired-view-only Week
+        %th.hired-view-only Date
+        %th.applied-view-only Job
+        %th.applied-view-only Spare
+        %th.hired-view-only M.Job
+        %th.hired-view-only Area
+        %th.hired-view-only M.Area
+        %th.hired-view-only Shift
+        %th.hired-view-only Assignment
+        %th.hired-view-only Job
+        %th.hired-view-only Tags
+        %th.hired-view-only.requires-tax-week Conf
+        %th.hired-view-only Pub?
+        %th.hired-view-only Misc?
+        /%th.hired-view-only Best
+        %th Skills
+        /%th Marketing
+        %th MngLvl
+        %th.hired-view-only Admin
+        %th.hired-view-only Profile
+        %th.hired-view-only Qual
+        %th Region
+        %th.hired-view-only.requires-tax-week Email
+        %th.applied-view-only AvgR
+        %th.applied-view-only PL
+        %th.applied-view-only Qual
+        %th.applied-view-only Training?
+        %th.hired-view-only Live?
+        %th.applied-view-only Size
+        %th.applied-view-only Best
+        %th.applied-view-only Distance
+        /%th.hired-view-only.requires-tax-week Template
+        %th.applied-view-only Admin
+        /%th.hired-view-only Coms
+        /%th.hired-view-only Pattern
+
+      %tr
+        %td.active-only-checkbox= _check_box :active_only, '1', checked: 'checked'
+        %td= _text_field :event_picker, class: 'form-control'
+        %td= _text_field :search, class: 'form-control'
+        %td.hired-view-only= _select :tax_week_id, '', class: 'form-control', id: 'events_tax_week_id'
+        %td.hired-view-only= _select :assignment_date, '', class: 'form-control'
+        %td.applied-view-only= _select :applied_job, '', class: 'form-control'
+        %td.applied-view-only= _select :spare, options_for_select([['',''], ['Yes','true'], ['No','false']]), class: 'form-control'
+        %td.hired-view-only= _select :job_id, '', class: 'form-control'
+        %td.hired-view-only= _select :assignment_location_id, '', class: 'form-control'
+        %td.hired-view-only= _select :location_id, '', class: 'form-control', id: 'events_main_area_id'
+        %td.hired-view-only= _select :assignment_shift_id, '', class: 'form-control'
+        %td.hired-view-only= _select :assignment_id, '', class: 'form-control'
+        %td.hired-view-only= _select :assignment_job_id, '', class: 'form-control'
+        %td.hired-view-only= _select :tag_id, '', class: 'form-control'
+        %td.hired-view-only.requires-tax-week= _select :confirmed, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td.hired-view-only= _select :published, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td.hired-view-only= _select :miscellaneous_boolean, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        /%td.hired-view-only= _select :is_best, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td= _select :prospect_skills, options_for_select([['',''],['Sport','has_sports'],['Hospitality','has_hospitality'],['Bar','has_bar'],['Promo','has_promotional'],['Retail','has_retail'],['Office','has_office'],['Festivals','has_festivals'],['Logistics','has_warehouse'],['Bar Manager','bar_manager'],['Staff Leader','staff_leadership']]), class: 'form-control'
+        /%td= _select :prospect_marketing, options_for_select([['',''],['Sport','has_sports'],['Hospitality','has_hospitality'],['Bar','has_bar'],['Promo','has_promotional'],['Retail','has_retail'],['Office','has_office'],['Festivals','has_festivals'],['Warehouse','has_warehouse'],['Bar Manager','bar_manager'],['Staff Leader','staff_leadership']]), class: 'form-control'
+        %td= _select :manager_level, options_for_select([['',''],['Top Volume','Level 1'],['Medium Volume','Level 2'],['Flair TL','Level 3'],['Bar TL','Level 4']]), class: 'form-control'
+        %td.hired-view-only= _select :admin, options_for_select([['',''],['TAX','TAX'],['No Tax','NO_TAX'],['NI','NI'],['No NI','NO_NI'],['ID','ID'],['No ID','NO_ID'],['Bank','BANK'],['No Bank','NO_BANK'],['Photo','PHOTO'],['Employee','EMPLOYEE'],['External','EXTERNAL'],['Large Photo','LARGE_PHOTO']]), class: 'form-control'
+        %td.hired-view-only= _select :profile, options_for_select([['',''],['Male','M'],['Female','F'],['AvgR 5',5],['AvgR 4.5', 4.5],['AvgR 4.0',4],['AvgR 3.5',3.5],['AvgR 3',3],['Training', 'TRAINING']]), class: 'form-control'
+        %td.hired-view-only= _select :prospect_qualifications, options_for_select([['',''],['SALPS','SCLPS_2_HR_TRAINING'],['SS','SCREEN_SHOT_OF_SCLPS'],['Scot PL','SCOTTISH_PERSONAL_LICENSE'],['Eng PL','ENGLISH_PERSONAL_LICENSE'],['FH2','qualification_food_health_2'],['No FH2','no_qualification_food_health_2'], ['Basic DBS', 'qualification_dbs_basic'], ['E DBS','qualification_dbs_enhanced'], ['E DBS B', 'qualification_dbs_enhanced_barred'], ['No DBS','no_qualification_dbs']]), class: 'form-control'
+        %td= _select :region_name, ('<option value="" selected="selected">All</option>'+options_from_collection_for_select(Region.all.sort_by(&:name), :name, :name)).html_safe, class: 'form-control'
+        %td.hired-view-only.requires-tax-week= _select :assignment_email_type, options_for_select(['','None','Any','Info','Reserve',['Shift Offer', 'ShiftOffer'], ['Call','CallToConfirm'],['Email','EmailToConfirm'],'Booked',['Booked Offer', 'BookedOffer'], 'Final','Change']), class: 'form-control'
+        %td.applied-view-only= _select :avg_rating, options_for_select([['',''],['None','None'],['5',5],['4.5+', '4.5'],['4.1+',4.1],['4+',4],['3.5+',3.5],['3+',3]]), class: 'form-control'
+        %td.applied-view-only= _select :bar_license_type, options_for_select([['',''],['S','SCLPS_2_HR_TRAINING'],['SL','SCOTTISH_PERSONAL_LICENSE'],['EL','ENGLISH_PERSONAL_LICENSE'],['SS','SCREEN_SHOT_OF_SCLPS']]), class: 'form-control'
+        %td.applied-view-only= _select :qualifications, options_for_select([['',''],['FH2','qualification_food_health_2'],['No FH2','no_qualification_food_health_2'],['Basic DBS', 'qualification_dbs_basic'], ['E DBS','qualification_dbs_enhanced'], ['E DBS B', 'qualification_dbs_enhanced_barred'], ['No DBS','no_qualification_dbs'], ['C-19 TT', 'c_19_tt'], ['No C-19 TT', 'no_c_19_tt']]), class: 'form-control'
+        %td.applied-view-only= _select :has_required_training, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td.hired-view-only= _select :status, options_for_select([['',''],['Y','Active'],['N','Inactive']], 'Active'), class: 'form-control'
+        %td.applied-view-only= _select :team_size, options_for_select(([['',''],['Big','BIG'],['Majority','ALL'],['BeSp', 'Bespoke']])), class: 'form-control'
+        %td.applied-view-only= _select :is_best, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td.applied-view-only= _select :distance, options_for_select([['','']]), class: 'form-control'
+        /%td.hired-view-only.requires-tax-week= _select :assignment_email_template_id, '', class: 'form-control'
+        %td.applied-view-only= _select :admin, options_for_select([['',''],['TXT','texted'],['E-M','email_status'],['VM','left_voice_message']]), class: 'form-control'
+        /%td.hired-view-only= _select :coms, options_for_select([['',''],['Email','email'],['Text','text'],['Tele','tele'],['W-App', 'w_app']]), class: 'form-control'
+        /%td.hired-view-only= _select :patterns, options_for_select([['',''],['Wkdays','weekdays'],['Wkends','weekends'],['Day','day'],['Evening', 'evening']]), class: 'form-control'
+
+%hr
+.list-view.hired-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+.list-view.applied-view{style: 'display:none'}
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+.report-download-dialog.modal.fade{style: 'display:none'}
+  .modal-header
+    %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+      &times;
+    %h3 Download Report
+  .modal-body
+    %a.download-xlsx{download: true}>
+      %img{src: asset_path('xlsx-icon.png'), width: 128, height: 128, alt: 'Excel'}>
+    %a.download-csv{download: true}>
+      %img{src: asset_path('csv-icon.png'), width: 128, height: 128, alt: 'CSV'}>
+    %a.download-pdf{download: true}>
+      %img{src: asset_path('pdf-icon.png'), width: 128, height: 128, alt: 'PDF'}>
+  .modal-footer
+    %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel
+
+.bulk-sms-dialog.modal.modal-w90.fade{style: 'display:none'}
+  .modal-header
+    %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+      &times;
+    %h3 Bulk SMS
+  .modal-body
+    .content
+  .modal-footer
+    %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Close
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    .slideover-tabs
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#gig-prospect-details', :"data-toggle" => 'tab'} Details
+        %li
+          %a{href: '#gig-prospect-profile', :"data-toggle" => 'tab'} Profile
+        %li
+          %a.prospect-events-tab{href: '#gig-prospect-events', :"data-toggle" => 'tab'} Events
+        %li
+          %a.prospect-future-events-tab{href: '#gig-prospect-future-events', :"data-toggle" => 'tab'} Future Events
+        %li
+          %a.prospect-requests-tab{href: '#gig-prospect-requests', :"data-toggle" => 'tab'} Gig Requests
+        %li
+          %a.prospect-action-taken-tab{href: '#gig-prospect-action-takens', :"data-toggle" => 'tab'} Action Logs
+        %li
+          %a{href: '#gigs-timesheet-notes', :"data-toggle" => 'tab'} Timesheet Notes
+    .slideover-tab-panes.tab-content
+      .tab-pane.active#gig-prospect-details
+        = render partial: 'prospect_form', locals: { form_id: 'gigs_edit_prospect', prospect: Prospect.new }
+      .tab-pane#gig-prospect-profile
+      .tab-pane.prospect-events-tab-pane#gig-prospect-events
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane.prospect-future-events-tab-pane#gig-prospect-future-events
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane.prospect-requests-tab-pane#gig-prospect-requests
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+        .btn.btn-default.hire-btn Hire
+        .btn.btn-default.reject-btn Reject
+      .tab-pane.prospect-action-taken-tab-pane#gig-prospect-action-takens
+        .pagination-controls.pagination-bar{style: 'float:left'}
+        .record-list
+      .tab-pane#gigs-timesheet-notes
+
+.assignment-email-dialog.modal.modal-w90.fade{style: 'display:none'}
+  .modal-header
+    %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+      &times;
+    %h3 Assignment Email
+  .modal-body
+    %table
+      %tr
+        %td Type
+        %td{colspan: 2}
+          = select_tag :assignment_email_type, options_for_select([['Just Shift Info', 'Info'], ['Reserved Shifts', 'Reserve'], ['Shift Offer', 'ShiftOffer'], ['Confirm Call','CallToConfirm'], ['Confirm Email', 'EmailToConfirm'], ['Booked', 'Booked'], ['Booked Offer', 'BookedOffer'], ['Final Details', 'Final'], ['Shift Changes', 'Change']]), class: 'form-control', style: 'width:180px'
+      %tr
+        %td Template
+        %td
+          = select_tag :assignment_email_template, '', class: 'form-control', style: 'width:360px'
+        %td.command-bar{style: 'text-align: right'}
+          .btn-group
+            %button.btn.btn-default.dropdown-toggle.command-link.command-bulk{:"data-toggle" => 'dropdown'}
+              Edit Template
+              %span.caret
+            %ul.dropdown-menu.pull-right{style:'min-width: unset'}
+              %li
+                %a.command-link{:"data-command" => 'createAssignmentEmailTemplate'} New
+              %li
+                %a.command-link{:"data-command" => 'duplicateAssignmentEmailTemplate'} Duplicate
+              %li
+                %a.command-link{:"data-command" => 'deleteAssignmentEmailTemplate'} Delete
+      %tr.custom-asgmt-email-field.type-Reserve.type-ShiftOffer.type-CallToConfirm.type-EmailToConfirm.type-BookedOffer{style: 'display:none;'}
+        %td Confirmation
+        %td{colspan: 2}
+          %textarea#confirmation{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Reserve.type-ShiftOffer.type-CallToConfirm.type-EmailToConfirm.type-Booked.type-BookedOffer.type-Final{style: 'display:none;'}
+        %td Message
+        %td{colspan: 2}
+          %textarea#office_message{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Final{style: 'display:none;'}
+        %td Arrival Time
+        %td{colspan: 2}
+          %textarea#arrival_time{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Final{style: 'display:none;'}
+        %td Meeting Location
+        %td{colspan: 2}
+          %textarea#meeting_location{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Final{style: 'display:none;'}
+        %td Coords
+        %td{colspan: 2}
+          %input#meeting_location_coords{class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Final{style: 'display:none;'}
+        %td On-Site Contact
+        %td{colspan: 2}
+          %textarea#on_site_contact{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Final{style: 'display:none;'}
+        %td Contact Number
+        %td{colspan: 2}
+          %textarea#contact_number{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Reserve.type-ShiftOffer.type-BookedOffer.type-Final{style: 'display:none;'}
+        %td Uniform
+        %td{colspan: 2}
+          %textarea#uniform{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Final{style: 'display:none;'}
+        %td Welfare
+        %td{colspan: 2}
+          %textarea#welfare{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Reserve.type-ShiftOffer.type-Booked.type-BookedOffer.type-Final{style: 'display:none;'}
+        %td Transport
+        %td{colspan: 2}
+          %textarea#transport{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Reserve.type-ShiftOffer.type-CallToConfirm.type-EmailToConfirm.type-Booked.type-BookedOffer.type-Final.type-Change{style: 'display:none;'}
+        %td Details
+        %td{colspan: 2}
+          %textarea#details{rows: 1, class: 'form-control'}
+      %tr.custom-asgmt-email-field.type-Reserve.type-ShiftOffer.type-CallToConfirm.type-EmailToConfirm.type-Booked.type-BookedOffer.type-Final.type-Change{style: 'display:none;'}
+        %td Additional Info
+        %td{colspan: 2}
+          %textarea#additional_info.type-Reserve.type-ShiftOffer.type-Booked.type-Final{rows: 1, class: 'form-control'}
+    .missing-only
+      %hr
+      %p#assignment-email-warning.warning
+    %hr
+    %p
+      %strong Subject:
+      %span{id: 'assignment-email-subject'}
+    #assignment-email-body
+  .modal-footer
+    %a.btn.btn-default.send-btn Send
+    %a.btn.btn-default.close-btn Close

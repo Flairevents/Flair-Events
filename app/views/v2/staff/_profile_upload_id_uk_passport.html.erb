@@ -1,0 +1,99 @@
+<div class="fl-form v2-profile-identification-passport-title">UK Passport</div>
+<%= form_tag '../staff/upload_uk_passport_images', multipart: true, id: 'upload_uk_passport', class: 'form-val fl-form' do %>
+  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+  <%= render partial: 'profile_upload_id_passport' %>
+
+  <div class="v2-profile-identification-birthcert-content" style='margin-top: 24px'>
+    <p>All scans or photos <strong>MUST</strong></p>
+    <ul>
+      <li><strong>Be in full colour, Looking directly onto a flat document</strong></li>
+      <li><strong>Display All text, four corners of document without glare or shine from flash</strong></li>
+    </ul>
+  </div>
+
+  <center>
+    <% if @prospect.photo.blank? %>
+      <%= submit_tag 'SUBMIT', class: 'v2-profile-identification-passport-submit', id: 'id-upload-submit', style: 'display: none' %>
+      <button type="button" class="v2-profile-identification-submit" data-toggle="modal" data-target="#edit-uploaded-photo" id="modal-required-button-upload" data-backdrop="static" data-keyboard="false" data-required="true">SUBMIT</button>
+    <% else %>
+      <%= submit_tag 'SUBMIT', class: 'v2-profile-identification-passport-submit', id: 'id-upload-submit' %>
+      <button type="button" class="v2-profile-identification-submit" id="modal-required-button-upload" data-toggle="modal" data-target="#edit-uploaded-photo" data-backdrop="static" data-keyboard="false" data-required="true" style="display: none">SUBMIT</button>
+    <% end %>
+  </center>
+<% end %>
+
+<div class="passport-pic-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-uk-passport-picture.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="passport-front-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-uk-passport-front.jpg', style: 'height:250px;' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="passport-expiry-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-uk-passport-expiry.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<div class="passport-number-popup sample-popup v2-id-pic-pop-up" style="display:none">
+  <div class="v2-id-pic-pop-up-body">
+    <%= image_tag 'id-sample-uk-passport-number.jpg' %>
+    <a class="fl-flash__close-btn" onclick="$('.v2-id-pic-pop-up').hide()">
+      <span>Close</span>
+    </a>
+  </div>
+</div>
+<% content_for_once :js do %>
+  <script>
+      $('.form-val').on('submit', function () {
+          $(this).find('.date-check').each(function () {
+              if ($(this)[0].value == '' ||  $(this)[1].value == '' || $(this)[2].value == ''  ){
+                  $('.date-check').css('border', '2px solid red');
+                  check = 1;
+              } else {
+                  check = 0;
+                  $('.date-check').css('border', 'none');
+              }
+          })
+          $(this).find('.file-field-1').each(function () {
+              if ($(this)[0].files.length == 0) {
+                  $('.v2-f1').css('border', '2px solid red');
+                  check = 1;
+              } else {
+                  check = 0;
+                  $('.v2-f1').css('border', 'none');
+              }
+          })
+          $(this).find('.file-field-2').each(function () {
+              if ($(this)[0].files.length == 0) {
+                  $('.v2-f2').css('border', '2px solid red');
+                  check = 1;
+              } else {
+                  check = 0;
+                  $('.v2-f2').css('border', 'none');
+              }
+          })
+          if (c1 == 0 && c2 == 0 && c3 == 0 ){
+              check = 0
+          } else {
+              check = 1
+          }
+          if(check == 1){
+              return false;
+          }else{
+              return true;
+          }
+      })
+  </script>
+<% end %>

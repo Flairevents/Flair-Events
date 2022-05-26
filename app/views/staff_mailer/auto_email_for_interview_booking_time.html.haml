@@ -1,0 +1,15 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td Your interview is booked for #{@interview.date.strftime('%A %d %B')} and you choose a #{@interview.time_type.downcase} call.
+  %tr
+    %td Expect a 10-15 minute chat.
+  %tr
+    %td We shall call you, so you don't worry about calling us.
+= render partial: 'staff_mailer/signature'

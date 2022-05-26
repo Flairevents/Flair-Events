@@ -1,0 +1,27 @@
+.staff_zone.unsubscribe
+  = render :partial => 'shared/nav'
+  .content
+    .content-spacer
+    .content-inner
+      .band-heading.row.expanded--restricted
+        %h3 Unsubscribe
+      .row.field.p2.expanded--restricted.align-center.translucent
+        .column.small-12.medium-8.text-justify
+          = form_tag "/staff/unsubscribe" do
+            .form-control#unsubscribe-inputs
+              %p Please choose one of the following options:
+              .fl-form__radio
+                =radio_button_tag(:desired_action, 'all_email', @account.user.send_marketing_email, required: true)
+                =label_tag(:desired_action_all_email, "I would like to continue as an employee of Flair Event Staffing and receive all work-related emails.")
+              .fl-form__radio
+                =radio_button_tag(:desired_action, 'no_marketing', !@account.user.send_marketing_email, required: true)
+                =label_tag(:desired_action_no_marketing, "I would like to continue as an employee of Flair Event Staffing, but do not want to receive unsolicited e-mails regarding upcoming job opportunities. I will still receive e-mails related to events that I have specifically selected to work.")
+              .fl-form__radio
+                =radio_button_tag(:desired_action, 'deactivate', false, required: true)
+                =label_tag(:desired_action_deactivate, "I no longer wish to be an employee of Flair Event Staffing and would like to close my account.")
+              %p.text-right
+                = hidden_field_tag 'token', @account.unsubscribe_token
+                = submit_tag 'Submit', class: 'btn btn-default'
+    .content-spacer
+  .content-after
+  = render partial: 'footer'

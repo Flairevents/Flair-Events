@@ -1,0 +1,18 @@
+$(document).ready(function(){
+  $(".industry-select").on('click', function(){
+    var industry = $(this).children('span').text().toLowerCase();
+    var unSelectedImg = $(this).children("img").first();
+    var selectedImg = $(this).children("img").last();
+
+    $(this).addClass('active-industry');
+    $(this).parent().find('.unselected').removeClass('hide');
+    $(this).parent().find('.selected').addClass('hide');
+
+    unSelectedImg.addClass('hide');
+    selectedImg.removeClass('hide');
+
+    // click radio button 
+    radio_id = $(this).attr('radio_id');
+    $(`#${radio_id}`).prop('checked', true);
+  });
+});

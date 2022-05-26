@@ -1,0 +1,61 @@
+.bar-license
+  %h4 Bar Licence
+  .bar-license__type
+    .row
+      .column.small-12.medium-4
+        %p
+          %span.field-label
+            Bar Licence Type
+        %p
+          %select.bar-license__type__select.form-control{:required => true, onchange: "bar_type_changed();"}
+            %option 
+            %option{value: 'english-pl'} English PL
+            %option{value: 'scottish-pl'} Scottish PL
+            %option{value: 'sclps-2-hr'} SALPS
+            %option{value: 'sclps-screen-shot'} Screen Shot of SCLPS
+
+  .bar-license__common
+    .row
+      .column.small-12.medium-4
+        %p
+          %span.field-label
+            Number
+        %p
+          = text_field_tag :bar_license_no, nil, required: true, class: "form-control"
+      .column.small-12.medium-4
+        %p
+          %span.field-label
+            Expiry Date
+        .date-input-group
+          = select_date Date.today, {prefix: 'bar_license_expiry', start_year: Date.today.year, end_year: Date.today.year+10, order: [:day, :month, :year], use_short_month: true}, {class: "form-control"}
+      .column.small-12.medium-4
+        %p
+          %span.field-label
+            Issued By
+        %p
+          = text_field_tag :bar_license_no, nil, required: true, class: "form-control"
+
+  .bar-license__personal-license.hidden
+    %hr
+    %h4 Personal Licence
+    .row
+      .column.small-12.medium-6
+        %p.upload-field
+          %span.field-label
+            Upload Front of PLASTIC LICENCE CARD
+          = file_field_tag :bar_license_front, required: true, class: "form-control", accept: @accepted_images
+      .column.small-12.medium-6
+        %p.upload-field
+          %span.field-label
+            Upload Reverse of PLASTIC LICENCE CARD
+          = file_field_tag :bar_license_back, required: true, class: "form-control", accept: @accepted_images
+
+  .bar-license__sclps.hidden
+    %hr
+    %h4 Sclps
+    .row
+      .column.small-12
+        %p.upload-field
+          %span.field-label
+            Scan and upload Certificate
+          = file_field_tag :bar_license_sclps, required: true, class: "form-control", accept: @accepted_images

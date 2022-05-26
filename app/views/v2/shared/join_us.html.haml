@@ -1,0 +1,124 @@
+.public.join-us
+  = render :partial => 'v2/shared/nav'
+  .content
+    .background.background-staff-fun-bw.background--fixed{style: 'background-position: 0 30%;'}
+    .content-inner
+      .row.expanded--restricted.title.background.background--tall
+        .column.small-12.flex--middle.flex--center
+          %h4.white-text.h3.text-center.shadow-text
+            Flair is seeking bright, motivated, and reliable people <br> to join our growing team.
+      .row.band-heading.expanded--restricted
+        %h3 Why work for us?
+      .row.p2.field-light.translucent.expanded--restricted.align-center
+        .column.small-12.large-8
+          .h5
+            \#different9to5
+          .row
+            .column.small-12.medium-6
+              %ul.list.list--flair
+                %li Pick the shifts that suit your lifestyle
+                %li Wide variety of jobs
+                %li Wages paid weekly
+                %li Dedicated Flair team working for you
+                %li National events or local jobs
+                %li Fixed venues to temporary work
+                %li Create your employer networks
+            .column.small-12.medium-6
+              =image_tag 'why-work-for-us.jpg', class: 'image--medium image--right mt2'
+      .row.band-heading.expanded--restricted
+        %h3 Sound Interesting?
+      .row.padding-top-bottom.dark-green.translucent.expanded--restricted
+        .new-to-flair.column.small-12.medium-6.text-center
+          %h4 Want to get on board?
+          %p Register here and we’ll be in touch.
+          %a.btn.btn-default{href: '/register', style: 'min-width: 150px;margin-bottom: 15px;margin-top: 15px;'} Register
+        .returning.column.small-12.medium-6.text-center
+          %h4 Already team Flair?
+          %p Visit your staff zone anytime
+          %a.btn.btn-default{href: '/login', style: 'min-width: 150px;margin-bottom: 15px;margin-top: 15px;'} Login
+      .row.band-heading.expanded--restricted
+        %h3 Here's How It Works
+      .row.padding-top-bottom.field-light.translucent.expanded--restricted.align-center
+        .column.small-12.how-it-works.large-8.pt2.pb2
+          .row.align-middle
+            .column.small-3.text-right
+              =image_tag 'register-icon.png', class: 'img--how-to-join'
+            .column.small-6
+              .h3 Register
+              %p Confirm your email to open a staff profile. Next fill in some essential details and completing a quick application.
+            .column.small-3.align-bottom
+              -#=image_tag 'arrow-down-right-light-green.png', class: 'img--how-to-join mb1'
+          .row.align-middle
+            .column.small-3.align-bottom.text-right
+              -#=image_tag 'arrow-down-left-light-green.png', class: 'img--how-to-join mb1'
+            .column.small-6.text-right
+              .h3 Interview
+              %p Schedule a video or telephone interview to introduce yourself.
+            .column.small-3
+              =image_tag 'interview-icon.png', class: 'img--how-to-join'
+          .row.align-middle
+            .column.small-3.text-right
+              =image_tag 'profile-icon.png', class: 'img--how-to-join'
+            .column.small-6
+              .h3 Build your profile
+              %p Set your work preferences from job categories to travel distances.
+            .column.small-3.align-bottom
+              -#=image_tag 'arrow-down-right-light-green.png', class: 'img--how-to-join mb1'
+          .row.align-middle
+            .column.small-3
+            .column.small-6.text-right
+              .h3 Get working
+              %p Review job vacancies, match your skills and start applying!
+            .column.small-3
+              =image_tag 'job-icon.png', class: 'img--how-to-join'
+      .row.band-heading.expanded--restricted
+        %h3 What Our Team Members Are Saying
+      .row.dark-green.translucent.expanded--restricted.align-center
+        .column.small-12.pt4.pb4.large-8
+          .testimonial-carousel.flexslider-container.join-us-message-background-image
+            =image_tag 'quotation-mark.png', class:'quote-image', height: '80px', width: '80px;'
+            %ul.slides
+              = render partial: 'shared/testimonial_staff'
+      .band-heading.row.expanded--restricted
+        %h3 The Staff Zone
+      .row.field.expanded--restricted.align-center
+        .column.small-12.p2.large-8
+          %p Take control of your career with Flair Events via your personal profile in our staff zone. You can monitor your event contracts, view and select new opportunities, edit your details and update your skills and experience anytime. Flair HQ will always keep you up to date on your selected events via emails or post information in your staff zone. Any questions, the golden rule is ‘call us’ -  the Flair team are always at the end of the telephone or an email.
+          %p.h5.text-center #getonboard <br> one click away from joining our team
+          .hand-drawn-notice.returning-notice
+            Returning?
+          .text-center
+            %a.btn{href: '/login'} Register
+            %a.btn{href: '/login'} Login
+      %span.anchor#faq
+      .band-heading.row.expanded--restricted
+        %h3 FAQ
+      .row.padding-top-bottom.field-light.translucent.expanded--restricted.align-center
+        .column.small-12.text-center.large-8
+          .flair-svg-icon
+            %svg
+              <use xlink:href="#fl-icon-call" />
+          %p.lead.pb1 If in doubt, give us a shout at
+          %p.lead 0161 241 2441
+      .row.field-light.translucent.pt2.pb2.expanded--restricted.align-center
+        .column.small-12.large-8.pb1
+          .faq-tabs.dark-green.pt1.rounded
+            %ul.nav.nav-tabs.nav-tabs--real-tabs.dark-green.nav-tabs--scroll{:role => "tablist"}
+              %li.active{:role => "faq"}
+                %a{"aria-controls" => "tab-recruitment", "data-toggle" => "tab", :href => "#tab-joining-flair", :role => "tab"} Joining Flair
+              %li{:role => "faq"}
+                %a{"aria-controls" => "tab-event-info", "data-toggle" => "tab", :href => "#tab-pre-event", :role => "tab"} Shift Questions
+              %li{:role => "faq"}
+                %a{"aria-controls" => "tab-wages", "data-toggle" => "tab", :href => "#tab-post-event", :role => "tab"} Wages
+            .tab-content.field
+              #tab-joining-flair.tab-pane.active{:role => "tabpanel"}
+                = render partial: 'shared/faq_content', locals: {entries: @entries_joining_flair}
+              #tab-pre-event.tab-pane{:role => "tabpanel"}
+                = render partial: 'shared/faq_content', locals: {entries: @entries_shift_questions}
+              #tab-post-event.tab-pane{:role => "tabpanel"}
+                = render partial: 'shared/faq_content', locals: {entries: @entries_wages}
+      .row.field.expanded--restricted.pt1.pb1.align-center
+        .column.small-12.medium-8
+          = render partial: 'shared/client_logos'
+  .content-after
+  = render :partial => 'footer'

@@ -1,0 +1,47 @@
+.public.home
+  = render :partial => 'v2/mobile/shared/nav'
+  .reg-conf-mask
+  .reg-conf-bg
+  .row
+    .col-6.col-8-my
+      .first_box
+        .header
+          Hello,
+          %span
+            = @prospect ? @prospect.first_name : "Unknown"
+            -# = session[:registration_email]
+        .content
+          You should now receive an email from us,
+          %br/
+          simply click the link to complete your registration
+          %br/
+          %br/
+          Don't see it? Check your spam box or
+          %a(href="/resend_confirmation")
+            resend
+      .second_box
+        .header
+          At
+          %span.orange Flair
+          we value
+          %br/
+          all our
+          %span.green people
+        .content
+          Expect weekly pay, flexibility, variety of jobs
+          %br/
+          and a dedicated team working for you
+    .col-6.display-no
+      .big-header-background.big-header-background-width
+      .big-header.big-header-width
+        %div
+          DO WORK THAT
+        %div
+          MATTERS TO YOU
+  = render :partial => 'v2/mobile/application/footer'
+
+- content_for :js do
+  :javascript
+      $(document).ready(function() {
+          $(".reg_back").css("background-color", "#a3d39c");
+      });

@@ -1,0 +1,12 @@
+<%= fetch(:logrotate_log_path) %>/*.log {
+    <%= fetch(:logrotate_interval) %>
+    rotate <%= fetch(:logrotate_logs_keep) %>
+
+    missingok
+    compress
+    delaycompress
+    notifempty
+    copytruncate
+
+    su <%= fetch(:logrotate_user) %> <%= fetch(:logrotate_group) %>
+}

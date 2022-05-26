@@ -1,0 +1,81 @@
+<div class="v2-login-form" id="v2-login-form">
+  <div class="v2-login-form-title">Welcome Back</div>
+  <div class="v2-login-form-number-of-jobs">
+    <span class="v2-number-of-jobs"><%= @no_of_jobs %></span>
+    <span class="v2-new-jobs-circle">&#9679;</span>
+    <span class="v2-new-jobs">jobs listed here.</span>
+  </div>
+  <br>
+  <div class="v2-login-name mobile-hide">Log in</div>
+  <%= form_tag "#{Flair::Application.config.base_https_url}/login", class: 'fl-login-form', autocomplete: "off" do %>
+    <div class="form-group">
+      <% error_class = flash[:error].present? ? "v2-registration-error" : '' %>
+      <label class="error-messages"><%= flash[:error].present? ? flash[:error] : '' %></label>
+      <input type="email" class="form-control v2-login-email v2-inputs <%= error_class %>" aria-describedby="emailHelp" placeholder="Email" aria-describedby="basic-addon1" id="login_email" name="login_email" placeholder="Email" value="<%= @login_email %>", autocomplete= "off">
+    </div>
+    <div class="form-group d-flex flex-row bd-highlight" style="margin-bottom: 0;">
+      <input aria-describedby="basic-addon2" class="form-control v2-login-password v2-inputs <%= error_class %>" id="login_password" name="login_password" placeholder="Password" type="password", autocomplete="off">
+      <i class="far fa-eye v2-togglePassword" id="v2-togglePassword"></i>
+    </div>
+    <div class="text-right">
+      <span class="v2-forgot-password-link" id="v2-forgot-password">Forgot password?</span>
+    </div>
+    <div class="mobile-hide">
+      <button class="v2-login-form-button" name="target" type="submit" value="<%= @target %>">
+        <span class="v2-login-form-button-name">Login</span>
+      </button>
+      <div class="v2-keep-me-login-container">
+        <div class="v2-application-checkbox">
+          <input type="checkbox" class="custom-control-input v2-keep-me-login-box" id="customCheck1">
+          <label class="custom-control-label v2-keep-me-login-label" for="customCheck1" style='margin-left: 0;'>Keep me logged in</label>
+        </div>
+      </div>
+    </div>
+    <div class="web-hide">
+      <div class="v2-keep-me-login-container">
+        <div class="v2-application-checkbox">
+          <input type="checkbox" class="custom-control-input v2-keep-me-login-box" id="customCheck1">
+          <label class="custom-control-label v2-keep-me-login-label" for="customCheck1" style='margin-left: 0;'>Keep me logged in</label>
+        </div>
+      </div>
+      <center>
+        <button class="v2-login-form-button" name="target" type="submit" value="<%= @target %>">
+          <span class="v2-login-form-button-name">Login</span>
+        </button>
+      </center>
+    </div>
+    <div class="v2-login-form-register-container">
+      <span class="v2-login-form-register">Need an account? <a href="/register">Join Us</a></span>
+    </div>
+    <div class="v2-login-form-contact-info text-right mobile-hide">
+      Head Office: <a href="tel:0161-241-2441">0161 241 2441</a>
+      <br>
+      Email:  <a href="mailto:hello@flairpeople.com">hello@flairpeople.com</a>
+    </div>
+    <div style="clear:both"></div>
+  <% end %>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $('#v2-togglePassword').on('click', function(){
+      input = $(this).prev();
+      if ($(input).attr('type') === 'password') {
+        $(input).attr('type', 'text')
+      }else{
+        $(input).attr('type', 'password')
+      }
+      this.classList.toggle('fa-eye-slash');
+    })
+
+    $('body').on('click', '#v2-forgot-password', function(){
+      $('#v2-login-form').css('display','none')
+      $('#v2-forgot-form').css('display','')
+    })
+
+    $('body').on('click', '#back-to-login', function(){
+      $('#v2-login-form').css('display','')
+      $('#v2-forgot-form').css('display','none')
+    })
+  </script>
+<% end %>

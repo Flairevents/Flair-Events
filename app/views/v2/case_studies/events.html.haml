@@ -1,0 +1,69 @@
+- content_for :head do
+  %title A reputation to engage the very best event staff there is!
+  %meta{ name: "description", content: "When asked to provide our high level of bar service across both V-Festival sites. We did not miss a beat, swiftly recruiting and organising more than 750 festival workers across two sites. That is 48 bars, 12 shifts, nine coaches – everyone paid within a week. And all at a time before smartphones!"}
+.public.case-study.events
+  = render :partial => 'v2/shared/nav'
+  .content
+    .container-fluid.px-0.d-flex
+      .case-header-bg
+      .v2-case-industry-1.d-flex.align-items-center
+        .container.px-0
+          .case-study Case Studies
+          %h3 FESTIVALS & EVENTS
+    .v2-case-industry-2.d-flex.align-items-center
+      .container.px-0.d-flex
+        .d-flex.flex-inline
+          .border-line
+          .d-flex.flex-column.ml-05
+            %h5 V FESTIVALS CHELMSFORD & WESTON PARK
+            %h3 Supplying the complete staffing solution.
+    .v2-case-industry-3.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column.mr1
+          %h2 Key Challenge
+          %p.mt2 After a few successful years at V Festival Weston Park, our client secured the bar contract at both venues. They now needed double the service that they grown to rely on from Flair, their staffing partner.
+        .cs-image.d-flex.events
+    .v2-case-industry-4.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .cs-image.d-flex.events.mr1
+        .d-flex.flex-column
+          %h2 How we helped:
+          %p.mt2 Our previous track record certainly gave our client confidence in our ability to pull this off, but this was still a monumental challenge – and a time before smartphones! Over 750 bar staff were required, along with the on-site management service that our client relied on. We dived straight into logistics and recruitment planning – two areas in which we had a lot of experience. Our season that year consisted of seven large-scale events and festivals – all prior to the V Festival weekend – and we used this to our advantage, training managers and Flair reps and steadily increasing our database of experienced festival workers.
+          %p.mt1 While there is rarely any shortage of people expressing an 'interest' in working at festivals, Flair’s unique working method from our very first event has been simple: we talk to people. We nurtured our teams, knew them by name and funneled the best people into the final cut. This resulted in years of never arriving understaffed across thousands of festivals and events.
+          %p.mt1 Pivotal to the success at V was our diligent logistics organisation and on-site event expertise and people management style, a format that has proved adaptable in any field time and time again. Our client depended on us to deliver across both festivals to ensure that festival goers' glasses never ran dry. And our staff depended on us to deliver an unforgettable 'working festival' experience.
+    .v2-case-industry-5.d-flex.align-items-center
+      .container.px-0.d-flex.align-items-center.justify-content-between
+        .d-flex.flex-column
+          %h2 The Results
+          %p.mt2 At the time a small, independent recruitment company, we demonstrated that no matter what the request, we nailed it. As the industry evolved, we grew too – never losing sight of our core principles: diligent planning, skilled organisation and treating people right.
+          .d-flex.flex-inline.align-items-center.mt1
+            .checkbox
+            %h5.ml-05 We became our client's staffing department.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Fully staffed, time and again.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 75% return rate of experienced festival workers year on year.
+          .d-flex.flex-inline.align-items-center
+            .checkbox
+            %h5.ml-05 Established regional recruitment hubs and transport routes still used today.
+        .d-flex.flex-column
+          %h2.mb1 Case Studies
+          - ["Festivals & Events", "Hospitality", "Logistics", "Promotional", "Sports", "Commercial"].each do |f|
+            %a{ href: v2_case_industry_path(industry: f == "Festivals & Events" ? "events" : f.downcase) }
+              .d-flex.flex-inline.align-items-center
+                %i.fa.fa-caret-right
+                %h3.ml-05{ class: f.downcase == "festivals & events" ? 'active-study' : '' }=f
+    .v2-case-industry-6.d-flex.align-items-start.events
+      .container.px-0.d-flex.mt5
+        .d-flex.flex-column
+          %h1 Our job is to make our client's job easier.
+          %h1 Workforce solutions delivered with event expertise.
+          %h1 Tell us how can we help?
+          .v2-home-btns.staff-request.d-flex.align-items-center.justify-content-center.mt1
+            %a{href: "/contact"}
+              %button.v2-home-staff-req-btn.join-team Chat with us today
+
+    .v2-home-bottom
+  = render :partial => 'v2/application/footer'

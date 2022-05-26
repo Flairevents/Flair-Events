@@ -1,0 +1,141 @@
+- content_for :head do
+  %title Hire Festival and Event Staff In the UK
+  %meta{ name: "description", content: "Find ushers, hostesses, setup and teardown crews and much more. We have a large pool of talented people ready to work. Call or contact us to get started."}
+.public.industry.events
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .content-inner
+      .container-fluid.position-relative.px-0.d-flex
+        .industry-header-bg
+        .industry-header-bg-overlay
+        .v2-industry-header
+          %h1
+            Festival &
+            .d-flex.flex-row
+              %div{style: "margin-top: -15px;margin-right:10px;"} Event
+              .staffing-img
+          %p The range of events we have covered is near endless. Our reputation in the industry enables us to quickly engage any required number of staff with the skillsets you need.
+          .orange-btn.d-flex.align-items-center.justify-content-center.request
+            %a{href: "/contact"}
+              %button Request more info
+          .industry-image
+      .container-fluid.position-relative.px-0
+        .v2-industry-section-1
+          %h1
+            A formidable workforce,
+            %br/
+            come rain or shine
+          %p Our first 12 years we took our thousands strong talent pool across the UK working major festivals and bespoke events. We grew as the industry evolved and steadily became one of the go-to festival staffing provider, known for providing the complete event staff management package – never understaffed and handling all logistics.
+          %p Today, the huge variety of events we now staff from 'boutique' to mass sports has enabled us to grow an enviable database of people accustomed to the rigours of ever-changing weather, working long hours and flexible interesting work.
+          %p We can lock in many of our staff months in advance – or often at the drop of a hat. If you need experienced events staff, we can help.
+        .v2-industry-section-3
+          .bg-industry-worker
+          .industry-worker-content
+            .d-flex.flex-row
+              .border-line
+              %h1
+                Workers who
+                %br/
+                give a little extra
+            %p Flair has built some amazing relationships over the years with the people on our database. Mutual respect and understanding promotes loyalty and reliability among our workers and enables us to successfully deliver brilliant teams again and again.
+        .v2-industry-section-2
+          %ul
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center="Complete<br>bar teams".html_safe
+                .type-desc.d-flex.flex-column
+                  %span Skilled pint pullers, servers,
+                  %span managers and more.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Box office & RFID support
+                .type-desc.d-flex.flex-column
+                  %span Systems specialists working across different platforms.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Wrist banding & Entrance
+                .type-desc.d-flex.flex-column
+                  %span Keen, attentive workers who work with efficiency and care.
+            %li
+              .d-flex.justify-content-center
+                .type-image{style: "background-position-y: 0px;"}
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Roadshows & promo
+                .type-desc.d-flex.flex-column
+                  %span Engaging, energetic individuals to add the X Factor.
+        .v2-industry-section-4
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No stress
+            %span{style: "margin-top: 5px;"} Our staff come fully-vetted
+            %span and ready to work.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No fuss
+            %span{style: "margin-top: 5px;"} Pre and post-contract admin and
+            %span payroll handled by us.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No surprises
+            %span{style: "margin-top: 5px;"} A cost-effective, bespoke staffing
+            %span solution that works for you.
+        .v2-industry-section-5
+          %h1
+            Events & Festivals
+            %br/
+            at Flair means...
+          %p Pint pullers, crowd controllers, ticket stampers, stage dismantlers, party planners, cloakroom tenders, supervisors, stock shifters, merch sellers, recycling promoters, promo sharers and an army of late-night legends that only stop when the job’s done.
+          .industry-about-bg{style: 'background-size: cover;width: 345px;height: 230px;'}
+          %h3 Real people, real skills, real simple
+          .d-flex.justify-content-center
+            .orange-btn.d-flex.align-items-center.justify-content-center.mr1
+              %a{ href: "/events?category=Sports"}
+                %button View Jobs
+            .orange-btn.d-flex.align-items-center.justify-content-center
+              %a{ href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                %button Hire Staff
+        .v2-industry-section-8
+          %h6 Case Study
+          .d-flex.flex-inline.align-items-center
+            .border-line
+            %div{style: "margin-left: 5px;"}
+              %h5 V FESTIVAL WESTON & CHELMSFORD
+              %h3 Complete staffing solutions.
+          .image-container.d-flex.justify-content-center
+            .cs-image
+            %div
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center{style: 'margin-bottom: 5px;'}
+                %h1 2
+                %h3 Locations
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center
+                %h1 756
+                %h3 Staff
+          %p Having previously staffed one V Festival several times, we knew handling both sites would be a monumental task. We jumped right in with diligent planning, recruiting and organising more than 750 bar staff, managers and supervisors. That’s 48 different bar teams, 12 shift patterns, nine coaches and five big local recruitment days. And all before smartphones!
+          .see-content
+            %p Our well-polished process meant that for the next 10-years, both V sites had full bar teams that simply arrived and worked. Our unique 360-degree festival service operated flawlessly alongside our clients’ operations and we proved time and time again that we can be adaptable in any field.
+            %a(href="/case_studies/events" data-turbolinks="false")
+              .read-more READ MORE
+          .see-more{onclick: "see_more_less()"}
+        .v2-industry-section-9
+          %h1 Flair provides a complete
+          %h1.d-flex.flex-inline
+            %span{style: "margin-right: 5px;"} event
+            staff service.
+          %h1{style: 'margin-top: 20px;'} So, how can we help?
+          .orange-btn.mt3.d-flex.align-items-center.justify-content-center{style: 'margin-top: 18px;'}
+            %a{ href: '/contact'}
+              %button Let's chat today
+          .v2-home-bottom
+
+  = render :partial => 'v2/mobile/application/footer'

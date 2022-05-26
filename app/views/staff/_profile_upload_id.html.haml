@@ -1,0 +1,18 @@
+.upload-id.article
+  -if @prospect.id_submitted?
+    -if @pending_id_approval
+      %p= "Your ID has been submitted and is pending approval."
+    -else
+      %p= "Your ID was approved on #{@prospect.id_sighted.try(:to_print)}. Flair will securely store your ID evidence for the duration of your employment and a further 2 years in compliance with the Immigration, Asylum and Nationality Act of 2006. If you have any working time limits we are required to re-check your documents every 12 months."
+  -else
+    %h3 Upload scans or photographs of your ID
+    %p It is a legal requirement under the Immigration, Asylum and Nationality Act of 2006 that every employer conducts diligent checks on the eligibility of all their workers legal right to work in the UK.
+    %p.text-center Flair operates a strict policy of:
+    %p.text-center No ID evidence = No work offered.
+    .row
+      .small-12.medium-4.pl1.pr1
+        Nationality<br/>
+        = select_tag(:nationality_id, options_for_select(nationality_options, @prospect.nationality_id || ''), {onchange: "nationality_changed();", class: "form-control", disabled: @prospect.id_submitted? || @prospect.id_sighted})
+    .id_type
+      = render partial: @id_view
+    %span.italics Please note: You will be required to bring your original ID documents to your first Flair contract for us to sight originals. Basic standard photographic ID will then be required to all sequential events.

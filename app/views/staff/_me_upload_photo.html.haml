@@ -1,0 +1,32 @@
+.content.upload-photo.text-center
+  .photo-edit
+  .staffzone-photo-area
+    .existing-photo
+      - if @prospect.photo.present?
+        %img{src: @prospect.photo_url, class: 'upload-photo__image flair-staff-profile-photo'}
+      - else
+        =image_tag 'no-prospect-photo.png' , class: 'upload-photo__image flair-staff-profile-photo'
+      .staffzone-update-photo
+        %a#edit-photo-link{"data-target" => "#edit-uploaded-photo", "data-toggle" => "modal", :type => "button"} Upload Photo
+
+    .container
+      #edit-uploaded-photo.modal.fade{:role => "dialog"}
+        .modal-dialog.modal-lg
+          .modal-content.mt5
+            -#.modal-header
+              %button.close{"data-dismiss" => "modal", :type => "button"} ×
+              %h4.modal-title Modal Header
+            .modal-body.out-team-message_moda.pt4{style: 'background-image: linear-gradient(#a3d39c 0%, #f5f5f5 50%, #a3d39c 100%);'}
+              .croppie-photo-preview
+              #photo-upload
+                %p Before Uploading, Zoom/Drag so your face fills the oval area
+                = form_tag '/staff/upload_photo', multipart: true, id: 'photo-form' do |f|
+                  = file_field_tag :photo, required: true, accept: @accepted_images, id: 'photo-input', class: 'input-center'
+                  = hidden_field_tag :cropLeftX
+                  = hidden_field_tag :cropTopY
+                  = hidden_field_tag :cropRightX
+                  = hidden_field_tag :cropBottomY
+                  = hidden_field_tag :orientation
+                  .text-center
+                    %button.yellow-button-home{"data-dismiss" => "modal", :type => "button", style: 'color: #005949'} Close
+                    = submit_tag (@prospect.photo.present? ? 'Update Photo' : 'Upload'), class: 'yellow-button-home', id: 'submit-photo'

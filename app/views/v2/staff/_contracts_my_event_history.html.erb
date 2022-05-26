@@ -1,0 +1,89 @@
+<div class="v2-explore-jobs-header">
+</div>
+<div class="d-flex flex-row bd-highlight" style='margin-bottom: 26px;'>
+  <div class="v2-explore-jobs-header-title v2-explore-jobs-event">EVENT</div>
+  <div class="v2-explore-jobs-header-title v2-explore-jobs-location">LOCATION</div>
+  <div class="v2-explore-jobs-header-title v2-explore-jobs-job">JOB</div>
+  <div class="v2-explore-jobs-header-title v2-explore-jobs-date">DATE</div>
+  <div class="v2-explore-jobs-header-title v2-explore-jobs-status">RATING</div>
+</div>
+
+<ul class="v2-explore-jobs-list">
+  <% @past_gigs.includes(:job).each do |gig| %>
+    <% job = gig.job %>
+    <li>
+      <div class="v2-explore-jobs-event-container d-flex flex-row bd-highlight v2-my-jobs-completed-completed" style="cursor: default;">
+        <div class="v2-explore-jobs-event"><%= gig.event.display_name %></div>
+        <div class="v2-explore-jobs-location"><%= gig.event.location ? gig.event.location.upcase() : '' %></div>
+        <div class="v2-explore-jobs-job"><%= job ? job.name.upcase() : '' %></div>
+        <div class="v2-explore-jobs-date">
+          <%= gig.event.public_date_start.strftime('%d/%m/%Y') %>
+        </div>
+        <div class="v2-explore-jobs-status" style='margin-top: -8px;'>
+          <div class="v2-my-jobs-stars d-flex flex-row bd-highlight">
+            <% (1..5).each do |i| %>
+              <% if i <=  gig.rating_comment.to_f.round %>
+                <% #%span{class:"glyphicon yellow-star"} %>
+                <%= image_tag 'v2/Path 3213.png' %>
+              <% else %>
+                <% #%span{class:"glyphicon glyphicon-star-empty"} %>
+                <%= image_tag 'v2/Path 3216.png' %>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </li>
+  <% end %>
+</ul>
+
+<div class="table-responsive p2" style='display: none;'>
+  <table class="table">
+    <thead>
+      <tr class="head-row" style="background-color: unset" valign="bottom">
+        <th style="background-color: unset; width: 30%">
+          <b class="contracts-th">Event</b>
+        </th>
+        <th style="background-color: unset; width: 20%">
+          <b class="contracts-th">Location</b>
+        </th>
+        <th style="background-color: unset; width: 20%">
+          <b class="contracts-th">Dates</b>
+        </th>
+        <th style="background-color: unset; width: 30%">
+          <b class="contracts-th">Rating</b>
+        </th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @past_gigs.each do |gig| %>
+        <tr valign="bottom">
+          <td>
+            <%= gig.event.display_name %>
+          </td>
+          <td>
+            <%= gig.event.location %>
+          </td>
+          <td class="nowrap">
+            <%= gig.event.date_range_for_history %>
+          </td>
+          <% if gig.rating.present? %>
+            <td>
+              <% (1..5).each do |i| %>
+                <% if i <=  gig.rating_comment.to_f.round %>
+                  <% #%span{class:"glyphicon yellow-star"} %>
+                  <span class="work-history-rating-star">&starf;</span>
+                <% else %>
+                  <% #%span{class:"glyphicon glyphicon-star-empty"} %>
+                  <span class="work-history-rating-white-star">&starf;</span>
+                <% end %>
+              <% end %>
+            </td>
+          <% else %>
+            <td></td>
+          <% end %>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+</div>

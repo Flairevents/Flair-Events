@@ -1,0 +1,15 @@
+<p>Hi <%= @name %>,</p>
+
+<h1>Welcome to Flair!</h1>
+
+<p>Thank you for registering your interest to work with us. Click the link to re-direct back to your Flair staff profile.</p>
+
+<p><a href="<%= Flair::Application.config.base_https_url %>/login?token=<%= @token %>">Confirm my address and take me to Flair's Staff Zone</a></p>
+
+<p>It's now your time to shine!  Once you have completed our simple work history questionnaire and application, uploaded a head shot selfie, and booked yourself in for a 10-minute telephone interview, you're just a few steps away from unlocking many interesting casual work opportunities.</p>
+
+<p>If the above link does not work, cut-and-paste the following into your browser address bar:</p>
+
+<p><%= Flair::Application.config.base_https_url %>/login?token=<%= @token %></p>
+
+<%= render partial: 'signature' %>

@@ -1,0 +1,4 @@
+class QuoteRequest < ApplicationRecord
+
+
+end

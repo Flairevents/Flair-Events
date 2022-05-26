@@ -1,0 +1,38 @@
+= form_for event_task, url: '#', html: {id: form_id, class: 'record-details-form event_task_form_test', autocomplete: 'off'} do |f|
+  %table
+    %tr
+      %td Event:
+      %td= f.select :event_id, [], {}, class: 'form-control new-event-task-event-select', style: 'width: 300px'
+    %tr
+      %td Officer:
+      %td= f.select :officer_id, [], {}, class: 'form-control new-event-task-officer-select', style: 'width: 300px'
+    %tr
+      %td Second Officer:
+      %td= f.select :second_officer_id, [], {}, class: 'form-control', style: 'width: 300px'
+    %tr
+      %td Task:
+      %td= f.select :template_id, [], {}, class: 'form-control', style: 'width: 300px'
+    %tr
+      %td Due Date:
+      %td= f.text_field :due_date, class: 'form-control', id: form_id + '_due', style: 'width: 300px'
+    %tr
+      %td Notes:
+      %td= f.text_area :notes, rows: 5, cols: 100, class: 'form-control'
+    %tr
+      %td Completed:
+      %td= f.check_box :completed
+
+- content_for_once :js do
+  :javascript
+    $('body').on('change', '.new-event-task-event-select', function(){
+        $event_id = this.value
+        if($event_id){
+           $.ajax({
+              url: '/office/get_event_manager/' + $event_id,
+              type: 'GET',
+              success: function(data) {
+                $('.new-event-task-officer-select').val(data.officer_id)
+              }
+            })
+        }
+    });

@@ -1,0 +1,15 @@
+.me.mt1
+  .row.pl2.pr2
+    .column.small-12.large-12.pt1-small
+      =render partial: 'me_upload_photo'
+    .column.small-12.large-12
+      =render partial: 'me_performance'
+-#- if @last_gig_with_rating && @display_latest_rating
+-#  .row.pl2.pr2
+-#    .column.small-12
+-#      .h5.mt1
+-#        Evaluation from your latest event
+-#      .p.strong
+-#        ="#{@last_gig_with_rating.event.display_name} (#{@last_gig_with_rating.event.date_range_for_show})"
+-#      .p
+-#        ="Rating: #{@last_gig_with_rating_comment}"

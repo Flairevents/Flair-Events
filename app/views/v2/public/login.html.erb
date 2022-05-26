@@ -1,0 +1,26 @@
+<%= content_for :head do %>
+  <title>Log In to your Flair Account</title>
+  <meta name="description" content="Casual flexible jobs should be rewarding for you and your bank account. Log in with Flair anytime, check out all up and coming events, select your shifts and keep on top of gaps in your schedules." />
+<% end %>
+<div class="public login">
+  <%= render :partial => "v2/shared/nav" %>
+  <div class="v2-login-background"></div>
+  <div class="content">
+    <div class="content-spacer"></div>
+    <div class="content-inner">
+      <div class="d-flex flex-row-reverse bd-highlight">
+        <div class="col p-0">
+          <div class='v2-login-page'>
+            <div class="v2-login-form-container">
+            </div>
+            <%= render :partial => 'login_form' %>
+            <%= render partial: 'forgot_password' %>
+          </div>
+        </div>
+        <div class="col p-0"></div>
+      </div>
+    </div>
+  </div>
+  <div class="content-after"></div>
+  <%= render :partial => "v2/application/footer" %>
+</div>

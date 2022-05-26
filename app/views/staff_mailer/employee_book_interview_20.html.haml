@@ -1,0 +1,17 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td
+      We have over the phone interview slots available every day this week. Our team is here to help and answer your questions. Go ahead and book
+      %a{ href: "#{Flair::Application.config.base_https_url}/staff#interview" } here
+  %tr
+    %td Did you know that Flair has been operating since 2000 and on average have over 25,000 jobs per year!
+  %tr
+    %td We look forward to speaking with you.
+= render partial: 'staff_mailer/signature'

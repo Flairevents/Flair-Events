@@ -1,0 +1,124 @@
+<div class="content upload-photo text-center">
+  <div class="photo-edit"></div>
+  <div class="staffzone-photo-area">
+    <div class="container">
+      <div class="modal fade" id="edit-uploaded-photo" role="dialog">
+        <div class="modal-dialog modal-lg">
+          <div class="modal-content mt5 v2-upload-photo-container">
+            <div class="modal-body out-team-message_moda" style="color: white;">
+              <div class="v2-upload-photo-header">
+                <% if @prospect.photo.present? %>
+                  <div id="photo_present" present="true" style="display:none;"></div>
+                  Edit your photo
+                <% else %>
+                  <div id="photo_present" present="false" style="display:none;"></div>
+                  Photo time
+                <% end %>
+              </div>
+              <div class="v2-upload-photo-caption v2-upload-photo-caption-desk">Upload a selfie <br /> Happy, professional head shots please.</div>
+              <div class="v2-upload-photo-caption v2-upload-photo-caption-mobile">Upload a selfie <br /> Happy,  professional head shots please.</div>
+              <div class="v2-upload-photo-caption v2-upload-photo-caption-drag" style="display: none">Zoom, drag or double click to reload.</div>
+              <div class="v2-profile-photo-show-container">
+                <% if @prospect.photo.present? %>
+                  <img class="v2-profile-image v2-upload-photo-teal-image" src="<%= @prospect.photo_url %>"/>
+                <% else %>
+                  <%= image_tag 'v2/logo_teal.png', class: 'v2-upload-photo-teal-image' %>
+                  <%= image_tag 'v2/Group 401.png', class: 'v2-upload-photo-camera-image' %>
+                <% end %>
+              </div>
+              <div class="croppie-photo-preview"></div>
+              <div id="photo-upload">
+                <%= form_tag '../staff/upload_photo', multipart: true, id: 'photo-form' do |f| %>
+                  <%= hidden_field_tag :authenticity_token, form_authenticity_token %>
+                  <%= file_field_tag :photo, required: true, accept: @accepted_images_profile, id: 'photo-input', class: 'input-center', style: 'display:none;' %>
+                  <%= hidden_field_tag :cropLeftX %>
+                  <%= hidden_field_tag :cropTopY %>
+                  <%= hidden_field_tag :cropRightX %>
+                  <%= hidden_field_tag :cropBottomY %>
+                  <%= hidden_field_tag :orientation %>
+                  <div class="text-center">
+                    <button class="fl-flash__close-btn" data-dismiss="modal" style="color: white;border:none;" id="upload-photo-close" type="button"></button>
+                    <%= submit_tag 'SAVE', class: 'v2-upload-phot-submit', id: 'submit-photo', style: 'display:none;' %>
+                    <button class='v2-upload-phot-submit' id="upload-photo">UPLOAD</button>
+                  </div>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<% content_for_once :js do %>
+  <script>
+    $('#edit-uploaded-photo').on('show.bs.modal', function (event) {
+      var button = $(event.relatedTarget)
+      var required = button.data('required')
+      var modal = $(this)
+
+      if (required) {
+        $('#upload-photo-close').css('display', 'none')
+        modal.find('.v2-upload-photo-caption').text('Happy and professional head shot for us to cross check with your ID and ‘Share Code’ if required.')
+        $('#photo-form').attr("id","photo-form-required");
+
+        $('#photo-form-required').on('submit', function(e) {
+          e.preventDefault()
+          var cropData = $('.croppie-photo-preview').croppie('get');
+          
+          var fd = new FormData();
+
+          $('#cropLeftX'  ).val(cropData['points'][0]);
+          $('#cropTopY'   ).val(cropData['points'][1]);
+          $('#cropRightX' ).val(cropData['points'][2]);
+          $('#cropBottomY').val(cropData['points'][3]);
+          $('#orientation').val(cropData['orientation'] == undefined ? 1 : cropData['orientation']);
+          
+          $('#photo-form-required').serializeArray().forEach(function (param) 
+          { 
+            fd.append(param.name, param.value) 
+          })
+
+          fd.append('photo', $('#photo-input').prop('files')[0])
+          $.ajax({
+            url: '/staff/upload_photo.json',
+            type: 'POST',
+            data: fd,
+            processData: false,
+            contentType: false,
+            success: function(data, status, xhr) {
+              $("#upload-photo-close").trigger('click')
+              $('.v2-profile-image').attr('src', '/prospect_photo/' + data.path )
+              $('.flair-nav-menu__profile-photo').attr('src', '/prospect_photo/' + data.path )
+              $('#modal-required-button-upload').css('display', 'none')
+              $('#id-upload-submit').css('display', 'block')
+              $('#id-upload-submit').trigger('click')
+            },
+            error: function(xhr, status, error) {
+              $("#upload-photo-close").trigger('click')
+
+              $('body').append(`
+                <div class="v2-flash-bg">
+                  <div class="v2-flash-body">
+                  <i class="icon--notice-flag"></i>
+                  <div class="v2-flash-message">
+                      ${xhr.responseJSON.error}
+                  </div>
+                  <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                      <span>Close</span>
+                  </a>
+                  <div class="clear"></div>
+                  </div>
+                </div>
+              `)
+            }
+          })
+        });
+      } else {
+        $('#photo-form').attr("id","photo-form");
+        $('#upload-photo-close').css('display', '')
+        modal.find('.v2-upload-photo-caption').html('Upload a selfie <br /> Happy, professional head shots please.')
+      }
+    })
+  </script>
+<% end %>

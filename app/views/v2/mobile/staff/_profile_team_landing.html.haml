@@ -1,0 +1,99 @@
+.d-flex.justify-content-center{style: "margin-top: 25px;"}
+    .v2-profile-small-container{style: "margin-right: 10px;"}
+        .v2-profile-container-bg
+        .v2-white-normal-bold{style: "margin-top: 25px;"}
+            ACTIVE CONTRACTS 
+        .v2-white-big-bold.text-center
+            =@confirmed_events.count
+    .v2-profile-small-container
+        .v2-profile-container-bg
+        .v2-white-normal-bold{style: "margin-top: 25px;"}
+            CONTRACTS WORKED
+        .v2-white-big-bold.text-center 
+            =@past_gigs.count
+
+.v2-profile-big-container 
+    .v2-profile-container-bg{style: "left:-3vw;width:100vw;border-radius:0;"}
+    %div{style: "padding: 30px;"}
+        .v2-white-big-bold.text-center{style: "padding-bottom: 18px;"} 
+            Welcome to your staff zone
+        .v2-white-normal.text-center
+            Snapshots view of your next jobs with flair.
+            %br/
+            Full details in "My Jobs"
+        - if  @confirmed_events.count > 0
+            %br/
+            .event-profile-container.d-flex.flex-row 
+                .v2-profile-jobs-header-title EVENT 
+                .v2-profile-jobs-header-title JOB 
+                .v2-profile-jobs-header-title DATE 
+                .v2-profile-jobs-header-title STATUS
+            - events = @confirmed_events + @pending_events
+            - (0...4).each do |i|
+                - event = events[i]
+                - if event
+                    - gig_request = @prospect.gig_requests.where(event_id: event.id).first
+                    - gig = @prospect.gigs.where(event_id: event.id).first
+                    - job = gig_request ? gig_request.job : gig ? gig.job : nil
+                    - date = event.public_date_start
+                    .event-profile-container-white.d-flex.flex-row 
+                        .event-profile-container-white-content= event.display_name
+                        .event-profile-container-white-content= job ? (job.public_name != "" && job.public_name != nil) ? job.public_name : job.name : ''
+                        .event-profile-container-white-content
+                            = date ? date.strftime("%e") : ''
+                            %sup{style: "margin-left: -4px;"}= date ? date.day.ordinalize.split(//).last(2).join : ''
+                            =date ? date.strftime("%b") : ''
+                        .event-profile-container-white-content
+                            - if (gig_request ? gig_request.spare == true ? true : false : false)
+                                .v2-profile-job-spare Reserve
+                            - else
+                                - if @status[event.id] == 'Pending'
+                                    .v2-profile-job-pending PENDING
+                                - elsif @status[event.id] == 'Signed Up'
+                                    .v2-profile-job-signed-up ACTIVE
+                                - elsif @status[event.id] == 'In Progress'
+                                    .v2-profile-job-signed-up In Progress
+                                - elsif @status[event.id] == 'Confirmed'
+                                    .v2-profile-job-signed-up Confirmed
+                                - elsif @status[event.id] == 'Confirmation Required'
+                                    .v2-profile-job-spare Requires Confirmation!
+        %br/
+        %center 
+            %a{href: '/staff#jobs'} 
+                %button.v2-profile-buttons{onclick: '$("#v2-profile-explore-jobs").click()'} My Jobs
+
+.v2-profile-big-container
+    .v2-profile-container-bg{style: "left:-3vw;width:100vw;border-radius:0;"}
+    %div{style: "padding: 30px;"}
+        .v2-white-big-bold.text-center{style: "margin-bottom: 16px;"}  Your selling points and job interest
+        .v2-white-normal.text-center{style: "margin-bottom: 16px;"} Match your skills to rewarding events and flexible jobs
+        .d-flex.justify-content-between
+            = image_tag (asset_path "v2/Group 4105.png"), style: "width: 87px; height: 86px"
+            = image_tag (asset_path "v2/Group 4106.png"), style: "width: 87px; height: 86px"
+            = image_tag (asset_path "v2/Group 4107.png"), style: "width: 87px; height: 86px"
+        .d-flex.justify-content-between{style: "margin-top: 18px;"}
+            = image_tag (asset_path "v2/Group 4108.png"), style: "width: 87px; height: 86px"
+            = image_tag (asset_path "v2/Group 4109.png"), style: "width: 87px; height: 86px"
+            = image_tag (asset_path "v2/Group 4110.png"), style: "width: 87px; height: 86px"
+        %br/
+        %center 
+            %a{href: "#application-skills"}
+                %button.v2-profile-buttons{onclick: '$("#v2-profile-applications").click();$("#v2-profile-application-header-skills").click();'} My Skills
+.v2-profile-big-container{style: "position:relative;height: 550px;"}
+    .v2-profile-container-bg{style: "left:-3vw;width:100vw;border-radius:0;"}
+    %div{style: "padding: 30px;"}
+        .v2-white-big-bold.text-center{style: "margin-bottom: 16px;"} 
+            Real jobs. Real Simple.
+        .v2-white-normal.text-center{style: "margin-bottom: 16px;"}
+            Filter by industry or location to view job descriptions then simply select a job and apply.
+        .v2-landing-page-big-image
+        -# =image_tag (asset_path "v2/Group 4111.png"), class: "v2-landing-page-big-image"
+        %br/
+        %center 
+            %a{href: "/staff/events"}
+                %button.v2-profile-buttons{style: "margin-top: 290px;"} Job Board
+%br/
+%center 
+    %button.v2-profile-buttons{onclick: '$("#v2-profile-my-profile").click()'} Edit My Profile
+%br/
+            

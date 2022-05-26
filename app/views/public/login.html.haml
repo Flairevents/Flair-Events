@@ -1,0 +1,14 @@
+.public.login
+  = render :partial => "shared/nav"
+  .content
+    .content-spacer
+    .content-inner
+      .row.darkgreen.background.background-photo-strip-2.expanded{style: "height:200px"}
+      .band-heading.row.expanded--restricted
+        %h3 #getonboard
+      .row.padding-top-bottom.expanded--restricted.mb2.align-center
+        .column.small-7.medium-7.pt1
+          = render :partial => 'login_form'
+        -#= render partial: 'shared/covid'
+  .content-after
+  = render :partial => "footer"

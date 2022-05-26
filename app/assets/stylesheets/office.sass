@@ -1,0 +1,1755 @@
+// OFFICE ZONE STYLES
+// We use Twitter Bootstrap to style most of the UI
+// Custom styles for Alex's table widget are in table-widget.css
+// sprites.css contains machine-generated CSS for application-wide CSS sprites file
+
+// bootstrap-custom.css contains the compiled less for selected files from the npm installation:
+
+/*
+ *= require table-widget
+ *= require flash
+ *= require jquery-ui
+ *= require jquery-ui-multidatespicker/jquery-ui.multidatespicker
+ *= require handsontable/dist/handsontable.full
+ *= require multiselect/css/multi-select
+ *= require select2/dist/css/select2
+ *= require bootstrap3/dist/css/bootstrap
+ *= require dropzone/dist/dropzone
+ */
+
+@import "mixins"
+@import "font-awesome-sprockets"
+@import "font-awesome"
+
+@font-face
+  font-family: 'Glyphicons Halflings'
+  src: font-url('glyphicons-halflings-regular.eot')
+  src: font-url('glyphicons-halflings-regular.eot?#iefix') format("embedded-opentype"), font-url('glyphicons-halflings-regular.woff2') format("woff2"), font-url('glyphicons-halflings-regular.woff') format("woff"), font-url('glyphicons-halflings-regular.ttf') format("truetype"), font-url('glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format("svg")
+
+body
+  background-color: #fffffe
+
+hr
+  margin: 5px 0
+
+.flash
+  box-sizing: content-box
+
+//----------------------------------------------------------------
+// Bootstrap 3 Overrides
+// These mainly bring back the Bootstrap 2 way for a few things
+//----------------------------------------------------------------
+.form-control
+  height: unset
+  display: unset
+  padding: 1px 2px
+
+th
+  text-align: center
+
+table
+  border-collapse: separate
+  border-spacing: 2px
+
+label
+  font-weight: normal
+
+.btn
+  line-height: 17px
+
+.btn-default
+  background-color: #f9f9f9
+  border-color: #ccc
+
+input[type="checkbox"]
+  margin: 0px
+
+.hire-checkbox.never-dirty, .big-box
+    -ms-transform: scale(2) /* IE */
+    -moz-transform: scale(2) /* FF */
+    -webkit-transform: scale(2) /* Safari and Chrome */
+    -o-transform: scale(2) /* Opera */
+    transform: scale(2)
+
+// This is for our custom modals, NOT bootbox modals
+.modal:not(.bootbox)
+  top: 10%
+  left: 50%
+  bottom: unset
+  right: unset
+  z-index: 1050
+  margin-left: -280px
+  background-color: #fff
+  border: 1px solid rgba(0,0,0,0.3)
+  border-radius: 6px
+  box-shadow: 0 3px 7px rgba(0,0,0,0.3)
+  background-clip: padding-box
+  outline: none
+
+  .modal-header h3
+    margin: 0
+    line-height: 30px
+
+//----------------------------------------------------------------
+// SELECT2
+// Make the multiselect dropdown gui more intuitive
+// Inspired by https://github.com/select2/select2/issues/167
+//----------------------------------------------------------------
+
+.select2-selection
+  padding-right: 20px
+
+.select2-selection__arrow b
+  border-color: rgba(255, 255, 255, 0) transparent transparent transparent !important
+
+.select2-container--default, .select2-selection--multiple, .select2-selection--single
+  position: relative
+  min-width: 266px
+
+  &:before
+    content: '\e114'
+    font-family: 'Glyphicons Halflings'
+    display: block
+    position: absolute
+    top: 11px
+    right: -4px
+    bottom: 0
+    width: 20px
+    color: #555
+    cursor: pointer
+
+  &.select2-container--open:before
+    display: none
+
+  &.select2-container--open
+    .select2-selection--multiple:before, .select2-selection--single:before
+      content: '\e014'
+      color: rgba(255,0,0,0.85)
+
+//----------------------------------------------------------------
+// Make Select2 border color match the bootstrap dropdowns
+//----------------------------------------------------------------
+.select2-dropdown
+  border: 1px solid #ccc
+.select2-container--default .select2-selection--single
+  border: 1px solid #ccc
+.select2-container--default .select2-selection--multiple
+  border: 1px solid #ccc
+
+//----------------------------------------------------------------
+// Reduce Select2 row height - Jon Long @ VoxelCreative
+//----------------------------------------------------------------
+
+.select2-container--default .select2-selection--multiple .select2-selection__rendered
+  padding: 0 1px
+
+.select2-container--default .select2-selection--multiple .select2-selection__choice
+  margin: 1px
+
+span.select2.select2-container.select2-container--default
+  line-height: 0
+
+.select2-container .select2-selection--multiple
+  min-height: 0
+
+li.select2-selection__choice
+  line-height: 1.28em
+
+.select2-results__option
+  padding-top: 0
+  padding-bottom: 0
+
+//----------------------------------------------------------------
+// Login Form
+//----------------------------------------------------------------
+
+.login-form
+  padding-top: 50px
+
+//----------------------------------------------------------------
+// OVERALL LAYOUT
+// RULE: Nothing should ever exceed one page-full!
+// This is to make it appear like a native app
+// If there is content which can't fit on a single page, that content should be wrapped
+//   in a <div> with overflow-y: auto (so a scrollbar will appear when necessary)
+//----------------------------------------------------------------
+
+// The viewport is divided into vertically stacked 'title bar', 'view tabs', and 'main viewport' areas
+//   which must exactly fill the window 100%
+
+$title_bar_height: 23px
+$view_tabs_height: 34px
+$header_height: 34px
+//$header_height: $title_bar_height + $view_tabs_height
+
+#title-bar
+  height: $title_bar_height
+  float: right
+  clear: left
+#view-tabs
+  height: $view_tabs_height
+#main-viewport
+  position: absolute
+  top: $header_height
+  bottom: 0px
+  width: 100%
+
+// When changes are being saved, we indicate that by displaying an animated spinner
+// I want the spinner to go on the far right of the tab area,
+//   but the tabs are 100% width (necessary so line at bottom of tab area is unbroken)
+// So we will use absolute positioning, relative to the viewport, to make the spinner
+//   land in the right place
+#view-tabs .saving-changes
+  position: absolute
+  top: $title_bar_height+10px
+  right: 5px
+
+.tab-pane
+  height: 100%
+  padding: 0 10px
+
+// Many views use command bars, filter bars, and pagination bars:
+
+.nav-tabs > li > a
+  padding: 4px 6px
+  margin-right: 2px
+
+$command_bar_height: 30px
+$filter_bar_height: 50px
+$pagination_bar_height: 22px
+$horizontal_rule_height: 12px
+
+$command_filter_pagination_height: $command_bar_height + ($horizontal_rule_height * 2) + $filter_bar-height + $pagination_bar_height
+$command_pagination_height: $command_bar_height + $horizontal_rule_height + $pagination_bar_height
+
+.command-bar
+  height: $command_bar_height
+.filter-bar
+  height: $filter_bar_height
+  line-height: 15px
+  white-space: nowrap
+  td
+    text-align: center
+  // If you change any of the following, you must also change the assumed values in FilterBar.setSelectWidth
+  select
+    font-family: 'system-ui'
+    font-size: 1em
+    font-style: normal
+
+.filter-bar-friend
+  height: $filter_bar_height
+  line-height: 15px
+  white-space: nowrap
+  td
+    text-align: center
+
+.pagination-bar
+  height: $pagination_bar_height
+
+.filter-bar-container
+  overflow-x: scroll
+
+// And several of them have a list view come underneath a command bar, filter bar, and pagination bar
+// (separated by horizontal rules)
+#planner, #events, #gigs, #team, #applicants, #content, #officers, #faq, #library, #bulkInterviews, #clients, #invoices
+  .record-list
+    position: absolute
+    bottom: 10px
+    left: 10px
+    right: 10px
+
+    overflow-x: hidden
+    overflow-y: auto
+
+    white-space: nowrap
+    td
+      height: 22px
+      overflow-x: hidden
+
+$record_list_spacing: 2px + 18px // Add 18px for the scrollbar on the too long filters
+
+#planner, #events, #gigs, #team, #applicants, #content, #bulkInterviews, #clients, #invoices, #officers
+  > .list-view .record-list
+    top: $command_filter_pagination_height + $record_list_spacing
+
+
+#prospect-events
+  .record-list
+    .table-widget
+      td:nth-child(4)
+        width: 15px
+      td:nth-child(5)
+        width: 20px
+
+#prospect-future-events
+  .record-list
+    .table-widget
+      td:nth-child(4)
+        width: 20px
+
+#gig-prospect-events
+  .record-list
+    .table-widget
+      td:nth-child(4)
+        width: 15px
+      td:nth-child(5)
+        width: 20px
+
+#gig-prospect-future-events
+  .record-list
+    .table-widget
+      td:nth-child(4)
+        width: 20px
+
+#bulkInterviews .record-list 
+  td:nth-child(4)
+    width: 300px !important
+  td:nth-child(5)
+    width: 300px !important
+  td:nth-child(6)
+    width: 300px !important
+
+#faq, #library
+  > .list-view .record-list
+    top: $command_pagination_height + $record_list_spacing
+
+.pl10
+  padding-left: 10px
+
+.pl30
+  padding-left: 30px
+
+#gigs
+  .filter-bar
+    td:nth-child(2)
+      min-width: 150px
+    td:nth-child(3)
+      min-width: 150px
+
+  .hired-view
+    .record-list
+      margin-top: 20px
+    .table-widget
+      display: block
+      overflow-x: auto
+      white-space: nowrap
+      td:nth-child(2)  // Call checkbox
+        text-align: center
+        width: 1%
+      td:nth-child(3) // Remove checkbox
+        text-align: center
+        width: 1%
+      td:nth-child(4) // Misc checkbox
+        text-align: center
+        width: 1%
+      td:nth-child(5) // Pub checkbox
+        text-align: center
+        width: 1%
+      td:nth-child(6) // Name
+        min-width: 200px
+      td:nth-child(11) // Tags
+        width: 130px
+      td:nth-child(12) // Notes
+        min-width: 200px
+      td:nth-child(13)  // Email
+        width: 1%
+      td:nth-child(14) // Tax
+        width: 1%
+      td:nth-child(15) // ID
+        width: 1%
+      td:nth-child(16) // Live
+        min-width: 40px
+      td:nth-child(17) // Age
+        width: 1%
+  .applied-view
+    .record-list
+      margin-top: 20px
+    .table-widget
+      display: block
+      overflow-x: auto
+      td
+        text-align: center
+      td:first-child
+        width: 2%
+      td:nth-child(3)
+        width: 2%
+      td:nth-child(4)
+        width: 3%
+      td:nth-child(5)
+        width: 20%
+        text-align: left
+      td:nth-child(6)
+        width: 10%
+      td:nth-child(7)
+        width: 1%
+        .interest-and-skill-label, .skill-and-interest-padding-left
+          padding-left: 0px
+      td:nth-child(8) // size
+        text-align: left
+      td:nth-child(10)
+        min-width: 250px
+
+  .tags-dropdown-container.select2-container--default
+    min-width: 150px
+
+  .tags-dropdown-container * .select2-selection--multiple
+    min-width: 150px
+
+#invoices
+  .record-list
+    .table-widget
+      td:nth-child(5)
+        max-width: 200px
+
+  .invoice-form table
+    max-width: 500px
+#events
+  .record-list#events-list
+    .table-widget
+      display: block
+      overflow-x: auto
+      td:first-child  // this is a checkbox
+        text-align: center
+        width: 1%
+
+#events #event-expenses .record-list
+  .table-widget
+    td:nth-child(2)
+      width: 120px
+    td:nth-child(3)
+      width: 70px
+    td:nth-child(5)
+      width: 1%
+
+#applicants
+  .record-list
+    display: block
+    overflow-x: auto
+    margin-top: 20px
+    .table-widget
+      th:first-child
+        text-align: center
+      td:first-child
+        text-align: center
+        width: auto
+      //td:nth-child(2)
+      //  min-width: 215px
+      //td:nth-child(4)
+      //  min-width: 230px
+      td:nth-child(8) //Notes
+        max-width: 200px
+        text-overflow: ellipsis
+        white-space: nowrap
+        overflow: hidden
+      td:nth-child(10)
+        text-align: center
+
+#team
+  .list-view
+    .record-list
+      .table-widget
+        display: block
+        overflow-x: scroll
+        th:first-child
+          text-align: center
+        th:nth-child(2)
+          min-width: 250px
+        td:first-child
+          text-align: center
+          width : 30px
+        td:nth-child(3)
+          min-width: 230px
+        td:nth-child(5)
+          min-width: 100px
+        td:nth-child(7)
+          min-width: 50px
+        td:nth-child(8)
+          min-width: 50px
+        td:nth-child(9)
+          min-width: 50px
+        td:nth-child(10)
+          min-width: 300px
+
+.header-symbol
+  font-size: 20px
+
+.record-edit, #invoices .record-list
+  .table-widget
+    td
+      padding-right: 8px
+    input
+      width: 100%
+
+#events
+  #event-shifts .record-list .table-widget
+    td:nth-child(4)
+      width: 100px
+    td:nth-child(5)
+      width: 100px
+  #event-locations .record-list .table-widget
+    td
+      input
+        min-width: 50px
+    td:first-child
+      input
+        min-width: 150px
+#clients
+  #client-contacts .record-list .table-widget
+    td
+      input
+        min-width: 100px
+    td:nth-child(3)
+      input
+        min-width: 225px
+  #client-future-events
+    .table-widget
+      td:first-child  // Checkbox
+        width: 1%
+
+//----------------------------------------------------------------
+// GIGS MISC
+//----------------------------------------------------------------
+
+#assignment-details
+  display: inline-block
+
+  #assignment-details-panel
+    display: inline-block
+    margin-left: 10px
+    margin-bottom: 10px
+    margin-right: 10px
+    .summary-table
+      .stat-column
+        max-width: 90px
+      .shift-column
+        width: 150px
+      td
+        white-space: nowrap
+//----------------------------------------------------------------
+// COMMON STYLES
+//----------------------------------------------------------------
+
+#applicants-requests
+  .record-list
+    margin-top: 30px
+
+a.disabled
+  color: #ccc
+  cursor: default
+
+.command-bar .btn-toolbar
+  margin-top: 0
+  margin-bottom: 0
+
+textarea
+  border: 1px solid rgb(203, 203, 203)
+  resize: none
+
+// Make overflow visible for command bars, so we can use dropdown menus
+.command-bar
+  overflow: visible
+  .btn-toolbar
+    overflow: visible
+  .btn-group
+    overflow: visible
+
+// Make overflow visible for popovers too, so we can see the little arrow
+.popover
+  overflow: visible
+  max-height: none
+.arrow
+  overflow: visible
+
+//Make overlflow visible for btn-groups (with drop-down buttons)
+.btn-group
+  overflow: visible
+
+.align-center
+  text-align: center
+
+.align-right
+  text-align: right
+
+.modal.fade.in
+  top: 5% !important // default is 10%, it wastes too much space
+
+// for table widgets
+.table-widget
+  // boolean columns only have a check or X, so it's better to make them narrow
+  td.td-boolean
+    width: 35px
+
+  .hilite
+    background: #FFFF00
+  .hilite-green
+    background: #76FF03
+  .hilite-orange
+    background: orange;
+
+  input.readonly
+    border-style: hidden
+    background-color: inherit
+
+table
+  .hilite
+    background: #f4ee4a
+
+// For putting things other than 'a' in dropdown menus
+.dropdown-item
+  display: block
+  padding: 3px 20px
+  clear: both
+  white-space: nowrap
+
+.dropdown-menu > li > label:hover
+  //Copied from Bootstrap dropdowns
+  text-decoration: none
+  color: #ffffff
+  background-color: #0081c2
+  background-image: -moz-linear-gradient(top, #0088cc, #0077b3)
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0077b3))
+  background-image: -webkit-linear-gradient(top, #0088cc, #0077b3)
+  background-image: -o-linear-gradient(top, #0088cc, #0077b3)
+  background-image: linear-gradient(to bottom, #0088cc, #0077b3)
+  background-repeat: repeat-x
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#ff0088cc', endColorstr='#ff0077b3', GradientType=0)
+
+// by default, .modal-body does not exceed 400px height
+// that isn't enough. we want to make full use of the available screen space,
+//   without overflowing past the bottom of the screen
+// putting a % as max-height doesn't work, unless we fix the height of .modal
+//   but I don't want to do that
+// the only good solution I have found is to use @media queries to adapt to screen size
+
+// desired max height: (screen height - 10%) - 60px for modal header and footer
+@media (max-height: 800px)
+  .modal-body
+    max-height: 520px !important // allowing for a screen height as low as 640px
+@media (min-height: 801px) and (max-height: 1000px)
+  .modal-body
+    max-height: 660px !important
+@media (min-height: 1001px)
+  .modal-body
+    max-height: 840px !important
+.modal-body
+  overflow: visible
+.scanned-id-dialog.modal, .scanned-dbs-dialog.modal, .scanned-bar-license-dialog.modal, .assignment-email-dialog
+  .modal-body
+    overflow: scroll
+
+// for CSS-based image rotate
+img
+  transform-origin: top left /* IE 10+, Firefox, etc. */
+  -webkit-transform-origin: top left /* Chrome */
+  -ms-transform-origin: top left /* IE 9 */
+img.rotate90
+  transform: rotate(90deg) translateY(-100%)
+  -webkit-transform: rotate(90deg) translateY(-100%)
+  -ms-transform: rotate(90deg) translateY(-100%)
+img.rotate180
+  transform: rotate(180deg) translate(-100%,-100%)
+  -webkit-transform: rotate(180deg) translate(-100%,-100%)
+  -ms-transform: rotate(180deg) translateX(-100%,-100%)
+img.rotate270
+  transform: rotate(270deg) translateX(-100%)
+  -webkit-transform: rotate(270deg) translateX(-100%)
+  -ms-transform: rotate(270deg) translateX(-100%)
+
+// for image zoom widget
+a.zoomimg
+  display: inline-block
+  position: relative
+  border: solid 1px #000
+  width: 400px
+  height: 400px
+  img
+    object-fit: contain
+    width: 400px
+    height: 400px
+
+.zoomed
+  img
+    object-fit: contain
+    max-width: none
+
+.hidden
+  display: none
+
+.profile-screening-table
+  border-spacing: 0
+  border-collapse: collapse
+  text-align: center
+  td
+    border: 1px solid #CCC
+    height: 40px
+    padding: 0px 4px
+    min-width: 140px
+    .dropdown
+      width: 110px
+  th
+    border: 1px solid #CCC
+    padding: 0px 10px
+    height: 25px
+    font-weight: normal
+    background-color: #f3f3f3
+    color: #222
+  .char-column
+    min-width: 80px
+  select
+    width: 60px
+
+.profile-skills-table
+  border-spacing: 0
+  border-collapse: collapse
+  text-align: center
+  td
+    border: 1px solid #CCC
+    height: 40px
+    padding: 0px 4px
+    min-width: 95px
+  th
+    border: 1px solid #CCC
+    padding: 0px 10px
+    height: 25px
+    font-weight: normal
+    background-color: #f3f3f3
+    color: #222
+  select
+    width: 85px
+
+
+.summary-table
+  border-spacing: 0
+  border-collapse: collapse
+  text-align: center
+  td
+    border: 1px solid #CCC
+    height: 22px
+    padding: 0px 4px
+    min-width: 70px
+  th
+    border: 1px solid #CCC
+    padding: 0px 10px
+    height: 25px
+    font-weight: normal
+    background-color: #f3f3f3
+    color: #222
+
+.visa_expired
+  color: red
+  font-weight: bold
+
+//----------------------------------------------------------------
+// TOOLTIPS
+//----------------------------------------------------------------
+
+.tooltip-inner
+  white-space: pre-line
+  max-width: 500px
+//----------------------------------------------------------------
+// TITLE BAR
+//----------------------------------------------------------------
+
+#title-bar h1
+  margin-top: 10px
+
+.office-zone-logo
+  display: inline-block
+  vertical-align: middle
+  margin-right: 5px
+
+#logged-in
+  margin: 5px 10px
+  text-align: right
+
+//----------------------------------------------------------------
+// "LOADING" POPUP
+//----------------------------------------------------------------
+
+#loading
+  @include centered(200px, 150px)
+
+  background: #fff
+  border: 1px solid #000
+
+  display: table // necessary for following '#loading span' style to work
+
+#loading span
+  // center vertically in #loading
+  display: table-cell
+  vertical-align: middle
+
+  text-align: center // and horizontally
+
+#loading span img
+  vertical-align: middle
+
+//----------------------------------------------------------------
+// LIST VIEWS
+//----------------------------------------------------------------
+
+.record-list
+  outline: none // don't like the effect when list view gets the focus for keyboard input
+
+.page-selector
+  text-align: center
+
+.red-text
+  color: red
+
+.red-text--bold
+  color: red
+  font-weight: bold
+
+.blue-text
+  color: blue
+
+.blue-text--bold
+  color: blue
+  font-weight: bold
+
+//----------------------------------------------------------------
+// MAP VIEWS
+//----------------------------------------------------------------
+
+#events, #team, #applicants, #bulkInterviews
+  .map-view
+    position: absolute
+    top: $command_bar_height + $horizontal_rule_height + $filter_bar_height + $horizontal_rule_height + 5px
+    bottom: 0px
+    left: 10px
+    right: 10px
+
+    overflow: hidden
+
+.map
+  position: absolute
+  top: 0px
+  bottom: 10px
+  width: 100%
+
+//----------------------------------------------------------------
+// HOME VIEW
+//----------------------------------------------------------------
+
+.tab-pane#home
+  overflow-x: hidden
+  overflow-y: scroll
+
+#home
+  table
+    border-collapse: collapse
+
+    td, th, tr
+      padding: 3px
+      border: 1px solid #999
+
+    .home--finished-event
+      background-color: lightgrey
+    .home--even-month
+      background-color: #FFFFE6 // Light Yellow
+    .home--odd-month
+      background-color: #EDFFE6 // Light Green
+    .new-week
+      border-top-width: 3px
+      border-top-color: green
+  .tab-content#home-events
+    margin-bottom: 10px
+
+.refresh-data-home
+  margin-top: 55px
+
+.refresh-data-todo
+  margin-top: 29px
+
+.zone_summary
+  table-layout: fixed
+  width: 1100px
+  td
+    width: 80px
+    text-align: center
+
+.zone_summary_team
+  table-layout: fixed
+  min-width: 150px
+  td
+    width: 80px
+    text-align: center
+  border-spacing: 0
+  border-collapse: collapse
+  text-align: center
+  td
+    border: 1px solid #CCC
+    height: 22px
+    padding: 0px 4px
+  th
+    border: 1px solid #CCC
+    padding: 0px 10px
+    height: 25px
+    font-weight: normal
+    border-spacing: 0
+    background-color: #f3f3f3
+    color: #222
+  td
+    white-space: nowrap
+  margin-bottom: 10px
+
+.zone_summary_applicant
+  table-layout: fixed
+  min-width: 150px
+  td
+    width: 80px
+    text-align: center
+  border-spacing: 0
+  border-collapse: collapse
+  text-align: center
+  td
+    border: 1px solid #CCC
+    height: 22px
+    padding: 0px 4px
+  th
+    border: 1px solid #CCC
+    padding: 0px 10px
+    height: 25px
+    font-weight: normal
+    background-color: #f3f3f3
+    color: #222
+  td
+    white-space: nowrap
+  margin-bottom: 10px
+
+
+.snds-RED
+  background-color: #ff000040
+
+.snds-YELLOW
+  background-color: #efff0040
+
+.snds-GREEN
+  background-color: #27ff0040
+
+//----------------------------------------------------------------
+// EVENTS VIEW
+//----------------------------------------------------------------
+
+#event-accomodation
+  td:first-child
+    width: 115px
+
+#events #event-jobs .record-list
+  position: static
+
+  .table-widget
+    td:nth-child(2)  // Name
+      width: 170px
+    td:nth-child(3) // Pay (-17)
+      width: 55px
+    td:nth-child(4) // Pay (18-20)
+      width: 55px
+    td:nth-child(5) // Pay (21-24)
+      width: 55px
+    td:nth-child(6) // Pay (25+)
+      width: 55px
+    td:nth-child(7) // Public
+      width: 1%
+    td:nth-child(8) // Featured
+      width: 1%
+    td:nth-child(9) // Public Name
+      width: 170px
+    td:nth-child(10) // Number of Jobs
+      width: 55px
+      input 
+        width: 50%
+    td:nth-child(11) // Job Requirement
+      textarea
+        width: 100%
+    td:nth-child(12) // Delete
+      width: 1%
+
+#events #event-tags .record-list
+  position: static
+
+  .table-widget
+    td:nth-child(2)  // Name
+      width: 200px
+#events #event-leaders .record-list
+  position: static
+
+#events #event-assignments
+  .record-list
+    position: static
+
+#events #event-tasks
+  .record-list
+    .table-widget
+  .table-widget
+    td:nth-child(2) // Due Date
+      width: 130px
+    td:nth-child(3) // Done
+      text-align: center
+      width: 1%
+    td:nth-child(4) // Task
+      width: 150px
+    td:nth-child(5) // W2Live
+      text-align: center
+    td:nth-child(7) // Manager Notes
+      text-align: center
+    td:nth-child(8) // Officer
+      width: 100px
+    td:nth-child(9) // Del
+      text-align: center
+
+#events #event-shifts .record-list
+  position: static
+
+#events .wide-text
+  width: 423px
+
+#events .slideover .label-column
+  width: 131px
+
+#edit_event_calendar, #duplicate-assignments-calendar
+  // Copy from ui-state-default. We don't want to highlight today's date
+  .ui-state-highlight, .ui-state-active
+    border: 1px solid #c5c5c5
+    background: #f6f6f6
+    font-weight: normal
+    color: #454545
+  .ui-datepicker .ui-datepicker-calendar .ui-state-highlight a
+    border: 1px solid black
+    background: #007fff none
+    color: white
+//----------------------------------------------------------------
+// INTERVIEWS VIEW
+//----------------------------------------------------------------
+
+#bulkInterviews #bulkInterview-blocks .record-list
+  position: static
+
+//----------------------------------------------------------------
+// TEAM VIEW
+//----------------------------------------------------------------
+
+.scanned-id-dialog.modal, .scanned-dbs-dialog.modal, .scanned-bar-license-dialog.modal
+  width: 640px
+  margin-left: -320px
+
+  .id-scan-display
+    overflow-y: auto
+    // our modal height adapts to screen height using @media queries
+    // we'll make this adapt in the same way
+    @media (max-height: 800px)
+      max-height: 440px
+    @media (min-height: 801px) and (max-height: 1000px)
+      max-height: 580px
+    @media (min-height: 1001px)
+      max-height: 760px
+
+.uploadIDs
+  margin: 10px
+
+.bulk-sms-dialog
+  width: 500px
+  .modal-body
+    overflow-y: scroll
+    textarea
+      margin-bottom: 10px
+
+.forgot_password_email_text
+  margin: 10px
+
+//----------------------------------------------------------------
+// APPLICANTS VIEW
+//----------------------------------------------------------------
+
+// Planner VIEW
+
+#planner .list-view
+  .record-list
+    margin-top: 60px
+#planner .list-view .record-list
+  .table-widget
+    td:nth-child(1) // Due Date
+      width: 130px
+    td:nth-child(2) // Event Name
+      width: 1%
+    td:nth-child(3) // Done
+      width: 1%
+    td:nth-child(4) // Task
+      width: 1%
+    td:nth-child(5) // Weeks to live
+      width: 1%
+    td:nth-child(6) // Notes
+      min-width: 300px
+    td:nth-child(7) // Done
+      text-align: center
+      width: 1%
+    td:nth-child(8) // Task
+      min-width: 250px
+    td:nth-child(9) // Task
+      width: 100px
+    td:nth-child(10) // Task
+      text-align: center
+    td:nth-child(11) // Officer
+      width: 150px
+
+//----------------------------------------------------------------
+// CLIENT VIEW
+//----------------------------------------------------------------
+
+#clients #client-details, #clients .record-new
+  input[type="text"]
+    width: 400px
+  .label-name
+    width: 160px
+  .date-field
+    input[type="text"]
+      width: 140px
+
+//----------------------------------------------------------------
+// CONTENT VIEW
+//----------------------------------------------------------------
+
+.progress
+  width: 200px
+
+.file-finished
+  color: #5eb95e
+
+.file-failed
+  color: #dd0000
+
+#content .filters
+  margin-right: 10px
+
+#content input[type=text]
+  width: 100%
+
+//----------------------------------------------------------------
+// TODO VIEW
+//----------------------------------------------------------------
+
+#todos
+  .prospect-profile table
+    border-spacing: 5px
+    td
+      border: 1px solid #888
+    th
+      text-align: left
+
+.scrollable-area
+  position: absolute
+  top: $filter_bar_height + $horizontal_rule_height*2
+  bottom: 0px
+  left: 10px
+  right: 5px
+  overflow: auto
+  div
+    max-height: none
+
+//----------------------------------------------------------------
+// PAYROLL VIEW
+//----------------------------------------------------------------
+
+#payroll
+  .payroll-grid, .timesheet-grid
+    margin-top: 10px
+    overflow: hidden
+    height: 500px
+    width: auto
+
+  .payroll-grid
+    .invalidDay
+      background-color: #EEE
+
+  .td-checkbox
+    text-align: center
+
+  .bulk-update-grid
+    width: 535px
+    height: 50px
+    float: left
+    overflow: visible !important
+    z-index: 104
+
+  #bulk-update-timesheet-invoice
+    width: 50px
+    height: 50px
+
+  #bulk-update-timesheet
+    width: 535px
+    height: 50px
+
+  #bulk-update-payroll
+    width: 535px
+    height: 50px
+
+  .clear
+    clear: both
+
+  .bulk-command
+    vertical-align: bottom
+    float: left
+    margin-left: 10px
+    margin-right: 10px
+
+  .zebraStyle > tbody > tr:nth-child(2n) > td
+    background: #FFFFE6
+  .zebraStyle > tbody > tr:nth-child(2n+1) > td
+    background: #EDFFE6
+
+  .currentRow
+    background-color: #D6E9F8 !important //rgb(234, 255, 208)
+
+  .FLOATRIGHT
+    float: right
+
+  .payroll-summary
+    float: left
+
+  .payroll-message
+    float: left
+    margin: 0px 0px 0px 10px
+
+  .summary-table
+    margin-bottom: 10px
+
+  #approval-client-signature
+    height: 60px
+
+.handsontable
+  td
+    white-space: nowrap
+    overflow: hidden
+
+  .ht_clone_top
+    width: 100% !important
+
+  .ht_master
+    height: inherit
+    width: inherit
+
+  .td-htCheckbox
+    font-size: larger
+
+#weekly-changes
+  position: absolute
+  top: 20px
+  left: 10px
+  right: 10px
+  bottom: 10px
+  max-height: none
+  overflow: visible
+
+  .print-link
+    margin-bottom: 10px
+
+  .name
+    font-weight: bold
+    font-size: 125%
+
+  .title
+    font-weight: bold
+    font-size: 150%
+    margin-top: 10px
+
+@media print
+  .noprint
+    display: none !important
+
+.info, .success, .warning, .error
+  border: 1px solid
+  margin: 10px
+  padding: 15px 10px 15px 50px
+  background-repeat: no-repeat
+  background-position: 10px center
+  white-space: pre-line
+
+.info
+  color: #00529B
+  background-color: #BDE5F8
+  background-image: image-url('info.png')
+
+.success
+  color: #4F8A10
+  background-color: #DFF2BF
+  background-image: image-url('success.png')
+
+.warning
+  color: #9F6000
+  background-color: #FEEFB3
+  background-image: image-url('warning.png')
+
+.error
+  color: #D8000C
+  background-color: #FFBABA
+  background-image: image-url('error.png')
+
+.small-badge
+  margin-top: 0
+  padding: 4px 10px
+  background-image: none
+
+.fl
+  float: left
+
+.clear
+  clear: both
+
+//----------------------------------------------------------------
+// MODAL DIALOGS
+//----------------------------------------------------------------
+
+.modal
+  .modal-body
+    overflow-y: visible
+    max-height: calc(100vh - 210px) !important
+
+.modal-w90
+  left: unset !important
+  right: 5% !important
+  width: 90% !important
+
+//----------------------------------------------------------------
+// ASSIGNMENT EMAILS MODAL DIALOG
+//----------------------------------------------------------------
+.assignment-email-dialog
+  table
+    tr td:first-child
+      width: 110px
+    width: 100%
+    textarea
+      width: 100%
+    input
+      width: 100%
+//----------------------------------------------------------------
+// BOOTBOX DIALOG
+//----------------------------------------------------------------
+
+.bootbox
+  .modal-body
+    padding-bottom: 40px
+  .btn-group#standard-reply
+    float: left
+    display: inline
+    margin-top: 5px
+  .checkbox-inline
+    float: right
+    display: inline
+    margin-top: 12px
+    #include-reason
+      margin-right: 3px
+
+  .reasonText
+    height: 200px
+
+  .logNote
+    height: 50px
+
+.bootbox.duplicate-assignments
+  .modal-body
+    .checkbox
+      display: block
+    overflow-y: scroll
+  .modal-dialog
+     width: 300px
+
+//----------------------------------------------------------------
+// "SLIDEOVER" FORMS
+//----------------------------------------------------------------
+
+$slideover_padding: 10px
+
+#planner, #events, #gigs, #team, #applicants, #content, #bulkInterviews, #clients, #invoices, #officers
+  .slideover
+    top: $header_height + $command_filter_pagination_height + $record_list_spacing
+
+// TODO: The slideovers are set to a percentage. For now we will just adjust the ratio until we can add responsive styling.
+#planner
+  .slideover
+    // This breaks the animation so we'll have to fix it later.
+    right: 0
+    left: unset !important
+    width: 52rem
+    // This also breaks the animation.
+    //left: 50% !important
+    //width: 50%
+
+
+#faq, #library
+  .slideover
+    top: $header_height + $command_pagination_height + $record_list_spacing
+
+.questions
+  border-spacing: 0 0.5em
+
+.question
+  font-weight: bold
+  white-space: nowrap
+  text-align: right
+  vertical-align: top
+  padding-right: 0.5em
+
+.answer
+  padding-left: 0.5em
+  vertical-align: top
+
+.slideover
+  position: fixed
+  width: 80%
+  bottom: 20px
+
+  background: #fff
+  border: 1px solid #000
+
+  .slideover-content
+    position: absolute
+    top: 0px
+    bottom: 0px
+    left: 0px
+    right: 0px
+
+    padding: $slideover_padding
+
+    overflow-x: hidden
+    overflow-y: auto
+
+  a.cancel
+    position: absolute
+    top: 10px
+    right: 68px
+    z-index: 100
+    color: rgba(0, 0, 0, 0.4)
+    cursor: pointer
+
+  a.cancel:hover
+    color: black
+
+  .close
+    position: absolute
+    top: 9px
+    right: 20px
+    z-index: 100
+  a.save
+    position: absolute
+    top: 8px
+    right: 42px
+    z-index: 100
+    cursor: pointer
+    opacity: 0.55
+  a.save:hover
+    opacity: 1.0
+
+  .slideover-tabs
+    height: 50px
+
+  .slideover-tab-panes
+    position: absolute
+    top: 43px + $slideover_padding // space for tabs AND padding
+    bottom: $slideover_padding
+    left: $slideover_padding
+    right: $slideover_padding
+
+  .tab-pane
+    height: none
+    overflow-x: hidden
+    overflow-y: auto
+
+  .record-list
+    position: absolute
+    top: $pagination_bar_height
+    bottom: 0px
+    left: 0px
+    right: 0px
+
+#events .record-edit #event-expenses .record-list
+  position: relative
+  top: 10px
+  left: 0
+  right: 0
+  margin-bottom: 20px
+
+.erroneous
+  border-color: #ff7373
+  border-width: 3px
+  border-radius: 3px
+  border-style: inset
+.erroneous-row td
+  background-color: #ef8a84 !important
+.dirty-row td
+  background-color: #efe984
+
+.tab-pane#event-shifts, .tab-pane#bulkInterview-blocks, .tab-pane#client-contacts
+  overflow: scroll
+  .record-list
+    overflow: visible
+
+.record-new, .record-new-booking
+  .mandatory
+    border-bottom: medium solid red
+
+.prospect-requests-tab-pane
+  .record-list
+    position: static !important
+    margin-bottom: 10px
+    margin-top: $pagination_bar_height
+
+.prospect-action-taken-tab-pane
+  .record-list
+    position: static !important
+    margin-bottom: 10px
+    margin-top: $pagination_bar_height
+
+.timesheet-notes
+  table
+    border-spacing: 0
+  th
+    text-align: left
+  th, td
+    padding-right: 20px
+  th
+    border-bottom: 2px solid #ddd
+  td
+    border-bottom: 1px solid #ddd
+
+.checkbox-group
+  label
+    margin-right: 10px
+
+//----------------------------------------------------------------
+// REPORT DOWNLOAD
+//----------------------------------------------------------------
+
+.report-download-dialog
+  .xlsx-download, .pdf-download, .csv-download
+    cursor: pointer
+
+//----------------------------------------------------------------
+// "ASSIGN" DIALOGS
+//----------------------------------------------------------------
+
+.multi-assigner
+  width: 500px
+  .modal-body
+    overflow: hidden
+  .left-side
+    float: left
+  .buttons
+    float: left
+  .button-left
+    margin-left: 10px
+    margin-top: 5px
+  .button-right
+    margin-right: 10px
+    margin-top: 5px
+  .left-items
+    width: 180px
+  .right-items
+    width: 180px
+  input.search-input
+    box-sizing: border-box
+    -moz-box-sizing: border-box
+    width: 100%
+    margin-bottom: 5px
+    height: auto
+  .assigner-added
+    background-color: #EDFFE6
+  .assigner-removed
+    background-color: #FFCCCC
+
+.ms-container
+  width: 470px
+
+.ms-list
+  min-height: 260px
+
+//----------------------------------------------------------------
+// LOGIN PAGE
+//----------------------------------------------------------------
+
+.login-form
+  padding-left: 15px
+
+//----------------------------------------------------------------
+// BOOKING EMAIL TEMPLATE
+//----------------------------------------------------------------
+
+.booking-email-template
+  table
+    font-family: sans-serif
+    border-spacing: 0
+    padding: 10px
+
+  td
+    padding: 3px
+    border-bottom: 1px solid #669
+
+  tr:first-child td
+    border-top: 1px solid #669
+
+  td:first-child
+    font-weight: bold
+    white-space: nowrap
+
+//----------------------------------------------------------------
+// DAY OF WEEK COLORS
+//----------------------------------------------------------------
+
+// The below use material design colors
+// Stay away from:
+//   - dark red (used to highlight errors)
+//   - yellow (used to highlight text)
+
+.day-of-week-monday
+  background-color: #BCAAA4 !important // Brown 200
+
+.day-of-week-tuesday
+  background-color: #F8BBD0 !important // Pink 100
+
+.day-of-week-wednesday
+  background-color: #9FA8DA !important // Indigo 200
+
+.day-of-week-thursday
+  background-color: #A7FFEB !important // Teal A200
+
+.day-of-week-friday
+  background-color: #40C4FF !important // Light Blue A200
+
+.day-of-week-saturday
+  background-color: #B2FF59 !important // Light Green A200
+
+.day-of-week-sunday
+  background-color: #FFAB40 !important // Orange A200
+
+//----------------------------------------------------------------
+
+#gigs
+  .select2-selection__choice__remove
+    color: inherit !important
+
+.assignment-open
+  font-weight: bold
+
+.assignment-full
+  font-style: italic
+
+.assignment-overstaffed
+  color: red
+  font-style: italic
+
+.assignment-full-icon
+  height: 1.1em
+  margin-bottom: 2px
+  margin-right: 2px
+
+.planner-second-tab
+  float: right
+  margin-right: 3%
+
+.gig-view-name-size
+  font-size: 14px
+
+.team_photo
+  height: 40px
+  width: 40px
+  float: left
+  margin-right: 10px
+  object-fit: contain
+
+.p-text
+  font-size: 14px
+
+.team-view-name-size
+  font-size: 14px
+
+.team-size-name-column-width
+  min-width: 200px
+
+.character-screening
+  float: left
+  margin-top: 0px
+
+.headquarter-heading
+  float: left
+  margin-left: 45%
+
+.screening-value
+  float: left
+  margin-left: 1%
+
+.date-heading
+  float: left
+  margin-left: 2%
+
+.name-column-flag
+  float: right
+  height: 24px
+  width: 24px
+  
+.no-of-actions
+  border-width: 0px
+  border: none
+  margin-left: 10px
+  font-weight: bold
+
+#applicant-prospect-action-takens
+  .record-list
+    margin-top: 30px
+    .table-widget
+      td:first-child
+        text-align: left
+
+.fixed-header
+  th
+    background: white
+    position: sticky
+    top: 0
+
+.bulk-info
+  margin-top: 10px
+  height: 35px
+
+.line-break
+  height: 2px
+  background-color: black
+  margin-top: 10px
+
+.interest-and-skill-label
+  display: block
+  //background-color: pink
+  height: 26px
+  width: 26px
+  border-radius: 13px
+  padding-left: 7px
+  padding-top: 1px
+  font-size: 18px
+  float: left
+  margin: 1px
+  margin-left: 4px
+
+.skill-and-interest-padding-left
+  padding-left: 5px
+
+.skill-interest-bar-color
+  background-color: #E4EDAF
+
+.skill-interest-hospitality-color
+  background-color: #CCE5B3
+
+.skill-interest-promotional-color
+  background-color: #A5CEEE
+
+.skill-interest-retail-color
+  background-color: #96BCD9
+
+.skill-interest-sport-color
+  background-color: #F1B2BD
+
+.skill-interest-office-color
+  background-color: #BAA4D8
+
+.skill-interest-warehouse-color
+  background-color: #BDBAC0
+
+.skill-interest-festivals-color
+  background-color: pink

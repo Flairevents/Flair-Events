@@ -1,0 +1,65 @@
+.public.case-study.sports
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .case-header-bg
+    .v2-case-industry-1
+      %h3 SPORTS
+      .case-study
+      .orange-btn.d-flex.align-items-center.justify-content-center
+        %a{href: '/contact'}
+          %button Request more info
+      .industry-image.sports
+    .v2-case-industry-2
+      .d-flex.flex-row
+        .border-line
+        %div
+          %h5 ROYAL PARK HALF MARATHON
+          %h3
+            Fully staffed at 6am
+            %br/
+            with Flair.
+    .v2-case-industry-3
+      %h2 Key challenge:
+      %p For just one day, hundreds of workers were required to assist in the operation of the Royal Parks Half Marathon, attended by over 16,000 participants. Staff began to arrive at 4.30am and were required throughout the entire 13.1-mile course.
+      .cs-image.sports
+    .v2-case-industry-4
+      %h2 How we helped:
+      %p Our client is an industry leader in high-energy mass participation sporting events and campaigns. Having worked with Flair since 2001, they know we are committed, experienced and that we have continually exceeded expectations.
+      %p This year, their brief not only doubled in size to deliver properly-prepared teams just before daybreak – it also involved nine separate London locations and covered 51 very specific roles. We didn’t skip a beat and got straight to work; we thrive on this kind of challenge.
+      %p We made sure that all 494 staff were outdoorsy candidates from our own database, and had a clear understanding of their job role. Some workers were also required to collect or be assigned specific equipment in order to complete their jobs. Flair's own leadership team came in to manage the day's operations, assembling smaller teams as needed and managing the event with military-like precision.
+      %p Additionally, we knew that the client took the reputation of its marshals and staff members very seriously, so we made sure all of our workers felt confident about what they had to do and that they would turn up ready and willing to help the day run as smoothly as possible – which it did.
+      .cs-image.sports
+    .v2-case-industry-5
+      %h2 The Results
+      %p Greeting all our staff with a warm welcome and breakfast! Signed in and deployed quickly, we worked in sync with our client to assist in the successful operation of another Royal Parks Half Marathon.
+      .d-flex.flex-row
+        .checkbox
+        %h5 All 494 positions filled with handpicked fully-vetted workers.
+      .d-flex.flex-row
+        .checkbox
+        %h5 Bespoke staffing system enabled us to react quickly.
+      .d-flex.flex-row
+        .checkbox
+        %h5 Leadership team on site, proactive demonstrating our full event experience.
+      .d-flex.flex-row
+        .checkbox
+        %h5 Exceeded on expectation.
+
+      .categories{style: "padding-left: 39px;margin-top: 30px;"}
+        %h2 Case Studies
+        - [["Festivals & Events", 'events'], ["Hospitality", 'hospitality'], ["Logistics", 'logistics'], ["Promotional", 'promotional'], ["Sports", 'sports'], ["Commercial", 'commercial']].each do |f|
+          .d-flex.flex-inline
+            %i.fa.fa-caret-right
+            %a{href: "/case_studies/#{f[1]}", style: 'width: 100%;'}
+              -if f[1] == "sports"
+                %h5.ml-05{style: "color: #6BCBB8;"}=f[0]
+              -else
+                %h5.ml-05=f[0]
+    .v2-case-industry-6
+      .bg-image.sports
+      %h1 Our job is to make our client's job easier. Workforce solutions delivered with event expertise.
+      .orange-btn.d-flex.align-items-center.justify-content-center
+        %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+          %button Hire Staff
+      .v2-home-bottom
+  = render :partial => 'v2/mobile/application/footer'

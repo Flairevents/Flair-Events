@@ -1,0 +1,36 @@
+.eu-passport
+  %h4 EU
+  %p All scans or photos MUST:
+  %ul
+    %li be in full colour
+    %li include ALL text. Please do not miss any part of the ID
+    %li be flat and looking directly onto the document
+    %li avoid using flash to avoid shine or glare
+  %h5 European Economic Area/Swiss Passport
+  %div{style: 'clear:both'}
+  = form_tag '/staff/upload_eu_passport', multipart: true do
+    =render partial: 'profile_upload_id_passport'
+    .row.pt1.pb1
+      .column.small-12.text-right
+        = submit_tag (@prospect.has_id? ? 'Update' : 'Submit'), class: 'btn btn-default'
+
+  .passport-pic-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-eu-passport-picture.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  .passport-front-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-eu-passport-front.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  .passport-expiry-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-eu-passport-expiry.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close
+  .passport-number-popup.sample-popup.fl-flash{style: 'display:none'}
+    .fl-flash__body
+      =image_tag 'id-sample-eu-passport-number.jpg'
+      %a.fl-flash__close-btn{onclick: '$(".fl-flash").hide()'}
+        %span Close

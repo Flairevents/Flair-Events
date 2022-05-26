@@ -1,0 +1,441 @@
+.content
+= form_for @questionnaire, method: :post, url: '/staff/update_questions', html: {multipart: true} do |f|
+  .questions
+    -unless @prospect.answered_some_questions?
+      #questionnaire-is-new
+    .row.text-center
+      .column.small-12.text-center
+        .h5.staff-text-with-underline Work Experience
+      %p Time to shine, add customer service related job experiences to your profile.
+    %hr
+    .row
+      .column.small-12.medium-6.pt1
+        .row
+          .column.small-4.text-right
+            %p Position
+          .column.small-8
+            = f.text_field :job1_position, class: 'form-control staff-form-fields', required: true
+        .row.mt2
+          .column.small-4.text-right
+            %p Company
+          .column.small-8
+            = f.text_field :job1_company, class: 'form-control staff-form-fields', required: true
+        .row.mt2
+          .column.small-4.text-right
+            %p Start Date
+          .column.small-8.medium-5.date-input-group
+            = select_date @questionnaire[:job1_date_start], {prefix: 'job1_date_start', start_year: Date.today.year-30, end_year: Date.today.year, order: [:month, :year], include_blank: true, default: nil}, {class: 'form-control staff-form-fields', required: true}
+        .row.mt2
+          .column.small-4.text-right
+            %p Finish Date
+          .column.small-8.medium-5.date-input-group.fl-form__optional
+            = select_date @questionnaire[:job1_date_finish], {prefix: 'job1_date_finish'.to_s, start_year: Date.today.year-30, end_year: Date.today.year, order: [:month, :year], include_blank: true, default: nil}, {class: 'form-control staff-form-fields', required: false}
+          .column.small-12.medium-3.p0
+            %small.optional-finish-date Leave blank if currently employer
+        .row.fl-form-radio.pt1
+          -#.column.medium-2.small-4.text-right
+          -#  %p Type
+          .column.small-offset-1.small-11
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3
+              %span.fl-form__radio
+                =f.radio_button :job1_type, 'FULL_TIME', checked: @questionnaire.job1_type=='FULL_TIME', required: true
+                =f.label :job1_type, 'Full Time', value: 'FULL_TIME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :job1_type, 'PT/Casual', checked: @questionnaire.job1_type=='PART_TIME/CASUAL', required: true
+                =f.label :job1_type, 'PT/Casual', value: 'PT/Casual'
+              -#%span.fl-form__radio.ml1
+              -#  =f.radio_button :job1_type, 'CASUAL', checked: @questionnaire.job1_type=='CASUAL', required: true
+              -#  =f.label :job1_type, 'Casual', value: 'CASUAL'
+              %span.fl-form__radio.ml1
+                =f.radio_button :job1_type, 'VOLUNTARY', checked: @questionnaire.job1_type=='VOLUNTARY', required: true
+                =f.label :job1_type, 'Voluntary', value: 'VOLUNTARY'
+      .column.small-12.medium-6.text-left
+        %p Duties & Responsibilities
+        = f.text_area :job1_description, class: 'form-control staff-form-fields', required: true, rows: 8
+        .mt1
+          %button.staff-expand-button{"aria-controller" => "job2", "aria-expanded" => "false", "data-target" => "#job2", "data-toggle" => "collapse", :type => "button"}
+          Add second job role (optional)
+        .mt1
+          %button.staff-expand-button{"aria-controller" => "referee", "aria-expanded" => "false", "data-target" => "#referee", "data-toggle" => "collapse", :type => "button"}
+          Add a reference (optional)
+
+    .row.pb1
+
+
+    #job2.collapse
+      %hr
+      .row
+        .column.small-12.medium-6.pt1
+          .row
+            .column.small-4.text-right
+              %p Position
+            .column.small-8
+              = f.text_field :job2_position, class: 'form-control fl-form__optional staff-form-fields'
+          .row.mt2
+            .column.small-4.text-right
+              %p Company
+            .column.small-8
+              = f.text_field :job2_company, class: 'form-control fl-form__optional staff-form-fields'
+          .row.mt2
+            .column.small-4.text-right
+              %p Start
+            .column.small-8.date-input-group.fl-form__optional
+              = select_date @questionnaire[:job2_date_start], {prefix: 'job2_date_start', start_year: Date.today.year-30, end_year: Date.today.year, order: [:month, :year], include_blank: true, default: nil}, {class: 'form-control fl-form__optional staff-form-fields'}
+          .row.mt2
+            .column.small-4.text-right
+              %p Finish
+            .column.small-8.date-input-group.fl-form__optional
+              = select_date @questionnaire[:job2_date_finish], {prefix: 'job2_date_finish'.to_s, start_year: Date.today.year-30, end_year: Date.today.year, order: [:month, :year], include_blank: true, default: nil}, {class: 'form-control fl-form__optional staff-form-fields'}
+
+          .row.fl-form-radio.pt2
+            .column.small-offset-2.small-10
+              .radio-row.fl-form__optional.job-type-field-label-size.staff-form-fields.staff-fields-none-background
+                %span.fl-form__radio
+                  =f.radio_button :job2_type, 'FULL_TIME', checked: @questionnaire.job2_type=='FULL_TIME'
+                  =f.label :job2_type, 'Full Time', value: 'FULL_TIME'
+                %span.fl-form__radio.ml1
+                  =f.radio_button :job2_type, 'PT/Casual', checked: @questionnaire.job2_type=='PART_TIME/CASUAL'
+                  =f.label :job2_type, 'PT/Casual', value: 'PT/Casual'
+                -#%span.fl-form__radio.ml1
+                -#  =f.radio_button :job2_type, 'CASUAL', checked: @questionnaire.job2_type=='CASUAL'
+                -#  =f.label :job2_type, 'Casual', value: 'CASUAL'
+                %span.fl-form__radio.ml1
+                  =f.radio_button :job2_type, 'VOLUNTARY', checked: @questionnaire.job2_type=='VOLUNTARY'
+                  =f.label :job2_type, 'Voluntary', value: 'VOLUNTARY'
+        .column.small-12.medium-6.text-left
+          %p Duties & Responsibilities
+          = f.text_area :job2_description, class: 'form-control fl-form__optional staff-form-fields', rows: 8
+    .row.pb1
+
+    #referee.collapse
+      %hr
+      .row.pt1
+        .column.medium-2.small-4.text-right
+          %p Name
+        .column.medium-10.small-8
+          = f.text_field :referee_name, class: 'form-control fl-form__optional staff-form-fields'
+      .row.mt1
+        .column.small-12.medium-6.pt1
+          .row
+            .column.small-4.text-right
+              %p Position
+            .column.small-8
+              = f.text_field :referee_position, class: 'form-control fl-form__optional staff-form-fields'
+        .column.small-12.medium-6.pt1
+          .row
+            .column.small-4.text-right
+              %p Company
+            .column.small-8
+              = f.text_field :referee_company, class: 'form-control fl-form__optional staff-form-fields'
+      .row.mt1
+        .column.small-12.medium-6.pt1
+          .row
+            .column.small-4.text-right
+              %p Phone
+            .column.small-8
+              = f.text_field :referee_phone, class: 'form-control fl-form__optional staff-form-fields', pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d?\D*', title: '0 + 10 or 9 digits'
+        .column.small-12.medium-6.pt1
+          .row
+            .column.small-4.text-right
+              %p Email
+            .column.small-8
+              = f.text_field :referee_email, class: 'form-control fl-form__optional staff-form-fields', type: 'email'
+
+
+    .row#skills-and_interests
+      .column.small-12.text-center
+        .h5.staff-text-with-underline Skills & Interests
+        %p Select the types of work you are interested in and indicate your experience level from high to none.
+      .column.small-12.medium-6.text-left
+        .row.mt2
+          .column.small-12.medium-offset-3.medium-8
+            %p
+              .text-left.skills-and-interests-heading
+                -if @questionnaire.has_sport_and_outdoor.nil?
+                  .fl-icon.fl-icon--small.fl-icon--close-mark.staff-top-bar-check-mark.skills-and-heading-interests#sports-outdoor-heading
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.skills-and-heading-interests#sports-outdoor-heading
+                Sports & Outdoor
+            .staff-small-font-size Registration, Info, Baggage, Marshalling, Labour
+          .column.small-12.medium-offset-2.medium-9
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3.skill-interest-radio-labels-font.staff-app-radios
+              %span.fl-form__radio
+                =f.radio_button :has_sport_and_outdoor, 'HIGH', checked: @questionnaire.has_sport_and_outdoor=='HIGH', class: 'sports-outdoor', disabled: @disabled_skills_interests
+                =f.label :has_sport_and_outdoor, 'High', value: 'HIGH'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_sport_and_outdoor, 'MEDIUM', checked: @questionnaire.has_sport_and_outdoor=='MEDIUM', class: 'sports-outdoor', disabled: @disabled_skills_interests
+                =f.label :has_sport_and_outdoor, 'Medium', value: 'MEDIUM'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_sport_and_outdoor, 'SOME', checked: @questionnaire.has_sport_and_outdoor=='SOME', class: 'sports-outdoor', disabled: @disabled_skills_interests
+                =f.label :has_sport_and_outdoor, 'Some', value: 'SOME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_sport_and_outdoor, 'NONE', checked: @questionnaire.has_sport_and_outdoor=='NONE', class: 'sports-outdoor', disabled: @disabled_skills_interests
+                =f.label :has_sport_and_outdoor, 'None', value: 'NONE'
+
+        .row.mt2
+          .column.small-12.medium-offset-3.medium-8
+            %p
+              .text-left.skills-and-interests-heading
+                -if @questionnaire.has_bar_and_hospitality.nil?
+                  .fl-icon.fl-icon--small.fl-icon--close-mark.staff-top-bar-check-mark.skills-and-heading-interests#bar-hospitality-heading
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.skills-and-heading-interests#bar-hospitality-heading
+                Bar & Hospitality
+            .staff-small-font-size Drink service, bar backs, Table waiting, Front of house
+          .column.small-12.medium-offset-2.medium-9
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3.skill-interest-radio-labels-font.staff-app-radios
+              %span.fl-form__radio
+                =f.radio_button :has_bar_and_hospitality, 'HIGH', checked: @questionnaire.has_bar_and_hospitality=='HIGH', class: 'bar-hospitality', disabled: @disabled_skills_interests
+                =f.label :has_bar_and_hospitality, 'High', value: 'HIGH'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_bar_and_hospitality, 'MEDIUM', checked: @questionnaire.has_bar_and_hospitality=='MEDIUM', class: 'bar-hospitality', disabled: @disabled_skills_interests
+                =f.label :has_bar_and_hospitality, 'Medium', value: 'MEDIUM'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_bar_and_hospitality, 'SOME', checked: @questionnaire.has_bar_and_hospitality=='SOME', class: 'bar-hospitality', disabled: @disabled_skills_interests
+                =f.label :has_bar_and_hospitality, 'Some', value: 'SOME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_bar_and_hospitality, 'NONE', checked: @questionnaire.has_bar_and_hospitality=='NONE', class: 'bar-hospitality', disabled: @disabled_skills_interests
+                =f.label :has_bar_and_hospitality, 'None', value: 'NONE'
+
+        .row.mt2
+          .column.small-12.medium-offset-3.medium-8
+            %p
+              .text-left.skills-and-interests-heading
+                -if @questionnaire.has_festivals_and_concerts.nil?
+                  .fl-icon.fl-icon--small.fl-icon--close-mark.staff-top-bar-check-mark.skills-and-heading-interests#festivals-concerts-heading
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.skills-and-heading-interests#festivals-concerts-heading
+                Festivals & Concerts
+            .staff-small-font-size Bars, Wrist-banding, Box Office, Merchandise
+          .column.small-12.medium-offset-2.medium-9
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3.skill-interest-radio-labels-font.staff-app-radios
+              %span.fl-form__radio
+                =f.radio_button :has_festivals_and_concerts, 'HIGH', checked: @questionnaire.has_festivals_and_concerts=='HIGH', class: 'festivals-concerts', disabled: @disabled_skills_interests
+                =f.label :has_festivals_and_concerts, 'High', value: 'HIGH'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_festivals_and_concerts, 'MEDIUM', checked: @questionnaire.has_festivals_and_concerts=='MEDIUM', class: 'festivals-concerts', disabled: @disabled_skills_interests
+                =f.label :has_festivals_and_concerts, 'Medium', value: 'MEDIUM'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_festivals_and_concerts, 'SOME', checked: @questionnaire.has_festivals_and_concerts=='SOME', class: 'festivals-concerts', disabled: @disabled_skills_interests
+                =f.label :has_festivals_and_concerts, 'Some', value: 'SOME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_festivals_and_concerts, 'NONE', checked: @questionnaire.has_festivals_and_concerts=='NONE', class: 'festivals-concerts', disabled: @disabled_skills_interests
+                =f.label :has_festivals_and_concerts, 'None', value: 'NONE'
+
+      .column.small-12.medium-6.text-left
+        .row.mt2
+          .column.small-12.medium-offset-1.medium-8
+            %p
+              .text-left.skills-and-interests-heading
+                -if @questionnaire.has_merchandise_and_retail.nil?
+                  .fl-icon.fl-icon--small.fl-icon--close-mark.staff-top-bar-check-mark.skills-and-heading-interests#merchandise-retail-heading
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.skills-and-heading-interests#merchandise-retail-heading
+                Merchandise & Retails
+            .staff-small-font-size Sales, Till & Cash Handling, Stock
+          .column.small-12.medium-9
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3.skill-interest-radio-labels-font.staff-app-radios
+              %span.fl-form__radio
+                =f.radio_button :has_merchandise_and_retail, 'HIGH', checked: @questionnaire.has_merchandise_and_retail=='HIGH',class: 'merchandise-retail', disabled: @disabled_skills_interests
+                =f.label :has_merchandise_and_retail, 'High', value: 'HIGH'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_merchandise_and_retail, 'MEDIUM', checked: @questionnaire.has_merchandise_and_retail=='MEDIUM',class: 'merchandise-retail', disabled: @disabled_skills_interests
+                =f.label :has_merchandise_and_retail, 'Medium', value: 'MEDIUM'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_merchandise_and_retail, 'SOME', checked: @questionnaire.has_merchandise_and_retail=='SOME',class: 'merchandise-retail', disabled: @disabled_skills_interests
+                =f.label :has_merchandise_and_retail, 'Some', value: 'SOME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_merchandise_and_retail, 'NONE', checked: @questionnaire.has_merchandise_and_retail=='NONE',class: 'merchandise-retail', disabled: @disabled_skills_interests
+                =f.label :has_merchandise_and_retail, 'None', value: 'NONE'
+
+        .row.mt2
+          .column.small-12.medium-offset-1.medium-8
+            %p
+              .text-left.skills-and-interests-heading
+                -if @questionnaire.has_promotional_and_street_marketing.nil?
+                  .fl-icon.fl-icon--small.fl-icon--close-mark.staff-top-bar-check-mark.skills-and-heading-interests#promotional-street-heading
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.skills-and-heading-interests#promotional-street-heading
+                Promotional & Street Marketing
+            .staff-small-font-size Brand Ambasadors, Sales, Data Capture
+          .column.small-12.medium-9
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3.skill-interest-radio-labels-font.staff-app-radios
+              %span.fl-form__radio
+                =f.radio_button :has_promotional_and_street_marketing, 'HIGH', checked: @questionnaire.has_promotional_and_street_marketing=='HIGH', class: 'promotional-street', disabled: @disabled_skills_interests
+                =f.label :has_promotional_and_street_marketing, 'High', value: 'HIGH'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_promotional_and_street_marketing, 'MEDIUM', checked: @questionnaire.has_promotional_and_street_marketing=='MEDIUM', class: 'promotional-street', disabled: @disabled_skills_interests
+                =f.label :has_promotional_and_street_marketing, 'Medium', value: 'MEDIUM'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_promotional_and_street_marketing, 'SOME', checked: @questionnaire.has_promotional_and_street_marketing=='SOME', class: 'promotional-street', disabled: @disabled_skills_interests
+                =f.label :has_promotional_and_street_marketing, 'Some', value: 'SOME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_promotional_and_street_marketing, 'NONE', checked: @questionnaire.has_promotional_and_street_marketing=='NONE', class: 'promotional-street', disabled: @disabled_skills_interests
+                =f.label :has_promotional_and_street_marketing, 'None', value: 'NONE'
+
+        .row.mt2
+          .column.small-12.medium-offset-1.medium-8
+            %p
+              .text-left.skills-and-interests-heading
+                .text-left.skills-and-interests-heading
+                -if @questionnaire.has_reception_and_office_admin.nil?
+                  .fl-icon.fl-icon--small.fl-icon--close-mark.staff-top-bar-check-mark.skills-and-heading-interests#reception-office-heading{style: 'border-radius: 100%;'}
+                -else
+                  .fl-icon.fl-icon--small.fl-icon--checkmark.staff-top-bar-check-mark.skills-and-heading-interests#reception-office-heading
+                Reception & Office Admin
+            .staff-small-font-size Office Assistant, Telesales, Customer service agents
+          .column.small-12.medium-9
+            .radio-row.job-type-field-label-size.staff-form-fields.staff-fields-none-background.ml3.skill-interest-radio-labels-font.staff-app-radios
+              %span.fl-form__radio
+                =f.radio_button :has_reception_and_office_admin, 'HIGH', checked: @questionnaire.has_reception_and_office_admin=='HIGH', class: 'reception-office', disabled: @disabled_skills_interests
+                =f.label :has_reception_and_office_admin, 'High', value: 'HIGH'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_reception_and_office_admin, 'MEDIUM', checked: @questionnaire.has_reception_and_office_admin=='MEDIUM', class: 'reception-office', disabled: @disabled_skills_interests
+                =f.label :has_reception_and_office_admin, 'Medium', value: 'MEDIUM'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_reception_and_office_admin, 'SOME', checked: @questionnaire.has_reception_and_office_admin=='SOME', class: 'reception-office', disabled: @disabled_skills_interests
+                =f.label :has_reception_and_office_admin, 'Some', value: 'SOME'
+              %span.fl-form__radio.ml1
+                =f.radio_button :has_reception_and_office_admin, 'NONE', checked: @questionnaire.has_reception_and_office_admin=='NONE', class: 'reception-office', disabled: @disabled_skills_interests
+                =f.label :has_reception_and_office_admin, 'None', value: 'NONE'
+
+    .row
+      .column.small-12.text-center
+        .row
+          .column.small-12.medium-offset-1.medium-5.mt3
+            .row.text-left
+              .column.small-12
+                %p{style: 'font-weight:bold;'} Do you hold any of the below industry qualifications?
+              .column.small-offset-1.small-10.mt1.ml1.fl-form__checkbox
+                = f.check_box :dbs_qualification, class: 'industrial-qualification-question', checked: (!@prospect.dbs_issue_date.nil? && @prospect.dbs_issue_date < Time.current - 2.years) ? false : @questionnaire.dbs_qualification
+                = label_tag 'questionnaire[dbs_qualification]', 'DBS - Valid In The last Two Years', class: 'industrial-qualification-question-label'
+              .column.small-offset-1.small-10.mt1.fl-form__checkbox
+                = f.check_box :food_health_level_two_qualification, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[food_health_level_two_qualification]', 'Food Health Level 2', class: 'industrial-qualification-question-label'
+              .column.small-offset-1.small-10.mt1.fl-form__checkbox
+                = f.check_box :english_personal_licence_qualification, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[english_personal_licence_qualification]', 'English Personal Licence', class: 'industrial-qualification-question-label'
+              .column.small-offset-1.small-10.mt1.fl-form__checkbox
+                = f.check_box :scottish_personal_licence_qualification, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[scottish_personal_licence_qualification]', 'Scottish Personal Licence', class: 'industrial-qualification-question-label'
+
+
+          .column.small-12.medium-6.mt3
+            .row.text-left
+              .column.small-12.medium-offset-2.medium-10
+                %p{style: 'font-weight:bold;'} Indicate when you are seeking flexible work
+              .column.small-offset-1.small-11.medium-offset-4.medium-8.mt1.fl-form__checkbox
+                = f.check_box :week_days_work, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[week_days_work]', 'Weekdays', class: 'industrial-qualification-question-label'
+              .column.small-offset-1.small-11.medium-offset-4.medium-8.mt1.fl-form__checkbox
+                = f.check_box :weekends_work, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[weekends_work]', 'Weekends', class: 'industrial-qualification-question-label'
+              .column.small-offset-1.small-11.medium-offset-4.medium-8.mt1.fl-form__checkbox
+                = f.check_box :day_shifts_work, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[day_shifts_work]', 'Day Shifts', class: 'industrial-qualification-question-label'
+              .column.small-offset-1.small-11.medium-offset-4.medium-8.mt1.fl-form__checkbox
+                = f.check_box :evening_shifts_work, class: 'industrial-qualification-question'
+                = label_tag 'questionnaire[evening_shifts_work]', 'Evening Shifts', class: 'industrial-qualification-question-label'
+
+    .row.mt2
+      .column.small-12.medium-6.pt1
+        .row.text-center.pr2.application-bottom-panel
+          .column.small-12.text-center
+            .h5.staff-text-with-underline Customer Service Topics
+          .column.small-12
+            %p.pt1.mb1 Briefly describe what excellent customer service means to you.
+            = f.text_area :customer_service_meaning, class: 'form-control staff-form-fields', required: true
+          .column.small-12
+            %p.pt1.mb1 How would you describe your working ethics?
+            = f.text_area :ethics_meaning, class: 'form-control staff-form-fields', required: true
+          .column.small-12
+            %p.pt1.mb1 Why are you interested in working with Flair?
+            = f.text_area :customer_service_why_interested, class: 'form-control staff-form-fields', required: true
+          .column.small-12
+            %p.pt1.mb1 In five words, highlight yourself to an employer.
+
+            .row
+              .column.small-4.describe-yourself-word
+                = text_field_tag :describe_yourself_one, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[0], class: 'form-control staff-form-fields', required: true
+              .column.small-4.describe-yourself-word
+                = text_field_tag :describe_yourself_two, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[1], class: 'form-control staff-form-fields', required: true
+              .column.small-4.describe-yourself-word
+                = text_field_tag :describe_yourself_three, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[2], class: 'form-control staff-form-fields', required: true
+              .column.small-offset-2.small-4.mt1.describe-yourself-word
+                = text_field_tag :describe_yourself_four, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[3], class: 'form-control staff-form-fields', required: true
+              .column.small-4.mt1.describe-yourself-word
+                = text_field_tag :describe_yourself_five, @questionnaire.describe_yourself.nil? ? nil : @questionnaire.describe_yourself.split(' ')[4], class: 'form-control staff-form-fields', required: true
+      .column.small-12.medium-6.pt1
+        .row.text-center.pl2.application-bottom-panel
+          .column.small-12.text-center
+            .h5.staff-text-with-underline Fact Finders
+          .column.small-12
+            %p.pt1 What is your favourite film?
+            = f.text_field :favorite_film, class: 'form-control staff-form-fields', required: true
+          .column.small-12
+            %p.pt1 Where is the best place in the world to you?
+            = f.text_field :best_place, class: 'form-control staff-form-fields', required: true
+          .column.small-12
+            %p.pt1 Tell us about any special attributes you would like to shout about.
+            = f.text_area :other_attributes, class: 'form-control staff-form-fields'
+          .column.small-12
+            %p.pt1
+              How would you like us contact you with our great job offers:- <br> Unselect at any time.
+            .row
+              .column.small-8.medium-offset-2.medium-4.text-left
+                %span.fl-form__checkbox
+                  = f.check_box :contact_via_email, checked: @questionnaire.contact_via_email.nil? || @questionnaire.contact_via_email == true
+                  = label_tag 'questionnaire[contact_via_email]', 'Email'
+              .column.small-8.medium-2.text-left.mr2
+                %span.fl-form__checkbox
+                  = f.check_box :contact_via_telephone, checked: @questionnaire.contact_via_telephone.nil? || @questionnaire.contact_via_telephone == true
+                  = label_tag 'questionnaire[contact_via_telephone]', 'Telephone'
+              .column.small-8.medium-offset-2.medium-4.text-left
+                %span.fl-form__checkbox
+                  = f.check_box :contact_via_text, checked: @questionnaire.contact_via_text.nil? || @questionnaire.contact_via_text == true
+                  = label_tag 'questionnaire[contact_via_text]', 'Text'
+              .column.small-8.medium-2.text-left
+                %span.fl-form__checkbox
+                  = f.check_box :contact_via_whatsapp, checked: @questionnaire.contact_via_whatsapp.nil? || @questionnaire.contact_via_whatsapp == true
+                  = label_tag 'questionnaire[contact_via_whatsapp]', 'WhatsApp'
+
+
+          .column.small-12.mt1
+            %p Do you have either of the following: -
+          .column.small-12
+            %p Bar Management Experience
+            .column.small-12
+              %span.fl-form__radio
+                =f.radio_button :bar_management_experience, true, checked: @questionnaire.bar_management_experience == true
+                =f.label :bar_management_experience, 'Yes', value: true
+              %span.fl-form__radio.ml1
+                =f.radio_button :bar_management_experience, false, checked: @questionnaire.bar_management_experience == false
+                =f.label :bar_management_experience, 'No', value: false
+          .column.small-12
+            %p Staff Leadership Experience
+            .column.small-12
+              %span.fl-form__radio
+                =f.radio_button :staff_leadership_experience, true, checked: @questionnaire.staff_leadership_experience == true
+                =f.label :staff_leadership_experience, 'Yes', value: true
+              %span.fl-form__radio.ml1
+                =f.radio_button :staff_leadership_experience, false, checked: @questionnaire.staff_leadership_experience == false
+                =f.label :staff_leadership_experience, 'No', value: false
+
+    .row.mt1
+      .column.small-12.text-center.job-type-field-label-size
+        %h4 Criminal Conviction
+        %p Do you have any convictions which are not yet spent under the terms of the Rehabilitation of Offenders Act 1974?
+        .radio-row#criminal-convictions
+          %span.fl-form__radio
+            =f.radio_button :has_criminal_convictions, true, checked: @questionnaire.has_criminal_convictions == true, required: true
+            =f.label :has_criminal_convictions, 'Yes', value: true
+          %span.fl-form__radio.ml1
+            =f.radio_button :has_criminal_convictions, false, checked: @questionnaire.has_criminal_convictions == false, required: true
+            =f.label :has_criminal_convictions, 'No', value: false
+          %p.has_criminal_convictions{style: @questionnaire.has_criminal_convictions ? 'display: block' : 'display: none'} If so, please detail here:
+          = f.text_area :criminal_conviction_details, class: 'form-control has_criminal_convictions staff-form-fields', style: @questionnaire.has_criminal_convictions ? 'display: block' : 'display: none'
+        %p Our clients may request a DBS check for certain roles. In this instance we will request your co-operation to obtain the information required to do so.
+
+  .row
+    .column.small-12.text-center.pt2
+      = submit_tag 'Submit', class: 'yellow-button-staff'

@@ -1,0 +1,206 @@
+<%= form_for @prospect, method: :post, html: {class: 'v2-profile-my-profile-form', id: 'v2-profle-my-profile-form', onsubmit: 'return submitForm()'}, url: '/staff/update_personal_details' do |f| %>
+
+  <%= f.text_field :first_name, class: 'form-control v2-profile-first-name v2-inputs required', style: 'background-color: white', autocomplete: "off", placeholder: 'First name' %>
+
+  <%= f.text_field :last_name, class: 'form-control v2-profile-last-name v2-inputs required', style: 'background-color: white', autocomplete: "off", placeholder: 'Last name' %>
+
+  <%#= f.date_field :date_of_birth, class: 'form-control v2-profile-last-name v2-calendar-icon v2-inputs required', placeholder: 'Date of Birth' %>
+  <div class="d-flex justify-content-center date">
+    <%= select_date @prospect.date_of_birth, {prefix: 'date_of_birth', end_year: Date.today.year-80, start_year: Date.today.year-16, order: [:day, :month, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, use_short_month: true}, {class: 'form-control v2-profile-date-of-birth v2-inputs required'} %>
+  </div>
+
+  <%= f.select(:gender, [['Gender',''], ['Male','M'], ['Female','F']], {}, {class: 'form-control v2-profile-nationality v2-inputs required', style: 'border-radius: 5px;margin-top: 8px;'}) %>
+
+  <%= f.text_field :email, placeholder: 'Email Address', class: 'form-control v2-profile-email v2-inputs required', type: 'email', autocomplete: "off" %>
+  <%= f.select(:nationality_id, ([['Nationality', '']] + nationality_options - [['']]), {}, {value: @prospect.nationality_id, class: 'form-control v2-profile-nationality v2-inputs required', style: 'border-radius: 5px;', disabled: @prospect.id_submitted? || @prospect.id_sighted}) %>
+
+  <%= f.text_field :mobile_no, placeholder: 'Mobile', class: 'form-control v2-profile-mobile-number v2-inputs required', pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*', title: '0 + 10 digits', autocomplete: "off" %>
+
+  <%= f.text_field :ni_number, placeholder: 'NI Number XX-XX-XX-XX', class: "form-control v2-profile-ni-number v2-inputs #{ni_number_required_class}", pattern: '[A-CEGHJ-NOPR-TW-Za-ceghj-nopr-tw-z]\s*[A-CEGHJ-NPR-TW-Za-ceghj-nopr-tw-z]\s*[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*[A-Da-d\s]', title: 'Valid NI Number (ie. AB123456C)', autocomplete: "off" %>
+
+  <%= f.text_field :address, placeholder: 'Street Address', class: 'form-control v2-profile-street v2-inputs required' %>
+
+  <%= f.text_field :address2, placeholder: 'Town/City', class: 'form-control v2-profile-city v2-inputs required' %>
+
+  <%= f.text_field :city, placeholder: 'County', class: 'form-control v2-profile-postal-code v2-inputs required' %>
+
+  <%= f.text_field :post_code, placeholder: 'Post Code', class: 'form-control v2-profile-postal-code v2-inputs required', pattern: '[a-zA-Z][a-zA-Z0-9]{1,3}\s?\d[a-zA-Z]{2}', title: 'Valid UK Postal Code', autocomplete: "off" %>
+
+  <% if !(@prospect.applicant?) && !@prospect.has_personal_details? && @prospect.emergency_name.nil? %>
+    <%= f.text_field :emergency_name, placeholder: 'Emergency Contact Name', class: 'red-border-error form-control v2-profile-emergency-name v2-inputs', autocomplete: "off" %>
+  <% elsif !(@prospect.applicant?) %>
+    <%= f.text_field :emergency_name, placeholder:  'Emergency Contact Name', class: 'form-control v2-profile-emergency-name v2-inputs', autocomplete: "off" %>
+  <% end %>
+
+  <% if !(@prospect.applicant?) && !@prospect.has_personal_details? && @prospect.emergency_no.nil? %>
+    <%= f.text_field :emergency_no, placeholder: 'Emergency Contact number', class: 'red-border-error form-control v2-profile-emergency-number v2-inputs', pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d?\D*', title: '0 + 10 or 9 digits', autocomplete: "off" %>
+  <% elsif !(@prospect.applicant?) %>
+    <%= f.text_field :emergency_no, placeholder: 'Emergency Contact number', class: 'form-control v2-profile-emergency-number v2-inputs', pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d?\D*', title: '0 + 10 or 9 digits', autocomplete: "off" %>
+  <% end %>
+
+  <div class="v2-profile-kid d-flex justify-content-center">
+    <div class="form-check v2-application-checkbox" style="width: 660px;">
+      <input class="form-check-input" type="checkbox" value="" id="kid" name="kid" <%= @prospect.kid_datetime != nil ? 'checked=true' : '' %> style="display: block;">
+      <label class="form-check-label" for="kid">
+        I agree with Flair's Key Information Document(KID) for PAYE agency workers, seen <span id='v2-kid-button'>here</span>
+      </label>
+    </div>
+  </div>
+
+  <div class="v2-profile-terms d-flex justify-content-center">
+    <div class="form-check v2-application-checkbox" style="width: 660px;">
+      <input class="form-check-input" type="checkbox" value="" id="terms" name="terms" <%= @prospect.datetime_agreement != nil ? 'checked=true' : '' %> style="display: block;">
+      <label class="form-check-label" for="terms">
+        I agree to Terms of Engagement for Agency Workers Contract of Services, seen <span id='v2-terms-button'>here</span>
+      </label>
+    </div>
+  </div>
+
+  <center style="margin-bottom: 100px;">
+    <button type="submit" id="v2-profile-personal-details-submit" class="v2-profile-submit-button">
+      <% if @prospect.has_personal_details? %>
+        UPDATE PROFILE
+      <% else %>
+        SAVE PROFILE
+      <% end %>
+    </button>
+  </center>
+<% end %>
+
+<% content_for_once :js do %>
+  <script>
+    $(document).ready(function (){
+        if(window.location.href.split('=')[1] === 'noImage') {
+            $('#edit-photo-link').trigger( "click" );
+            // debugger;
+        }
+    })
+    $('body').on('click', '#v2-terms-button', function(){
+      $('#v2-profile-kid').css('display', 'none');
+      $('#v2-profile-terms').css('display', 'block');
+      $('#v2-profile-personal-details').css('display', 'none');
+
+      v2_profile_bg_size('.v2-profile-content')
+    })
+
+    $('body').on('click', '#v2-kid-button', function(){
+      $('#v2-profile-kid').css('display', 'block');
+      $('#v2-profile-terms').css('display', 'none');
+      $('#v2-profile-personal-details').css('display', 'none');
+
+      v2_profile_bg_size('.v2-profile-content')
+    })
+
+    function submitForm() {
+      checked = 0
+      scroll_input = ""
+
+      inputs_required = $('#v2-profle-my-profile-form').find('.required')
+      inputs_required.each(function () {
+        if($(this).attr('id') !== 'prospect_email'){
+          if ($(this).val() == ""){
+            $(this).css('border', '2px solid red');
+            checked = 1
+            scroll_input = $(this).attr('id')
+          }else{
+            $(this).css('border', 'none');
+          }
+        }else{
+          if ($(this).val() == ""){
+            $(this).css('border', '2px solid red');
+            scroll_input = $(this).attr('id')
+            checked = 1
+          }else{
+            if($(this).css('border') == '1px solid rgb(255, 0, 0)'){
+              $(this).css('border', '2px solid red');
+            }else{
+              $(this).css('border', 'none');
+            }
+          }
+        }
+      })
+
+      // Kid && terms
+      if ($('#terms').prop('checked') == false){
+        scroll_input = "terms"
+        checked = 1
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <div class="v2-flash-message">Please Check Terms</div>
+            </div>
+          </div>
+        `)
+      }
+
+      if(checked != 0){
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $(`#${scroll_input}`).offset().top - 100
+        }, 500);
+        return false;
+      }
+
+      if ($('#kid').prop('checked') == false){
+        scroll_input = "kid"
+        checked = 1
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body">
+              <div class="v2-flash-message">Please Check Kid</div>
+            </div>
+          </div>
+        `)
+      }
+
+      if(checked != 0){
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $(`#${scroll_input}`).offset().top - 100
+        }, 500);
+        return false;
+      }
+
+      // check if email exists
+      email = $('#prospect_email').val()
+      $.ajax({
+        url: '/staff/check_email',
+        type: 'GET',
+        async: false,
+        data: {email: email},
+        success: function(data) {
+          console.log("success ajax")
+          if (data["check"] == "true") { // email exists
+            $('body').append(`
+              <div class="v2-flash-bg">
+                <div class="v2-flash-body">
+                  <i class="icon--notice-flag"></i>
+                  <div class="v2-flash-message">
+                  Email has already been taken
+                  </div>
+                  <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                  <span>Close</span>
+                  </a>
+                  <div class="clear"></div>
+                </div>
+              </div>
+            `)
+            $('#prospect_email').css('border', '2px solid red');
+            scroll_input = "prospect_email"
+            checked = 1
+          }else{
+            checked = 0
+          }
+        }
+      })
+
+      if(checked == 0){
+        return true;
+      }else{
+        checked = 0
+        $([document.documentElement, document.body]).animate({
+          scrollTop: $(`#${scroll_input}`).offset().top - 100
+        }, 500);
+        return false;
+      }
+    }
+  </script>
+<% end %>

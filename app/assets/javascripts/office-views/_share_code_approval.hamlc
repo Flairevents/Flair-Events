@@ -1,0 +1,221 @@
+%p
+  %table
+    %tr
+      %td
+        %b Flair Events People
+    %tr
+      %td
+        %p IDs uploaded by 
+          %span{style: 'font-size: 20px;'}= "#{escapeHTML(@name)}"
+    %tr
+      %td
+        %b Nationality:
+      %td
+        %select.form-control{id: "nationality#{@prospect_id}"}
+          - for name,index in window.Countries
+            %option{value: index, selected: @nationality == index}= name
+      %td.pl10{rowspan: 8}
+        %img{src: "/prospect_photo/#{@prospect_id}", id: "prospect_photo", height: 145}
+      %td.pl30{rowspan: 8}
+        %form{ method: 'POST', action: "/office/upload_share_code/#{@prospect_id}", class: "dropzone", id: "drag_drop", style: 'border-style: dashed; border-width: 2px;' }
+    %tr
+      %td
+        %b ID Number:
+      %td
+        %input.form-control{id: "idnumber#{@prospect_id}", value: @id_number}
+    %tr
+      %td
+        %b ID Expiry:
+      %td
+        %input.form-control{id: "idexpiry#{@prospect_id}", value: @id_expiry}
+    %tr
+      %td
+        %b NI Number:
+      %td
+        %input.form-control{id: "ninumber#{@prospect_id}", value: @ni_number}
+    %tr
+      %td
+        %b Date of Birth:
+      %td
+        %input.form-control{id: "dateofbirth#{@prospect_id}", value: @date_of_birth, style: 'font-size: 18px;'}
+    - if @id_type == 'Work/Residency Visa' || @id_type == 'Pass Visa' 
+      %tr
+        %td
+          %b Share Code:
+        %td
+          %input.form-control{id: "sharecode#{@prospect_id}", value: @share_code}
+      %tr
+        %td
+          %b Visa Number:
+        %td
+          %input.form-control{id: "visanumber#{@prospect_id}", value: @visa_number}
+      %tr
+        %td
+          %b Visa Expiry:
+        %td
+          %input.form-control{id: "visaexpiry#{@prospect_id}", value: @visa_expiry, style: 'font-size: 18px;'}
+      %tr
+        %td
+          %b Indefinite Visa:
+        %td
+          %input{id: "visaindefinite#{@prospect_id}", type: 'checkbox', checked: @visa_indefinite}
+      %tr
+        %td
+          %b Condition:
+        %td
+          %select.form-control{id: "condition#{@prospect_id}"}
+            %option{value: 'None', selected: @condition == 'None'}= 'None'
+            %option{value: 'Holidays', selected: @condition == 'Holidays'}= 'Holidays'
+            %option{value: 'Under 20Hrs', selected: @condition == 'Under 20Hrs'}= 'Under 20Hrs'
+            %option{value: 'Specific', selected: @condition == 'Specific'}= 'Specific'
+%div{style: 'display: flex; align-items: center; flex-wrap: wrap;'}
+  - for scanned_id in @scanned_ids
+    // TODO: Why the rand_id?
+    - rand_id = Math.floor(Math.random() * 1000000)
+    - if scanned_id.extension == '.pdf'
+      %iframe{ id: "img#{rand_id}", src: "/office/scanned_id_image/#{scanned_id.id}", width: "600", height:"400", style:"border: none; margin-right: 10px" }
+    - else
+      %a{href: "/office/scanned_id_image/#{scanned_id.id}?large=true", class: 'zoomimg', style:"margin-right: 10px"}
+        %img{src: "/office/scanned_id_image/#{scanned_id.id}", id: "img#{rand_id}", width: 400, height: 400, data-rotation: 0}
+      %button.btn.btn-default{data-image-id: "#img#{rand_id}", data-scanned-id: scanned_id.id, data-id-approval-rotatable: '', style:"margin-right: 10px"} Rotate
+
+- if @has_share_code_file
+  %h3{id: 'share_code_iframe_title_to_do', style: 'margin-top: 18px;'}
+    Share Code File
+  %p
+    %iframe{ id: 'share_code_iframe_to_do', src: "/office/share_code_file/#{@prospect_id}", width: "600", height:"780", style:"border: none;" }
+- else
+  %h3{id: 'share_code_iframe_title_to_do', style: 'display: none; margin-top: 18px;'}
+    Share Code File
+  %p
+    %iframe{ id: 'share_code_iframe_to_do', src: "/office/share_code_file/#{@prospect_id}", width: "600", height:"780", style:"border: none; display: none" }
+
+%script
+  $('[data-id-approval-rotatable]').click(function() {
+    var scanned_id = $(this).data('scanned-id');
+    var image = $($(this).data('image-id'));
+    var angle = parseInt(image.attr('angle') || 0, 10);
+    angle = (angle+90)%360;
+    image.data('rotation', angle);
+    image.attr('angle', angle);
+    image[0].className = 'rotate'+angle;
+    ServerProxy.saveChanges("/office/rotate_scanned_id/"+scanned_id, {}, null, window.db);
+    // We might need to reinitialize ZoomIt
+    //@viewport.find('a.zoomimg').jqZoomItDispose() # currently displayed to-do might contain a zoomed image
+    //@viewport.find('.todo-description').html(@buildTodoHtml(todo))
+    //@viewport.find('a.zoomimg').jqZoomIt()
+  });
+
+  Dropzone.options.dragDrop = {
+    init: function() {
+      this.on('addedfile', function(file) {
+        if (this.files.length > 1) {
+          this.removeFile(this.files[0]);
+        }
+        file.previewElement.addEventListener("click", function() {
+          window.open("/office/share_code_file/#{@prospect_id}", '_blank');
+        });
+      });
+    },
+    dictDefaultMessage: 'Drop the Share Code PDF here',
+    acceptedFiles: ".pdf"
+  }
+  const shareCodeDropzone = new Dropzone("#drag_drop", {});
+
+  shareCodeDropzone.on("complete", function (file) {
+    $('#share_code_iframe_to_do').attr('src', "/office/share_code_file/#{@prospect_id}")
+    $('#share_code_iframe_to_do').css('display', '')
+    $('#share_code_iframe_title_to_do').css('display', '')
+  })
+
+  $('#idnumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_number]" : newNumber}, null, window.db);
+  });
+
+  $('#idnumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_number]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#idexpiry#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_expiry]" : newNumber}, null, window.db);
+  });
+  $('#idexpiry#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[id_expiry]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#nationality#{@prospect_id}').change(function() {
+    var newNationality = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[nationality_id]" : newNationality}, null, window.db);
+  })
+
+  $('#condition#{@prospect_id}').change(function() {
+    var newCondition = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[condition]" : newCondition}, null, window.db);
+  })
+
+  $('#ninumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[ni_number]" : newNumber}, null, window.db);
+  });
+  $('#ninumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[ni_number]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#sharecode#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[share_code]" : newNumber}, null, window.db);
+  });
+  $('#sharecode#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[share_code]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#dateofbirth#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[date_of_birth]" : newNumber}, null, window.db);
+  });
+  $('#dateofbirth#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[date_of_birth]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#visaexpiry#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_expiry]" : newNumber}, null, window.db);
+  });
+  $('#visaexpiry#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_expiry]" : newNumber}, null, window.db);
+    }
+  })
+
+  $('#visaindefinite#{@prospect_id}').change(function() {
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_indefinite]" : this.checked}, null, window.db);
+  });
+  
+  $('#visanumber#{@prospect_id}').change(function() {
+    var newNumber = $(this).val();
+    ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_number]" : newNumber}, null, window.db);
+  });
+  $('#visanumber#{@prospect_id}').keyup(function(event) {
+    if (event.which == 13) {
+      var newNumber = $(this).val();
+      ServerProxy.saveChanges("/office/update_prospect/#{@prospect_id}", { "prospect[visa_number]" : newNumber}, null, window.db);
+    }
+  })

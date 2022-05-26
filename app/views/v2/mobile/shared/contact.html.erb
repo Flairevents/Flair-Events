@@ -1,0 +1,106 @@
+<% content_for :head do %>
+  <title>Contact Flair - lets chat today</title>
+  <meta name="description" content="Need more information, a quote or simply want to get in touch? Drop us a line!" />
+<% end %>
+<%= render :partial => 'v2/mobile/shared/nav' %>
+<div class="v2-contact-bg"></div>
+<div class="content">
+  <div class="content-spacer"></div>
+  <div class="content-inner">
+    <div class="d-flex justify-content-center">
+      <a href="tel:02045426441">
+        <div class="v2-contact-london-container">
+          <div class="d-flex flex-row bd-highlight fit-content" style="margin: auto;margin-top: 5px;">
+            <div class="v2-big-ben"></div>
+            <div style="margin-left: 10px">
+              <div class="v2-contact-london-label">London</div>
+              <div class="v2-contact-london-number">0204 542 6441</div>
+            </div>
+          </div>
+        </div>
+      </a>
+
+      <a href="tel:01612412441">
+        <div class="v2-contact-london-container" style="margin-left: 20px;">
+          <div class="d-flex flex-row bd-highlight fit-content" style="margin: auto;margin-top: 7px;">
+            <div class="v2-manchester"></div>
+            <div style="margin-left: 10px">
+              <div class="v2-contact-london-label" style="margin-top: 3px;">Manchester</div>
+              <div class="v2-contact-london-number">01612412441</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+    <div class="v2-contact-form-container">
+    </div>
+    <div class="v2-contact-form">
+      <div class="v2-lets-talk">Let's talk, but you first</div>
+      <%= form_tag "/contact", id: 'contact-form' do %>
+        <input aria-describedby="basic-addon1" class="form-control v2-contact-name required" id="name" name="name" placeholder="Full Name" style="border-radius: 10px;" type="text" autocomplete="off">
+
+        <input aria-describedby="basic-addon2" class="form-control v2-contact-email required" id="email" name="email" placeholder="Email Address" style="border-radius: 10px;margin-right:10px;" type="email" autocomplete="off">
+
+        <input aria-describedby="basic-addon1" class="form-control v2-contact-email required" id="contact" name="contact" placeholder="Contact Number" style="border-radius: 10px;" type="tel" autocomplete="off" title="0 + 10 or 9 digits">
+
+        <select class="form-select v2-contact-dropdown required" name="subject" aria-label="Default select example">
+          <option value="" disabled selected class="v2-contact-dropdown-label">I am...</option>
+          <option value="1">hiring</option>
+          <option value="2">have a general question</option>
+          <option value="3">looking for payroll</option>
+          <option value="4">looking for accounts</option>
+          <option value="5">ledgend</option>
+        </select>
+
+        <textarea aria-describedby="basic-addon5" class="form-control v2-contact-message required" id="message" name="message" placeholder="Message" style="border-radius: 10px;" type="text" autocomplete="off"></textarea>
+
+        <center>
+          <input class="v2-contact-submit d-flex justify-content-center" type="submit" value="SEND MESSAGE">
+        </center>
+      <% end %>
+    </div>
+    <br>
+    <br>
+  </div>
+</div>
+<div class="content-after"></div>
+<%= render :partial => 'v2/mobile/application/footer' %>
+
+<% content_for_once :js do %>
+  <script>
+    $('#contact-form').on('submit', function(){
+        check = 0;
+
+        inputs = $(this).find('.required');
+
+        inputs.each(function(){
+            if($(this).val() == "" || $(this).val() == null){
+                check = 1
+                $(this).css('border', '2px solid red');
+            }else{
+                $(this).css('border', 'none');
+            }
+        })
+
+        if(check == 0){
+            return true;
+        }else{
+            $('body').append(`
+                <div class="v2-flash-bg">
+                    <div class="v2-flash-body">
+                    <i class="icon--notice-flag"></i>
+                    <div class="v2-flash-message">
+                        Please fill up all details.
+                    </div>
+                    <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                        <span>Close</span>
+                    </a>
+                    <div class="clear"></div>
+                    </div>
+                </div>
+            `)
+            return false;
+        }
+    })
+  </script>
+<% end %>

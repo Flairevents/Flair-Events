@@ -1,0 +1,43 @@
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;"}
+  %tr
+    %td Kind Regards,
+  %tr
+    %td=name
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 12px; padding: 20px 0px 0px;"}
+  %tr
+    %td
+      You are receiving this email because you are registered with Flair People Ltd. If you are no longer seeking work, please simply
+      %a{href: "#{Flair::Application.config.base_https_url}/staff/unsubscribe?token=#{@unsub}"} unsubscribe.
+%table{ style: "padding-bottom: 10px; font-family: 'Lato', sans-serif; font-size: 14px; padding-top: 20px;"}
+  %tr
+    %td{ rowspan: "5"}
+      = image_tag('v2/flair-logo.png', width: 120, style: 'margin-bottom: -50px;')
+  %tr
+    %td{ rowspan: "5" }
+      %div{ style: 'width: 5px; background-color: #15a5b9; height: 150px; margin: 0px 5px;'}
+  %tr
+    %td{ colspan: "4", style: 'color: #0099cc; font-weight: 700;'} Flair HQ
+  %tr
+    %td{ colspan: "4"} 0161 241 2441
+  %tr
+    %td{ colspan: "4"}
+      %a{href: "https://www.flairpeople.com", style: 'color: #0099cc;'} www.flairpeople.com
+  %tr
+    %td
+    %td
+      %a{ href: "https://www.facebook.com/flaireventstaffinglimited"}
+        = image_tag('v2/flair-fb.png')
+    %td
+      %a{ href: "https://twitter.com/FlairEventStaff" }
+        = image_tag('v2/flair-twitter.png')
+    %td
+      %a{ href: "https://instagram.com/flaireventstaffing" }
+        = image_tag('v2/flair-instagram.png')
+    %td
+      %a{ href: "https://www.linkedin.com/company/flair-event-staffing-ltd" }
+        = image_tag('v2/flair-linkedin.png')
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 10px; padding-top: 20px;"}
+  %tr
+    %td
+      %span{ style: 'color: #0099cc; font-weight: 700;'} E-MAIL DISCLAIMER
+      This email and any attachments is intended solely for the addressee and may contain information that is confidential, proprietary and/or legal privileged. Please let me know if this email is not for you, please delete it completely from your computer system, please don’t copy, forward or store unless as stated you are the intended recipient. Whilst all reasonable care has been taken to avoid transmission of viruses and bugs, the responsibility falls on the recipient to ensure that onward transmission, once opening does not adversely affect its systems or data. This email message is being sent to you on behalf of Flair People Ltd which is a Registered in Scotland with company NO: SC453179 and has a registered office at Suit 15, The Adelphi Mill, Bollington, SK10 5JB.

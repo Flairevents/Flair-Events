@@ -1,0 +1,86 @@
+.command-bar
+  .btn-group
+    %button.btn.btn-default.command-link.command-new{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-upload.disabled{:"data-command" => 'uploadThumbnail'} Upload Thumbnail
+    %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+
+  .upload-notification.list-view-only{style: 'float:right'}
+    .progress{style: 'display: none'}
+      .progress-bar.progress-bar-success.progress-bar-striped.active{role: 'progressbar', style: 'width:0%'}
+
+%hr
+.filter-bar-container
+  .filter-bar.filters
+    %table
+      %tr
+        %th Content Type
+      %tr
+        %td= _select :type, options_for_select([['E-mail','email'],['Page','page'],['Terms','terms'],['News','news']]), class: 'form-control'
+
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    = form_tag '/office/update_content', class: 'record-details-form' do
+      %table
+        %tr
+          %td Name
+          %td= _text_field :"content[key]", class: 'form-control'
+        %tr.title-row
+          %td Title
+          %td= _text_field :"content[title]", class: 'form-control'
+        %tr
+          %td Status
+          %td= _select :"content[status]", options_for_select([['Draft', 'DRAFT'], ['Published', 'PUBLISHED']]), class: 'form-control'
+        %tr.thumbnail-row
+          %td Thumbnail
+          %td
+            %img.thumbnail{alt: 'Thumbnail'}
+        %tr
+          %td{colspan:2}
+            .tinymce#edit-content-editor{:"data-prop" => 'contents'}
+        %tr
+          %td Last Updated
+          %td#content_updated_at
+
+.slideover.record-new{style: 'display:none; left:100%'}
+  %a.close X
+  .slideover-content
+    = form_tag '/office/create_content', class: 'record-details-form' do
+      = hidden_field_tag :"content[type]"
+      %table
+        %tr
+          %td Name
+          %td= _text_field :"content[key]"
+        %tr.title-row
+          %td Title
+          %td= _text_field :"content[title]"
+        %tr
+          %td Status
+          %td= _select :"content[status]", options_for_select([['Draft', 'DRAFT'], ['Published', 'PUBLISHED']])
+        %tr
+          %td{colspan:2}
+            .tinymce#new-content-editor{:"data-prop" => 'contents'}
+
+- content_for :js do
+  :javascript
+    $('#content .command-upload').popover({
+      content: #{raw form_tag('#', multipart: true) { _erbout << file_field_tag('file_upload') }.inspect},
+      html: true,
+      placement: 'bottom',
+      trigger: 'click'
+    });

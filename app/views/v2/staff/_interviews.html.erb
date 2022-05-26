@@ -1,0 +1,122 @@
+<div id="v2-book-interview">
+  <ul class="nav nav-tabs nav-tabs--real-tabs dark-green nav-tabs--scroll staff-nav mt1" role="tablist" style="background-color: unset; display:none;">
+    <% active='active' %>
+    <li class="<%= active %>" role="events">
+      <span class="anchor" id="anchor-interview-scheduled"></span>
+      <a aria-controls="tab-interview-scheduled" class="staff-interview-tab" data-toggle="tab" href="#tab-interview-scheduled" role="tab">
+        <% if @prospect.interview.present? %>
+          <div class="fl-icon fl-icon--small fl-icon--checkmark staff-top-bar-check-mark staff-interview-tab-icon" style="margin-right: 10px;"></div>
+        <% else %>
+          <div class="fl-icon fl-icon--small fl-icon--checkmark-unchecked staff-top-bar-check-mark staff-interview-tab-icon" style="margin-right: 10px;"></div>
+        <% end %>
+        <div class="text-left">
+          <% if @prospect.interview.present? %>
+            Booked
+          <% else %>
+            Book Interview
+          <% end %>
+        </div>
+      </a>
+    </li>
+  </ul>
+  <% active='active' %>
+  <% if @show_interview_scheduled %>
+    <div id='v2-interview-scheduled'>
+      <%= render partial: 'interview_scheduled' %>
+    </div>
+  <% end %>
+  <% if @show_interview_online_signup %>
+    <div>
+      <%= render partial: 'interview_online_signup' %>
+    </div>
+  <% end %>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $('#v2-interview-this-week-button').on('click', function(){
+      if($(this).hasClass('v2-interview-week-buttons-active') != true){
+        $(this).addClass('v2-interview-week-buttons-active');
+        $('#v2-interview-next-week-button').removeClass('v2-interview-week-buttons-active');
+
+        $('#v2-interview-first-week').css('display', 'flex');
+        $('#v2-interview-second-week').css('display', 'none');
+      }
+
+      v2_profile_bg_size('#v2-book-interview')
+    })
+
+    $('#v2-interview-next-week-button').on('click', function(){
+      if($(this).hasClass('v2-interview-week-buttons-active') != true){
+        $(this).addClass('v2-interview-week-buttons-active');
+        $('#v2-interview-this-week-button').removeClass('v2-interview-week-buttons-active');
+
+        $('#v2-interview-first-week').css('display', 'none');
+        $('#v2-interview-second-week').css('display', 'flex');
+      }
+
+      v2_profile_bg_size('#v2-book-interview')
+    })
+
+    $('body').on('click', '.v2-interview-dates-time-available', function(){
+      $(this).find('input').prop('checked', true);
+      if(!$(this).hasClass('v2-interview-dates-time-available-active')){
+        $('.v2-interview-dates-time-available').each(function(){
+          $(this).removeClass('v2-interview-dates-time-available-active');
+        })
+        $(this).addClass('v2-interview-dates-time-available-active');
+      }
+    })
+
+    // $('body').('click', '#v2-book-interview-form', function () {
+
+    // })
+
+    $('.v2-interview-dates-time-unavailable').hover(function(){
+      if($(this).find('.v2-interview-dates-time-unavailable-hover').length > 0){
+        pop_up = $(this).find('.v2-interview-dates-time-unavailable-hover')
+
+        if($(pop_up).css('display') == 'none'){
+          $(pop_up).fadeIn()
+        }else{
+          $(pop_up).fadeOut()
+        }
+      }else{
+        $(this).prepend(`
+          <div class="v2-interview-dates-time-unavailable-hover">
+            <p>
+              Timeslot Full
+            </p>
+          </div>
+        `)
+      }
+    })
+
+    $('#v2-interview-book-submit').click(function(){
+      if($('#video_call_interview').prop('checked') == false && $('#telephone_call_interview').prop('checked') == false){
+        $('body').append(`
+          <div class="v2-flash-bg">
+            <div class="v2-flash-body" style="width: 700px; display: flex; flex-flow: column; align-items: center;">
+              <i class="icon--notice-flag"></i>
+              <h2 class="v2-flash-title">
+              Book an Interview
+              </h2>
+              <div class="v2-flash-message">
+                You need to select the date you want your interview to be scheduled and the method of interviewing, either through video call or telephone call.
+              </div>
+              <div class="v2-flash-button" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                Okay
+              </div>
+              <a class="fl-flash__close-btn" onclick="$(&quot;.v2-flash-bg&quot;).fadeOut()">
+                <span>Close</span>
+              </a>
+              <div class="clear"></div>
+            </div>
+          </div>
+        `)
+      return false
+      }
+      return true
+    })
+  </script>
+<% end %>

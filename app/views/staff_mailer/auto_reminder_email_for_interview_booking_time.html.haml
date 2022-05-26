@@ -1,0 +1,22 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px; line-height: 25px;" }
+  %tr
+    %td Don’t forget, your Introduction with Flair Is booked today. Please expect a call from us between #{@interview_time}, from our HQ number 0161 241 2441.
+  %tr
+    %td We will spend 5-10 minutes chatting to you, our main goal is to find the right work to suit your skills.
+  %tr
+    %td Or you can Fast track your application and call us anytime between 10am-6pm Monday - Friday
+  %tr
+    %td Looking forward to speaking to you!
+  %tr
+    %td The Flair Team!
+  %tr
+    %td (Elise, Zoe, Amber, Miriam & Clare) We welcome you!
+
+= render partial: 'staff_mailer/signature'

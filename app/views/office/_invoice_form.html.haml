@@ -1,0 +1,42 @@
+= form_for invoice, url: '#', html: {id: form_id, class: 'record-details-form invoice-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  %table
+    %tr
+      %td{class: 'label-column'} Client:
+      %td
+        %select{name: 'client_id'}
+    %tr
+      %td{class: 'label-column'} Event:
+      %td
+        %select{name: 'event_id'}
+    %tr
+      %td{class: 'label-column'} Tax Week:
+      %td= f.select :tax_week_id, [], {}, class: 'form-control'
+    %tr
+      %td{class: 'label-column'} Status:
+      %td= f.select :status, options_for_select([['New','NEW'],['Emailed','EMAILED'],['Sage','SAGE']], 'NEW'), {}, class: 'form-control'
+    %tr
+      %td{class: 'label-column'} Date Emailed:
+      %td= f.text_field :date_emailed, size: 14, class: 'invoice-datepicker', id: form_id + '_date_emailed'
+    %tr
+      %td{class: 'label-column'} Invoiced By:
+      %td= f.text_field :who, class: 'form-control'
+    - if type == 'edit'
+      %tr
+        %td{class: 'label-column'} Office Manager:
+        %td#invoice_office_manager
+      %tr
+        %td{class: 'label-column'} Rates:
+        %td#invoice_client_rates
+      %tr
+        %td{class: 'label-column'} Booking Invoicing Notes:
+        %td#invoice_booking_invoicing_notes
+      %tr
+        %td{class: 'label-column'} Client Invoice Notes:
+        %td#invoice_client_notes
+- content_for_once :js do
+  :javascript
+    setUpDatepicker($('.invoice-datepicker'), 'D dd/mm/yy');
+    $invoices = $('#invoices');
+    $invoices.find('.invoice-datepicker').watermark('DD/MM/YYYY', {className: 'watermark'});
+    $invoices.find('select[name="event_id"]').select2();
+    $invoices.find('select[name="client_id"]').select2();

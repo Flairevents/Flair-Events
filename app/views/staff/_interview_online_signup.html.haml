@@ -1,0 +1,53 @@
+-if @interview_calendar.empty?
+  .h5 We currently have no open online interview slots
+  %ul
+    %li Everyone requires an interview before being accepted into our database.
+    %li We will email you, and post details on your staff zone, when interview slots become available each week.
+    %li We want to learn about your skills and experiences so we can match you to the right opportunities.
+    %li Make sure you're happy with your profile, you can edit at any time.
+  %p FYI: Feel free to upload your bank and ID details before your interview or you can wait until we are legally your employer.
+-else
+  -if @interview
+    .text-center
+      <strong>Click on another time slot to reschedule, or click on your existing sign-up to cancel</strong>
+  -else
+    %p.text-center.interview-text
+      We want to learn about you and the skills and experiences you can bring to our team. This will help us match you to the right client and also match the right client to you.
+      <br><br>
+      Allow 10 - 15 minutes for the interview.
+      <br><br>
+      Once successful, you will have access to all our flexible jobs throughout the year.
+      <br><br>
+      %b.text-center.interview-text-green This is just the start!
+  = form_with url: '/staff/sign_up_for_interview', method: :post, style: 'border: 1px solid; background-color: white;' do |f|
+    .text-center.mt4
+      .row
+        .column.small-12.medium-6.text-right.interview-method
+          %span.interview-radio{style: 'padding:10px; padding-right: 20px'}
+            = f.check_box :telephone_call_interview, {class: 'interview-method-checkbox'}
+            = label_tag 'telephone_call_interview', 'Telephone Call'
+
+            -#Telephone Call
+        .column.small-12.medium-6.text-left.interview-method
+          %span.interview-radio{style: 'padding:10px; padding-right: 45px'}
+            = f.check_box :video_call_interview, {class: 'interview-method-checkbox'}
+            = label_tag 'video_call_interview', 'Video Call'
+
+    .text-left.mt2
+      Select Date:
+    .text-center
+      .row.mt1
+        .column.small-12.medium-6
+          - interview_dates = []
+          -@interview_calendar.each do |ic_key, ic_value|
+            - interview_dates = interview_dates.concat(ic_value.keys)
+          #interview-date-picker{'data-dates': interview_dates.as_json}
+        - @interview_calendar.each do |ic_key, ic_value|
+          - ic_value.each do |week_day, values|
+            = render partial: 'interview_calendar_week', locals: {week_day: week_day, values: values, form: f}
+
+  -#.pt2
+    -#.slider--generic.flexslider-container#interview-flexslider
+    -#  %ul.slides.interview-calendar
+    -#    - @interview_calendar.each do |week_start, values|
+    -#      = render partial: 'interview_calendar_week', locals: {week_start: week_start, values: values}

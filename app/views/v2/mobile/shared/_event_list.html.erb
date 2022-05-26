@@ -1,0 +1,384 @@
+<ul class="v2-explore-jobs-list">
+  <% previous_date = nil %>
+  <% extra_classes = [] %>
+  <% new_events ||= @new_events ||= [] %>
+  <% events ||= @events ||= [] %>
+  <% featured_events ||= @featured_events ||= [] %>
+  <% [[featured_events, :featured], [new_events, :new], [events, nil]].each do |events, type| %>
+    <% if events.length > 0 %>
+      <% for n in 0..(events.length-1) %>
+        <% event = events[n] %>
+        <% classes = ['event-status-' + @status[event.id].downcase.sub(' ', '-')] %>
+        <% if (n < (events.length - 2)) && (event.next_active_date.cweek != events[n+1].next_active_date.cweek) && (type || (event.next_active_date.month == events[n+1].next_active_date.month)) %>
+          <% classes << 'new_week' %>
+        <% end %>
+
+        <% gig_request = @prospect.gig_requests.where(event_id: event.id).first %>
+        <% gig = @prospect.gigs.where(event_id: event.id).first %>
+        <% job = gig ? gig.job : gig_request ? gig_request.job : nil %>
+        <li>
+          <div class="v2-explore-jobs-event-container">
+            <div class="d-flex flex-row" style="position: relative;">
+              <%# header %>
+              <div style="width: 206px;">
+                <div class="v2-explore-jobs-event fit-content"><%= event.display_name %></div>
+                <div class="row">
+                  <div class="col v2-p-m-0">
+                    <div class="v2-explore-jobs-job"><b><%= job ? (job.public_name != "" && job.public_name != nil) ? job.public_name : job.name : '' %></b></div>
+                    <div class="row" style="margin-left: 0px;">
+                      <div class="col v2-p-m-0">
+                        <div class="v2-explore-jobs-location"><%= event.location %></div>
+                      </div>
+                      <div class="col v2-p-m-0">
+                        <% date = event.public_date_start %>
+                        <div class="v2-explore-jobs-date">
+                          <%= date ? date.strftime("%e") : '' %>
+                          <sup style='margin-left: -4px;'><%= date ? date.day.ordinalize.split(//).last(2).join : '' %></sup>
+                          <%= date ? date.strftime("%B") : '' %>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <%# status %>
+              <div class="v2-explore-jobs-status d-flex align-items-end">
+                <% status = "" %>
+                <% message = "" %>
+                <% sub = "" %>
+                <% if (gig_request ? gig_request.spare == true ? true : false : false) %>
+                  <div class="v2-explore-job-spare">Reserve</div>
+                    <% status = "Spare List" %>
+                    <% message = "We will be in touch via email or a call as soon as any guaranteed positions become available." %>
+                    <%# sub = " Feel free to explore other events with us." %>
+                <% else %>
+                  <% if @status[event.id] == 'Pending' %>
+                    <div class="v2-explore-job-pending">PENDING</div>
+                    <% status = "Pending Status" %>
+                    <% message = "Thank you for your interest, we will be intouch via email or a call concerning this contract as the start date draws closer." %>
+                  <% elsif @status[event.id] == 'Signed Up' %>
+                    <div class="v2-explore-job-signed-up">ACTIVE</div>
+                    <% status = "Signed Up" %>
+                    <% message = "Your booked in to work, monitor your emails for information and when to confirm attendance and shifts." %>
+                  <% elsif @status[event.id] == 'In Progress' %>
+                    <div class="v2-explore-job-signed-up">In Progress</div>
+                    <% status = "Working" %>
+                    <% message = "You're booked to work, monitor your emails to pick your shifts, and confirm attendance." %>
+                  <% elsif @status[event.id] == 'Confirmed' %>
+                    <div class="v2-explore-job-signed-up">Confirmed</div>
+                    <% status = "Working" %>
+                    <% message = "Check your FlairApp to see all confirmed shifts. We also send out final details via email. Anu question please call the Flair office Team: 0161 2412441" %>
+                  <% elsif @status[event.id] == 'Confirmation Required' %>
+                    <div class="">Requires Confirmation!</div>
+                  <% else %>
+                    <% if @event_is_new[event.id] %>
+                      <div class="">New</div>
+                    <% end %>
+                    <% if event.fullness == 'FULL' %>
+                      <div class="">Full</div>
+                    <% elsif event.fullness == 'NEARLY' %>
+                      <div class="">Few Places Left</div>
+                    <% elsif event.fullness == 'REGISTER_INTEREST' %>
+                      <div class="">Register Interest</div>
+                    <% end %>
+                  <% end %>
+                <% end %>
+              </div>
+              <%# arrow %>
+              <div class="v2-mobile-my-jobs-arrow">
+                <%= image_tag (asset_path 'v2/mobile/Path 3218.png'), style: 'margin-left:7px;margin-top:35px;' %>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col v2-p-m-0">
+              </div>
+              <div class="col v2-p-m-0" style="width:25px;flex:revert;">
+              </div>
+            </div>
+          </div>
+          <%# content %>
+          <div class="v2-explore-jobs-list-event-content">
+              <div class="v2-explore-jobs-list-event-content-header">
+                <div class="status"><%= status %></div>
+                <div class="status-caption">
+<!--                  <span><%#= status %></span>-->
+                  <span><%= message %></span><br />
+                  <span><%= sub %></span>
+                </div>
+              </div>
+            <% if job %>
+              <label class="v2-explore-jobs-label">Applied Position</label>
+              <div class="v2-explore-jobs-list-event-job-title"><%= job ? (job.public_name != "" && job.public_name != nil) ? job.public_name : job.name : '' %></div>
+
+              <% if job.new_description != nil && job.new_description != '' %>
+                <label class="v2-explore-jobs-label">Description</label>
+                <div class="v2-explore-jobs-label-content"><%= job.new_description %></div>
+              <% end %>
+
+              <% if job.description != nil && job.description != '' %>
+                <label class="v2-explore-jobs-label">Job Requirements</label>
+                <div class="v2-explore-jobs-label-content"><%= job.description %></div>
+              <% end %>
+
+              <% if job.uniform_information != nil && job.uniform_information != '' %>
+                <label class="v2-explore-jobs-label">Uniform & Appearance</label>
+                <div class="v2-explore-jobs-label-content"><%= job.uniform_information %></div>
+              <% end %>
+            <% end %>
+
+            <% if event.other_info != nil && event.other_info != '' %>
+              <label class="v2-explore-jobs-label">Other Info</label>
+              <div class="v2-explore-jobs-label-content"><%= event.other_info %></div>
+            <% end %>
+
+            <% if event.blurb_transport != nil && event.blurb_transport != '' %>
+              <label class="v2-explore-jobs-label">Transport</label>
+              <div class="v2-explore-jobs-label-content"><%= event.blurb_transport %></div>
+            <% end %>
+
+            <% if (event.location != nil && event.location != '') || (event.post_code != nil && event.post_code != '') %>
+              <label class="v2-explore-jobs-label">Location</label>
+              <div class="v2-explore-jobs-label-content"><%= event.location %>, <%= event.post_code %></div>
+            <% end %>
+
+            <% if event.blurb_wage_additional !=nil && event.blurb_wage_additional != "" %>
+              <label class="v2-explore-jobs-label">Additional Wage</label>
+              <div class="v2-explore-jobs-label-content"><%= event.blurb_wage_additional %></div>
+            <% end %>
+
+            <% if event.blurb_closing !=nil && event.blurb_closing != "" %>
+              <label class="v2-explore-jobs-label">Closing Words</label>
+              <div class="v2-explore-jobs-label-content"><%= event.blurb_closing %></div>
+            <% end %>
+
+            <% if job %>
+              <label class="v2-explore-jobs-label">Rates and Holiday Pay</label>
+              <%# get rate %>
+              <% if @prospect&.age >= 23 %>
+                <div class="v2-explore-jobs-label-content-rate">£<%= '%.2f' % job.pay_25_and_over.to_f %></div>
+
+                <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_25_and_over.to_f %>(£<%= '%.2f' % (job.pay_25_and_over.to_f - job.holiday_pay(:pay_25_and_over).to_f) %> + £<%= job.holiday_pay(:pay_25_and_over).to_f %>)</div>
+              <% elsif @prospect&.age >= 21 %>
+                <div class="v2-explore-jobs-label-content-rate">£<%= '%.2f' % job.pay_21_and_over.to_f %></div>
+
+                <% if job.pay_25_and_over.to_f == job.pay_21_and_over.to_f %>
+                  <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_21_and_over.to_f %>(£<%= '%.2f' % (job.pay_21_and_over.to_f - job.holiday_pay(:pay_25_and_over).to_f) %> + £<%= job.holiday_pay(:pay_25_and_over).to_f %>)</div>
+                <% else %>
+                  <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_21_and_over.to_f %>(£<%= '%.2f' % (job.pay_21_and_over.to_f - job.holiday_pay(:pay_21_and_over).to_f) %> + £<%= job.holiday_pay(:pay_21_and_over).to_f %>)</div>
+                <% end %>
+              <% else %>
+                <div class="v2-explore-jobs-label-content-rate">£<%= '%.2f' % job.pay_18_and_over.to_f %></div>
+
+                <% if job.pay_18_and_over.to_f == job.pay_21_and_over.to_f %>
+                  <ladivbel class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_18_and_over.to_f %>(£<%= '%.2f' % (job.pay_18_and_over.to_f - job.holiday_pay(:pay_21_and_over).to_f) %> + £<%= job.holiday_pay(:pay_21_and_over).to_f %>)</div>
+                <% else %>
+                  <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_18_and_over.to_f %>(£<%= '%.2f' % (job.pay_18_and_over.to_f - job.holiday_pay(:pay_18_and_over).to_f) %> + £<%= job.holiday_pay(:pay_18_and_over).to_f %>)</div>
+                <% end %>
+              <% end %>
+            <% end %>
+            <label class="v2-explore-jobs-label">Shifts</label>
+            <div class="v2-explore-jobs-label-content"><%= job ? job.shift_information : '' %></div>
+            <div class="v2-explore-jobs-label-content"><%= event.event_dates.count %> shifts</div>
+            <label class="v2-explore-jobs-label">Dates</label>
+            <div class="v2-explore-jobs-label-content"><%= event.public_date_start.strftime("%e %b %Y") %> - <%= event.public_date_end.strftime("%e %b %Y") %></div>
+            <% if job %>
+              <% if job.number_of_positions != nil && job.number_of_positions != '' %>
+                <label class="v2-explore-jobs-label">Number of Jobs</label>
+                <div class="v2-explore-jobs-label-content"><%= job.number_of_positions %></div>
+              <% end %>
+            <% end %>
+
+            <% if hired == false %> <%# APPLIED %>
+              <a href="/staff/deselect_event/<%= event.id %>?redirect=/staff#jobs">
+                <div class="v2-explore-jobs-cancel">CANCEL REQUEST</div>
+              </a>
+            <% else %> <%# HIRED %>
+              <% gig = @prospect.gigs.where(event_id: event.id).first %>
+
+              <% if (event.date_callback_due && Date.today > event.date_callback_due) || (event.date_callback_due == nil && (gig ? gig.assignments.map{|asgn| asgn.shift.date >= Date.today ? asgn : []}.flatten.count > 0 : false)) || @status[event.id] == 'Confirmed' %>
+                <a href="/staff/deselect_event/<%= event.id %>?redirect=/staff#jobs">
+                  <div class="v2-explore-jobs-cancel">CANCEL</div>
+                </a>
+              <% else %>
+                <a href="#" job_name="<%= job ? job.public_name || job.name : '' %>" event_id="<%= event.id %>" event_name="<%= event.display_name || event.name %>" id="v2-my-jobs-cancel-application">
+                  <div class="v2-explore-jobs-cancel">CANCEL</div>
+                </a>
+              <% end %>
+            <% end %>
+          </div>
+        </li>
+      <% end %>
+    <% end %>
+  <% end %>
+  <% if hired == false %>
+    <% @prospect.reject_events.where(has_seen: false).includes(:job, :event).each do |reject_event| %>
+      <% job = reject_event.job %>
+      <% event = reject_event.event %>
+      <li class="rejected_events" rejected_event_id="<%= reject_event.id %>">
+        <div class="v2-explore-jobs-event-container">
+          <div class="d-flex flex-row" style="position: relative;">
+            <%# header %>
+            <div style="width: 206px;">
+              <div class="v2-explore-jobs-event fit-content"><%= event.display_name %></div>
+              <div class="row">
+                <div class="col v2-p-m-0">
+                  <div class="v2-explore-jobs-job"><b><%= job ? (job.public_name != "" && job.public_name != nil) ? job.public_name : job.name : '' %></b></div>
+                  <div class="row" style="margin-left: 0px;">
+                    <div class="col v2-p-m-0">
+                      <div class="v2-explore-jobs-location"><%= event.location %></div>
+                    </div>
+                    <div class="col v2-p-m-0">
+                      <% date = event.public_date_start %>
+                      <div class="v2-explore-jobs-date">
+                        <%= date ? date.strftime("%e") : '' %>
+                        <sup style='margin-left: -4px;'><%= date ? date.day.ordinalize.split(//).last(2).join : '' %></sup>
+                        <%= date ? date.strftime("%B") : '' %>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <%# status %>
+            <div class="v2-explore-jobs-status d-flex align-items-end">
+              <div class="v2-explore-job-unsuccessful">UNSUCCESSFUL</div>
+            </div>
+            <%# arrow %>
+            <div class="v2-mobile-my-jobs-arrow">
+              <%= image_tag (asset_path 'v2/mobile/Path 3218.png'), style: 'margin-left:7px;margin-top:35px;' %>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col v2-p-m-0">
+            </div>
+            <div class="col v2-p-m-0" style="width:25px;flex:revert;">
+            </div>
+          </div>
+        </div>
+        <%# content %>
+        <div class="v2-explore-jobs-list-event-content">
+          <div class="v2-explore-jobs-list-event-content-header">
+            <div class="status">Rejected Request</div>
+            <div class="status-caption"> Reasons can be a mixture from required numbers, travel distance, skills or timing of your application. See you at other events.</div>
+          </div>
+          <% if job %>
+            <label class="v2-explore-jobs-label">Applied Position</label>
+            <div class="v2-explore-jobs-list-event-job-title"><%= job ? (job.public_name != "" && job.public_name != nil) ? job.public_name : job.name : '' %></div>
+
+            <% if job.new_description != nil && job.new_description != '' %>
+              <label class="v2-explore-jobs-label">Description</label>
+              <div class="v2-explore-jobs-label-content"><%= job.new_description %></div>
+            <% end %>
+
+            <% if job.description != nil && job.description != '' %>
+              <label class="v2-explore-jobs-label">Job Requirements</label>
+              <div class="v2-explore-jobs-label-content"><%= job.description %></div>
+            <% end %>
+
+            <% if job.uniform_information != nil && job.uniform_information != '' %>
+              <label class="v2-explore-jobs-label">Uniform & Appearance</label>
+              <div class="v2-explore-jobs-label-content"><%= job.uniform_information %></div>
+            <% end %>
+          <% end %>
+
+          <% if event.other_info != nil && event.other_info != '' %>
+            <label class="v2-explore-jobs-label">Other Info</label>
+            <div class="v2-explore-jobs-label-content"><%= event.other_info %></div>
+          <% end %>
+
+          <% if event.blurb_transport != nil && event.blurb_transport != '' %>
+            <label class="v2-explore-jobs-label">Transport</label>
+            <div class="v2-explore-jobs-label-content"><%= event.blurb_transport %></div>
+          <% end %>
+
+          <% if (event.location != nil && event.location != '') || (event.post_code != nil && event.post_code != '') %>
+            <label class="v2-explore-jobs-label">Location</label>
+            <div class="v2-explore-jobs-label-content"><%= event.location %>, <%= event.post_code %></div>
+          <% end %>
+
+          <% if event.blurb_wage_additional !=nil && event.blurb_wage_additional != "" %>
+            <label class="v2-explore-jobs-label">Additional Wage</label>
+            <div class="v2-explore-jobs-label-content"><%= event.blurb_wage_additional %></div>
+          <% end %>
+
+          <% if event.blurb_closing !=nil && event.blurb_closing != "" %>
+            <label class="v2-explore-jobs-label">Closing Words</label>
+            <div class="v2-explore-jobs-label-content"><%= event.blurb_closing %></div>
+          <% end %>
+
+          <% if job %>
+            <label class="v2-explore-jobs-label">Rates and Holiday Pay</label>
+            <%# get rate %>
+            <% if @prospect.age >= 23 %>
+              <div class="v2-explore-jobs-label-content-rate">£<%= '%.2f' % job.pay_25_and_over.to_f %></div>
+
+              <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_25_and_over.to_f %>(£<%= '%.2f' % (job.pay_25_and_over.to_f - job.holiday_pay(:pay_25_and_over).to_f) %> + £<%= job.holiday_pay(:pay_25_and_over).to_f %>)</div>
+            <% elsif @prospect.age >= 21 %>
+              <div class="v2-explore-jobs-label-content-rate">£<%= '%.2f' % job.pay_21_and_over.to_f %></div>
+
+              <% if job.pay_25_and_over.to_f == job.pay_21_and_over.to_f %>
+                <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_21_and_over.to_f %>(£<%= '%.2f' % (job.pay_21_and_over.to_f - job.holiday_pay(:pay_25_and_over).to_f) %> + £<%= job.holiday_pay(:pay_25_and_over).to_f %>)</div>
+              <% else %>
+                <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_21_and_over.to_f %>(£<%= '%.2f' % (job.pay_21_and_over.to_f - job.holiday_pay(:pay_21_and_over).to_f) %> + £<%= job.holiday_pay(:pay_21_and_over).to_f %>)</div>
+              <% end %>
+            <% else %>
+              <div class="v2-explore-jobs-label-content-rate">£<%= '%.2f' % job.pay_18_and_over.to_f %></div>
+
+              <% if job.pay_18_and_over.to_f == job.pay_21_and_over.to_f %>
+                <ladivbel class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_18_and_over.to_f %>(£<%= '%.2f' % (job.pay_18_and_over.to_f - job.holiday_pay(:pay_21_and_over).to_f) %> + £<%= job.holiday_pay(:pay_21_and_over).to_f %>)</div>
+              <% else %>
+                <div class="v2-explore-jobs-label-content-rate-caption">£<%= '%.2f' % job.pay_18_and_over.to_f %>(£<%= '%.2f' % (job.pay_18_and_over.to_f - job.holiday_pay(:pay_18_and_over).to_f) %> + £<%= job.holiday_pay(:pay_18_and_over).to_f %>)</div>
+              <% end %>
+            <% end %>
+          <% end %>
+
+          <label class="v2-explore-jobs-label">Shifts</label>
+          <div class="v2-explore-jobs-label-content"><%= job ? job.shift_information : '' %></div>
+          <div class="v2-explore-jobs-label-content"><%= event.event_dates.count %> shifts</div>
+          <label class="v2-explore-jobs-label">Dates</label>
+          <div class="v2-explore-jobs-label-content"><%= event.public_date_start.strftime("%e %b %Y") %> - <%= event.public_date_end.strftime("%e %b %Y") %></div>
+          <% if job %>
+            <% if job.number_of_positions != nil && job.number_of_positions != '' %>
+              <label class="v2-explore-jobs-label">Number of Jobs</label>
+              <div class="v2-explore-jobs-label-content"><%= job.number_of_positions %></div>
+            <% end %>
+          <% end %>
+        </div>
+      </li>
+    <% end %>
+  <% end %>
+</ul>
+
+<a href="../staff/events">
+  <div class="v2-explore-jobs-button" style="margin-bottom: 0;">Explore Jobs</div>
+</a>
+
+<div class="row v2-job-content" style='background: none;margin-top: 56px;margin-bottom: 74px;'>
+  <div>
+    <div class="row bottom-more-info d-flex justify-content-center">
+      <div class="d-flex flex-column work-with-flair">To be able to work with flair:</div>
+      <div class="d-flex flex-column you-need mt-5">You need</div>
+      <div class="d-flex flex-wrap justify-content-center align-items-center mt-20">
+        <div class="d-flex flex-row mr-50">
+          <img src="<%= asset_path("v2/stamp.png") %>"/>
+          <label>Proof of Right to Work</label>
+        </div>
+        <div class="d-flex flex-row mr-50">
+          <img src="<%= asset_path("v2/bank-bldg.png") %>"/>
+          <label>UK Bank Account</label>
+        </div>
+        <div class="d-flex flex-row">
+          <img src="<%= asset_path("v2/thumbsup.png") %>"/>
+          <label>Reliability</label>
+        </div>
+      </div>
+      <div class="d-flex flex-column justify-content-center mt-30 mb-40">
+        <label>
+          Flair will always be an equal opportunity employer.
+          We celebrate diversity, working with great people and are committed to an inclusive work environment.
+          <br>
+        </label>
+      </div>
+    </div>
+  </div>
+</div>

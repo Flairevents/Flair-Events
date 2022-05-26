@@ -1,0 +1,16 @@
+%table.table-widget{style: 'width:100%', cellspacing: 0}
+  %tr.tr-head
+    %td.table-th IP Address
+    %td.table-th Location (Approximate)
+    %td.table-th Login Time
+    %td.table-th Logout Time
+  - i = 0
+  - @session_logs.each do |sl|
+    %tr{class: (i = ((i + 1) % 2)).odd? ? 'tr-even' : 'tr-odd'}
+      -if sl[:login_ip_href].present?
+        %td.td=link_to sl[:login_ip], sl[:login_ip_href], target: '_blank'
+      - else
+        %td.td= sl[:login_ip]
+      %td.td= sl[:login_ip_location]
+      %td.td= sl[:login_time].try(:strftime, "%d/%m/%Y %H:%M:%S")
+      %td.td= sl[:logout_time].try(:strftime, "%d/%m/%Y %H:%M:%S")

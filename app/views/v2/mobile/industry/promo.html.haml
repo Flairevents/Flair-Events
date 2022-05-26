@@ -1,0 +1,148 @@
+- content_for :head do
+  %title Hire Promotional Staff throughout the UK
+  %meta{ name: "description", content: "Find exactly the flexibile team you need for your upcoming promotional and marketing activities. Flair's extensive database is full of keen, experienced workers who know how to make your product or service shine."}
+.public.industry.promo
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .content-inner
+      .container-fluid.position-relative.px-0.d-flex
+        .industry-header-bg
+        .industry-header-bg-overlay
+        .v2-industry-header
+          %h1
+            Promotional
+            .staffing-img
+          %p Flair’s hand-picked teams of promotional workers have just what it takes to leave a lasting impression. Big smiles and a positive attitude come as standard – but we do more, too.
+          .orange-btn.d-flex.align-items-center.justify-content-center.request
+            %a{href: "/contact"}
+              %button Request more info
+          .industry-image
+      .container-fluid.position-relative.px-0
+        .v2-industry-section-1
+          %h1
+            Amplify your message
+            %br/
+            with radiant workers
+          %p Your new Brand Ambassadors will be great at striking up conversations with the public, homing in on whatever task is at hand and explaining what makes you so special. We find talented people who are a great match for your brand who will champion it all the way.
+          %p Providing sampling teams, touring managers, radiant hander-outers, Diligent data capture specialists, whatever it needs for you to reach your target audience. We’ve delivered this for Haagen- Dazs, ECC, Walkers, Kew Gardens, PlayStation and countless other well-known brands. Reach our, lets discuss how your next promotional campaign can come to life.
+        .v2-industry-section-3
+          .bg-industry-worker
+          .industry-worker-content
+            .d-flex.flex-row
+              .border-line
+              %h1
+                Workers who
+                %br/
+                give a little extra
+            %p Flair has built some amazing relationships over the years with the people on our database. Mutual respect and understanding promotes loyalty and reliability among our workers and enables us to successfully deliver brilliant teams again and again.
+        .v2-industry-section-2
+          %ul
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Trade Shows
+                .type-desc.d-flex.flex-column
+                  %span When life gives you lemons
+                  %span create a stand and hire
+                  %span amazing staff.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Street Marketing
+                .type-desc.d-flex.flex-column
+                  %span Outgoing and confident staff
+                  %span ready to walk those miles to
+                  %span deliver the message.
+            %li
+              .d-flex.justify-content-center
+                .type-image{style: "background-size: contain;"}
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Brand Ambassadors
+                .type-desc.d-flex.flex-column
+                  %span A database full of talent ready
+                  %span to make your brand stand out
+                  %span in the crowd.
+            %li
+              .d-flex.justify-content-center
+                .type-image
+                .light-overlay
+                .circular
+                .flat-overlay
+                %a.d-flex.align-items-center.justify-content-center Data Capture
+                .type-desc.d-flex.flex-column
+                  %span Meticulous information
+                  %span recorders to ensure your
+                  %span activation stays on point.
+        .v2-industry-section-4
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No stress
+            %span{style: "margin-top: 5px;"} Our staff come fully-vetted
+            %span and ready to work.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No fuss
+            %span{style: "margin-top: 5px;"} Pre and post-contract admin and
+            %span payroll handled by us.
+          .box.d-flex.flex-column.justify-content-center.align-items-center
+            %h1 No surprises
+            %span{style: "margin-top: 5px;"} A cost-effective, bespoke staffing
+            %span solution that works for you.
+        .v2-industry-section-5
+          %h1
+            Promotional at Flair
+            %br/
+            means.....
+          %p Buzz-builders, brand ambassadors, taste-test tempters, customer spotters, hand wavers, sample sharers, excitement generators and everything you need to add life and personality to an event.
+          .industry-about-bg
+          %h3 Real people, real skills, real simple
+          .d-flex.justify-content-center
+            .orange-btn.d-flex.align-items-center.justify-content-center.mr1
+              %a{ href: "/events?category=Sports"}
+                %button View Jobs
+            .orange-btn.d-flex.align-items-center.justify-content-center
+              %a{ href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+                %button Hire Staff
+        .v2-industry-section-8
+          %h6 Case Study
+          .d-flex.flex-inline.align-items-center
+            .border-line{style: 'height: 75px;'}
+            %div{style: "margin-left: 5px;"}
+              %h5 EVERY CAN COUNTS
+              %h3
+                Brand Ambassadors with a
+                %br/
+                'can do' attitude.
+          .image-container.d-flex.justify-content-center
+            .cs-image
+            %div
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center{style: 'margin-bottom: 5px;'}
+                %h1 22
+                %h3 Events
+              .cs-event-box.cs-event-counter.d-flex.flex-column.align-items-center.justify-content-center
+                %h1 95
+                %h3 Staff
+          %p As part of a nationwide campaign linked to the Tour of Britain cycling series, our client needed specialist teams who were tech savvy and had a passion for recycling. Seeking a single supplier to partner with for the season, they put their trust in Flair – and with one crystal clear job description we jumped into action matching people from our national database.
+          .see-content
+            %p We’re an agency well used to dealing with sudden changes in demand, and know that success lies in understanding the client’s needs and managing the staff's expectations. Our client saved time and money by using one agency and we demonstrated time and time again that we can find the right people for the job. Working in partnership, they were guaranteed quality – and only had to ask once.
+            %a(href="/case_studies/promotional" data-turbolinks="false")
+              .read-more READ MORE
+          .see-more{onclick: "see_more_less()"}
+        .v2-industry-section-9
+          %h1 Flair provides a complete
+          %h1.d-flex.flex-inline
+            %span.mr1 promotional
+            staff service.
+          %h1{style: 'margin-top: 20px;'} So, how can we help?
+          .orange-btn.mt3.d-flex.align-items-center.justify-content-center{style: 'margin-top: 18px;'}
+            %a{ href: '/contact'}
+              %button Let's chat today
+          .v2-home-bottom
+
+  = render :partial => 'v2/mobile/application/footer'

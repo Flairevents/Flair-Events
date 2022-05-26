@@ -1,0 +1,45 @@
+<% sample_pic_class    = '.passport-pic-popup'    if sample_pic_class.nil? %>
+<% sample_front_class  = '.passport-front-popup'  if sample_front_class.nil? %>
+<% sample_expiry_class = '.passport-expiry-popup' if sample_expiry_class.nil? %>
+<% sample_number_class = '.passport-number-popup' if sample_number_class.nil? %>
+
+<div class="d-flex flex-row bd-highlight" style='margin-bottom: 12px;'>
+  <div class="v2-f1 v2-files v2-profile-identification-passport-inputs d-flex flex-row bd-highlight" style='max-width: 420px;'>
+    <div class="v2-upload-file-button" id='v2-identification-upload-picture-page'>Upload File</div>
+    <div class="v2-upload-file-content" id='v2-identification-upload-picture-page-content'>Picture Page (.jpg, .png)</div>
+  </div>
+  <%= file_field_tag :picture_page, required: true, class: "file-field-1 form-control", accept: @accepted_images, style: 'display: block; position: absolute;left: 0;opacity: 0;z-index: -1;' %>
+
+  <% if sample_pic_class %>
+    <a class="v2-help" onclick="$('<%= sample_pic_class %>').show()" style='margin-left: 6px;'>
+      <i class="glyphicon glyphicon-question-sign"></i>
+    </a>
+  <% end %>
+
+  <%= text_field_tag :id_no, nil, required: true, class: "form-control v2-profile-identification-passport-text-inputs v2-inputs", placeholder: 'Passport Number', style: 'margin-left: 40px; max-width: 418px;', autocomplete: "off" %>
+
+  <% if sample_number_class %>
+    <a class="v2-help" onclick="$('<%= sample_number_class %>').show()"  style='margin-left: 6px;'>
+      <i class="glyphicon glyphicon-question-sign"></i>
+    </a>
+  <% end %>
+</div>
+
+<div class="d-flex flex-row bd-highlight" style='margin-bottom: 15px;'>
+  <div class="v2-f2 v2-files v2-profile-identification-passport-inputs d-flex flex-row bd-highlight" style='max-width: 420px;'>
+    <div class="v2-upload-file-button" id='v2-identification-upload-front-cover'>Upload File</div>
+    <div class="v2-upload-file-content" id='v2-identification-upload-front-cover-content'>Front Cover (.jpg, .png)</div>
+  </div>
+  <%= file_field_tag :front_cover, required: true, class: "file-field-2 form-control", style: 'display: block; position: absolute; opacity: 0;z-index: -1;  right: 0; width: fit-content;' , accept: @accepted_images %>
+
+  <% if sample_front_class %>
+    <a class="v2-help" onclick="$('<%= sample_front_class %>').show()"  style='margin-left: 6px;'>
+      <i class="glyphicon glyphicon-question-sign"></i>
+    </a>
+  <% end %>
+
+  <div class="v2-id-login-date-input-group", style="margin-left: 40px; margin-right: 26px">
+    <div><span>Expiry Date</span></div>
+    <%= select_date @prospect.id_expiry, { prefix: 'id_expiry', start_year: Date.today.year, end_year: Date.today.year+10, order: [:day, :month, :year], :prompt => { :day => 'Day', :month => 'Month', :year => 'Year' }, use_short_month: true},  { required: true, class: "date-check-3 form-control v2-profile-identification-date-select v2-inputs"} %>
+  </div>
+</div>

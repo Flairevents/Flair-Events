@@ -1,0 +1,184 @@
+<div class="v2-profile-kid-container">
+    <div class="v2-profile-kid-label">
+        Key Information Document
+    </div>
+    
+    <center>
+        <%= form_tag '../staff/kid', class: 'v2-kid-form' do %>
+            <input type="hidden" name="agreed" value='true'>
+            <%= submit_tag 'I AGREE', class: 'v2-profile-kid-agree-button' %>
+        <% end %>
+    </center>
+
+    <div class="v2-profile-kid-green-text">
+        Name of employment business
+    </div>
+    <div class="v2-profile-kid-white-text">
+        Flair People Ltd.
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Type of contact you will be engaged under
+    </div>
+    <div class="v2-profile-kid-white-text">
+        Contact for Services
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Who will be responsible for paying you
+    </div>
+    <div class="v2-profile-kid-white-text">
+        Flair people Ltd
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        How often you will be paid
+    </div>
+    <div class="v2-profile-kid-white-text">
+        Weekly, Each Friday the week following your working hours.
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Expected or minimum rate of pay
+    </div>
+    <div class="v2-profile-kid-white-text">
+        23 years+ £8.91 per hour   
+    </div>
+    <div class="v2-profile-kid-white-text">
+        21-22 years £8.36 per hour
+    </div>
+    <div class="v2-profile-kid-white-text">
+        18-20 years £6.56 per hour
+    </div>
+    <div class="v2-profile-kid-white-text">
+        U18 £4.62 per hour
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Deductions from your pay required by law
+    </div>
+    <div class="v2-profile-kid-white-text">
+        Income tax, National Insurance Contributions, Pension Contributions (if applicable) and student loan (if applicable)
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Any other deductions or costs from your pay
+    </div>
+    <div class="v2-profile-kid-white-text">
+        None
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Any fees for goods or services
+    </div>
+    <div class="v2-profile-kid-white-text">
+        None
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Holiday Entitlement and pay
+    </div>
+    <div class="v2-profile-kid-white-text">
+        28 days a year pro-rate, proportional to the hourly rate of pay at 12.07%
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Additional Benefits
+    </div>
+    <div class="v2-profile-kid-white-text">
+        None
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-label">
+        EXAMPLE OF YOUR PAY
+    </div>
+
+    <div class="v2-profile-kid-green-text">
+        Example of gross rate of pay
+    </div>
+    <div class="v2-profile-kid-white-text">
+        £250.40 weekly
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Deductions from your wage required by law
+    </div>
+    <div class="v2-profile-kid-white-text">
+        £2 Income tax <br> £10 NI <br> Actual tax deductions always based on personal circumstances.
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Any other deductions or costs from your wage
+    </div>
+    <div class="v2-profile-kid-white-text">
+        £6.60 pension if applicable
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Any fees for goods or services:
+    </div>
+    <div class="v2-profile-kid-white-text">
+        None
+    </div>
+    <br>
+
+    <div class="v2-profile-kid-green-text">
+        Example net take home pay:
+    </div>
+    <div class="v2-profile-kid-white-text">
+        £231.80
+    </div>
+    <br>
+
+    <div class="v2-eas">
+        The Employment Agency Standards (EAS) Inspectorate is the government authority responsible for the enforcement of certain agency worker rights. You can raise a concern with them directly on 020 7215 5000 or through the Acas helpline on 0300 123 1100, Monday to Friday, 8am to 6pm.
+    </div>
+    <br>
+    
+    <center>
+        <%= form_tag '../staff/kid', class: 'v2-kid-form' do %>
+            <input type="hidden" name="agreed" value='true'>
+            <%= submit_tag 'I AGREE', class: 'v2-profile-kid-agree-button' %>
+        <% end %>
+    </center>
+</div>
+
+<% content_for_once :js do %>
+  <script>
+    $('.v2-kid-form').on('submit', function(e){
+        e.preventDefault()
+        $.ajax({
+            url: "../staff/kid",
+            type: 'POST',
+            data: {agreed: 'true'},
+            success: function (result) {
+
+            }
+        })
+        $('#v2-profile-kid').css('display', 'none');
+        $('#v2-profile-terms').css('display', 'none');
+        $('#v2-profile-personal-details').css('display', 'block');
+
+        v2_profile_bg_size('.v2-profile-content')
+
+        if ($('#kid').prop('checked') == false){
+            $('#kid').prop('checked', true)
+        }
+
+        return false
+    })
+  </script>
+<% end %>

@@ -1,0 +1,31 @@
+- if flash[:error].present? || flash[:notice].present?
+  .flash-backing{style: 'display:none'}
+    .flash
+      - if flash[:error].present?
+        .error-flag
+      - else
+        .notice-flag
+      - if flash[:title]
+        %h2= flash[:title]
+      %p= flash[:error] || flash[:notice]
+
+  - content_for :js do
+    :javascript
+      $(document).ready(function() {
+          $('.flash-backing').fadeIn();
+          $('.flash-backing').click(function() { $('.flash-backing').fadeOut(); })
+      });
+
+.login-form
+  .container
+    = form_tag "/office/login" do
+      .row
+        .col-md-4
+          %h1 Login
+          .form-group
+            %label E-mail address
+            = text_field_tag :login_email, @login_email, class: 'form-control'
+          .form-group
+            %label Password
+            = password_field_tag :login_password, '', class: 'form-control'
+          = submit_tag "Login", class: 'btn btn-primary pull-right'

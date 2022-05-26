@@ -1,0 +1,91 @@
+.content
+  = form_for @prospect, method: :post, class: 'fl-form', url: '/staff/update_personal_details' do |f|
+    .personal-details
+      .row.pt1
+        .column.small-12.medium-6
+          .row
+            .column.small-4.text-right
+              %p First Name
+            .column.small-8
+              = f.text_field :first_name, class: 'form-control staff-form-fields', disabled: true, style: 'background-color: white'
+          .row.mt1
+            .column.small-4.text-right
+              %p Last Name
+            .column.small-8
+              = f.text_field :last_name, class: 'form-control staff-form-fields', disabled: true, style: 'background-color: white'
+        .column.small-12.medium-6
+          .row.pt1-small
+            .column.small-4.text-right
+              %p Date of Birth
+            .column.small-8.date-input-group
+              = select_date @prospect.date_of_birth || Date.today, {prefix: 'date_of_birth', start_year: Date.today.year-90, end_year: Date.today.year, order: [:day, :month, :year], use_short_month: true}, {class: 'form-control staff-form-fields'}
+          .row.mt1
+            .column.small-4.text-right
+              %p Gender:
+            .column.small-8
+              .radio-row.gender-row
+                %span.fl-form__radio
+                  = f.radio_button :gender, 'M', checked: @prospect.gender == 'M', required: true, class: 'staff-gender'
+                  = f.label :gender, 'Male', value: 'M'
+                %span.fl-form__radio.ml1
+                  = f.radio_button :gender, 'F', checked: @prospect.gender == 'F', required: true, class: 'staffgender'
+                  = f.label :gender, 'Female', value: 'F'
+      .row.pt1
+        .column.small-12.medium-6
+          .row
+            .column.small-4.text-right
+              %p Address
+            .column.small-8
+              = f.text_field :address, placeholder: 'Street', class: 'form-control staff-form-fields staff-address', required: true
+              = f.text_field :address2, placeholder: 'Town (Optional)', class: 'form-control mt1 staff-form-fields'
+              = f.text_field :city, placeholder: 'City', class: 'form-control mt1 staff-form-fields', required: true
+              = f.text_field :post_code, placeholder: 'Postal Code', class: 'form-control mt1 staff-form-fields', required: true, pattern: '[a-zA-Z][a-zA-Z0-9]{1,3}\s?\d[a-zA-Z]{2}', title: 'Valid UK Postal Code'
+          .row.pt1
+            .column.small-4.text-right
+              %p Email
+            .column.small-8
+              = f.text_field :email, placeholder: 'Email Address', class: 'form-control mb1 staff-form-fields', required: true, type: 'email'
+          -#.row
+          -#  .column.small-4.text-right
+          -#    %span.fl-form__checkbox
+          -#      = f.check_box :send_marketing_email
+          -#      %label{for: 'prospect_send_marketing_email'}
+          -#  .column.small-8
+          -#    %p.mt1{style: 'font-size: 17px;'} YES please keep me in the loop with job offers. <br><br> I know I can unsubscribe at any time by de-selecting this little box.
+          .row
+        .column.small-12.medium-6
+          .row.pt1-small
+            .column.small-4.text-right
+              %p NI Number
+            .column.small-8
+              = f.text_field :ni_number, placeholder: 'NI Number', class: 'form-control uppercase mb1 staff-form-fields staff-ni', required: true, pattern: '[A-CEGHJ-NOPR-TW-Za-ceghj-nopr-tw-z]\s*[A-CEGHJ-NPR-TW-Za-ceghj-nopr-tw-z]\s*[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*[0-9]\s*[A-Da-d\s]', title: 'Valid NI Number (ie. AB123456C)'
+          .row
+            .column.small-4.text-right
+              %p Nationality
+            .column.small-8
+              = f.select(:nationality_id, nationality_options, {}, {value: @prospect.nationality_id, class: 'form-control mb1 staff-form-fields staff-nationality', style: 'border-radius: 10px;', required: true, disabled: @prospect.id_submitted? || @prospect.id_sighted})
+            .column.small-4.text-right
+              %p Mobile Number
+            .column.small-8
+              = f.text_field :mobile_no, placeholder: 'Mobile', class: 'form-control mb1 staff-form-fields staff-mobile', required: true, pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*', title: '0 + 10 digits'
+          -extra_classes = (!@prospect.applicant? && @prospect.has_some_non_registration_details? && !(@prospect.emergency_name.present?)) ? ['fl-form__row--highlight'] : []
+          -optional_classes = (@prospect.applicant?) ? 'field-optional' : ''
+          .row{class: extra_classes}
+            .column.small-4.text-right{class: optional_classes}
+              -emerg_placeholder_name = 'Family member or friend'
+              -emerg_placeholder_no = ''
+              -if @prospect.applicant?
+                -emerg_placeholder_name = 'Optional until hired'
+                -emerg_placeholder_no = 'Optional until hired'
+              %p Emergency <br/>Contact Name
+            .column.small-8
+              = f.text_field :emergency_name, placeholder:  emerg_placeholder_name, class: 'form-control mb1 staff-form-fields', required: !@prospect.applicant?, style: !(@prospect.applicant?) && !(@prospect.emergency_name.present?) ? 'border: 4px solid yellow;' : ''
+            -extra_classes = (!@prospect.applicant? && @prospect.has_some_non_registration_details? && !(@prospect.emergency_no.present?)) ? ['fl-form__row--highlight'] : []
+          .row{class: extra_classes}
+            .column.small-4.text-right{class: optional_classes}
+              %p Emergency <br/>Contact Number
+            .column.small-8
+              = f.text_field :emergency_no, placeholder: emerg_placeholder_no, class: 'form-control staff-form-fields', required: !@prospect.applicant?, pattern: '\D*0\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d\D*\d?\D*', title: '0 + 10 or 9 digits', style: !(@prospect.applicant?) && !(@prospect.emergency_no.present?) ? 'border: 4px solid yellow;' : ''
+    .row
+      .column.small-12.text-right.pt1
+        = submit_tag 'Submit', class: 'yellow-button-staff'

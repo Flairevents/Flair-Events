@@ -1,0 +1,12 @@
+<p><%= @name %>, you still need to confirm your e-mail address before you can log in to Flair's Staff Zone.</p>
+
+<p>To confirm your e-mail address, click the following link.</p>
+
+<p><a href="<%= Flair::Application.config.base_https_url %>/login?token=<%= @token %>">Confirm my address and take me to Flair's Staff Zone</a></p>
+
+<p>If you can't use the above link, you can cut-and-paste the following address into your browser's address bar:</p>
+
+<p><%= Flair::Application.config.base_https_url %>/login?token=<%= @token %></p>
+
+
+<%= render partial: 'signature' %>

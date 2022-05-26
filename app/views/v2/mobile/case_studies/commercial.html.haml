@@ -1,0 +1,65 @@
+.public.case-study.commercial
+  = render :partial => 'v2/mobile/shared/nav'
+  .content
+    .case-header-bg
+    .v2-case-industry-1
+      %h3 COMMERCIAL
+      .case-study
+      .orange-btn.d-flex.align-items-center.justify-content-center
+        %a{href: '/contact'}
+          %button Request more info
+      .industry-image.commercial{style: "height: 100px;"}
+    .v2-case-industry-2
+      .d-flex.flex-row 
+        .border-line
+        %div 
+          %h5 THE LOWRY
+          %h3 
+            Scale up operations 
+            %br/
+            with flexible staffing.
+    .v2-case-industry-3
+      %h2 Key challenge:
+      %p Flexibility. Call centres have notoriously high churn rates due partly to the unpredictable nature of their demands. Our client wanted to avoid this by finding a staffing partner to supply the required numbers without the lengthy engagement process.
+      .cs-image.commercial
+    .v2-case-industry-4
+      %h2 How we helped:
+      %p The Lowry’s needs were very specific – they wanted reliable, responsible fast-learners who could quickly get to grips with their booking systems and software. 
+      %p It was also important that this new flexible workforce could confidently answer questions about the various shows and events they were selling tickets for, and that they would work seamlessly alongside existing teams. In short, the Lowry wanted several things that are sometimes difficult to find in call centre staff: tech skills, a personable nature, and a willingness to accept that work would come in sudden bursts, followed by quieter periods. 
+      %p We identified that the ideal candidates would first need to understand the highly flexible nature of the work. Once we'd sourced and placed the first wave of these, we liaised with them to glean more information about the exact nature of the work – information which we then used to recruit future candidates. 
+      %p It meant that the client was consistently supplied with exactly the kind of worker they needed; many of these people went on to form a core team that stayed with the Lowry for six whole months.
+      .cs-image.commercial
+    .v2-case-industry-5
+      %h2 The Results
+      %p Our client found a staffing partner that not only delivered skilled workers but who could be trusted to meet their requirements. Our people filled absentee gaps at the last minute, helped with planned bookings around Christmas and more.
+      .d-flex.flex-row 
+        .checkbox
+        %h5 Outsourcing saved our client time and money.
+      .d-flex.flex-row 
+        .checkbox
+        %h5 Demonstrated constant flexibility.
+      .d-flex.flex-row 
+        .checkbox
+        %h5 Provided 7 day week account managers.
+      .d-flex.flex-row 
+        .checkbox
+        %h5 Every last-minute request filled.
+      
+      .categories{style: "padding-left: 39px;margin-top: 30px;"}
+        %h2 Case Studies
+        - [["Festivals & Events", 'events'], ["Hospitality", 'hospitality'], ["Logistics", 'logistics'], ["Promotional", 'promotional'], ["Sports", 'sports'], ["Commercial", 'commercial']].each do |f|
+          .d-flex.flex-inline
+            %i.fa.fa-caret-right
+            %a{href: "/case_studies/#{f[1]}", style: 'width: 100%;'}
+              -if f[1] == "commercial"
+                %h5.ml-05{style: "color: #6BCBB8;"}=f[0]
+              -else
+                %h5.ml-05=f[0]
+    .v2-case-industry-6
+      .bg-image.commercial{style: "width: 400px;bottom: -40px;right: 8px;"}
+      %h1 Our job is to make our client's job easier. Workforce solutions delivered with event expertise.
+      .orange-btn.d-flex.align-items-center.justify-content-center
+        %a{href: "/hire?redirect=#{Flair::Application.config.base_https_url}"}
+          %button Hire Staff
+      .v2-home-bottom{style: "height:65px;bottom:-40px;"}
+  = render :partial => 'v2/mobile/application/footer'

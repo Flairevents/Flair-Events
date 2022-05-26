@@ -1,0 +1,174 @@
+.column.small-12.medium-5.large-4
+  .padded-multiline
+    %h3{style: 'margin-top: 0px; margin-bottom: 10px;'} We're Open
+    -#%br
+    %p.mt2.covid-box-message{style: 'margin-top: 12px; '}
+      Flair’s database is bursting with skilled event workers seeking jobs in <b> call centres, warehouses, farms </b> to <b>retail. </b>
+    .yellow-button-home-covid-box{style: 'margin-top: 12px; margin-bottom: 12px;'}
+      %a.pop-up-request-quote{"data-target" => "#contact-us-modal", "data-toggle" => "modal", :type => "button", style: 'width: auto;'}
+        %p.bottom-button.covid-box-btn
+          %b{style: 'color: #005949'} Contact Us
+
+    -#%h3 Staff @ COST
+    %p.mt2.covid-box-message
+      Flair Fam, we’re exploring different flexible work opportunities that we know match your skills, so keep an eye on your emails for updates!
+    .mb1
+
+  .container
+    #contact-us-modal.modal.fade{:role => "dialog"}
+      .modal-dialog.modal-lg
+        .modal-content.mt5.contact-model-content
+          -#.modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"} ×
+            %h4.modal-title Modal Header
+          .modal-body.out-team-message_modal.dark-green.home-page-form-model-body{style: 'background-color: #d1d68c;'}
+            = form_tag "/contact", class: 'mt4' do
+              .mb1.contact-us-field-parent-complete
+                .input-group.name-field
+                  .input-group__icon
+                    %svg
+                      <use xlink:href="#fl-icon-human" />
+                  %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon1", :placeholder => "Name", :type => "text", :id => "name", :name => "name", :required => "", value: @name, style:'border-radius: 10px;'}
+              .mb1.contact-us-field-parent-complete
+                .input-group.email-field
+                  .input-group__icon
+                    %svg
+                      <use xlink:href="#fl-icon-email" />
+                  %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon2", :placeholder => "Email", :type => "email", :id => "email", :name => "email", :required => "", value: @email, style:'border-radius: 10px;'}
+              .mb1.contact-us-field-parent-complete
+                .input-group.contact-field
+                  .input-group__icon
+                    %svg
+                      <use xlink:href="#fl-icon-phone" />
+                  %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon3", :placeholder => "Phone Number", :type => "tel", :id => "contact", :name => "contact", style:'border-radius: 10px;'}
+              .mb1.contact-us-field-parent-complete
+                .input-group.subject-field
+                  .input-group__icon
+                    %svg
+                      <use xlink:href="#fl-icon-pencil" />
+                  %input.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon4", :placeholder => "Subject", :type => "text", :id => "subject", :name => "subject", :required => "", style:'border-radius: 10px;'}
+              .mb1.contact-us-field-parent-complete
+                .input-group.message-field
+                  .input-group__icon
+                    %svg
+                      <use xlink:href="#fl-icon-info" />
+                  %textarea.form-control.error.contact-us-form-fields{"aria-describedby" => "basic-addon5", :placeholder => "Message", :type => "text", :id => "message", :name => "message", :required => "", style:'border-radius: 10px;'}
+              .row.mt2
+                .column.small-6
+                  =image_tag('logo-rec-member.jpg', class: 'image--tiny inline')
+                  =image_tag('logo-noea.svg', class: 'image--tiny ml1 inline')
+                .column.small-6.text-right
+                  %button.yellow-button-home.home-page-btn-text-color{"data-dismiss" => "modal", :type => "button"} Close
+                  %input.yellow-button-home.home-page-btn-text-color{:type => 'submit', :value => 'Send!'}
+
+  .container
+    #outTeamModal.modal.fade{:role => "dialog"}
+      .modal-dialog.modal-lg
+        .modal-content.mt5
+          -#.modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"} ×
+            %h4.modal-title Modal Header
+          .modal-body.out-team-message_modal.dark-green
+            %h4 COVID-19 UPDATE
+            %p Flair team wish you all nothing but the best, stay at home, embrace some YOU time and look after your physical and mental health during these tough times.  Understandably we are receiving questions concerning future work contracts and the types of work we can offer.  We’re keeping up to date with news reports and working closely with our clients to post updates as they happen on our website, via social media and direct emails.
+            %p Your health and safety are paramount as Summer approaches, and we prepare for the Autumn season.
+            %p Flair team moved quickly to look at different types of work opportunities for those who still want to work in the ‘essential’ categories, mainly for the coming months. Interviews are open and we are offering telephone and Skype interviews. It’s great to hear from people wanting to join our team for tomorrows possibilities.
+            %p
+              %a.btn{ href: '/register'}Register
+            %p Let’s all help the front-line workers; they need your support more than ever.
+            %p The Flair Team
+          .modal-footer.dark-green
+            %button.btn.btn-default{"data-dismiss" => "modal", :type => "button"} Close
+
+  .container
+    #outQueteRequestModal.modal.fade{:role => "dialog"}
+      .modal-dialog.modal-lg
+        .modal-content.mt5.quote-request-model-content
+          -#.modal-header
+            %button.close{"data-dismiss" => "modal", :type => "button"} ×
+            %h4.modal-title Modal Header
+          .modal-body.field.out-team-message_modal.home-page-form-model-body
+            %button.model-close-button{"data-dismiss" => "modal", :type => "button"} ×
+            %br
+            %h1.text-center.quote-form Request A Quote
+            .text-center
+              Tel:
+              %a.inline-block{href: 'tel:01612412441'}
+                %p 0161 241 2441
+            .text-center
+              Email:
+              %a.inline-block{href: 'mailto:hello@flairpeople.com'}
+                %p hello@flairpeople.com
+            = form_for QuoteRequest.new do |f|
+              .row.fields.pt1.align-center
+                .column.small-12.medium-8.pt1
+                  Point Of Contact<br/>
+                  = f.text_field :first_name, class: 'form-control request-quote-form-fields quote-request-form-fields-margin', required: true, placeholder: 'First Name'
+                .column.small-12.medium-8.pt1
+                  = f.text_field :last_name, class: 'form-control request-quote-form-fields quote-request-form-fields-margin', required: true, placeholder: 'Last Name'
+                .column.small-12.medium-8.pt1
+                  = f.text_field :company_name, class: 'form-control request-quote-form-fields', required: true, placeholder: 'Company Name'
+                .column.small-12.medium-8.pt1
+                  = f.text_field :telephone, class: 'form-control request-quote-form-fields', required: true, placeholder: 'Telephone'
+                .column.small-12.medium-8.pt1
+                  = f.text_field :email, class: 'form-control request-quote-form-fields', required: true, type: 'email', placeholder: 'Email'
+                .column.small-12.medium-8.pt1.mt3
+                  Hire Information<br/>
+                  = f.text_field :contract_name, class: 'form-control request-quote-form-fields quote-request-form-fields-margin', placeholder: 'Contract Name (optional)'
+                .column.small-12.medium-8.pt1
+                  = f.text_field :location, class: 'form-control request-quote-form-fields', required: true, placeholder: 'Location / town, city'
+                .column.small-12.medium-8.pt1
+                  = f.text_field :post_code, class: 'form-control request-quote-form-fields', required: true, placeholder: 'Address / postcode'
+                .column.small-12.medium-8.pt1
+                  Start Date<br/>
+                  = f.date_select :start_date, {}, {class: 'datepicker quote-request-form-fields-margin', required: true}
+                .column.small-12.medium-8.pt1
+                  Finish Date<br/>
+                  = f.date_select :finish_date, {}, {class: 'quote-request-form-fields-margin', required: true}
+                .column.small-12.medium-8.pt1
+                  Job Title<br/>
+                  = f.text_field :job_position, class: 'form-control request-quote-form-fields quote-request-form-fields-margin', required: true, placeholder: 'Job Positions'
+                .column.small-12.medium-8.pt1
+                  Job Category<br/>
+                  = f.select :job_category, options_for_select([['Sports & Outdoors','Sports & Outdoors'],['Bar & Hospitality','Bar & Hospitality'],['Festivals & Music','Festivals & Music'],['Retail & Merchandise','Retail & Merchandise'],['Promotional & Street Marketing','Promotional & Street Marketing'], ['Office & call centres','Office & call centres']]), {}, class: 'request-quote-form-fields quote-request-form-fields-margin', style: 'width: 100%;', required: true
+                .column.small-12.medium-8.pt1
+                  Experience Level<br/>
+                  .experience_level=f.select :experience, options_for_select([['Beginner','Beginner'],['Intermediate','Intermediate'],['Expert','Expert']]), {}, class: 'request-quote-form-fields quote-request-form-fields-margin', style: 'width: 100%;', required: true
+                .column.small-12.medium-8.pt1
+                  Working Pattern <br/>
+                  .radio-row
+                    %span.fl-form__radio
+                      =f.radio_button :working_pattern, 'Weekdays', required: true
+                      =f.label :working_pattern, 'Weekdays', value: 'Weekdays'
+                    %span.fl-form__radio.ml1
+                      =f.radio_button :working_pattern, 'Weekends', required: true
+                      =f.label :working_pattern, 'Weekends', value: 'Weekends'
+                    %span.fl-form__radio.ml1
+                      =f.radio_button :working_pattern, 'Day_Shifts', required: true
+                      =f.label :working_pattern, 'Day Shifts', value: 'Day Shifts'
+                    %span.fl-form__radio.ml1
+                      =f.radio_button :working_pattern, 'Evening_Shifts', required: true
+                      =f.label :working_pattern, 'Evening Shifts', value: 'Evening Shifts'
+                .column.small-12.medium-8.pt1
+                  Number of staff required<br/>
+                  .radio-row
+                    %span.fl-form__radio
+                      =f.radio_button :number_of_people, '1-10', required: true
+                      =f.label :number_of_people, '1-10', value: '1-10'
+                    %span.fl-form__radio.ml1
+                      =f.radio_button :number_of_people, '11-20', required: true
+                      =f.label :number_of_people, '11-20', value: '11-20'
+                    %span.fl-form__radio.ml1
+                      =f.radio_button :number_of_people, '21-50', required: true
+                      =f.label :number_of_people, '21-50', value: '21-50'
+                    %span.fl-form__radio.ml1
+                      =f.radio_button :number_of_people, 'Other', required: true
+                      =f.label :number_of_people, 'Other', value: 'Other'
+                .column.small-12.medium-8.pt1.mt2
+                  Additional Information<br/>
+                  = f.text_area :other_facts, class: 'form-control request-quote-form-fields quote-request-form-fields-margin', required: true, placeholder: 'E.g location quirks, specific skills/knowledge required/specific budget', rows: '12'
+              .row.pt1
+                .column.small-12.text-right.mt3
+                  %button.yellow-button-home{"data-dismiss" => "modal", :type => "button", style: 'color: #005949'} Close
+                  %button.yellow-button-home{:type => "submit", style: 'color: #005949'} Submit
+

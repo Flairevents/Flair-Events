@@ -1,0 +1,62 @@
+<footer style='position: relative;'>
+  <div class="v2-watermark-mobile-logo"></div>
+  <div class="v2-footer" style='position: relative;z-index:9;background: none;'>
+    <div style="margin:auto;">
+      <center>
+        <%= image_tag 'v2/Group 312.png', class: 'v2-copyright-logo v2-logo v2-p-m-0' %>
+        <div class="v2-footer-caption v2-p-m-0">Supplying great staff for 20+ years.</div>
+        <div style="width: fit-content">
+          <div class="v2-footer-contact-info">
+            Head Office : <a href="tel:0161-241-2441" style="background: none; border: none;padding:2px;">0161 241 2441</a>
+            <br>
+            London Office : <a href="tel:0204-542-6441" style="background: none; border: none;padding:2px;">0204 542 6441</a>
+            <br>
+            Email :  <a href="mailto:hello@flairpeople.com">hello@flairpeople.com</a>
+          </div>
+        </div>
+        <div class="v2-speak-to-us-today">Speak to us today</div>
+        <div class="v2-footer-text">
+          Staffing is our passion. You are our focus.
+          Let's connect and discover the best staffing solutions for your
+          business together. <a href="<%= Flair::Application.config.base_https_url %>/contact" class="v2-say-hello">Say hello!</a>
+        </div>
+        <div class="v2-footer-media">
+          <a href="https://www.instagram.com/flaireventstaffing/" style="margin-left: 0;">
+            <%= image_tag 'v2/Group 517.png' %>
+          </a>
+          <a href="https://twitter.com/flaireventstaff" data-show-count="false">
+            <%= image_tag 'v2/Group 518.png' %>
+          </a>
+          <a href="https://www.facebook.com/flaireventstaffinglimited" class="fb-like" data-layout="button_count" data-send="false" data-show-faces="false" data-width="90">
+            <%= image_tag 'v2/Group 519.png' %>
+          </a>
+          <a href="https://www.linkedin.com/company/flair-event-staffing-ltd/">
+            <%= image_tag 'v2/Group 520.png' %>
+          </a>
+        </div>
+        <div class="v2-copyright text-center">
+          <div>
+            &#169;2021 flairpeople &nbsp; &#9679; &nbsp; All rights reserved
+          </div>
+          <div style="margin-top: 19px;">
+            <a href='../privacy' class="v2-privacy-and-cookies">Privacy and cookies</a>
+          </div>
+        </div>
+      </center>
+    </div>
+  </div>
+</footer>
+<div class="svg-include hidden">
+  <%= render :partial => 'shared/flair_icons.svg' %>
+</div>
+
+
+<% content_for_once :js do %>
+  <script>
+    $('#hire-staff').on('click', function(){
+      url = window.location.href;
+      window.location.replace("<%= Flair::Application.config.base_https_url %>/hire?redirect=" + url)
+      return false;
+    })
+  </script>
+<% end %>

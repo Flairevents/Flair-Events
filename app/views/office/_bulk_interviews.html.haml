@@ -1,0 +1,108 @@
+/-------- command bar
+.command-bar
+  .btn-group.list-view-only
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} Map
+    %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+    %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+    %button.btn.btn-default.command-link.command-upload.disabled{:"data-command" => 'uploadPhoto'} Upload Photo
+    %button.btn.btn-default.command-link{:"data-command" => 'clearFilters'} Clear Filters
+  .btn-group.map-view-only{style: 'display:none'}
+    %button.btn.btn-default.command-link{:"data-command" => 'toggleSubview'} List
+    %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+
+  .map-view-only{style: 'float:right; display:none'}
+    Autozoom
+    %input.autozoom{type: 'checkbox'}
+
+  .upload-notification.list-view-only{style: 'float:right'}
+    .progress{style: 'display: none'}
+      .progress-bar.progress-bar-success.progress-bar-striped.active{role: 'progressbar', style: 'width:0%'}
+  %div{style: 'clear:both'}
+/-------- filter bar
+%hr
+.filter-bar-container
+  %form.filters.filter-bar
+    %table
+      %tr
+        %th Name
+      %tr
+        %td= _text_field :search, class: 'form-control'
+        %td= _select :status, options_for_select([['Upcoming','UPCOMING'],['All',''],['New','NEW'],['Open','OPEN'],['Finished', 'FINISHED']]), class: 'form-control'
+
+/-------- list view (with navigation bar)
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+/-------- map view (no navigation bar)
+.map-view{style: 'display:none'}
+  .map
+
+= slideover_form 'record-new', {partial: 'bulk_interview_form', locals: { form_id: 'new_bulk_interview', bulkInterview: BulkInterview.new, prefix: 'new' }}
+
+.slideover.record-edit{style: 'display:none; left:100%'}
+  %a.close X
+  %a.save
+    %img{src: image_path('little-disk.png'), alt: 'Save'}
+  %a.cancel Cancel
+  .slideover-content
+    .slideover-tabs
+      %ul.nav.nav-tabs
+        %li.active
+          %a{href: '#bulkInterview-details'} Details
+        %li
+          %a{href: '#bulkInterview-blocks'} Days/Times
+    .slideover-tab-panes.tab-content
+      .tab-pane.active#bulkInterview-details
+        = render partial: 'bulk_interview_form', locals: { form_id: 'edit_bulk_interview', bulkInterview: BulkInterview.new, prefix: 'edit' }
+      .tab-pane#bulkInterview-blocks
+        %div{class: 'dropdown'}
+          %button.btn.btn-default.dropdown-toggle.command-addblock{:"data-toggle" => 'dropdown'}
+            Add Block
+            %span.caret
+          %ul.dropdown-menu.addblock-dropdown
+        .record-list
+
+- content_for :js do
+  :javascript
+    $('#bulkInterviews .command-upload').popover({
+      content: #{raw form_tag('#', multipart: true) { _erbout << file_field_tag('file_upload') }.inspect},
+      html: true,
+      placement: 'bottom',
+      trigger: 'click'
+    });
+
+    $('body').on('change', '#morning', function(){
+      if ($(this).prop('checked') == true){
+        $($(this).parent()).find('input[type="text"]').prop('disabled', false)
+      }else{
+        $($(this).parent()).find('input[type="text"]').val('')
+        $($(this).parent()).find('input[type="text"]').prop('disabled', true)
+      }
+    })
+
+    $('body').on('change', '#afternoon', function(){
+      if ($(this).prop('checked') == true){
+        $($(this).parent()).find('input[type="text"]').prop('disabled', false)
+      }else{
+        $($(this).parent()).find('input[type="text"]').val('')
+        $($(this).parent()).find('input[type="text"]').prop('disabled', true)
+      }
+    })
+
+    $('body').on('change', '#evening', function(){
+      if ($(this).prop('checked') == true){
+        $($(this).parent()).find('input[type="text"]').prop('disabled', false)
+      }else{
+        $($(this).parent()).find('input[type="text"]').val('')
+        $($(this).parent()).find('input[type="text"]').prop('disabled', true)
+      }
+    })

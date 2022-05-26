@@ -1,0 +1,291 @@
+= form_for prospect, url: '#', html: {id: form_id, class: 'record-details-form', autocomplete: 'off'}, skip_default_ids: true do |f|
+  - tabindex = 0
+  .error-message.error
+  %table
+    %tr
+      %td Prospect ID:
+      %td.prospect_id
+      %td.pl10 Start Date:
+      %td.prospect_date_start
+      %td.pl10.status-label Status:
+      %td= f.select :status, Prospect::STATUSES.map { |s| [s.gsub('_', ' ').titleize, s] }, {}, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10.btn.btn-primary.prospect_applicant_status{style: 'display:none;margin-left:20%;'} Re-send Verification Email
+    %tr
+      %td Registered:
+      %td.prospect_registered
+      %td.pl10 End Date:
+      %td.prospect_date_end
+      %td.pl10 Manager Level:
+      %td= f.select :manager_level, [['',''],['Top Volume','Level 1'],['Medium Volume','Level 2'],['Flair TL','Level 3'],['Bar TL','Level 4']], {}, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory'}First Name:
+      %td= f.text_field :first_name, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10
+        %span{class: 'mandatory mandatory-internal-only'}DOB:
+      %td= f.text_field :date_of_birth, tabindex: tabindex+=1, class: 'form-control  prospect-datepicker', id: form_id + '_date_of_birth'
+      %td.pl10.align-center.photo-area{colspan: 2, rowspan: 6}
+        %img.prospect_photo{height: '145', alt: 'Photo'}
+    %tr
+      %td
+        %span{class: 'mandatory'}Last Name:
+      %td= f.text_field :last_name, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10
+        %span{class: 'mandatory'}Gender:
+      %td= f.select :gender, [['Male', 'M'], ['Female', 'F']], {}, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory mandatory-internal-only'}Address:
+      %td= f.text_field :address, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10
+        %span{class: 'mandatory'}Mobile:
+      %td= f.text_field :mobile_no, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td
+      %td= f.text_field :address2, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 Home:
+      %td= f.text_field :home_no, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory mandatory-internal-only'}City:
+      %td= f.text_field :city, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 Emergency #:
+      %td= f.text_field :emergency_no, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td
+        %span{class: 'mandatory mandatory-internal-only'}Post Code:
+      %td= f.text_field :post_code, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 Emerg. Name:
+      %td= f.text_field :emergency_name, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td.pl10
+        %span{class: 'mandatory mandatory-internal-only'}Country:
+      %td= f.select :country, [['', ''], ['England', 'england'], ['Wales', 'wales'], ['Scotland', 'scotland'], ['N. Ireland', 'n-ireland'], ['Outside UK', 'non-uk']], {}, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10
+        %span{class: 'mandatory'}Email:
+      %td= f.text_field :email, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10.align-center.prospect_reject_photo{colspan: 2}= link_to "Reject Photo", {}
+    %tr
+      %td.pl10.prospect_city_of_study City Of Study:
+      %td.prospect_city_of_study= f.text_field :city_of_study, tabindex: tabindex+=1, class: 'form-control'
+
+  %hr
+  %table
+    %tr.external-only
+      %td
+        %span{class: 'mandatory mandatory-external-only'}Client:
+      %td{colspan: 4}= f.select :client_id, [], {}, tabindex: tabindex+=1
+    %tr
+      %td
+        %span Tax Choice:
+      %td
+        = f.select :tax_choice, [['',''], ['A','A'], ['B','B'], ['C','C']], {}, tabindex: tabindex+=1, class: 'form-control'
+      %td
+      %td.pl10
+        %span{class: 'mandatory mandatory-internal-only'}Nationality:
+      %td
+      %td= f.select :nationality_id, office_nationality_options, {}, tabindex: tabindex+=1, class: 'form-control'
+      %td
+      %td.pl10
+        %span Worked:
+      %td= f.text_field :completed_contracts, tabindex: tabindex+=1, disabled: true, class: 'no-of-actions'
+    %tr
+      %td NI Number:
+      %td{colspan: 2}= f.text_field :ni_number, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 ID Evidence:
+      %td
+      %td= f.select :id_type, [['None','']] + [['UK/ROI Passport', 'UK Passport'], ['Share Code', 'Work/Residency Visa'], ['BC+NI'], ['Pass Visa']], {}, tabindex: tabindex+=1, class: 'form-control'
+      %td
+      %td.pl10
+        %span Cancelled:
+      %td= f.text_field :cancelled_contracts, tabindex: tabindex+=1, disabled: true, class: 'no-of-actions'
+    %tr
+      %td Sort Code:
+      %td{colspan: 2}= f.text_field :bank_sort_code, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 ID Number:
+      %td
+      %td= f.text_field :id_number, tabindex: tabindex+=1, class: 'form-control'
+      %td
+      %td.pl10
+        %span Cancelled > 18 hrs:
+      %td= f.text_field :cancelled_eighteen_hrs_contracts, tabindex: tabindex+=1, disabled: true, class: 'no-of-actions'
+    %tr
+      %td Account No:
+      %td{colspan: 2}= f.text_field :bank_account_no, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 ID Expiry:
+      %td
+      %td= f.text_field :id_expiry, tabindex: tabindex+=1, class: 'form-control prospect-datepicker', id: form_id + '_id_expiry'
+      %td
+      %td.pl10
+        %span No Show:
+      %td= f.text_field :no_show_contracts, tabindex: tabindex+=1, disabled: true, class: 'no-of-actions'
+    %tr
+      %td Account Name:
+      %td{colspan: 2}= f.text_field :bank_account_name, tabindex: tabindex+=1, class: 'form-control'
+      %td{colspan: 4}
+      %td.pl10
+        %span Non Confirm:
+      %td= f.text_field :non_confirmed_contracts, tabindex: tabindex+=1, disabled: true, class: 'no-of-actions'
+    %tr
+      %td Student Loan?
+      %td{colspan: 2}= f.check_box :student_loan, tabindex: tabindex+=1
+      %td.pl10 Share Code:
+      %td
+      %td
+        .share-code{style: 'display:none'}= f.text_field :share_code, tabindex: tabindex+=1, class: 'form-control'
+        .non-share-code N/A
+      %td
+      %td.pl10
+        %span Held Spares:
+      %td= f.text_field :held_spare_contracts, tabindex: tabindex+=1, disabled: true, class: 'no-of-actions'
+    %tr
+      %td Agreed to Terms:
+      %td{colspan: 2}
+        = _check_box :prospect_agreed_terms, '1', disabled: 'disabled'
+      %td.pl10 Visa Number:
+      %td
+      %td
+        .non-eu-only{style: 'display:none'}= f.text_field :visa_number, tabindex: tabindex+=1, class: 'form-control'
+        .eu-only N/A
+    %tr
+      %td Marketing Email:
+      %td{colspan: 2}= f.check_box :send_marketing_email, disabled: 'disabled'
+      %td.pl10 Visa Expiry:
+      %td
+      %td
+        .non-eu-only{style: 'display:none'}= f.text_field :visa_expiry, tabindex: tabindex+=1, class: 'form-control prospect-datepicker', id: form_id + '_visa_expiry'
+        .eu-only N/A
+    %tr
+      %td Marketing Text:
+      %td{colspan: 2}= check_box_tag 'prospect[questionnaire[contact_via_text]]',{},{}, disabled: true
+      %td.pl10{ :style => "display: none" } Test Site #:
+      %td{ :style => "display: none" }
+      %td{ :style => "display: none" }= f.text_field :test_site_code, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 Indefinite Visa:
+      %td
+      %td
+        .non-eu-only{style: 'display:none'}= f.check_box :visa_indefinite, tabindex: tabindex+=1
+        .eu-only N/A
+    %tr
+      %td Market WhatsApp:
+      %td{colspan: 2}= check_box_tag 'prospect[questionnaire[contact_via_whatsapp]]',{},{}, disabled: true
+      %td.pl10 Condition:
+      %td
+      %td= f.select :condition, [['None'], ['Holidays'], ['Under 20Hrs'], ['Specific']], {}, tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td{colspan: 3}
+      %td.pl10 ID Approved:
+      %td
+      %td= f.text_field :id_sighted, readonly: true, tabindex: tabindex+=1, class: 'form-control'
+  %hr
+  %table
+    %tr
+      %td
+      %td
+      %td.pl10{colspan: 2} Qualifications:
+      %td.pl10{colspan: 2} Training:
+      %td.pl10{colspan: 2} Working Patterns:
+    %tr
+      %td Bar License:
+      %td= f.select :bar_license_type, [['',''], ['SALPS', 'SCLPS_2_HR_TRAINING'], ['Scottish PL', 'SCOTTISH_PERSONAL_LICENSE'], ['English PL', 'ENGLISH_PERSONAL_LICENSE'], ['Screen Shot of SCLPS','SCREEN_SHOT_OF_SCLPS']], {}, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10{colspan: 2}
+        = check_box_tag 'prospect[questionnaire[food_health_level_two_qualification]]'
+        Food Health 2
+      %td.pl10= _check_box :training_ethics, '1', disabled: 'disabled', tabindex: tabindex+=1
+      %td Ethics
+      %td.pl10= check_box_tag 'prospect[questionnaire[week_days_work]]'
+      %td Weekdays
+    %tr
+      %td ● Number:
+      %td= f.text_field :bar_license_no, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10{colspan: 2}
+        = check_box_tag 'prospect[questionnaire[dbs_qualification]]'
+        DBS Certificate
+      %td.pl10= _check_box :training_customer_service, '1', disabled: 'disabled', tabindex: tabindex+=1
+      %td Customer Service
+      %td.pl10= check_box_tag 'prospect[questionnaire[weekends_work]]'
+      %td Weekends
+    %tr
+      %td ● Expiry Date:
+      %td= f.text_field :bar_license_expiry, tabindex: tabindex+=1, class: 'form-control prospect-datepicker', id: form_id + '_bar_license_expiry'
+      %td.pl10 ● Certificate #:
+      %td= f.text_field :dbs_certificate_number, tabindex: tabindex+=1, class: 'form-control', id: form_id + '_dbs_certificate_number'
+      %td.pl10= _check_box :training_sports, '1', disabled: 'disabled'
+      %td Sports
+      %td.pl10= check_box_tag 'prospect[questionnaire[day_shifts_work]]'
+      %td Day Shifts
+    %tr
+      %td ● Issued By:
+      %td= f.text_field :bar_license_issued_by, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 ● Issue Date:
+      %td= f.text_field :dbs_issue_date, tabindex: tabindex+=1, class: 'form-control prospect-datepicker', id: form_id + '_dbs_issue_date'
+      %td.pl10= _check_box :training_bar_hospitality, '1', disabled: 'disabled'
+      %td Bar & Hospitality
+      %td.pl10= check_box_tag 'prospect[questionnaire[evening_shifts_work]]'
+      %td Evening Shifts
+    %tr
+      %td Training Log:
+      %td= f.select :training_type, [['',''], ['Food Safety', 'FoodSafety'], ['Health & Safety', 'HealthAndSafety'], ['Both', 'Both']], {}, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10 ● Type:
+      %td
+        = f.select :dbs_qualification_type, [[''], ['Basic'], ['Enhanced'], ['Enhanced Barred', 'Enhanced Barred List']], {}, tabindex: tabindex+=1, class: 'form-control'
+      %td.pl10= _check_box :training_health_safety, '1', disabled: 'disabled'
+      %td Health & Safety
+    %tr
+      %td
+        Management Level:
+      %td.pl10
+        = _check_box :bar_management_experience, '1', id: 'bar_management_experience', disabled: 'disabled'
+        Bar Manager
+      %td.pl10
+        Clean/Conviction:
+      %td.pl10{colspan: 2}
+        = check_box_tag 'prospect[is_clean]'
+        Clean
+      %td
+      %td
+    %tr
+      %td
+      %td.pl10
+        = _check_box :festival_event_bar_management_experience, '1', id: 'festival_event_bar_management_experience', disabled: 'disabled'
+        Festival & Event Bar Manager
+      %td
+      %td.pl10{colspan: 2}
+        = check_box_tag 'prospect[is_convicted]'
+        Conviction
+      %td
+    %tr
+      %td
+      %td.pl10
+        = _check_box :event_production_experience, '1', id: 'event_production_experience', disabled: 'disabled'
+        Event production
+      %td
+    %tr
+      %td
+      %td.pl10
+        = _check_box :staff_leadership_experience, '1', id: 'staff_leadership_experience', disabled: 'disabled'
+        Staff Leadership
+      %td
+      %td
+    %tr.only-applicants
+      %td.pl10
+        %span{class: 'mandatory mandatory-internal-only'}TXT:
+      %td= f.text_field :texted_date, tabindex: tabindex+=1, class: 'form-control prospect-datepicker', id: form_id + '_txt'
+    %tr.only-applicants
+      %td.pl10
+        %span{class: 'mandatory mandatory-internal-only'}MI:
+      %td= f.text_field :missed_interview_date, tabindex: tabindex+=1, class: 'form-control prospect-datepicker', id: form_id + '_missed_interview'
+  %hr
+  %table
+    %tr.only-applicants
+      %td{style: 'vertical-align:top'} HQ
+      %td= f.text_area :headquarter, rows: 1, cols: 100, style: 'width:200px', tabindex: tabindex+=1, class: 'form-control'
+    %tr
+      %td{style: 'vertical-align:top'} Notes
+      %td= f.text_area :notes, rows: 1, cols: 100, style: 'width:700px', tabindex: tabindex+=1, class: 'form-control'
+
+- content_for_once :js do
+  :javascript
+    $dateFields = $('input.prospect-datepicker');
+    setUpDatepicker($dateFields, 'dd/mm/yy', "-22y");
+    $dateFields.watermark('DD/MM/YYYY', {className: 'watermark'});

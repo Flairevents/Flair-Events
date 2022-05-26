@@ -1,0 +1,98 @@
+.command-bar
+  .btn-group
+    %button.btn.btn-default.command-link{:"data-command" => 'newRecord'} New
+    %button.btn.btn-default.command-link.command-edit.disabled{:"data-command" => 'editSelectedRecord'} Edit
+    %button.btn.btn-default.command-link.command-revert.disabled{:"data-command" => 'revert'} Revert
+    %button.btn.btn-default.command-link.command-delete.disabled{:"data-command" => 'deleteRecord'} Delete
+    %button.btn.btn-default.command-link{:"data-command" => 'clearAndApplyFilters'} Clear Filters
+  .btn-group
+    %button.btn.btn-default.dropdown-toggle.command-link.command-report{:"data-toggle" => 'dropdown'}
+      Report
+      %span.caret
+    %ul.dropdown-menu.report-dropdown
+      - Report.where(table: 'event_tasks').sort_by(&:print_name).each do |report|
+        %li
+          %a{href: '#', :"data-report-name" => report.name}= report.print_name
+  %button.hired-view-only.btn.btn-primary.command-link{:"data-command" => 'openTasksWindow'}
+    Tasks Popup
+%hr
+.filter-bar-container
+  .filter-bar
+    %table
+      %tr
+        %th Active?
+        %th Event
+        %th Client
+        %th Task
+        %th Who
+        %th Region
+        %th Done
+        %th Due
+        %th Week
+        %th Day
+      %tr
+        %td.active-only-checkbox= _check_box :active_only, '1', checked: 'checked'
+        %td= _text_field :event_picker, class: 'form-control'
+        %td= _text_field :client_picker, class: 'form-control'
+        %td= _select :template_id, [], class: 'form-control'
+        %td= _select :officer_id, [], class: 'form-control'
+        %td= _select :region_id, options_for_select([['', '']].concat(Region.select('name, id').sort_by(&:name).map {|r| [r.name, r.id] })), class: 'form-control'
+        %td= _select :completed, options_for_select([['',''], 'To Do and Done Today',['Done','true'], ['To Do','false']], 'To Do and Done Today'), class: 'form-control'
+        %td= _select :due, options_for_select([['',''], ['Y','true'], ['N','false']]), class: 'form-control'
+        %td= _select :tax_week_id, [], class: 'form-control'
+        %td= _select :day_of_the_week, options_for_select([['',''], ['Monday', '1'], ['Tuesday', '2'], ['Wednesday', '3'], ['Thursday', '4'], ['Friday', '5'], ['Saturday', '6'], ['Sunday', '0']]), class: 'form-control'
+%div
+  %table.summary-table{style: 'float: right;'}
+    %tr
+      %th Need
+      %th Assig
+      %th Hired
+      %th Req
+      %th Spare
+      %th Appl
+    %tr.event-stats-row
+      %td.event-need
+      %td.event-assigned
+      %td.event-hired
+      %td.event-required
+      %td.event-spare
+      %td.event-app
+%table.summary-table.planner-second-tab
+  %tr
+    %th Dates
+    %th W2#
+    %th Plan Size
+  %tr.event-stats-row
+    %td.event-dates
+    %td.event-total-weeks
+    %td.event-plan-size
+%br
+%br
+%br
+%hr
+.list-view
+  .pagination-controls.pagination-bar{style: 'float:left'}
+  %div{style: 'float:right'}
+    %span.total-records
+    |
+    %a.refresh-data{href: 'javascript:void(0)'} Refresh
+  %div{style: 'clear:both'}
+  .record-list{tabindex: '0'}
+
+= slideover_form 'record-new', partial: 'event_task_form', locals: { event_task: EventTask.new, prefix: 'new', form_id: 'new_event_task' }
+= slideover_form 'record-edit', partial: 'event_task_form', locals: { event_task: EventTask.new, prefix: 'edit', form_id: 'edit_event_task' }
+
+.report-download-dialog.modal.fade{style: 'display:none'}
+  .modal-header
+    %button.close{type: 'button', :"data-dismiss" => 'modal', :"aria-hidden" => 'true'}
+      &times;
+    %h3 Download Report
+  .modal-body
+    %a.download-xlsx{download: true}>
+      %img{src: image_path('xlsx-icon.png'), width: 128, height: 128, alt: 'Excel'}>
+    %a.download-csv{download: true}>
+      %img{src: image_path('csv-icon.png'), width: 128, height: 128, alt: 'CSV'}>
+    %a.download-pdf{download: true}>
+      %img{src: image_path('pdf-icon.png'), width: 128, height: 128, alt: 'PDF'}>
+  .modal-footer
+    %a.btn.btn-default{href: '#', :"data-dismiss" => 'modal'} Cancel

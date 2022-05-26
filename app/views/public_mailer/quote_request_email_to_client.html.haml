@@ -1,0 +1,62 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;margin-bottom: 16px" }
+  %tr
+    %td Hi #{@qoute.name.split(' ').first},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 10px 0px;" }
+  %tr
+    %td Welcome to Flair, thank you for getting in touch. One of our staffing managers has received your enquiry and will get in touch with you shortly to find out more about your requirements.
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; margin-top:15px" }
+  %tr
+    %td
+      If your staffing request is urgent and you need to get in touch with somebody immediately, our office is open 7 days a week, call us on 0161 241 2441 or email
+      %a{ href: 'mailto: clare@flairpeople.com' }
+        clare@flairpeople.com
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 0px 0px 0px;" }
+  %tr{style: "line-height: 40px"}
+    %td Thanks
+  %tr{style: "line-height: 40px"}
+    %td Flair Team
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 20px 0px;" }
+  %tr
+    %td Your Enquiry:
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;margin-bottom: 30px;" }
+  %tr{style: "line-height: 20px"}
+    %td{ style: 'font-weight: 700; width: 120px;'} Contact Name:
+    %td= "#{@qoute.name}"
+  %tr{style: "line-height: 20px"}
+    %td{ style: 'font-weight: 700; width: 120px;'} Company Name:
+    %td= @qoute.company_name
+  %tr{style: "line-height: 20px"}
+    %td{ style: 'font-weight: 700; width: 120px;'} Telephone:
+    %td= @qoute.telephone
+  %tr{style: "line-height: 20px"}
+    %td{ style: 'font-weight: 700; width: 120px;'} Email:
+    %td= @qoute.email
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 20px 0px;margin-bottom: 30px;" }
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Job Position:
+    %td= @qoute.job_position
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Location:
+    %td= @qoute.location
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Industry:
+    %td= @qoute.job_category
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; margin-bottom: 30px;" }
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Start Date:
+    %td= @qoute.start_date.strftime('%d-%m-%Y')
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} End Date:
+    %td
+      - if @qoute.finish_date != nil
+        = @qoute.finish_date.strftime('%d-%m-%Y')
+  %tr
+    %td{ style: 'font-weight: 700; width: 120px;'} Notes:
+    %td= @qoute.other_facts
+
+= render partial: 'hire_form_signature'

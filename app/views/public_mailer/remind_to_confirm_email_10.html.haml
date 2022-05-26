@@ -1,0 +1,25 @@
+%link{:href => "https://fonts.gstatic.com", :rel => "preconnect"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato&display=swap", :rel => "stylesheet"}/
+%link{:href => "https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap", :rel => "stylesheet"}/
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px;" }
+  %tr
+    %td Hi #{@name},
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; padding: 15px 0px;" }
+  %tr
+    %td A little nudge coming your way! You need to activate your account if you want to join our team.
+
+%table{ style: "padding: 0px 0px 15px;" }
+  %tr
+    %td
+      %a{ href: "#{Flair::Application.config.base_https_url}/staff?token=#{@token}", style: "text-decoration: none; font-family: 'Lato', sans-serif; font-weight: 900; font-size: 14px; color: #f24726;" } ACTIVATE PROFILE
+
+%table{ style: "font-family: 'Lato', sans-serif; font-size: 14px; line-height: 25px; padding-bottom: 20px;" }
+  %tr
+    %td
+      Having trouble with the button above? Please copy and paste the following link into a new browser:
+      %span{ style: 'color: #0099cc; text-decoration: underline;'} #{Flair::Application.config.base_https_url}/staff?token=#{@token}
+%table{ style: "font-family: 'Lato', sans-serif; font-weight: 700; font-size: 20px; padding: 5px 0px 15px;" }
+  %tr
+    %td Unlock Flexible work opportunities that suit your lifestyle.
+= render partial: 'signature'

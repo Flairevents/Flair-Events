@@ -1,0 +1,57 @@
+<p>Hi <%= @data[:person].first_name %>,</p>
+
+<p><%= @data[:intro_statement] %></p>
+
+<% unless @data[:intro_details].blank? %>
+  <table style="border-spacing:0px">
+    <% @data[:intro_details].each do |heading, value| %>
+      <tr>
+        <% if heading == :break %>
+          <td style="padding-top:8px"></td>
+        <% else %>
+          <td style="padding-top:0px;padding-bottom:0px"><strong><%= heading %></strong>: <%= raw(value) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+<% end %>
+
+<% unless @data[:assignment_bullets].blank? %>
+  <ul>
+    <% @data[:assignment_bullets].each do |assignment_bullet| %>
+      <li><%= assignment_bullet %></li>
+    <% end %>
+  </ul>
+<% end %>
+
+<% if @data[:office_message].present? %>
+  <p><%= raw(@data[:office_message]) %></p>
+<% end %>
+
+<% unless @data[:details].blank? %>
+  <% style = "border-spacing:0px;" %>
+  <table style='<%= style %>'>
+    <% @data[:details].each do |heading, value| %>
+      <tr>
+        <% if heading == :break %>
+          <td style="padding-top:8px"></td>
+        <% else %>
+          <td style="padding-top:0px;padding-bottom:0px"><strong><%= heading %></strong>: <%= raw(value) %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <br/>
+<% end %>
+
+<% if @data[:concluding_statement].present? %>
+  <p><%= raw(@data[:concluding_statement]) %></p>
+<% end %>
+
+<%= render partial: 'staff_mailer/signature' %>
+
+<% if @data[:postscript].present? %>
+  <br/>
+  <small><p><strong>The Legal Bit: </strong><%= @data[:postscript] %></p></small>
+<% end %>

@@ -1,0 +1,17 @@
+%thead
+  %tr.head-row{valign: 'bottom'}
+    %th Event
+    %th Location
+    %th Dates
+    %th Staff
+%tbody
+  - previous_date = nil
+  - events.each do |event|
+    - if previous_date && (event[:date_end].year != previous_date.year)
+      %tr.event-month-separator
+        %td{colspan:4}="#{event[:date_end].strftime("%Y")}"
+    - previous_date = event[:date_end]
+    = event[:history_tr].html_safe
+  - if events.empty?
+    %tr{valign: 'bottom'}
+      %td{colspan: '5'} Sorry, no events found.

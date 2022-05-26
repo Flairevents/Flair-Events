@@ -1,0 +1,29 @@
+.table-responsive.p2
+  %table.table
+    %thead
+      %tr.head-row{valign: 'bottom', style: 'background-color: unset'}
+        %th{style: 'background-color: unset; width: 30%'}
+          %b.contracts-th Event
+        %th{style: 'background-color: unset; width: 20%'}
+          %b.contracts-th Location
+        %th{style: 'background-color: unset; width: 20%'}
+          %b.contracts-th Dates
+        %th{style: 'background-color: unset; width: 30%'}
+          %b.contracts-th Rating
+    %tbody
+      - @past_gigs.each do |gig|
+        %tr{valign: 'bottom'}
+          %td= gig.event.display_name
+          %td= gig.event.location
+          %td.nowrap= gig.event.date_range_for_history
+          -if gig.rating.present?
+            %td
+              -(1..5).each do |i|
+                -if i <=  gig.rating_comment.to_f.round
+                  -#%span{class:"glyphicon yellow-star"}
+                  %span.work-history-rating-star &starf;
+                -else
+                  -#%span{class:"glyphicon glyphicon-star-empty"}
+                  %span.work-history-rating-white-star &starf;
+          -else
+            %td

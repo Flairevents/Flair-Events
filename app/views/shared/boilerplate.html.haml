@@ -1,0 +1,12 @@
+.public{:class => controller.action_name}
+  = render :partial => 'shared/nav'
+  .content
+    .content-inner
+      .row.band-heading.expanded--restricted
+        %h1= @title
+        -if @subtitle
+          %p.lead= @subtitle
+      .row.p2.field-light.align-center
+        .column.small-12.large-8
+          = @message
+  = render :partial => 'footer'

@@ -1,0 +1,6 @@
+* INCREASING DISK SIZE *
+http://help.1and1.co.uk/servers-c40665/dedicated-server-linux-c40577/administration-c40585/increase-the-logical-volume-a756911.html
+> df -h to find volume
+> sudo lvextend -L +100G /dev/mapper/vg00-var
+> mount (do determine if ext4, if so, proceed with resize2fs)
+> sudo resize2fs /dev/mapper/vg00-var

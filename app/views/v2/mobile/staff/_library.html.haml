@@ -1,0 +1,10 @@
+.p1.text-center
+  Useful documents for working with Flair
+-if @library_items.length > 0
+  %ul.fl-library-list.wide-list
+    - @library_items.each do |item|
+      %li.wide-list__item
+        %i.glyphicon.glyphicon-file.fl-library-list__icon
+        =link_to item[0], item[1], data: { turbolinks: false}
+-else
+  Currently no documents available
